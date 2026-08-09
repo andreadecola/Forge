@@ -1,9 +1,11 @@
 import 'package:drift/drift.dart';
 
-/// Tabella tecnica minimale per verificare la baseline Drift.
-/// Non fa parte dello schema definitivo (vedi 03_Database_Design.md), che
-/// sarà introdotto nella Milestone 2.
+/// Impostazioni applicative chiave/valore (onboarding, tema, notifiche).
+/// Nome fisico SQLite in italiano (Milestone 3.1).
 class AppSettingsTable extends Table {
+  @override
+  String get tableName => 'impostazioni_app';
+
   TextColumn get key => text()();
   TextColumn get value => text()();
 

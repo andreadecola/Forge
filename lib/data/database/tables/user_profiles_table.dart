@@ -1,6 +1,11 @@
 import 'package:drift/drift.dart';
 
+/// Nome fisico SQLite in italiano (Milestone 3.1); la classe Dart resta
+/// idiomatica in inglese, coerentemente con il resto del codice applicativo.
 class UserProfilesTable extends Table {
+  @override
+  String get tableName => 'profili_utente';
+
   IntColumn get id => integer().autoIncrement()();
   TextColumn get name => text()();
   DateTimeColumn get birthDate => dateTime()();

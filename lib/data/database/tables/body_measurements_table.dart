@@ -2,7 +2,11 @@ import 'package:drift/drift.dart';
 
 import 'user_profiles_table.dart';
 
+/// Nome fisico SQLite in italiano (Milestone 3.1).
 class BodyMeasurementsTable extends Table {
+  @override
+  String get tableName => 'misurazioni_corporee';
+
   IntColumn get id => integer().autoIncrement()();
   IntColumn get profileId => integer().references(UserProfilesTable, #id)();
   DateTimeColumn get measuredAt => dateTime()();
