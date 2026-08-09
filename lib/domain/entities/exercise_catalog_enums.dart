@@ -17,6 +17,20 @@ enum ExerciseImpactLevel {
   final String code;
 }
 
+/// Intensità cardio, centralizzata dalla Milestone 3.2 (in 3.1 era testo
+/// libero). Stesso vocabolario di [ExerciseImpactLevel] ma semantica distinta
+/// (carico cardiovascolare, non impatto articolare).
+enum ExerciseCardioIntensity {
+  veryLow('VERY_LOW'),
+  low('LOW'),
+  moderate('MODERATE'),
+  high('HIGH');
+
+  const ExerciseCardioIntensity(this.code);
+
+  final String code;
+}
+
 enum ExerciseMuscleRole {
   primario('PRIMARIO'),
   secondario('SECONDARIO');

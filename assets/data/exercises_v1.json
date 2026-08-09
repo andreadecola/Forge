@@ -1,0 +1,6545 @@
+{
+  "catalogType": "ESERCIZI",
+  "catalogVersion": 1,
+  "categories": [
+    {
+      "code": "MOBILITA",
+      "name": "Mobilità e riscaldamento",
+      "description": "Movimenti dolci di attivazione e riscaldamento.",
+      "displayOrder": 1,
+      "active": true
+    },
+    {
+      "code": "GAMBE_GLUTEI",
+      "name": "Gambe e glutei",
+      "description": "Forza e controllo per arti inferiori e glutei.",
+      "displayOrder": 2,
+      "active": true
+    },
+    {
+      "code": "PETTO_SPINTA",
+      "name": "Petto e spinta",
+      "description": "Movimenti di spinta per il tronco superiore.",
+      "displayOrder": 3,
+      "active": true
+    },
+    {
+      "code": "SCHIENA",
+      "name": "Schiena e tirata",
+      "description": "Movimenti di tirata per la catena posteriore alta.",
+      "displayOrder": 4,
+      "active": true
+    },
+    {
+      "code": "SPALLE",
+      "name": "Spalle",
+      "description": "Lavoro mirato per le spalle.",
+      "displayOrder": 5,
+      "active": true
+    },
+    {
+      "code": "BRACCIA",
+      "name": "Braccia",
+      "description": "Isolamento per bicipiti e tricipiti.",
+      "displayOrder": 6,
+      "active": true
+    },
+    {
+      "code": "CORE",
+      "name": "Core e stabilità",
+      "description": "Stabilità del tronco e controllo.",
+      "displayOrder": 7,
+      "active": true
+    },
+    {
+      "code": "EQUILIBRIO",
+      "name": "Equilibrio e controllo",
+      "description": "Equilibrio e propriocezione.",
+      "displayOrder": 8,
+      "active": true
+    },
+    {
+      "code": "CARDIO",
+      "name": "Cardio low-impact",
+      "description": "Attività cardiovascolare a basso impatto.",
+      "displayOrder": 9,
+      "active": true
+    },
+    {
+      "code": "STRETCHING",
+      "name": "Stretching e defaticamento",
+      "description": "Allungamento e defaticamento.",
+      "displayOrder": 10,
+      "active": true
+    }
+  ],
+  "muscleGroups": [
+    {
+      "code": "QUADRICIPITI",
+      "name": "Quadricipiti",
+      "active": true
+    },
+    {
+      "code": "GLUTEI",
+      "name": "Glutei",
+      "active": true
+    },
+    {
+      "code": "FEMORALI",
+      "name": "Femorali",
+      "active": true
+    },
+    {
+      "code": "POLPACCI",
+      "name": "Polpacci",
+      "active": true
+    },
+    {
+      "code": "PETTORALI",
+      "name": "Pettorali",
+      "active": true
+    },
+    {
+      "code": "DORSALI",
+      "name": "Dorsali",
+      "active": true
+    },
+    {
+      "code": "TRAPEZIO",
+      "name": "Trapezio",
+      "active": true
+    },
+    {
+      "code": "SPALLE",
+      "name": "Spalle",
+      "active": true
+    },
+    {
+      "code": "BICIPITI",
+      "name": "Bicipiti",
+      "active": true
+    },
+    {
+      "code": "TRICIPITI",
+      "name": "Tricipiti",
+      "active": true
+    },
+    {
+      "code": "ADDOMINALI",
+      "name": "Addominali",
+      "active": true
+    },
+    {
+      "code": "CORE",
+      "name": "Core",
+      "active": true
+    },
+    {
+      "code": "LOMBARI",
+      "name": "Lombari",
+      "active": true
+    },
+    {
+      "code": "AVAMBRACCI",
+      "name": "Avambracci",
+      "active": true
+    },
+    {
+      "code": "FLESSORI_ANCA",
+      "name": "Flessori dell'anca",
+      "active": true
+    },
+    {
+      "code": "CORPO_INTERO",
+      "name": "Corpo intero",
+      "active": true
+    }
+  ],
+  "equipment": [
+    {
+      "code": "NONE",
+      "name": "Nessuna",
+      "description": "Nessuna attrezzatura richiesta.",
+      "category": "base",
+      "minPrice": null,
+      "maxPrice": null,
+      "priority": 0,
+      "searchQuery": null,
+      "active": true
+    },
+    {
+      "code": "CHAIR",
+      "name": "Sedia",
+      "description": "Sedia stabile.",
+      "category": "base",
+      "minPrice": null,
+      "maxPrice": null,
+      "priority": 1,
+      "searchQuery": null,
+      "active": true
+    },
+    {
+      "code": "WALL",
+      "name": "Muro",
+      "description": "Parete libera e stabile.",
+      "category": "base",
+      "minPrice": null,
+      "maxPrice": null,
+      "priority": 1,
+      "searchQuery": null,
+      "active": true
+    },
+    {
+      "code": "MAT",
+      "name": "Tappetino",
+      "description": "Tappetino da terra.",
+      "category": "comfort",
+      "minPrice": 15.0,
+      "maxPrice": 40.0,
+      "priority": 2,
+      "searchQuery": "tappetino fitness antiscivolo",
+      "active": true
+    },
+    {
+      "code": "BAND",
+      "name": "Elastici",
+      "description": "Elastici di resistenza.",
+      "category": "resistenza",
+      "minPrice": 10.0,
+      "maxPrice": 30.0,
+      "priority": 2,
+      "searchQuery": "set elastici fitness resistenza",
+      "active": true
+    },
+    {
+      "code": "DUMBBELL",
+      "name": "Manubri",
+      "description": "Manubri fino a 10 kg.",
+      "category": "carico",
+      "minPrice": 20.0,
+      "maxPrice": 50.0,
+      "priority": 2,
+      "searchQuery": "manubri regolabili fino a 10 kg",
+      "active": true
+    },
+    {
+      "code": "STEP",
+      "name": "Step",
+      "description": "Step robusto e antiscivolo.",
+      "category": "cardio",
+      "minPrice": 30.0,
+      "maxPrice": 60.0,
+      "priority": 3,
+      "searchQuery": "step fitness regolabile alta portata antiscivolo",
+      "active": true
+    },
+    {
+      "code": "HOUSEHOLD",
+      "name": "Oggetto domestico",
+      "description": "Oggetto domestico leggero e stabile.",
+      "category": "base",
+      "minPrice": null,
+      "maxPrice": null,
+      "priority": 1,
+      "searchQuery": null,
+      "active": true
+    }
+  ],
+  "exercises": [
+    {
+      "code": "MOB-001",
+      "name": "Respirazione diaframmatica seduta",
+      "categoryCode": "MOBILITA",
+      "description": "Respirazione diaframmatica seduta — mobilità e riscaldamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 60,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORE"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": "MOB-002",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_001/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_001/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "MOB-002",
+      "name": "Marcia da seduto",
+      "categoryCode": "MOBILITA",
+      "description": "Marcia da seduto — mobilità e riscaldamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 45,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "FLESSORI_ANCA"
+      ],
+      "secondaryMuscleCodes": [
+        "CORE"
+      ],
+      "progressionCode": "CARD-002",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [
+        {
+          "code": "MOB-003",
+          "reason": "VARIANTE_EQUIVALENTE",
+          "priority": 1
+        }
+      ],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_002/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_002/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "MOB-003",
+      "name": "Circonduzioni caviglia da seduto",
+      "categoryCode": "MOBILITA",
+      "description": "Circonduzioni caviglia da seduto — mobilità e riscaldamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "POLPACCI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_003/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_003/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "MOB-004",
+      "name": "Punta/tallone da seduto",
+      "categoryCode": "MOBILITA",
+      "description": "Punta/tallone da seduto — mobilità e riscaldamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "POLPACCI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_004/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_004/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "MOB-005",
+      "name": "Estensione ginocchio da seduto senza carico",
+      "categoryCode": "MOBILITA",
+      "description": "Estensione ginocchio da seduto senza carico — mobilità e riscaldamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "QUADRICIPITI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": "LEG-002",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_005/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_005/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "MOB-006",
+      "name": "Apertura/chiusura braccia da seduto",
+      "categoryCode": "MOBILITA",
+      "description": "Apertura/chiusura braccia da seduto — mobilità e riscaldamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "PETTORALI"
+      ],
+      "secondaryMuscleCodes": [
+        "SPALLE"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_006/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_006/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "MOB-007",
+      "name": "Circonduzioni spalle",
+      "categoryCode": "MOBILITA",
+      "description": "Circonduzioni spalle — mobilità e riscaldamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "NONE",
+          "required": false
+        },
+        {
+          "code": "CHAIR",
+          "required": false
+        }
+      ],
+      "primaryMuscleCodes": [
+        "SPALLE"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_007/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_007/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "MOB-008",
+      "name": "Retrazione scapolare seduta",
+      "categoryCode": "MOBILITA",
+      "description": "Retrazione scapolare seduta — mobilità e riscaldamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "TRAPEZIO"
+      ],
+      "secondaryMuscleCodes": [
+        "DORSALI"
+      ],
+      "progressionCode": "BACK-001",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_008/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_008/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "MOB-009",
+      "name": "Rotazione toracica seduta controllata",
+      "categoryCode": "MOBILITA",
+      "description": "Rotazione toracica seduta controllata — mobilità e riscaldamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": 6,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORE"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_009/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_009/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "MOB-010",
+      "name": "Inclinazione laterale del tronco seduta",
+      "categoryCode": "MOBILITA",
+      "description": "Inclinazione laterale del tronco seduta — mobilità e riscaldamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": 6,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORE"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_010/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_010/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "MOB-011",
+      "name": "Mobilità cervicale dolce",
+      "categoryCode": "MOBILITA",
+      "description": "Mobilità cervicale dolce — mobilità e riscaldamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 30,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "NONE",
+          "required": false
+        },
+        {
+          "code": "CHAIR",
+          "required": false
+        }
+      ],
+      "primaryMuscleCodes": [
+        "TRAPEZIO"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_011/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_011/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "MOB-012",
+      "name": "Wall slide parziale",
+      "categoryCode": "MOBILITA",
+      "description": "Wall slide parziale — mobilità e riscaldamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "WALL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "SPALLE"
+      ],
+      "secondaryMuscleCodes": [
+        "TRAPEZIO"
+      ],
+      "progressionCode": "SHO-003",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_012/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_012/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "MOB-013",
+      "name": "Hip hinge assistito al muro",
+      "categoryCode": "MOBILITA",
+      "description": "Hip hinge assistito al muro — mobilità e riscaldamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "WALL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "GLUTEI"
+      ],
+      "secondaryMuscleCodes": [
+        "FEMORALI"
+      ],
+      "progressionCode": "LEG-009",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_013/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_013/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "MOB-014",
+      "name": "Trasferimento del peso laterale con appoggio",
+      "categoryCode": "MOBILITA",
+      "description": "Trasferimento del peso laterale con appoggio — mobilità e riscaldamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": true,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": false
+        },
+        {
+          "code": "WALL",
+          "required": false
+        }
+      ],
+      "primaryMuscleCodes": [
+        "GLUTEI"
+      ],
+      "secondaryMuscleCodes": [
+        "CORE"
+      ],
+      "progressionCode": "BAL-002",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_014/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_014/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "MOB-015",
+      "name": "Marcia in piedi con appoggio",
+      "categoryCode": "MOBILITA",
+      "description": "Marcia in piedi con appoggio — mobilità e riscaldamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 45,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": false
+        },
+        {
+          "code": "WALL",
+          "required": false
+        }
+      ],
+      "primaryMuscleCodes": [
+        "FLESSORI_ANCA"
+      ],
+      "secondaryMuscleCodes": [
+        "CORPO_INTERO"
+      ],
+      "progressionCode": "CARD-002",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_015/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/mob_015/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "LEG-001",
+      "name": "Sit-to-stand assistito con mani",
+      "categoryCode": "GAMBE_GLUTEI",
+      "description": "Sit-to-stand assistito con mani — gambe e glutei.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": 2,
+      "defaultReps": 5,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "QUADRICIPITI",
+        "GLUTEI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": "LEG-003",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_001/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_001/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "LEG-002",
+      "name": "Estensione ginocchio seduto controllata",
+      "categoryCode": "GAMBE_GLUTEI",
+      "description": "Estensione ginocchio seduto controllata — gambe e glutei.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": 2,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "QUADRICIPITI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": "LEG-001",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_002/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_002/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "LEG-003",
+      "name": "Sit-to-stand senza mani",
+      "categoryCode": "GAMBE_GLUTEI",
+      "description": "Sit-to-stand senza mani — gambe e glutei.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": 2,
+      "defaultReps": 6,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "QUADRICIPITI",
+        "GLUTEI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": "LEG-004",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_003/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_003/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "LEG-004",
+      "name": "Box squat a sedia",
+      "categoryCode": "GAMBE_GLUTEI",
+      "description": "Box squat a sedia — gambe e glutei.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": true,
+      "defaultSets": 2,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "QUADRICIPITI",
+        "GLUTEI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": "LEG-005",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [
+        {
+          "code": "LEG-003",
+          "reason": "DIFFICOLTA",
+          "priority": 1
+        },
+        {
+          "code": "LEG-002",
+          "reason": "VARIANTE_SEMPLICE",
+          "priority": 2
+        },
+        {
+          "code": "LEG-016",
+          "reason": "VARIANTE_EQUIVALENTE",
+          "priority": 3
+        }
+      ],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_004/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_004/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "LEG-005",
+      "name": "Squat a box con tocco leggero",
+      "categoryCode": "GAMBE_GLUTEI",
+      "description": "Squat a box con tocco leggero — gambe e glutei.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 3,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": true,
+      "defaultSets": 3,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "QUADRICIPITI",
+        "GLUTEI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": "LEG-006",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_005/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_005/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "LEG-006",
+      "name": "Squat libero a escursione confortevole",
+      "categoryCode": "GAMBE_GLUTEI",
+      "description": "Squat libero a escursione confortevole — gambe e glutei.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 3,
+      "maximumLevel": null,
+      "impactLevel": "MODERATE",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": 3,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "NONE",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "QUADRICIPITI",
+        "GLUTEI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": "LEG-007",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_006/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_006/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "LEG-007",
+      "name": "Goblet squat con manubrio leggero",
+      "categoryCode": "GAMBE_GLUTEI",
+      "description": "Goblet squat con manubrio leggero — gambe e glutei.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 3,
+      "maximumLevel": null,
+      "impactLevel": "MODERATE",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": 3,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 90,
+      "equipmentCodes": [
+        {
+          "code": "DUMBBELL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "QUADRICIPITI",
+        "GLUTEI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": "LEG-008",
+      "progressionType": "CARICO",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_007/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_007/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "LEG-008",
+      "name": "Goblet squat progressivo",
+      "categoryCode": "GAMBE_GLUTEI",
+      "description": "Goblet squat progressivo — gambe e glutei.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 4,
+      "maximumLevel": null,
+      "impactLevel": "MODERATE",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": 3,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 90,
+      "equipmentCodes": [
+        {
+          "code": "DUMBBELL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "QUADRICIPITI",
+        "GLUTEI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_008/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_008/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "LEG-009",
+      "name": "Hip hinge a corpo libero",
+      "categoryCode": "GAMBE_GLUTEI",
+      "description": "Hip hinge a corpo libero — gambe e glutei.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": true,
+      "defaultSets": 2,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "NONE",
+          "required": false
+        },
+        {
+          "code": "WALL",
+          "required": false
+        }
+      ],
+      "primaryMuscleCodes": [
+        "GLUTEI",
+        "FEMORALI"
+      ],
+      "secondaryMuscleCodes": [
+        "LOMBARI"
+      ],
+      "progressionCode": "LEG-010",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_009/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_009/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "LEG-010",
+      "name": "Romanian deadlift con due manubri leggeri",
+      "categoryCode": "GAMBE_GLUTEI",
+      "description": "Romanian deadlift con due manubri leggeri — gambe e glutei.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 3,
+      "maximumLevel": null,
+      "impactLevel": "MODERATE",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": 3,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 90,
+      "equipmentCodes": [
+        {
+          "code": "DUMBBELL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "FEMORALI",
+        "GLUTEI"
+      ],
+      "secondaryMuscleCodes": [
+        "LOMBARI"
+      ],
+      "progressionCode": "LEG-011",
+      "progressionType": "CARICO",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_010/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_010/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "LEG-011",
+      "name": "Romanian deadlift con carico progressivo",
+      "categoryCode": "GAMBE_GLUTEI",
+      "description": "Romanian deadlift con carico progressivo — gambe e glutei.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 4,
+      "maximumLevel": null,
+      "impactLevel": "MODERATE",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": 3,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 90,
+      "equipmentCodes": [
+        {
+          "code": "DUMBBELL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "FEMORALI",
+        "GLUTEI"
+      ],
+      "secondaryMuscleCodes": [
+        "LOMBARI"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_011/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_011/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "LEG-012",
+      "name": "Calf raise con appoggio",
+      "categoryCode": "GAMBE_GLUTEI",
+      "description": "Calf raise con appoggio — gambe e glutei.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": true,
+      "defaultSets": 2,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": false
+        },
+        {
+          "code": "WALL",
+          "required": false
+        }
+      ],
+      "primaryMuscleCodes": [
+        "POLPACCI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": "LEG-013",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_012/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_012/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "LEG-013",
+      "name": "Calf raise senza appoggio",
+      "categoryCode": "GAMBE_GLUTEI",
+      "description": "Calf raise senza appoggio — gambe e glutei.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": true,
+      "defaultSets": 2,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "NONE",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "POLPACCI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_013/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_013/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "LEG-014",
+      "name": "Abduzione anca in piedi con appoggio",
+      "categoryCode": "GAMBE_GLUTEI",
+      "description": "Abduzione anca in piedi con appoggio — gambe e glutei.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": true,
+      "defaultSets": 2,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "GLUTEI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": "LEG-015",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_014/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_014/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "LEG-015",
+      "name": "Abduzione anca con elastico",
+      "categoryCode": "GAMBE_GLUTEI",
+      "description": "Abduzione anca con elastico — gambe e glutei.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": 2,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "BAND",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "GLUTEI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_015/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_015/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "LEG-016",
+      "name": "Estensione anca in piedi con appoggio",
+      "categoryCode": "GAMBE_GLUTEI",
+      "description": "Estensione anca in piedi con appoggio — gambe e glutei.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": true,
+      "defaultSets": 2,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "GLUTEI"
+      ],
+      "secondaryMuscleCodes": [
+        "FEMORALI"
+      ],
+      "progressionCode": "LEG-017",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_016/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_016/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "LEG-017",
+      "name": "Estensione anca con elastico",
+      "categoryCode": "GAMBE_GLUTEI",
+      "description": "Estensione anca con elastico — gambe e glutei.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": 2,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "BAND",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "GLUTEI"
+      ],
+      "secondaryMuscleCodes": [
+        "FEMORALI"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_017/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_017/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "LEG-018",
+      "name": "Step-up basso assistito",
+      "categoryCode": "GAMBE_GLUTEI",
+      "description": "Step-up basso assistito — gambe e glutei.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 3,
+      "maximumLevel": null,
+      "impactLevel": "MODERATE",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": true,
+      "defaultSets": 2,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "STEP",
+          "required": true
+        },
+        {
+          "code": "CHAIR",
+          "required": false
+        }
+      ],
+      "primaryMuscleCodes": [
+        "QUADRICIPITI",
+        "GLUTEI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": "LEG-019",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_018/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_018/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "LEG-019",
+      "name": "Step-up basso",
+      "categoryCode": "GAMBE_GLUTEI",
+      "description": "Step-up basso — gambe e glutei.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 3,
+      "maximumLevel": null,
+      "impactLevel": "MODERATE",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": 3,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "STEP",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "QUADRICIPITI",
+        "GLUTEI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": "LEG-020",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_019/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_019/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "LEG-020",
+      "name": "Step-up controllato con manubri leggeri",
+      "categoryCode": "GAMBE_GLUTEI",
+      "description": "Step-up controllato con manubri leggeri — gambe e glutei.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 4,
+      "maximumLevel": null,
+      "impactLevel": "MODERATE",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": 3,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 90,
+      "equipmentCodes": [
+        {
+          "code": "STEP",
+          "required": true
+        },
+        {
+          "code": "DUMBBELL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "QUADRICIPITI",
+        "GLUTEI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_020/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/leg_020/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "PUSH-001",
+      "name": "Wall push-up alto",
+      "categoryCode": "PETTO_SPINTA",
+      "description": "Wall push-up alto — petto e spinta.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": true,
+      "defaultSets": 2,
+      "defaultReps": 6,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "WALL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "PETTORALI"
+      ],
+      "secondaryMuscleCodes": [
+        "TRICIPITI",
+        "SPALLE"
+      ],
+      "progressionCode": "PUSH-002",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/push_001/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/push_001/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "PUSH-002",
+      "name": "Wall push-up con piedi più distanti",
+      "categoryCode": "PETTO_SPINTA",
+      "description": "Wall push-up con piedi più distanti — petto e spinta.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": true,
+      "defaultSets": 2,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "WALL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "PETTORALI"
+      ],
+      "secondaryMuscleCodes": [
+        "TRICIPITI",
+        "SPALLE"
+      ],
+      "progressionCode": "PUSH-003",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/push_002/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/push_002/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "PUSH-003",
+      "name": "Push-up inclinato su supporto molto stabile",
+      "categoryCode": "PETTO_SPINTA",
+      "description": "Push-up inclinato su supporto molto stabile — petto e spinta.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 3,
+      "maximumLevel": null,
+      "impactLevel": "MODERATE",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": true,
+      "defaultSets": 3,
+      "defaultReps": 6,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "HOUSEHOLD",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "PETTORALI"
+      ],
+      "secondaryMuscleCodes": [
+        "TRICIPITI",
+        "SPALLE"
+      ],
+      "progressionCode": "PUSH-004",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/push_003/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/push_003/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "PUSH-004",
+      "name": "Push-up inclinato più basso",
+      "categoryCode": "PETTO_SPINTA",
+      "description": "Push-up inclinato più basso — petto e spinta.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 4,
+      "maximumLevel": null,
+      "impactLevel": "MODERATE",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": 3,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "HOUSEHOLD",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "PETTORALI"
+      ],
+      "secondaryMuscleCodes": [
+        "TRICIPITI",
+        "SPALLE"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/push_004/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/push_004/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "PUSH-005",
+      "name": "Chest press con elastico da seduto",
+      "categoryCode": "PETTO_SPINTA",
+      "description": "Chest press con elastico da seduto — petto e spinta.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": 2,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "BAND",
+          "required": true
+        },
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "PETTORALI"
+      ],
+      "secondaryMuscleCodes": [
+        "TRICIPITI",
+        "SPALLE"
+      ],
+      "progressionCode": "PUSH-006",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/push_005/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/push_005/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "PUSH-006",
+      "name": "Chest press con elastico in piedi",
+      "categoryCode": "PETTO_SPINTA",
+      "description": "Chest press con elastico in piedi — petto e spinta.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": 2,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "BAND",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "PETTORALI"
+      ],
+      "secondaryMuscleCodes": [
+        "TRICIPITI",
+        "SPALLE"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/push_006/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/push_006/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "PUSH-007",
+      "name": "Floor press con manubri",
+      "categoryCode": "PETTO_SPINTA",
+      "description": "Floor press con manubri — petto e spinta.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 3,
+      "maximumLevel": null,
+      "impactLevel": "MODERATE",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": true,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": 3,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 90,
+      "equipmentCodes": [
+        {
+          "code": "DUMBBELL",
+          "required": true
+        },
+        {
+          "code": "MAT",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "PETTORALI"
+      ],
+      "secondaryMuscleCodes": [
+        "TRICIPITI",
+        "SPALLE"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [
+        {
+          "code": "PUSH-006",
+          "reason": "POSIZIONE",
+          "priority": 1
+        },
+        {
+          "code": "PUSH-005",
+          "reason": "POSIZIONE",
+          "priority": 2
+        }
+      ],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/push_007/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/push_007/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "PUSH-008",
+      "name": "Squeeze press con manubri leggeri",
+      "categoryCode": "PETTO_SPINTA",
+      "description": "Squeeze press con manubri leggeri — petto e spinta.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 3,
+      "maximumLevel": null,
+      "impactLevel": "MODERATE",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": 3,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "DUMBBELL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "PETTORALI"
+      ],
+      "secondaryMuscleCodes": [
+        "TRICIPITI"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/push_008/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/push_008/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "PUSH-009",
+      "name": "Press isometrica palmo contro palmo",
+      "categoryCode": "PETTO_SPINTA",
+      "description": "Press isometrica palmo contro palmo — petto e spinta.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 15,
+      "defaultRestSeconds": 30,
+      "equipmentCodes": [
+        {
+          "code": "NONE",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "PETTORALI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/push_009/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/push_009/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "PUSH-010",
+      "name": "Punch controllato con elastico leggero",
+      "categoryCode": "PETTO_SPINTA",
+      "description": "Punch controllato con elastico leggero — petto e spinta.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": 2,
+      "defaultReps": 12,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "BAND",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "SPALLE"
+      ],
+      "secondaryMuscleCodes": [
+        "PETTORALI"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/push_010/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/push_010/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "BACK-001",
+      "name": "Band pull-apart leggero",
+      "categoryCode": "SCHIENA",
+      "description": "Band pull-apart leggero — schiena e tirata.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": 2,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "BAND",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "TRAPEZIO"
+      ],
+      "secondaryMuscleCodes": [
+        "DORSALI",
+        "SPALLE"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/back_001/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/back_001/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "BACK-002",
+      "name": "Rematore elastico seduto",
+      "categoryCode": "SCHIENA",
+      "description": "Rematore elastico seduto — schiena e tirata.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": 2,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "BAND",
+          "required": true
+        },
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "DORSALI"
+      ],
+      "secondaryMuscleCodes": [
+        "BICIPITI",
+        "TRAPEZIO"
+      ],
+      "progressionCode": "BACK-003",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/back_002/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/back_002/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "BACK-003",
+      "name": "Rematore elastico in piedi",
+      "categoryCode": "SCHIENA",
+      "description": "Rematore elastico in piedi — schiena e tirata.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": 2,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "BAND",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "DORSALI"
+      ],
+      "secondaryMuscleCodes": [
+        "BICIPITI",
+        "TRAPEZIO"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/back_003/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/back_003/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "BACK-004",
+      "name": "Rematore con manubrio supportato",
+      "categoryCode": "SCHIENA",
+      "description": "Rematore con manubrio supportato — schiena e tirata.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": 2,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "DUMBBELL",
+          "required": true
+        },
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "DORSALI"
+      ],
+      "secondaryMuscleCodes": [
+        "BICIPITI"
+      ],
+      "progressionCode": "BACK-005",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/back_004/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/back_004/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "BACK-005",
+      "name": "Rematore con manubrio più impegnativo",
+      "categoryCode": "SCHIENA",
+      "description": "Rematore con manubrio più impegnativo — schiena e tirata.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 3,
+      "maximumLevel": null,
+      "impactLevel": "MODERATE",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": 3,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "DUMBBELL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "DORSALI"
+      ],
+      "secondaryMuscleCodes": [
+        "BICIPITI"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/back_005/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/back_005/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "BACK-006",
+      "name": "Rematore bilaterale con manubri",
+      "categoryCode": "SCHIENA",
+      "description": "Rematore bilaterale con manubri — schiena e tirata.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 3,
+      "maximumLevel": null,
+      "impactLevel": "MODERATE",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": 3,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "DUMBBELL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "DORSALI"
+      ],
+      "secondaryMuscleCodes": [
+        "BICIPITI",
+        "TRAPEZIO"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/back_006/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/back_006/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "BACK-007",
+      "name": "Face pull con elastico",
+      "categoryCode": "SCHIENA",
+      "description": "Face pull con elastico — schiena e tirata.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": 2,
+      "defaultReps": 12,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "BAND",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "TRAPEZIO"
+      ],
+      "secondaryMuscleCodes": [
+        "SPALLE",
+        "DORSALI"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/back_007/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/back_007/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "BACK-008",
+      "name": "Straight-arm pulldown con elastico",
+      "categoryCode": "SCHIENA",
+      "description": "Straight-arm pulldown con elastico — schiena e tirata.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": 2,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "BAND",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "DORSALI"
+      ],
+      "secondaryMuscleCodes": [
+        "CORE"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/back_008/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/back_008/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "BACK-009",
+      "name": "Reverse fly con elastico",
+      "categoryCode": "SCHIENA",
+      "description": "Reverse fly con elastico — schiena e tirata.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": 2,
+      "defaultReps": 12,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "BAND",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "TRAPEZIO"
+      ],
+      "secondaryMuscleCodes": [
+        "SPALLE"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/back_009/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/back_009/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "BACK-010",
+      "name": "Reverse fly con manubri molto leggeri e supporto",
+      "categoryCode": "SCHIENA",
+      "description": "Reverse fly con manubri molto leggeri e supporto — schiena e tirata.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 3,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": 3,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "DUMBBELL",
+          "required": true
+        },
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "TRAPEZIO"
+      ],
+      "secondaryMuscleCodes": [
+        "SPALLE"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/back_010/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/back_010/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "SHO-001",
+      "name": "Shoulder press seduto senza carico",
+      "categoryCode": "SPALLE",
+      "description": "Shoulder press seduto senza carico — spalle.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": 2,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "SPALLE"
+      ],
+      "secondaryMuscleCodes": [
+        "TRICIPITI"
+      ],
+      "progressionCode": "SHO-002",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/sho_001/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/sho_001/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "SHO-002",
+      "name": "Shoulder press seduto con manubri leggeri",
+      "categoryCode": "SPALLE",
+      "description": "Shoulder press seduto con manubri leggeri — spalle.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": 2,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "DUMBBELL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "SPALLE"
+      ],
+      "secondaryMuscleCodes": [
+        "TRICIPITI"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/sho_002/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/sho_002/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "SHO-003",
+      "name": "Wall slide completo controllato",
+      "categoryCode": "SPALLE",
+      "description": "Wall slide completo controllato — spalle.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": true,
+      "defaultSets": 2,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "WALL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "SPALLE"
+      ],
+      "secondaryMuscleCodes": [
+        "TRAPEZIO"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/sho_003/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/sho_003/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "SHO-004",
+      "name": "Alzata laterale parziale senza carico",
+      "categoryCode": "SPALLE",
+      "description": "Alzata laterale parziale senza carico — spalle.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": true,
+      "defaultSets": 2,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "NONE",
+          "required": false
+        },
+        {
+          "code": "CHAIR",
+          "required": false
+        }
+      ],
+      "primaryMuscleCodes": [
+        "SPALLE"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/sho_004/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/sho_004/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "SHO-005",
+      "name": "Alzata laterale con elastico leggero",
+      "categoryCode": "SPALLE",
+      "description": "Alzata laterale con elastico leggero — spalle.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": 2,
+      "defaultReps": 12,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "BAND",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "SPALLE"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/sho_005/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/sho_005/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "SHO-006",
+      "name": "Alzata laterale con manubri leggeri",
+      "categoryCode": "SPALLE",
+      "description": "Alzata laterale con manubri leggeri — spalle.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": 2,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "DUMBBELL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "SPALLE"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/sho_006/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/sho_006/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "SHO-007",
+      "name": "Alzata frontale alternata leggera",
+      "categoryCode": "SPALLE",
+      "description": "Alzata frontale alternata leggera — spalle.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": 2,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "DUMBBELL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "SPALLE"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/sho_007/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/sho_007/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "SHO-008",
+      "name": "External rotation con elastico",
+      "categoryCode": "SPALLE",
+      "description": "External rotation con elastico — spalle.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": 2,
+      "defaultReps": 12,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "BAND",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "SPALLE"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/sho_008/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/sho_008/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "SHO-009",
+      "name": "Arnold press leggera",
+      "categoryCode": "SPALLE",
+      "description": "Arnold press leggera — spalle.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 4,
+      "maximumLevel": null,
+      "impactLevel": "MODERATE",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": 3,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "DUMBBELL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "SPALLE"
+      ],
+      "secondaryMuscleCodes": [
+        "TRICIPITI"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/sho_009/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/sho_009/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "SHO-010",
+      "name": "Shoulder press in piedi",
+      "categoryCode": "SPALLE",
+      "description": "Shoulder press in piedi — spalle.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 3,
+      "maximumLevel": null,
+      "impactLevel": "MODERATE",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": 3,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "DUMBBELL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "SPALLE"
+      ],
+      "secondaryMuscleCodes": [
+        "TRICIPITI"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/sho_010/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/sho_010/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "ARM-001",
+      "name": "Curl da seduto con elastico",
+      "categoryCode": "BRACCIA",
+      "description": "Curl da seduto con elastico — braccia.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": 2,
+      "defaultReps": 12,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "BAND",
+          "required": true
+        },
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "BICIPITI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/arm_001/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/arm_001/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "ARM-002",
+      "name": "Curl da seduto con manubri",
+      "categoryCode": "BRACCIA",
+      "description": "Curl da seduto con manubri — braccia.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": 2,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "DUMBBELL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "BICIPITI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/arm_002/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/arm_002/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "ARM-003",
+      "name": "Curl in piedi",
+      "categoryCode": "BRACCIA",
+      "description": "Curl in piedi — braccia.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": 2,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "DUMBBELL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "BICIPITI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/arm_003/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/arm_003/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "ARM-004",
+      "name": "Hammer curl",
+      "categoryCode": "BRACCIA",
+      "description": "Hammer curl — braccia.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": 2,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "DUMBBELL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "BICIPITI"
+      ],
+      "secondaryMuscleCodes": [
+        "AVAMBRACCI"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/arm_004/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/arm_004/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "ARM-005",
+      "name": "Estensione tricipiti con elastico",
+      "categoryCode": "BRACCIA",
+      "description": "Estensione tricipiti con elastico — braccia.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": 2,
+      "defaultReps": 12,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "BAND",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "TRICIPITI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/arm_005/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/arm_005/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "ARM-006",
+      "name": "Kickback tricipiti supportato",
+      "categoryCode": "BRACCIA",
+      "description": "Kickback tricipiti supportato — braccia.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": 2,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "DUMBBELL",
+          "required": true
+        },
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "TRICIPITI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/arm_006/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/arm_006/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "ARM-007",
+      "name": "Estensione tricipiti sopra testa seduta",
+      "categoryCode": "BRACCIA",
+      "description": "Estensione tricipiti sopra testa seduta — braccia.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 3,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": 3,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "DUMBBELL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "TRICIPITI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/arm_007/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/arm_007/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "ARM-008",
+      "name": "Curl alternato controllato",
+      "categoryCode": "BRACCIA",
+      "description": "Curl alternato controllato — braccia.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": 2,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "DUMBBELL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "BICIPITI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/arm_008/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/arm_008/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "CORE-001",
+      "name": "Bracing addominale da seduto",
+      "categoryCode": "CORE",
+      "description": "Bracing addominale da seduto — core e stabilità.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": 5,
+      "defaultReps": null,
+      "defaultDurationSeconds": 10,
+      "defaultRestSeconds": 30,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORE"
+      ],
+      "secondaryMuscleCodes": [
+        "ADDOMINALI"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/core_001/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/core_001/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "CORE-002",
+      "name": "Marcia seduta con bracing",
+      "categoryCode": "CORE",
+      "description": "Marcia seduta con bracing — core e stabilità.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": 2,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORE"
+      ],
+      "secondaryMuscleCodes": [
+        "FLESSORI_ANCA"
+      ],
+      "progressionCode": "CORE-003",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/core_002/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/core_002/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "CORE-003",
+      "name": "Pallof press con elastico da seduto",
+      "categoryCode": "CORE",
+      "description": "Pallof press con elastico da seduto — core e stabilità.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": 2,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "BAND",
+          "required": true
+        },
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORE"
+      ],
+      "secondaryMuscleCodes": [
+        "ADDOMINALI"
+      ],
+      "progressionCode": "CORE-004",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/core_003/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/core_003/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "CORE-004",
+      "name": "Pallof press in piedi",
+      "categoryCode": "CORE",
+      "description": "Pallof press in piedi — core e stabilità.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": 2,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "BAND",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORE"
+      ],
+      "secondaryMuscleCodes": [
+        "ADDOMINALI"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/core_004/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/core_004/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "CORE-005",
+      "name": "Wall plank",
+      "categoryCode": "CORE",
+      "description": "Wall plank — core e stabilità.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 20,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "WALL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORE"
+      ],
+      "secondaryMuscleCodes": [
+        "ADDOMINALI"
+      ],
+      "progressionCode": "CORE-006",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/core_005/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/core_005/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "CORE-006",
+      "name": "Plank inclinato su supporto stabile",
+      "categoryCode": "CORE",
+      "description": "Plank inclinato su supporto stabile — core e stabilità.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 20,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "HOUSEHOLD",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORE"
+      ],
+      "secondaryMuscleCodes": [
+        "ADDOMINALI"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/core_006/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/core_006/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "CORE-007",
+      "name": "Dead bug semplificato",
+      "categoryCode": "CORE",
+      "description": "Dead bug semplificato — core e stabilità.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 3,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": true,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": 2,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "MAT",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORE"
+      ],
+      "secondaryMuscleCodes": [
+        "ADDOMINALI"
+      ],
+      "progressionCode": "CORE-008",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/core_007/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/core_007/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "CORE-008",
+      "name": "Dead bug",
+      "categoryCode": "CORE",
+      "description": "Dead bug — core e stabilità.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 4,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": true,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": 3,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "MAT",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORE"
+      ],
+      "secondaryMuscleCodes": [
+        "ADDOMINALI"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/core_008/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/core_008/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "CORE-009",
+      "name": "Bird dog semplificato",
+      "categoryCode": "CORE",
+      "description": "Bird dog semplificato — core e stabilità.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 3,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": true,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": 2,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "MAT",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORE"
+      ],
+      "secondaryMuscleCodes": [
+        "LOMBARI",
+        "GLUTEI"
+      ],
+      "progressionCode": "CORE-010",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/core_009/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/core_009/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "CORE-010",
+      "name": "Bird dog",
+      "categoryCode": "CORE",
+      "description": "Bird dog — core e stabilità.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 4,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": true,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": 3,
+      "defaultReps": 8,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "MAT",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORE"
+      ],
+      "secondaryMuscleCodes": [
+        "LOMBARI",
+        "GLUTEI"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/core_010/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/core_010/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "CORE-011",
+      "name": "Farmer hold",
+      "categoryCode": "CORE",
+      "description": "Farmer hold — core e stabilità.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 20,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "DUMBBELL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORE"
+      ],
+      "secondaryMuscleCodes": [
+        "AVAMBRACCI",
+        "TRAPEZIO"
+      ],
+      "progressionCode": "CORE-012",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/core_011/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/core_011/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "CORE-012",
+      "name": "Farmer walk domestico",
+      "categoryCode": "CORE",
+      "description": "Farmer walk domestico — core e stabilità.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 3,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 30,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "DUMBBELL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORE"
+      ],
+      "secondaryMuscleCodes": [
+        "AVAMBRACCI",
+        "TRAPEZIO"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/core_012/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/core_012/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "BAL-001",
+      "name": "Stazione eretta con appoggio",
+      "categoryCode": "EQUILIBRIO",
+      "description": "Stazione eretta con appoggio — equilibrio e controllo.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": true,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 20,
+      "defaultRestSeconds": 30,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORE"
+      ],
+      "secondaryMuscleCodes": [
+        "GLUTEI"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/bal_001/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/bal_001/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "BAL-002",
+      "name": "Trasferimento peso laterale",
+      "categoryCode": "EQUILIBRIO",
+      "description": "Trasferimento peso laterale — equilibrio e controllo.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": true,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 30,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "GLUTEI"
+      ],
+      "secondaryMuscleCodes": [
+        "CORE"
+      ],
+      "progressionCode": "BAL-003",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/bal_002/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/bal_002/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "BAL-003",
+      "name": "Marcia controllata con appoggio leggero",
+      "categoryCode": "EQUILIBRIO",
+      "description": "Marcia controllata con appoggio leggero — equilibrio e controllo.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": true,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 30,
+      "defaultRestSeconds": 30,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "FLESSORI_ANCA"
+      ],
+      "secondaryMuscleCodes": [
+        "CORE"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/bal_003/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/bal_003/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "BAL-004",
+      "name": "Tandem stance assistita",
+      "categoryCode": "EQUILIBRIO",
+      "description": "Tandem stance assistita — equilibrio e controllo.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": true,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 20,
+      "defaultRestSeconds": 30,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": false
+        },
+        {
+          "code": "WALL",
+          "required": false
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORE"
+      ],
+      "secondaryMuscleCodes": [
+        "GLUTEI"
+      ],
+      "progressionCode": "BAL-005",
+      "progressionType": "VARIANTE",
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/bal_004/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/bal_004/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "BAL-005",
+      "name": "Tandem stance",
+      "categoryCode": "EQUILIBRIO",
+      "description": "Tandem stance — equilibrio e controllo.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 3,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": true,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 20,
+      "defaultRestSeconds": 30,
+      "equipmentCodes": [
+        {
+          "code": "NONE",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORE"
+      ],
+      "secondaryMuscleCodes": [
+        "GLUTEI"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/bal_005/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/bal_005/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "BAL-006",
+      "name": "Single-leg support assistito",
+      "categoryCode": "EQUILIBRIO",
+      "description": "Single-leg support assistito — equilibrio e controllo.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 3,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": true,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 15,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "GLUTEI"
+      ],
+      "secondaryMuscleCodes": [
+        "CORE"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/bal_006/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/bal_006/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "BAL-007",
+      "name": "Toe taps su target basso",
+      "categoryCode": "EQUILIBRIO",
+      "description": "Toe taps su target basso — equilibrio e controllo.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": true,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": 2,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "HOUSEHOLD",
+          "required": false
+        },
+        {
+          "code": "STEP",
+          "required": false
+        }
+      ],
+      "primaryMuscleCodes": [
+        "FLESSORI_ANCA"
+      ],
+      "secondaryMuscleCodes": [
+        "CORE"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/bal_007/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/bal_007/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "BAL-008",
+      "name": "Step lateral touch",
+      "categoryCode": "EQUILIBRIO",
+      "description": "Step lateral touch — equilibrio e controllo.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 3,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": null,
+      "balanceRequired": true,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": 2,
+      "defaultReps": 10,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "STEP",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "GLUTEI"
+      ],
+      "secondaryMuscleCodes": [
+        "QUADRICIPITI"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/bal_008/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/bal_008/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "CARD-001",
+      "name": "Camminata libera",
+      "categoryCode": "CARDIO",
+      "description": "Camminata libera — cardio low-impact.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": "LOW",
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "NONE",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORPO_INTERO"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/card_001/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/card_001/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "CARD-002",
+      "name": "Marcia sul posto con appoggio",
+      "categoryCode": "CARDIO",
+      "description": "Marcia sul posto con appoggio — cardio low-impact.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": "LOW",
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 60,
+      "defaultRestSeconds": 30,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": false
+        },
+        {
+          "code": "WALL",
+          "required": false
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORPO_INTERO"
+      ],
+      "secondaryMuscleCodes": [
+        "FLESSORI_ANCA"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/card_002/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/card_002/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "CARD-003",
+      "name": "Marcia sul posto senza appoggio",
+      "categoryCode": "CARDIO",
+      "description": "Marcia sul posto senza appoggio — cardio low-impact.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": "LOW",
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 60,
+      "defaultRestSeconds": 30,
+      "equipmentCodes": [
+        {
+          "code": "NONE",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORPO_INTERO"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/card_003/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/card_003/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "CARD-004",
+      "name": "Step touch laterale",
+      "categoryCode": "CARDIO",
+      "description": "Step touch laterale — cardio low-impact.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "LOW",
+      "cardioIntensity": "LOW",
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 60,
+      "defaultRestSeconds": 30,
+      "equipmentCodes": [
+        {
+          "code": "NONE",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORPO_INTERO"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/card_004/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/card_004/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "CARD-005",
+      "name": "Camminata a intervalli facile",
+      "categoryCode": "CARDIO",
+      "description": "Camminata a intervalli facile — cardio low-impact.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "MODERATE",
+      "cardioIntensity": "MODERATE",
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "NONE",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORPO_INTERO"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/card_005/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/card_005/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "CARD-006",
+      "name": "Camminata a ritmo sostenuto controllato",
+      "categoryCode": "CARDIO",
+      "description": "Camminata a ritmo sostenuto controllato — cardio low-impact.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "MODERATE",
+      "cardioIntensity": "MODERATE",
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": null,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "NONE",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORPO_INTERO"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/card_006/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/card_006/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "CARD-007",
+      "name": "Circuito marcia + step touch",
+      "categoryCode": "CARDIO",
+      "description": "Circuito marcia + step touch — cardio low-impact.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 3,
+      "maximumLevel": null,
+      "impactLevel": "MODERATE",
+      "cardioIntensity": "MODERATE",
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 120,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "NONE",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORPO_INTERO"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/card_007/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/card_007/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "CARD-008",
+      "name": "Step touch su step basso",
+      "categoryCode": "CARDIO",
+      "description": "Step touch su step basso — cardio low-impact.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 3,
+      "maximumLevel": null,
+      "impactLevel": "MODERATE",
+      "cardioIntensity": "MODERATE",
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 120,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "STEP",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORPO_INTERO"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/card_008/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/card_008/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "CARD-009",
+      "name": "Step-up cardio controllato",
+      "categoryCode": "CARDIO",
+      "description": "Step-up cardio controllato — cardio low-impact.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 4,
+      "maximumLevel": null,
+      "impactLevel": "MODERATE",
+      "cardioIntensity": "MODERATE",
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": false,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 120,
+      "defaultRestSeconds": 45,
+      "equipmentCodes": [
+        {
+          "code": "STEP",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORPO_INTERO"
+      ],
+      "secondaryMuscleCodes": [
+        "QUADRICIPITI",
+        "GLUTEI"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/card_009/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/card_009/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "CARD-010",
+      "name": "Circuito cardio domestico low-impact",
+      "categoryCode": "CARDIO",
+      "description": "Circuito cardio domestico low-impact — cardio low-impact.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 4,
+      "maximumLevel": null,
+      "impactLevel": "MODERATE",
+      "cardioIntensity": "MODERATE",
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 180,
+      "defaultRestSeconds": 60,
+      "equipmentCodes": [
+        {
+          "code": "NONE",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORPO_INTERO"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/card_010/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/card_010/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "STR-001",
+      "name": "Polpaccio al muro",
+      "categoryCode": "STRETCHING",
+      "description": "Polpaccio al muro — stretching e defaticamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 30,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "WALL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "POLPACCI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_001/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_001/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "STR-002",
+      "name": "Pettorale al muro",
+      "categoryCode": "STRETCHING",
+      "description": "Pettorale al muro — stretching e defaticamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 30,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "WALL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "PETTORALI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_002/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_002/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "STR-003",
+      "name": "Tricipite dolce",
+      "categoryCode": "STRETCHING",
+      "description": "Tricipite dolce — stretching e defaticamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 30,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "NONE",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "TRICIPITI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_003/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_003/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "STR-004",
+      "name": "Spalla posteriore",
+      "categoryCode": "STRETCHING",
+      "description": "Spalla posteriore — stretching e defaticamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 30,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "NONE",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "SPALLE"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_004/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_004/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "STR-005",
+      "name": "Flessori anca in piedi assistito",
+      "categoryCode": "STRETCHING",
+      "description": "Flessori anca in piedi assistito — stretching e defaticamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 30,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "FLESSORI_ANCA"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_005/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_005/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "STR-006",
+      "name": "Posteriori coscia da seduto",
+      "categoryCode": "STRETCHING",
+      "description": "Posteriori coscia da seduto — stretching e defaticamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 30,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "FEMORALI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_006/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_006/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "STR-007",
+      "name": "Gluteo da seduto, variante tollerata",
+      "categoryCode": "STRETCHING",
+      "description": "Gluteo da seduto, variante tollerata — stretching e defaticamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 2,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 30,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "GLUTEI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_007/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_007/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "STR-008",
+      "name": "Mobilità caviglia al muro",
+      "categoryCode": "STRETCHING",
+      "description": "Mobilità caviglia al muro — stretching e defaticamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 30,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "WALL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "POLPACCI"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_008/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_008/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "STR-009",
+      "name": "Stretch laterale seduto",
+      "categoryCode": "STRETCHING",
+      "description": "Stretch laterale seduto — stretching e defaticamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 30,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORE"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_009/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_009/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "STR-010",
+      "name": "Estensione toracica da seduto",
+      "categoryCode": "STRETCHING",
+      "description": "Estensione toracica da seduto — stretching e defaticamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 30,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORE"
+      ],
+      "secondaryMuscleCodes": [
+        "LOMBARI"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_010/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_010/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "STR-011",
+      "name": "Cat-cow al muro",
+      "categoryCode": "STRETCHING",
+      "description": "Cat-cow al muro — stretching e defaticamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": true,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 30,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "WALL",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "LOMBARI"
+      ],
+      "secondaryMuscleCodes": [
+        "CORE"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_011/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_011/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "STR-012",
+      "name": "Cat-cow a terra",
+      "categoryCode": "STRETCHING",
+      "description": "Cat-cow a terra — stretching e defaticamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 3,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": true,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 30,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "MAT",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "LOMBARI"
+      ],
+      "secondaryMuscleCodes": [
+        "CORE"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_012/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_012/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "STR-013",
+      "name": "Child's pose modificata",
+      "categoryCode": "STRETCHING",
+      "description": "Child's pose modificata — stretching e defaticamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 3,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": true,
+      "standingRequired": false,
+      "supportAllowed": false,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 30,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "MAT",
+          "required": true
+        }
+      ],
+      "primaryMuscleCodes": [
+        "LOMBARI"
+      ],
+      "secondaryMuscleCodes": [
+        "DORSALI"
+      ],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_013/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_013/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "STR-014",
+      "name": "Respirazione di defaticamento",
+      "categoryCode": "STRETCHING",
+      "description": "Respirazione di defaticamento — stretching e defaticamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 60,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": false
+        },
+        {
+          "code": "NONE",
+          "required": false
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORE"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_014/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_014/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "code": "STR-015",
+      "name": "Sequenza mobilità totale dolce",
+      "categoryCode": "STRETCHING",
+      "description": "Sequenza mobilità totale dolce — stretching e defaticamento.",
+      "instructions": "Istruzioni dettagliate da definire in una prossima iterazione di contenuto.",
+      "breathingInstructions": null,
+      "safetyNotes": null,
+      "commonMistakes": null,
+      "minimumLevel": 1,
+      "maximumLevel": null,
+      "impactLevel": "VERY_LOW",
+      "cardioIntensity": null,
+      "balanceRequired": false,
+      "floorRequired": false,
+      "standingRequired": false,
+      "supportAllowed": true,
+      "defaultSets": null,
+      "defaultReps": null,
+      "defaultDurationSeconds": 300,
+      "defaultRestSeconds": null,
+      "equipmentCodes": [
+        {
+          "code": "CHAIR",
+          "required": false
+        },
+        {
+          "code": "WALL",
+          "required": false
+        }
+      ],
+      "primaryMuscleCodes": [
+        "CORPO_INTERO"
+      ],
+      "secondaryMuscleCodes": [],
+      "progressionCode": null,
+      "progressionType": null,
+      "alternativeCodes": [],
+      "images": [
+        {
+          "type": "POSIZIONE_INIZIALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_015/start.webp",
+          "caption": null,
+          "order": 1
+        },
+        {
+          "type": "POSIZIONE_FINALE",
+          "sourceType": "ASSET",
+          "path": "assets/images/exercises/str_015/end.webp",
+          "caption": null,
+          "order": 2
+        }
+      ]
+    }
+  ]
+}
