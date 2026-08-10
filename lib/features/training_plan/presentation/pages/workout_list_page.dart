@@ -7,6 +7,7 @@ import '../../../../data/repositories/repository_providers.dart';
 import '../../../../data/repositories/workout_providers.dart';
 import '../../../../domain/entities/workout.dart';
 import '../../application/workout_editor_controller.dart';
+import '../widgets/active_session_banner.dart';
 import '../widgets/workout_card.dart';
 
 /// Punto di ingresso alle schede allenamento (voce "Programma" della
@@ -27,18 +28,37 @@ class WorkoutListPage extends ConsumerWidget {
         title: const Text('I tuoi allenamenti'),
         actions: [
           IconButton(
+            icon: const Icon(Icons.bar_chart),
+            tooltip: 'Statistiche',
+            onPressed: () => context.push(AppRoutes.workoutStatistics),
+          ),
+          IconButton(
+            icon: const Icon(Icons.history),
+            tooltip: 'Storico allenamenti',
+            onPressed: () => context.push(AppRoutes.workoutHistory),
+          ),
+          IconButton(
             icon: const Icon(Icons.archive_outlined),
             tooltip: 'Allenamenti archiviati',
             onPressed: () => context.push(AppRoutes.workoutArchived),
           ),
         ],
       ),
-      body: profileAsync.when(
-        data: (profile) => profile?.id == null
-            ? const Center(child: CircularProgressIndicator())
-            : _WorkoutList(profileId: profile!.id!),
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, stackTrace) => const _ErrorState(),
+      body: Column(
+        children: [
+          const ActiveSessionBanner(
+            padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
+          ),
+          Expanded(
+            child: profileAsync.when(
+              data: (profile) => profile?.id == null
+                  ? const Center(child: CircularProgressIndicator())
+                  : _WorkoutList(profileId: profile!.id!),
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, stackTrace) => const _ErrorState(),
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => context.push(AppRoutes.workoutNew),

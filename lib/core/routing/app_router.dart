@@ -17,7 +17,11 @@ import '../../features/training_plan/presentation/pages/exercise_picker_page.dar
 import '../../features/training_plan/presentation/pages/program_page.dart';
 import '../../features/training_plan/presentation/pages/workout_detail_page.dart';
 import '../../features/training_plan/presentation/pages/workout_edit_page.dart';
+import '../../features/training_plan/presentation/pages/workout_history_detail_page.dart';
+import '../../features/training_plan/presentation/pages/workout_history_page.dart';
 import '../../features/training_plan/presentation/pages/workout_list_page.dart';
+import '../../features/training_plan/presentation/pages/workout_session_page.dart';
+import '../../features/training_plan/presentation/pages/workout_statistics_page.dart';
 import '../../features/weight/presentation/pages/weight_page.dart';
 import 'app_routes.dart';
 import 'app_shell.dart';
@@ -100,6 +104,24 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: AppRoutes.workoutArchived,
         builder: (context, state) => const ArchivedWorkoutsPage(),
       ),
+      // Devono precedere `workoutDetail` (`/workouts/:id`), stesso motivo
+      // di `workoutArchived` sopra: con rotte piatte il primo match vince.
+      GoRoute(
+        path: AppRoutes.workoutHistory,
+        builder: (context, state) => const WorkoutHistoryPage(),
+      ),
+      GoRoute(
+        path: AppRoutes.workoutHistoryDetail,
+        builder: (context, state) {
+          final id = int.tryParse(state.pathParameters['sessionId'] ?? '');
+          if (id == null) return const _InvalidWorkoutIdPage();
+          return WorkoutHistoryDetailPage(sessionId: id);
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.workoutStatistics,
+        builder: (context, state) => const WorkoutStatisticsPage(),
+      ),
       GoRoute(
         path: AppRoutes.workoutDetail,
         builder: (context, state) {
@@ -122,6 +144,17 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           final id = int.tryParse(state.pathParameters['id'] ?? '');
           if (id == null) return const _InvalidWorkoutIdPage();
           return ExercisePickerPage(workoutId: id);
+        },
+      ),
+      // Fuori dalla StatefulShellRoute (bottom navigation) come le altre
+      // rotte scheda: la sessione guidata non deve mostrare la barra di
+      // navigazione principale.
+      GoRoute(
+        path: AppRoutes.workoutSession,
+        builder: (context, state) {
+          final id = int.tryParse(state.pathParameters['id'] ?? '');
+          if (id == null) return const _InvalidWorkoutIdPage();
+          return WorkoutSessionPage(workoutId: id);
         },
       ),
       StatefulShellRoute.indexedStack(

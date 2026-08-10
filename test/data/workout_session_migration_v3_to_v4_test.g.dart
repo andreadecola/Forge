@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'app_database.dart';
+part of 'workout_session_migration_v3_to_v4_test.dart';
 
 // ignore_for_file: type=lint
 class $AppSettingsTableTable extends AppSettingsTable
@@ -10807,1890 +10807,9 @@ class AllenamentiEserciziTableCompanion
   }
 }
 
-class $SessioniAllenamentoTableTable extends SessioniAllenamentoTable
-    with
-        TableInfo<
-          $SessioniAllenamentoTableTable,
-          SessioniAllenamentoTableData
-        > {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  $SessioniAllenamentoTableTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedColumn<int> id = GeneratedColumn<int>(
-    'id',
-    aliasedName,
-    false,
-    hasAutoIncrement: true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'PRIMARY KEY AUTOINCREMENT',
-    ),
-  );
-  static const VerificationMeta _idAllenamentoMeta = const VerificationMeta(
-    'idAllenamento',
-  );
-  @override
-  late final GeneratedColumn<int> idAllenamento = GeneratedColumn<int>(
-    'id_allenamento',
-    aliasedName,
-    true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES allenamenti (id) ON DELETE SET NULL',
-    ),
-  );
-  static const VerificationMeta _idProfiloMeta = const VerificationMeta(
-    'idProfilo',
-  );
-  @override
-  late final GeneratedColumn<int> idProfilo = GeneratedColumn<int>(
-    'id_profilo',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES profili_utente (id)',
-    ),
-  );
-  static const VerificationMeta _nomeAllenamentoSnapshotMeta =
-      const VerificationMeta('nomeAllenamentoSnapshot');
-  @override
-  late final GeneratedColumn<String> nomeAllenamentoSnapshot =
-      GeneratedColumn<String>(
-        'nome_allenamento_snapshot',
-        aliasedName,
-        false,
-        type: DriftSqlType.string,
-        requiredDuringInsert: true,
-      );
-  static const VerificationMeta _statoMeta = const VerificationMeta('stato');
-  @override
-  late final GeneratedColumn<String> stato = GeneratedColumn<String>(
-    'stato',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _indiceEsercizioCorrenteMeta =
-      const VerificationMeta('indiceEsercizioCorrente');
-  @override
-  late final GeneratedColumn<int> indiceEsercizioCorrente =
-      GeneratedColumn<int>(
-        'indice_esercizio_corrente',
-        aliasedName,
-        false,
-        type: DriftSqlType.int,
-        requiredDuringInsert: false,
-        defaultValue: const Constant(0),
-      );
-  static const VerificationMeta _dataInizioMeta = const VerificationMeta(
-    'dataInizio',
-  );
-  @override
-  late final GeneratedColumn<DateTime> dataInizio = GeneratedColumn<DateTime>(
-    'data_inizio',
-    aliasedName,
-    false,
-    type: DriftSqlType.dateTime,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _dataFineMeta = const VerificationMeta(
-    'dataFine',
-  );
-  @override
-  late final GeneratedColumn<DateTime> dataFine = GeneratedColumn<DateTime>(
-    'data_fine',
-    aliasedName,
-    true,
-    type: DriftSqlType.dateTime,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _inPausaMeta = const VerificationMeta(
-    'inPausa',
-  );
-  @override
-  late final GeneratedColumn<bool> inPausa = GeneratedColumn<bool>(
-    'in_pausa',
-    aliasedName,
-    false,
-    type: DriftSqlType.bool,
-    requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'CHECK ("in_pausa" IN (0, 1))',
-    ),
-    defaultValue: const Constant(false),
-  );
-  static const VerificationMeta _completataMeta = const VerificationMeta(
-    'completata',
-  );
-  @override
-  late final GeneratedColumn<bool> completata = GeneratedColumn<bool>(
-    'completata',
-    aliasedName,
-    false,
-    type: DriftSqlType.bool,
-    requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'CHECK ("completata" IN (0, 1))',
-    ),
-    defaultValue: const Constant(false),
-  );
-  static const VerificationMeta _timerTipoMeta = const VerificationMeta(
-    'timerTipo',
-  );
-  @override
-  late final GeneratedColumn<String> timerTipo = GeneratedColumn<String>(
-    'timer_tipo',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _timerStartedAtMeta = const VerificationMeta(
-    'timerStartedAt',
-  );
-  @override
-  late final GeneratedColumn<DateTime> timerStartedAt =
-      GeneratedColumn<DateTime>(
-        'timer_started_at',
-        aliasedName,
-        true,
-        type: DriftSqlType.dateTime,
-        requiredDuringInsert: false,
-      );
-  static const VerificationMeta _timerTargetSecondsMeta =
-      const VerificationMeta('timerTargetSeconds');
-  @override
-  late final GeneratedColumn<int> timerTargetSeconds = GeneratedColumn<int>(
-    'timer_target_seconds',
-    aliasedName,
-    true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _timerRemainingPausedMeta =
-      const VerificationMeta('timerRemainingPaused');
-  @override
-  late final GeneratedColumn<int> timerRemainingPaused = GeneratedColumn<int>(
-    'timer_remaining_paused',
-    aliasedName,
-    true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _dataCreazioneMeta = const VerificationMeta(
-    'dataCreazione',
-  );
-  @override
-  late final GeneratedColumn<DateTime> dataCreazione =
-      GeneratedColumn<DateTime>(
-        'data_creazione',
-        aliasedName,
-        false,
-        type: DriftSqlType.dateTime,
-        requiredDuringInsert: true,
-      );
-  static const VerificationMeta _dataModificaMeta = const VerificationMeta(
-    'dataModifica',
-  );
-  @override
-  late final GeneratedColumn<DateTime> dataModifica = GeneratedColumn<DateTime>(
-    'data_modifica',
-    aliasedName,
-    false,
-    type: DriftSqlType.dateTime,
-    requiredDuringInsert: true,
-  );
-  @override
-  List<GeneratedColumn> get $columns => [
-    id,
-    idAllenamento,
-    idProfilo,
-    nomeAllenamentoSnapshot,
-    stato,
-    indiceEsercizioCorrente,
-    dataInizio,
-    dataFine,
-    inPausa,
-    completata,
-    timerTipo,
-    timerStartedAt,
-    timerTargetSeconds,
-    timerRemainingPaused,
-    dataCreazione,
-    dataModifica,
-  ];
-  @override
-  String get aliasedName => _alias ?? actualTableName;
-  @override
-  String get actualTableName => $name;
-  static const String $name = 'sessioni_allenamento';
-  @override
-  VerificationContext validateIntegrity(
-    Insertable<SessioniAllenamentoTableData> instance, {
-    bool isInserting = false,
-  }) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    }
-    if (data.containsKey('id_allenamento')) {
-      context.handle(
-        _idAllenamentoMeta,
-        idAllenamento.isAcceptableOrUnknown(
-          data['id_allenamento']!,
-          _idAllenamentoMeta,
-        ),
-      );
-    }
-    if (data.containsKey('id_profilo')) {
-      context.handle(
-        _idProfiloMeta,
-        idProfilo.isAcceptableOrUnknown(data['id_profilo']!, _idProfiloMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_idProfiloMeta);
-    }
-    if (data.containsKey('nome_allenamento_snapshot')) {
-      context.handle(
-        _nomeAllenamentoSnapshotMeta,
-        nomeAllenamentoSnapshot.isAcceptableOrUnknown(
-          data['nome_allenamento_snapshot']!,
-          _nomeAllenamentoSnapshotMeta,
-        ),
-      );
-    } else if (isInserting) {
-      context.missing(_nomeAllenamentoSnapshotMeta);
-    }
-    if (data.containsKey('stato')) {
-      context.handle(
-        _statoMeta,
-        stato.isAcceptableOrUnknown(data['stato']!, _statoMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_statoMeta);
-    }
-    if (data.containsKey('indice_esercizio_corrente')) {
-      context.handle(
-        _indiceEsercizioCorrenteMeta,
-        indiceEsercizioCorrente.isAcceptableOrUnknown(
-          data['indice_esercizio_corrente']!,
-          _indiceEsercizioCorrenteMeta,
-        ),
-      );
-    }
-    if (data.containsKey('data_inizio')) {
-      context.handle(
-        _dataInizioMeta,
-        dataInizio.isAcceptableOrUnknown(data['data_inizio']!, _dataInizioMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_dataInizioMeta);
-    }
-    if (data.containsKey('data_fine')) {
-      context.handle(
-        _dataFineMeta,
-        dataFine.isAcceptableOrUnknown(data['data_fine']!, _dataFineMeta),
-      );
-    }
-    if (data.containsKey('in_pausa')) {
-      context.handle(
-        _inPausaMeta,
-        inPausa.isAcceptableOrUnknown(data['in_pausa']!, _inPausaMeta),
-      );
-    }
-    if (data.containsKey('completata')) {
-      context.handle(
-        _completataMeta,
-        completata.isAcceptableOrUnknown(data['completata']!, _completataMeta),
-      );
-    }
-    if (data.containsKey('timer_tipo')) {
-      context.handle(
-        _timerTipoMeta,
-        timerTipo.isAcceptableOrUnknown(data['timer_tipo']!, _timerTipoMeta),
-      );
-    }
-    if (data.containsKey('timer_started_at')) {
-      context.handle(
-        _timerStartedAtMeta,
-        timerStartedAt.isAcceptableOrUnknown(
-          data['timer_started_at']!,
-          _timerStartedAtMeta,
-        ),
-      );
-    }
-    if (data.containsKey('timer_target_seconds')) {
-      context.handle(
-        _timerTargetSecondsMeta,
-        timerTargetSeconds.isAcceptableOrUnknown(
-          data['timer_target_seconds']!,
-          _timerTargetSecondsMeta,
-        ),
-      );
-    }
-    if (data.containsKey('timer_remaining_paused')) {
-      context.handle(
-        _timerRemainingPausedMeta,
-        timerRemainingPaused.isAcceptableOrUnknown(
-          data['timer_remaining_paused']!,
-          _timerRemainingPausedMeta,
-        ),
-      );
-    }
-    if (data.containsKey('data_creazione')) {
-      context.handle(
-        _dataCreazioneMeta,
-        dataCreazione.isAcceptableOrUnknown(
-          data['data_creazione']!,
-          _dataCreazioneMeta,
-        ),
-      );
-    } else if (isInserting) {
-      context.missing(_dataCreazioneMeta);
-    }
-    if (data.containsKey('data_modifica')) {
-      context.handle(
-        _dataModificaMeta,
-        dataModifica.isAcceptableOrUnknown(
-          data['data_modifica']!,
-          _dataModificaMeta,
-        ),
-      );
-    } else if (isInserting) {
-      context.missing(_dataModificaMeta);
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {id};
-  @override
-  SessioniAllenamentoTableData map(
-    Map<String, dynamic> data, {
-    String? tablePrefix,
-  }) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return SessioniAllenamentoTableData(
-      id: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}id'],
-      )!,
-      idAllenamento: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}id_allenamento'],
-      ),
-      idProfilo: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}id_profilo'],
-      )!,
-      nomeAllenamentoSnapshot: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}nome_allenamento_snapshot'],
-      )!,
-      stato: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}stato'],
-      )!,
-      indiceEsercizioCorrente: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}indice_esercizio_corrente'],
-      )!,
-      dataInizio: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}data_inizio'],
-      )!,
-      dataFine: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}data_fine'],
-      ),
-      inPausa: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
-        data['${effectivePrefix}in_pausa'],
-      )!,
-      completata: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
-        data['${effectivePrefix}completata'],
-      )!,
-      timerTipo: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}timer_tipo'],
-      ),
-      timerStartedAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}timer_started_at'],
-      ),
-      timerTargetSeconds: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}timer_target_seconds'],
-      ),
-      timerRemainingPaused: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}timer_remaining_paused'],
-      ),
-      dataCreazione: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}data_creazione'],
-      )!,
-      dataModifica: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}data_modifica'],
-      )!,
-    );
-  }
-
-  @override
-  $SessioniAllenamentoTableTable createAlias(String alias) {
-    return $SessioniAllenamentoTableTable(attachedDatabase, alias);
-  }
-}
-
-class SessioniAllenamentoTableData extends DataClass
-    implements Insertable<SessioniAllenamentoTableData> {
-  final int id;
-  final int? idAllenamento;
-  final int idProfilo;
-
-  /// Nome della scheda al momento dell'avvio: la scheda può essere
-  /// rinominata (o eliminata) dopo, ma lo storico deve restare leggibile
-  /// con il nome usato quando la sessione è iniziata (sezione 7).
-  final String nomeAllenamentoSnapshot;
-
-  /// Codice stabile di `WorkoutSessionPersistenceStatus`
-  /// (IN_PROGRESS/PAUSED/COMPLETED/ABORTED).
-  final String stato;
-  final int indiceEsercizioCorrente;
-  final DateTime dataInizio;
-  final DateTime? dataFine;
-  final bool inPausa;
-  final bool completata;
-
-  /// Timer attivo (serie a tempo o recupero), se presente: al più uno dei
-  /// due può essere in corso alla volta (stesso invariante di
-  /// `WorkoutSessionState.exerciseTimer`/`restTimer`), quindi un'unica
-  /// terna di colonne basta — `null` in [timerTipo] significa "nessun
-  /// timer attivo" (equivalente al valore concettuale "NONE" citato nello
-  /// spec: qui reso come assenza, non come stringa magica, per coerenza
-  /// con il resto dello schema).
-  final String? timerTipo;
-  final DateTime? timerStartedAt;
-  final int? timerTargetSeconds;
-
-  /// Non nullo solo quando il timer è in pausa: i secondi residui
-  /// congelati (stesso significato di `SessionTimer.pausedRemainingSeconds`).
-  final int? timerRemainingPaused;
-  final DateTime dataCreazione;
-  final DateTime dataModifica;
-  const SessioniAllenamentoTableData({
-    required this.id,
-    this.idAllenamento,
-    required this.idProfilo,
-    required this.nomeAllenamentoSnapshot,
-    required this.stato,
-    required this.indiceEsercizioCorrente,
-    required this.dataInizio,
-    this.dataFine,
-    required this.inPausa,
-    required this.completata,
-    this.timerTipo,
-    this.timerStartedAt,
-    this.timerTargetSeconds,
-    this.timerRemainingPaused,
-    required this.dataCreazione,
-    required this.dataModifica,
-  });
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['id'] = Variable<int>(id);
-    if (!nullToAbsent || idAllenamento != null) {
-      map['id_allenamento'] = Variable<int>(idAllenamento);
-    }
-    map['id_profilo'] = Variable<int>(idProfilo);
-    map['nome_allenamento_snapshot'] = Variable<String>(
-      nomeAllenamentoSnapshot,
-    );
-    map['stato'] = Variable<String>(stato);
-    map['indice_esercizio_corrente'] = Variable<int>(indiceEsercizioCorrente);
-    map['data_inizio'] = Variable<DateTime>(dataInizio);
-    if (!nullToAbsent || dataFine != null) {
-      map['data_fine'] = Variable<DateTime>(dataFine);
-    }
-    map['in_pausa'] = Variable<bool>(inPausa);
-    map['completata'] = Variable<bool>(completata);
-    if (!nullToAbsent || timerTipo != null) {
-      map['timer_tipo'] = Variable<String>(timerTipo);
-    }
-    if (!nullToAbsent || timerStartedAt != null) {
-      map['timer_started_at'] = Variable<DateTime>(timerStartedAt);
-    }
-    if (!nullToAbsent || timerTargetSeconds != null) {
-      map['timer_target_seconds'] = Variable<int>(timerTargetSeconds);
-    }
-    if (!nullToAbsent || timerRemainingPaused != null) {
-      map['timer_remaining_paused'] = Variable<int>(timerRemainingPaused);
-    }
-    map['data_creazione'] = Variable<DateTime>(dataCreazione);
-    map['data_modifica'] = Variable<DateTime>(dataModifica);
-    return map;
-  }
-
-  SessioniAllenamentoTableCompanion toCompanion(bool nullToAbsent) {
-    return SessioniAllenamentoTableCompanion(
-      id: Value(id),
-      idAllenamento: idAllenamento == null && nullToAbsent
-          ? const Value.absent()
-          : Value(idAllenamento),
-      idProfilo: Value(idProfilo),
-      nomeAllenamentoSnapshot: Value(nomeAllenamentoSnapshot),
-      stato: Value(stato),
-      indiceEsercizioCorrente: Value(indiceEsercizioCorrente),
-      dataInizio: Value(dataInizio),
-      dataFine: dataFine == null && nullToAbsent
-          ? const Value.absent()
-          : Value(dataFine),
-      inPausa: Value(inPausa),
-      completata: Value(completata),
-      timerTipo: timerTipo == null && nullToAbsent
-          ? const Value.absent()
-          : Value(timerTipo),
-      timerStartedAt: timerStartedAt == null && nullToAbsent
-          ? const Value.absent()
-          : Value(timerStartedAt),
-      timerTargetSeconds: timerTargetSeconds == null && nullToAbsent
-          ? const Value.absent()
-          : Value(timerTargetSeconds),
-      timerRemainingPaused: timerRemainingPaused == null && nullToAbsent
-          ? const Value.absent()
-          : Value(timerRemainingPaused),
-      dataCreazione: Value(dataCreazione),
-      dataModifica: Value(dataModifica),
-    );
-  }
-
-  factory SessioniAllenamentoTableData.fromJson(
-    Map<String, dynamic> json, {
-    ValueSerializer? serializer,
-  }) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return SessioniAllenamentoTableData(
-      id: serializer.fromJson<int>(json['id']),
-      idAllenamento: serializer.fromJson<int?>(json['idAllenamento']),
-      idProfilo: serializer.fromJson<int>(json['idProfilo']),
-      nomeAllenamentoSnapshot: serializer.fromJson<String>(
-        json['nomeAllenamentoSnapshot'],
-      ),
-      stato: serializer.fromJson<String>(json['stato']),
-      indiceEsercizioCorrente: serializer.fromJson<int>(
-        json['indiceEsercizioCorrente'],
-      ),
-      dataInizio: serializer.fromJson<DateTime>(json['dataInizio']),
-      dataFine: serializer.fromJson<DateTime?>(json['dataFine']),
-      inPausa: serializer.fromJson<bool>(json['inPausa']),
-      completata: serializer.fromJson<bool>(json['completata']),
-      timerTipo: serializer.fromJson<String?>(json['timerTipo']),
-      timerStartedAt: serializer.fromJson<DateTime?>(json['timerStartedAt']),
-      timerTargetSeconds: serializer.fromJson<int?>(json['timerTargetSeconds']),
-      timerRemainingPaused: serializer.fromJson<int?>(
-        json['timerRemainingPaused'],
-      ),
-      dataCreazione: serializer.fromJson<DateTime>(json['dataCreazione']),
-      dataModifica: serializer.fromJson<DateTime>(json['dataModifica']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'id': serializer.toJson<int>(id),
-      'idAllenamento': serializer.toJson<int?>(idAllenamento),
-      'idProfilo': serializer.toJson<int>(idProfilo),
-      'nomeAllenamentoSnapshot': serializer.toJson<String>(
-        nomeAllenamentoSnapshot,
-      ),
-      'stato': serializer.toJson<String>(stato),
-      'indiceEsercizioCorrente': serializer.toJson<int>(
-        indiceEsercizioCorrente,
-      ),
-      'dataInizio': serializer.toJson<DateTime>(dataInizio),
-      'dataFine': serializer.toJson<DateTime?>(dataFine),
-      'inPausa': serializer.toJson<bool>(inPausa),
-      'completata': serializer.toJson<bool>(completata),
-      'timerTipo': serializer.toJson<String?>(timerTipo),
-      'timerStartedAt': serializer.toJson<DateTime?>(timerStartedAt),
-      'timerTargetSeconds': serializer.toJson<int?>(timerTargetSeconds),
-      'timerRemainingPaused': serializer.toJson<int?>(timerRemainingPaused),
-      'dataCreazione': serializer.toJson<DateTime>(dataCreazione),
-      'dataModifica': serializer.toJson<DateTime>(dataModifica),
-    };
-  }
-
-  SessioniAllenamentoTableData copyWith({
-    int? id,
-    Value<int?> idAllenamento = const Value.absent(),
-    int? idProfilo,
-    String? nomeAllenamentoSnapshot,
-    String? stato,
-    int? indiceEsercizioCorrente,
-    DateTime? dataInizio,
-    Value<DateTime?> dataFine = const Value.absent(),
-    bool? inPausa,
-    bool? completata,
-    Value<String?> timerTipo = const Value.absent(),
-    Value<DateTime?> timerStartedAt = const Value.absent(),
-    Value<int?> timerTargetSeconds = const Value.absent(),
-    Value<int?> timerRemainingPaused = const Value.absent(),
-    DateTime? dataCreazione,
-    DateTime? dataModifica,
-  }) => SessioniAllenamentoTableData(
-    id: id ?? this.id,
-    idAllenamento: idAllenamento.present
-        ? idAllenamento.value
-        : this.idAllenamento,
-    idProfilo: idProfilo ?? this.idProfilo,
-    nomeAllenamentoSnapshot:
-        nomeAllenamentoSnapshot ?? this.nomeAllenamentoSnapshot,
-    stato: stato ?? this.stato,
-    indiceEsercizioCorrente:
-        indiceEsercizioCorrente ?? this.indiceEsercizioCorrente,
-    dataInizio: dataInizio ?? this.dataInizio,
-    dataFine: dataFine.present ? dataFine.value : this.dataFine,
-    inPausa: inPausa ?? this.inPausa,
-    completata: completata ?? this.completata,
-    timerTipo: timerTipo.present ? timerTipo.value : this.timerTipo,
-    timerStartedAt: timerStartedAt.present
-        ? timerStartedAt.value
-        : this.timerStartedAt,
-    timerTargetSeconds: timerTargetSeconds.present
-        ? timerTargetSeconds.value
-        : this.timerTargetSeconds,
-    timerRemainingPaused: timerRemainingPaused.present
-        ? timerRemainingPaused.value
-        : this.timerRemainingPaused,
-    dataCreazione: dataCreazione ?? this.dataCreazione,
-    dataModifica: dataModifica ?? this.dataModifica,
-  );
-  SessioniAllenamentoTableData copyWithCompanion(
-    SessioniAllenamentoTableCompanion data,
-  ) {
-    return SessioniAllenamentoTableData(
-      id: data.id.present ? data.id.value : this.id,
-      idAllenamento: data.idAllenamento.present
-          ? data.idAllenamento.value
-          : this.idAllenamento,
-      idProfilo: data.idProfilo.present ? data.idProfilo.value : this.idProfilo,
-      nomeAllenamentoSnapshot: data.nomeAllenamentoSnapshot.present
-          ? data.nomeAllenamentoSnapshot.value
-          : this.nomeAllenamentoSnapshot,
-      stato: data.stato.present ? data.stato.value : this.stato,
-      indiceEsercizioCorrente: data.indiceEsercizioCorrente.present
-          ? data.indiceEsercizioCorrente.value
-          : this.indiceEsercizioCorrente,
-      dataInizio: data.dataInizio.present
-          ? data.dataInizio.value
-          : this.dataInizio,
-      dataFine: data.dataFine.present ? data.dataFine.value : this.dataFine,
-      inPausa: data.inPausa.present ? data.inPausa.value : this.inPausa,
-      completata: data.completata.present
-          ? data.completata.value
-          : this.completata,
-      timerTipo: data.timerTipo.present ? data.timerTipo.value : this.timerTipo,
-      timerStartedAt: data.timerStartedAt.present
-          ? data.timerStartedAt.value
-          : this.timerStartedAt,
-      timerTargetSeconds: data.timerTargetSeconds.present
-          ? data.timerTargetSeconds.value
-          : this.timerTargetSeconds,
-      timerRemainingPaused: data.timerRemainingPaused.present
-          ? data.timerRemainingPaused.value
-          : this.timerRemainingPaused,
-      dataCreazione: data.dataCreazione.present
-          ? data.dataCreazione.value
-          : this.dataCreazione,
-      dataModifica: data.dataModifica.present
-          ? data.dataModifica.value
-          : this.dataModifica,
-    );
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('SessioniAllenamentoTableData(')
-          ..write('id: $id, ')
-          ..write('idAllenamento: $idAllenamento, ')
-          ..write('idProfilo: $idProfilo, ')
-          ..write('nomeAllenamentoSnapshot: $nomeAllenamentoSnapshot, ')
-          ..write('stato: $stato, ')
-          ..write('indiceEsercizioCorrente: $indiceEsercizioCorrente, ')
-          ..write('dataInizio: $dataInizio, ')
-          ..write('dataFine: $dataFine, ')
-          ..write('inPausa: $inPausa, ')
-          ..write('completata: $completata, ')
-          ..write('timerTipo: $timerTipo, ')
-          ..write('timerStartedAt: $timerStartedAt, ')
-          ..write('timerTargetSeconds: $timerTargetSeconds, ')
-          ..write('timerRemainingPaused: $timerRemainingPaused, ')
-          ..write('dataCreazione: $dataCreazione, ')
-          ..write('dataModifica: $dataModifica')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode => Object.hash(
-    id,
-    idAllenamento,
-    idProfilo,
-    nomeAllenamentoSnapshot,
-    stato,
-    indiceEsercizioCorrente,
-    dataInizio,
-    dataFine,
-    inPausa,
-    completata,
-    timerTipo,
-    timerStartedAt,
-    timerTargetSeconds,
-    timerRemainingPaused,
-    dataCreazione,
-    dataModifica,
-  );
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is SessioniAllenamentoTableData &&
-          other.id == this.id &&
-          other.idAllenamento == this.idAllenamento &&
-          other.idProfilo == this.idProfilo &&
-          other.nomeAllenamentoSnapshot == this.nomeAllenamentoSnapshot &&
-          other.stato == this.stato &&
-          other.indiceEsercizioCorrente == this.indiceEsercizioCorrente &&
-          other.dataInizio == this.dataInizio &&
-          other.dataFine == this.dataFine &&
-          other.inPausa == this.inPausa &&
-          other.completata == this.completata &&
-          other.timerTipo == this.timerTipo &&
-          other.timerStartedAt == this.timerStartedAt &&
-          other.timerTargetSeconds == this.timerTargetSeconds &&
-          other.timerRemainingPaused == this.timerRemainingPaused &&
-          other.dataCreazione == this.dataCreazione &&
-          other.dataModifica == this.dataModifica);
-}
-
-class SessioniAllenamentoTableCompanion
-    extends UpdateCompanion<SessioniAllenamentoTableData> {
-  final Value<int> id;
-  final Value<int?> idAllenamento;
-  final Value<int> idProfilo;
-  final Value<String> nomeAllenamentoSnapshot;
-  final Value<String> stato;
-  final Value<int> indiceEsercizioCorrente;
-  final Value<DateTime> dataInizio;
-  final Value<DateTime?> dataFine;
-  final Value<bool> inPausa;
-  final Value<bool> completata;
-  final Value<String?> timerTipo;
-  final Value<DateTime?> timerStartedAt;
-  final Value<int?> timerTargetSeconds;
-  final Value<int?> timerRemainingPaused;
-  final Value<DateTime> dataCreazione;
-  final Value<DateTime> dataModifica;
-  const SessioniAllenamentoTableCompanion({
-    this.id = const Value.absent(),
-    this.idAllenamento = const Value.absent(),
-    this.idProfilo = const Value.absent(),
-    this.nomeAllenamentoSnapshot = const Value.absent(),
-    this.stato = const Value.absent(),
-    this.indiceEsercizioCorrente = const Value.absent(),
-    this.dataInizio = const Value.absent(),
-    this.dataFine = const Value.absent(),
-    this.inPausa = const Value.absent(),
-    this.completata = const Value.absent(),
-    this.timerTipo = const Value.absent(),
-    this.timerStartedAt = const Value.absent(),
-    this.timerTargetSeconds = const Value.absent(),
-    this.timerRemainingPaused = const Value.absent(),
-    this.dataCreazione = const Value.absent(),
-    this.dataModifica = const Value.absent(),
-  });
-  SessioniAllenamentoTableCompanion.insert({
-    this.id = const Value.absent(),
-    this.idAllenamento = const Value.absent(),
-    required int idProfilo,
-    required String nomeAllenamentoSnapshot,
-    required String stato,
-    this.indiceEsercizioCorrente = const Value.absent(),
-    required DateTime dataInizio,
-    this.dataFine = const Value.absent(),
-    this.inPausa = const Value.absent(),
-    this.completata = const Value.absent(),
-    this.timerTipo = const Value.absent(),
-    this.timerStartedAt = const Value.absent(),
-    this.timerTargetSeconds = const Value.absent(),
-    this.timerRemainingPaused = const Value.absent(),
-    required DateTime dataCreazione,
-    required DateTime dataModifica,
-  }) : idProfilo = Value(idProfilo),
-       nomeAllenamentoSnapshot = Value(nomeAllenamentoSnapshot),
-       stato = Value(stato),
-       dataInizio = Value(dataInizio),
-       dataCreazione = Value(dataCreazione),
-       dataModifica = Value(dataModifica);
-  static Insertable<SessioniAllenamentoTableData> custom({
-    Expression<int>? id,
-    Expression<int>? idAllenamento,
-    Expression<int>? idProfilo,
-    Expression<String>? nomeAllenamentoSnapshot,
-    Expression<String>? stato,
-    Expression<int>? indiceEsercizioCorrente,
-    Expression<DateTime>? dataInizio,
-    Expression<DateTime>? dataFine,
-    Expression<bool>? inPausa,
-    Expression<bool>? completata,
-    Expression<String>? timerTipo,
-    Expression<DateTime>? timerStartedAt,
-    Expression<int>? timerTargetSeconds,
-    Expression<int>? timerRemainingPaused,
-    Expression<DateTime>? dataCreazione,
-    Expression<DateTime>? dataModifica,
-  }) {
-    return RawValuesInsertable({
-      if (id != null) 'id': id,
-      if (idAllenamento != null) 'id_allenamento': idAllenamento,
-      if (idProfilo != null) 'id_profilo': idProfilo,
-      if (nomeAllenamentoSnapshot != null)
-        'nome_allenamento_snapshot': nomeAllenamentoSnapshot,
-      if (stato != null) 'stato': stato,
-      if (indiceEsercizioCorrente != null)
-        'indice_esercizio_corrente': indiceEsercizioCorrente,
-      if (dataInizio != null) 'data_inizio': dataInizio,
-      if (dataFine != null) 'data_fine': dataFine,
-      if (inPausa != null) 'in_pausa': inPausa,
-      if (completata != null) 'completata': completata,
-      if (timerTipo != null) 'timer_tipo': timerTipo,
-      if (timerStartedAt != null) 'timer_started_at': timerStartedAt,
-      if (timerTargetSeconds != null)
-        'timer_target_seconds': timerTargetSeconds,
-      if (timerRemainingPaused != null)
-        'timer_remaining_paused': timerRemainingPaused,
-      if (dataCreazione != null) 'data_creazione': dataCreazione,
-      if (dataModifica != null) 'data_modifica': dataModifica,
-    });
-  }
-
-  SessioniAllenamentoTableCompanion copyWith({
-    Value<int>? id,
-    Value<int?>? idAllenamento,
-    Value<int>? idProfilo,
-    Value<String>? nomeAllenamentoSnapshot,
-    Value<String>? stato,
-    Value<int>? indiceEsercizioCorrente,
-    Value<DateTime>? dataInizio,
-    Value<DateTime?>? dataFine,
-    Value<bool>? inPausa,
-    Value<bool>? completata,
-    Value<String?>? timerTipo,
-    Value<DateTime?>? timerStartedAt,
-    Value<int?>? timerTargetSeconds,
-    Value<int?>? timerRemainingPaused,
-    Value<DateTime>? dataCreazione,
-    Value<DateTime>? dataModifica,
-  }) {
-    return SessioniAllenamentoTableCompanion(
-      id: id ?? this.id,
-      idAllenamento: idAllenamento ?? this.idAllenamento,
-      idProfilo: idProfilo ?? this.idProfilo,
-      nomeAllenamentoSnapshot:
-          nomeAllenamentoSnapshot ?? this.nomeAllenamentoSnapshot,
-      stato: stato ?? this.stato,
-      indiceEsercizioCorrente:
-          indiceEsercizioCorrente ?? this.indiceEsercizioCorrente,
-      dataInizio: dataInizio ?? this.dataInizio,
-      dataFine: dataFine ?? this.dataFine,
-      inPausa: inPausa ?? this.inPausa,
-      completata: completata ?? this.completata,
-      timerTipo: timerTipo ?? this.timerTipo,
-      timerStartedAt: timerStartedAt ?? this.timerStartedAt,
-      timerTargetSeconds: timerTargetSeconds ?? this.timerTargetSeconds,
-      timerRemainingPaused: timerRemainingPaused ?? this.timerRemainingPaused,
-      dataCreazione: dataCreazione ?? this.dataCreazione,
-      dataModifica: dataModifica ?? this.dataModifica,
-    );
-  }
-
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    if (id.present) {
-      map['id'] = Variable<int>(id.value);
-    }
-    if (idAllenamento.present) {
-      map['id_allenamento'] = Variable<int>(idAllenamento.value);
-    }
-    if (idProfilo.present) {
-      map['id_profilo'] = Variable<int>(idProfilo.value);
-    }
-    if (nomeAllenamentoSnapshot.present) {
-      map['nome_allenamento_snapshot'] = Variable<String>(
-        nomeAllenamentoSnapshot.value,
-      );
-    }
-    if (stato.present) {
-      map['stato'] = Variable<String>(stato.value);
-    }
-    if (indiceEsercizioCorrente.present) {
-      map['indice_esercizio_corrente'] = Variable<int>(
-        indiceEsercizioCorrente.value,
-      );
-    }
-    if (dataInizio.present) {
-      map['data_inizio'] = Variable<DateTime>(dataInizio.value);
-    }
-    if (dataFine.present) {
-      map['data_fine'] = Variable<DateTime>(dataFine.value);
-    }
-    if (inPausa.present) {
-      map['in_pausa'] = Variable<bool>(inPausa.value);
-    }
-    if (completata.present) {
-      map['completata'] = Variable<bool>(completata.value);
-    }
-    if (timerTipo.present) {
-      map['timer_tipo'] = Variable<String>(timerTipo.value);
-    }
-    if (timerStartedAt.present) {
-      map['timer_started_at'] = Variable<DateTime>(timerStartedAt.value);
-    }
-    if (timerTargetSeconds.present) {
-      map['timer_target_seconds'] = Variable<int>(timerTargetSeconds.value);
-    }
-    if (timerRemainingPaused.present) {
-      map['timer_remaining_paused'] = Variable<int>(timerRemainingPaused.value);
-    }
-    if (dataCreazione.present) {
-      map['data_creazione'] = Variable<DateTime>(dataCreazione.value);
-    }
-    if (dataModifica.present) {
-      map['data_modifica'] = Variable<DateTime>(dataModifica.value);
-    }
-    return map;
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('SessioniAllenamentoTableCompanion(')
-          ..write('id: $id, ')
-          ..write('idAllenamento: $idAllenamento, ')
-          ..write('idProfilo: $idProfilo, ')
-          ..write('nomeAllenamentoSnapshot: $nomeAllenamentoSnapshot, ')
-          ..write('stato: $stato, ')
-          ..write('indiceEsercizioCorrente: $indiceEsercizioCorrente, ')
-          ..write('dataInizio: $dataInizio, ')
-          ..write('dataFine: $dataFine, ')
-          ..write('inPausa: $inPausa, ')
-          ..write('completata: $completata, ')
-          ..write('timerTipo: $timerTipo, ')
-          ..write('timerStartedAt: $timerStartedAt, ')
-          ..write('timerTargetSeconds: $timerTargetSeconds, ')
-          ..write('timerRemainingPaused: $timerRemainingPaused, ')
-          ..write('dataCreazione: $dataCreazione, ')
-          ..write('dataModifica: $dataModifica')
-          ..write(')'))
-        .toString();
-  }
-}
-
-class $SessioniEserciziTableTable extends SessioniEserciziTable
-    with TableInfo<$SessioniEserciziTableTable, SessioniEserciziTableData> {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  $SessioniEserciziTableTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedColumn<int> id = GeneratedColumn<int>(
-    'id',
-    aliasedName,
-    false,
-    hasAutoIncrement: true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'PRIMARY KEY AUTOINCREMENT',
-    ),
-  );
-  static const VerificationMeta _idSessioneMeta = const VerificationMeta(
-    'idSessione',
-  );
-  @override
-  late final GeneratedColumn<int> idSessione = GeneratedColumn<int>(
-    'id_sessione',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES sessioni_allenamento (id) ON DELETE CASCADE',
-    ),
-  );
-  static const VerificationMeta _idAllenamentoEsercizioMeta =
-      const VerificationMeta('idAllenamentoEsercizio');
-  @override
-  late final GeneratedColumn<int> idAllenamentoEsercizio = GeneratedColumn<int>(
-    'id_allenamento_esercizio',
-    aliasedName,
-    true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES allenamenti_esercizi (id) ON DELETE SET NULL',
-    ),
-  );
-  static const VerificationMeta _idEsercizioMeta = const VerificationMeta(
-    'idEsercizio',
-  );
-  @override
-  late final GeneratedColumn<int> idEsercizio = GeneratedColumn<int>(
-    'id_esercizio',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES esercizi (id)',
-    ),
-  );
-  static const VerificationMeta _ordineMeta = const VerificationMeta('ordine');
-  @override
-  late final GeneratedColumn<int> ordine = GeneratedColumn<int>(
-    'ordine',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _serieTotaliMeta = const VerificationMeta(
-    'serieTotali',
-  );
-  @override
-  late final GeneratedColumn<int> serieTotali = GeneratedColumn<int>(
-    'serie_totali',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _serieCompletateMeta = const VerificationMeta(
-    'serieCompletate',
-  );
-  @override
-  late final GeneratedColumn<int> serieCompletate = GeneratedColumn<int>(
-    'serie_completate',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-    defaultValue: const Constant(0),
-  );
-  static const VerificationMeta _ripetizioniMeta = const VerificationMeta(
-    'ripetizioni',
-  );
-  @override
-  late final GeneratedColumn<int> ripetizioni = GeneratedColumn<int>(
-    'ripetizioni',
-    aliasedName,
-    true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _durataSecondiMeta = const VerificationMeta(
-    'durataSecondi',
-  );
-  @override
-  late final GeneratedColumn<int> durataSecondi = GeneratedColumn<int>(
-    'durata_secondi',
-    aliasedName,
-    true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _recuperoSecondiMeta = const VerificationMeta(
-    'recuperoSecondi',
-  );
-  @override
-  late final GeneratedColumn<int> recuperoSecondi = GeneratedColumn<int>(
-    'recupero_secondi',
-    aliasedName,
-    true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _saltatoMeta = const VerificationMeta(
-    'saltato',
-  );
-  @override
-  late final GeneratedColumn<bool> saltato = GeneratedColumn<bool>(
-    'saltato',
-    aliasedName,
-    false,
-    type: DriftSqlType.bool,
-    requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'CHECK ("saltato" IN (0, 1))',
-    ),
-    defaultValue: const Constant(false),
-  );
-  static const VerificationMeta _completatoMeta = const VerificationMeta(
-    'completato',
-  );
-  @override
-  late final GeneratedColumn<bool> completato = GeneratedColumn<bool>(
-    'completato',
-    aliasedName,
-    false,
-    type: DriftSqlType.bool,
-    requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'CHECK ("completato" IN (0, 1))',
-    ),
-    defaultValue: const Constant(false),
-  );
-  static const VerificationMeta _dataCreazioneMeta = const VerificationMeta(
-    'dataCreazione',
-  );
-  @override
-  late final GeneratedColumn<DateTime> dataCreazione =
-      GeneratedColumn<DateTime>(
-        'data_creazione',
-        aliasedName,
-        false,
-        type: DriftSqlType.dateTime,
-        requiredDuringInsert: true,
-      );
-  static const VerificationMeta _dataModificaMeta = const VerificationMeta(
-    'dataModifica',
-  );
-  @override
-  late final GeneratedColumn<DateTime> dataModifica = GeneratedColumn<DateTime>(
-    'data_modifica',
-    aliasedName,
-    false,
-    type: DriftSqlType.dateTime,
-    requiredDuringInsert: true,
-  );
-  @override
-  List<GeneratedColumn> get $columns => [
-    id,
-    idSessione,
-    idAllenamentoEsercizio,
-    idEsercizio,
-    ordine,
-    serieTotali,
-    serieCompletate,
-    ripetizioni,
-    durataSecondi,
-    recuperoSecondi,
-    saltato,
-    completato,
-    dataCreazione,
-    dataModifica,
-  ];
-  @override
-  String get aliasedName => _alias ?? actualTableName;
-  @override
-  String get actualTableName => $name;
-  static const String $name = 'sessioni_esercizi';
-  @override
-  VerificationContext validateIntegrity(
-    Insertable<SessioniEserciziTableData> instance, {
-    bool isInserting = false,
-  }) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    }
-    if (data.containsKey('id_sessione')) {
-      context.handle(
-        _idSessioneMeta,
-        idSessione.isAcceptableOrUnknown(data['id_sessione']!, _idSessioneMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_idSessioneMeta);
-    }
-    if (data.containsKey('id_allenamento_esercizio')) {
-      context.handle(
-        _idAllenamentoEsercizioMeta,
-        idAllenamentoEsercizio.isAcceptableOrUnknown(
-          data['id_allenamento_esercizio']!,
-          _idAllenamentoEsercizioMeta,
-        ),
-      );
-    }
-    if (data.containsKey('id_esercizio')) {
-      context.handle(
-        _idEsercizioMeta,
-        idEsercizio.isAcceptableOrUnknown(
-          data['id_esercizio']!,
-          _idEsercizioMeta,
-        ),
-      );
-    } else if (isInserting) {
-      context.missing(_idEsercizioMeta);
-    }
-    if (data.containsKey('ordine')) {
-      context.handle(
-        _ordineMeta,
-        ordine.isAcceptableOrUnknown(data['ordine']!, _ordineMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_ordineMeta);
-    }
-    if (data.containsKey('serie_totali')) {
-      context.handle(
-        _serieTotaliMeta,
-        serieTotali.isAcceptableOrUnknown(
-          data['serie_totali']!,
-          _serieTotaliMeta,
-        ),
-      );
-    } else if (isInserting) {
-      context.missing(_serieTotaliMeta);
-    }
-    if (data.containsKey('serie_completate')) {
-      context.handle(
-        _serieCompletateMeta,
-        serieCompletate.isAcceptableOrUnknown(
-          data['serie_completate']!,
-          _serieCompletateMeta,
-        ),
-      );
-    }
-    if (data.containsKey('ripetizioni')) {
-      context.handle(
-        _ripetizioniMeta,
-        ripetizioni.isAcceptableOrUnknown(
-          data['ripetizioni']!,
-          _ripetizioniMeta,
-        ),
-      );
-    }
-    if (data.containsKey('durata_secondi')) {
-      context.handle(
-        _durataSecondiMeta,
-        durataSecondi.isAcceptableOrUnknown(
-          data['durata_secondi']!,
-          _durataSecondiMeta,
-        ),
-      );
-    }
-    if (data.containsKey('recupero_secondi')) {
-      context.handle(
-        _recuperoSecondiMeta,
-        recuperoSecondi.isAcceptableOrUnknown(
-          data['recupero_secondi']!,
-          _recuperoSecondiMeta,
-        ),
-      );
-    }
-    if (data.containsKey('saltato')) {
-      context.handle(
-        _saltatoMeta,
-        saltato.isAcceptableOrUnknown(data['saltato']!, _saltatoMeta),
-      );
-    }
-    if (data.containsKey('completato')) {
-      context.handle(
-        _completatoMeta,
-        completato.isAcceptableOrUnknown(data['completato']!, _completatoMeta),
-      );
-    }
-    if (data.containsKey('data_creazione')) {
-      context.handle(
-        _dataCreazioneMeta,
-        dataCreazione.isAcceptableOrUnknown(
-          data['data_creazione']!,
-          _dataCreazioneMeta,
-        ),
-      );
-    } else if (isInserting) {
-      context.missing(_dataCreazioneMeta);
-    }
-    if (data.containsKey('data_modifica')) {
-      context.handle(
-        _dataModificaMeta,
-        dataModifica.isAcceptableOrUnknown(
-          data['data_modifica']!,
-          _dataModificaMeta,
-        ),
-      );
-    } else if (isInserting) {
-      context.missing(_dataModificaMeta);
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {id};
-  @override
-  List<Set<GeneratedColumn>> get uniqueKeys => [
-    {idSessione, ordine},
-  ];
-  @override
-  SessioniEserciziTableData map(
-    Map<String, dynamic> data, {
-    String? tablePrefix,
-  }) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return SessioniEserciziTableData(
-      id: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}id'],
-      )!,
-      idSessione: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}id_sessione'],
-      )!,
-      idAllenamentoEsercizio: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}id_allenamento_esercizio'],
-      ),
-      idEsercizio: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}id_esercizio'],
-      )!,
-      ordine: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}ordine'],
-      )!,
-      serieTotali: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}serie_totali'],
-      )!,
-      serieCompletate: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}serie_completate'],
-      )!,
-      ripetizioni: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}ripetizioni'],
-      ),
-      durataSecondi: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}durata_secondi'],
-      ),
-      recuperoSecondi: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}recupero_secondi'],
-      ),
-      saltato: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
-        data['${effectivePrefix}saltato'],
-      )!,
-      completato: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
-        data['${effectivePrefix}completato'],
-      )!,
-      dataCreazione: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}data_creazione'],
-      )!,
-      dataModifica: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}data_modifica'],
-      )!,
-    );
-  }
-
-  @override
-  $SessioniEserciziTableTable createAlias(String alias) {
-    return $SessioniEserciziTableTable(attachedDatabase, alias);
-  }
-}
-
-class SessioniEserciziTableData extends DataClass
-    implements Insertable<SessioniEserciziTableData> {
-  final int id;
-  final int idSessione;
-  final int? idAllenamentoEsercizio;
-  final int idEsercizio;
-  final int ordine;
-
-  /// Numero di serie da eseguire, già risolto a runtime (`sets ?? 1`
-  /// dell'esercizio scheda al momento dell'avvio, Milestone 4.4.2 sezione
-  /// 18): a differenza di `AllenamentiEserciziTable.serie`, qui non è mai
-  /// null, perché questa riga esiste solo per tracciare il progresso di
-  /// una sessione già iniziata (serve sempre un totale con cui confrontare
-  /// [serieCompletate]).
-  final int serieTotali;
-  final int serieCompletate;
-  final int? ripetizioni;
-  final int? durataSecondi;
-  final int? recuperoSecondi;
-  final bool saltato;
-  final bool completato;
-  final DateTime dataCreazione;
-  final DateTime dataModifica;
-  const SessioniEserciziTableData({
-    required this.id,
-    required this.idSessione,
-    this.idAllenamentoEsercizio,
-    required this.idEsercizio,
-    required this.ordine,
-    required this.serieTotali,
-    required this.serieCompletate,
-    this.ripetizioni,
-    this.durataSecondi,
-    this.recuperoSecondi,
-    required this.saltato,
-    required this.completato,
-    required this.dataCreazione,
-    required this.dataModifica,
-  });
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['id'] = Variable<int>(id);
-    map['id_sessione'] = Variable<int>(idSessione);
-    if (!nullToAbsent || idAllenamentoEsercizio != null) {
-      map['id_allenamento_esercizio'] = Variable<int>(idAllenamentoEsercizio);
-    }
-    map['id_esercizio'] = Variable<int>(idEsercizio);
-    map['ordine'] = Variable<int>(ordine);
-    map['serie_totali'] = Variable<int>(serieTotali);
-    map['serie_completate'] = Variable<int>(serieCompletate);
-    if (!nullToAbsent || ripetizioni != null) {
-      map['ripetizioni'] = Variable<int>(ripetizioni);
-    }
-    if (!nullToAbsent || durataSecondi != null) {
-      map['durata_secondi'] = Variable<int>(durataSecondi);
-    }
-    if (!nullToAbsent || recuperoSecondi != null) {
-      map['recupero_secondi'] = Variable<int>(recuperoSecondi);
-    }
-    map['saltato'] = Variable<bool>(saltato);
-    map['completato'] = Variable<bool>(completato);
-    map['data_creazione'] = Variable<DateTime>(dataCreazione);
-    map['data_modifica'] = Variable<DateTime>(dataModifica);
-    return map;
-  }
-
-  SessioniEserciziTableCompanion toCompanion(bool nullToAbsent) {
-    return SessioniEserciziTableCompanion(
-      id: Value(id),
-      idSessione: Value(idSessione),
-      idAllenamentoEsercizio: idAllenamentoEsercizio == null && nullToAbsent
-          ? const Value.absent()
-          : Value(idAllenamentoEsercizio),
-      idEsercizio: Value(idEsercizio),
-      ordine: Value(ordine),
-      serieTotali: Value(serieTotali),
-      serieCompletate: Value(serieCompletate),
-      ripetizioni: ripetizioni == null && nullToAbsent
-          ? const Value.absent()
-          : Value(ripetizioni),
-      durataSecondi: durataSecondi == null && nullToAbsent
-          ? const Value.absent()
-          : Value(durataSecondi),
-      recuperoSecondi: recuperoSecondi == null && nullToAbsent
-          ? const Value.absent()
-          : Value(recuperoSecondi),
-      saltato: Value(saltato),
-      completato: Value(completato),
-      dataCreazione: Value(dataCreazione),
-      dataModifica: Value(dataModifica),
-    );
-  }
-
-  factory SessioniEserciziTableData.fromJson(
-    Map<String, dynamic> json, {
-    ValueSerializer? serializer,
-  }) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return SessioniEserciziTableData(
-      id: serializer.fromJson<int>(json['id']),
-      idSessione: serializer.fromJson<int>(json['idSessione']),
-      idAllenamentoEsercizio: serializer.fromJson<int?>(
-        json['idAllenamentoEsercizio'],
-      ),
-      idEsercizio: serializer.fromJson<int>(json['idEsercizio']),
-      ordine: serializer.fromJson<int>(json['ordine']),
-      serieTotali: serializer.fromJson<int>(json['serieTotali']),
-      serieCompletate: serializer.fromJson<int>(json['serieCompletate']),
-      ripetizioni: serializer.fromJson<int?>(json['ripetizioni']),
-      durataSecondi: serializer.fromJson<int?>(json['durataSecondi']),
-      recuperoSecondi: serializer.fromJson<int?>(json['recuperoSecondi']),
-      saltato: serializer.fromJson<bool>(json['saltato']),
-      completato: serializer.fromJson<bool>(json['completato']),
-      dataCreazione: serializer.fromJson<DateTime>(json['dataCreazione']),
-      dataModifica: serializer.fromJson<DateTime>(json['dataModifica']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'id': serializer.toJson<int>(id),
-      'idSessione': serializer.toJson<int>(idSessione),
-      'idAllenamentoEsercizio': serializer.toJson<int?>(idAllenamentoEsercizio),
-      'idEsercizio': serializer.toJson<int>(idEsercizio),
-      'ordine': serializer.toJson<int>(ordine),
-      'serieTotali': serializer.toJson<int>(serieTotali),
-      'serieCompletate': serializer.toJson<int>(serieCompletate),
-      'ripetizioni': serializer.toJson<int?>(ripetizioni),
-      'durataSecondi': serializer.toJson<int?>(durataSecondi),
-      'recuperoSecondi': serializer.toJson<int?>(recuperoSecondi),
-      'saltato': serializer.toJson<bool>(saltato),
-      'completato': serializer.toJson<bool>(completato),
-      'dataCreazione': serializer.toJson<DateTime>(dataCreazione),
-      'dataModifica': serializer.toJson<DateTime>(dataModifica),
-    };
-  }
-
-  SessioniEserciziTableData copyWith({
-    int? id,
-    int? idSessione,
-    Value<int?> idAllenamentoEsercizio = const Value.absent(),
-    int? idEsercizio,
-    int? ordine,
-    int? serieTotali,
-    int? serieCompletate,
-    Value<int?> ripetizioni = const Value.absent(),
-    Value<int?> durataSecondi = const Value.absent(),
-    Value<int?> recuperoSecondi = const Value.absent(),
-    bool? saltato,
-    bool? completato,
-    DateTime? dataCreazione,
-    DateTime? dataModifica,
-  }) => SessioniEserciziTableData(
-    id: id ?? this.id,
-    idSessione: idSessione ?? this.idSessione,
-    idAllenamentoEsercizio: idAllenamentoEsercizio.present
-        ? idAllenamentoEsercizio.value
-        : this.idAllenamentoEsercizio,
-    idEsercizio: idEsercizio ?? this.idEsercizio,
-    ordine: ordine ?? this.ordine,
-    serieTotali: serieTotali ?? this.serieTotali,
-    serieCompletate: serieCompletate ?? this.serieCompletate,
-    ripetizioni: ripetizioni.present ? ripetizioni.value : this.ripetizioni,
-    durataSecondi: durataSecondi.present
-        ? durataSecondi.value
-        : this.durataSecondi,
-    recuperoSecondi: recuperoSecondi.present
-        ? recuperoSecondi.value
-        : this.recuperoSecondi,
-    saltato: saltato ?? this.saltato,
-    completato: completato ?? this.completato,
-    dataCreazione: dataCreazione ?? this.dataCreazione,
-    dataModifica: dataModifica ?? this.dataModifica,
-  );
-  SessioniEserciziTableData copyWithCompanion(
-    SessioniEserciziTableCompanion data,
-  ) {
-    return SessioniEserciziTableData(
-      id: data.id.present ? data.id.value : this.id,
-      idSessione: data.idSessione.present
-          ? data.idSessione.value
-          : this.idSessione,
-      idAllenamentoEsercizio: data.idAllenamentoEsercizio.present
-          ? data.idAllenamentoEsercizio.value
-          : this.idAllenamentoEsercizio,
-      idEsercizio: data.idEsercizio.present
-          ? data.idEsercizio.value
-          : this.idEsercizio,
-      ordine: data.ordine.present ? data.ordine.value : this.ordine,
-      serieTotali: data.serieTotali.present
-          ? data.serieTotali.value
-          : this.serieTotali,
-      serieCompletate: data.serieCompletate.present
-          ? data.serieCompletate.value
-          : this.serieCompletate,
-      ripetizioni: data.ripetizioni.present
-          ? data.ripetizioni.value
-          : this.ripetizioni,
-      durataSecondi: data.durataSecondi.present
-          ? data.durataSecondi.value
-          : this.durataSecondi,
-      recuperoSecondi: data.recuperoSecondi.present
-          ? data.recuperoSecondi.value
-          : this.recuperoSecondi,
-      saltato: data.saltato.present ? data.saltato.value : this.saltato,
-      completato: data.completato.present
-          ? data.completato.value
-          : this.completato,
-      dataCreazione: data.dataCreazione.present
-          ? data.dataCreazione.value
-          : this.dataCreazione,
-      dataModifica: data.dataModifica.present
-          ? data.dataModifica.value
-          : this.dataModifica,
-    );
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('SessioniEserciziTableData(')
-          ..write('id: $id, ')
-          ..write('idSessione: $idSessione, ')
-          ..write('idAllenamentoEsercizio: $idAllenamentoEsercizio, ')
-          ..write('idEsercizio: $idEsercizio, ')
-          ..write('ordine: $ordine, ')
-          ..write('serieTotali: $serieTotali, ')
-          ..write('serieCompletate: $serieCompletate, ')
-          ..write('ripetizioni: $ripetizioni, ')
-          ..write('durataSecondi: $durataSecondi, ')
-          ..write('recuperoSecondi: $recuperoSecondi, ')
-          ..write('saltato: $saltato, ')
-          ..write('completato: $completato, ')
-          ..write('dataCreazione: $dataCreazione, ')
-          ..write('dataModifica: $dataModifica')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode => Object.hash(
-    id,
-    idSessione,
-    idAllenamentoEsercizio,
-    idEsercizio,
-    ordine,
-    serieTotali,
-    serieCompletate,
-    ripetizioni,
-    durataSecondi,
-    recuperoSecondi,
-    saltato,
-    completato,
-    dataCreazione,
-    dataModifica,
-  );
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is SessioniEserciziTableData &&
-          other.id == this.id &&
-          other.idSessione == this.idSessione &&
-          other.idAllenamentoEsercizio == this.idAllenamentoEsercizio &&
-          other.idEsercizio == this.idEsercizio &&
-          other.ordine == this.ordine &&
-          other.serieTotali == this.serieTotali &&
-          other.serieCompletate == this.serieCompletate &&
-          other.ripetizioni == this.ripetizioni &&
-          other.durataSecondi == this.durataSecondi &&
-          other.recuperoSecondi == this.recuperoSecondi &&
-          other.saltato == this.saltato &&
-          other.completato == this.completato &&
-          other.dataCreazione == this.dataCreazione &&
-          other.dataModifica == this.dataModifica);
-}
-
-class SessioniEserciziTableCompanion
-    extends UpdateCompanion<SessioniEserciziTableData> {
-  final Value<int> id;
-  final Value<int> idSessione;
-  final Value<int?> idAllenamentoEsercizio;
-  final Value<int> idEsercizio;
-  final Value<int> ordine;
-  final Value<int> serieTotali;
-  final Value<int> serieCompletate;
-  final Value<int?> ripetizioni;
-  final Value<int?> durataSecondi;
-  final Value<int?> recuperoSecondi;
-  final Value<bool> saltato;
-  final Value<bool> completato;
-  final Value<DateTime> dataCreazione;
-  final Value<DateTime> dataModifica;
-  const SessioniEserciziTableCompanion({
-    this.id = const Value.absent(),
-    this.idSessione = const Value.absent(),
-    this.idAllenamentoEsercizio = const Value.absent(),
-    this.idEsercizio = const Value.absent(),
-    this.ordine = const Value.absent(),
-    this.serieTotali = const Value.absent(),
-    this.serieCompletate = const Value.absent(),
-    this.ripetizioni = const Value.absent(),
-    this.durataSecondi = const Value.absent(),
-    this.recuperoSecondi = const Value.absent(),
-    this.saltato = const Value.absent(),
-    this.completato = const Value.absent(),
-    this.dataCreazione = const Value.absent(),
-    this.dataModifica = const Value.absent(),
-  });
-  SessioniEserciziTableCompanion.insert({
-    this.id = const Value.absent(),
-    required int idSessione,
-    this.idAllenamentoEsercizio = const Value.absent(),
-    required int idEsercizio,
-    required int ordine,
-    required int serieTotali,
-    this.serieCompletate = const Value.absent(),
-    this.ripetizioni = const Value.absent(),
-    this.durataSecondi = const Value.absent(),
-    this.recuperoSecondi = const Value.absent(),
-    this.saltato = const Value.absent(),
-    this.completato = const Value.absent(),
-    required DateTime dataCreazione,
-    required DateTime dataModifica,
-  }) : idSessione = Value(idSessione),
-       idEsercizio = Value(idEsercizio),
-       ordine = Value(ordine),
-       serieTotali = Value(serieTotali),
-       dataCreazione = Value(dataCreazione),
-       dataModifica = Value(dataModifica);
-  static Insertable<SessioniEserciziTableData> custom({
-    Expression<int>? id,
-    Expression<int>? idSessione,
-    Expression<int>? idAllenamentoEsercizio,
-    Expression<int>? idEsercizio,
-    Expression<int>? ordine,
-    Expression<int>? serieTotali,
-    Expression<int>? serieCompletate,
-    Expression<int>? ripetizioni,
-    Expression<int>? durataSecondi,
-    Expression<int>? recuperoSecondi,
-    Expression<bool>? saltato,
-    Expression<bool>? completato,
-    Expression<DateTime>? dataCreazione,
-    Expression<DateTime>? dataModifica,
-  }) {
-    return RawValuesInsertable({
-      if (id != null) 'id': id,
-      if (idSessione != null) 'id_sessione': idSessione,
-      if (idAllenamentoEsercizio != null)
-        'id_allenamento_esercizio': idAllenamentoEsercizio,
-      if (idEsercizio != null) 'id_esercizio': idEsercizio,
-      if (ordine != null) 'ordine': ordine,
-      if (serieTotali != null) 'serie_totali': serieTotali,
-      if (serieCompletate != null) 'serie_completate': serieCompletate,
-      if (ripetizioni != null) 'ripetizioni': ripetizioni,
-      if (durataSecondi != null) 'durata_secondi': durataSecondi,
-      if (recuperoSecondi != null) 'recupero_secondi': recuperoSecondi,
-      if (saltato != null) 'saltato': saltato,
-      if (completato != null) 'completato': completato,
-      if (dataCreazione != null) 'data_creazione': dataCreazione,
-      if (dataModifica != null) 'data_modifica': dataModifica,
-    });
-  }
-
-  SessioniEserciziTableCompanion copyWith({
-    Value<int>? id,
-    Value<int>? idSessione,
-    Value<int?>? idAllenamentoEsercizio,
-    Value<int>? idEsercizio,
-    Value<int>? ordine,
-    Value<int>? serieTotali,
-    Value<int>? serieCompletate,
-    Value<int?>? ripetizioni,
-    Value<int?>? durataSecondi,
-    Value<int?>? recuperoSecondi,
-    Value<bool>? saltato,
-    Value<bool>? completato,
-    Value<DateTime>? dataCreazione,
-    Value<DateTime>? dataModifica,
-  }) {
-    return SessioniEserciziTableCompanion(
-      id: id ?? this.id,
-      idSessione: idSessione ?? this.idSessione,
-      idAllenamentoEsercizio:
-          idAllenamentoEsercizio ?? this.idAllenamentoEsercizio,
-      idEsercizio: idEsercizio ?? this.idEsercizio,
-      ordine: ordine ?? this.ordine,
-      serieTotali: serieTotali ?? this.serieTotali,
-      serieCompletate: serieCompletate ?? this.serieCompletate,
-      ripetizioni: ripetizioni ?? this.ripetizioni,
-      durataSecondi: durataSecondi ?? this.durataSecondi,
-      recuperoSecondi: recuperoSecondi ?? this.recuperoSecondi,
-      saltato: saltato ?? this.saltato,
-      completato: completato ?? this.completato,
-      dataCreazione: dataCreazione ?? this.dataCreazione,
-      dataModifica: dataModifica ?? this.dataModifica,
-    );
-  }
-
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    if (id.present) {
-      map['id'] = Variable<int>(id.value);
-    }
-    if (idSessione.present) {
-      map['id_sessione'] = Variable<int>(idSessione.value);
-    }
-    if (idAllenamentoEsercizio.present) {
-      map['id_allenamento_esercizio'] = Variable<int>(
-        idAllenamentoEsercizio.value,
-      );
-    }
-    if (idEsercizio.present) {
-      map['id_esercizio'] = Variable<int>(idEsercizio.value);
-    }
-    if (ordine.present) {
-      map['ordine'] = Variable<int>(ordine.value);
-    }
-    if (serieTotali.present) {
-      map['serie_totali'] = Variable<int>(serieTotali.value);
-    }
-    if (serieCompletate.present) {
-      map['serie_completate'] = Variable<int>(serieCompletate.value);
-    }
-    if (ripetizioni.present) {
-      map['ripetizioni'] = Variable<int>(ripetizioni.value);
-    }
-    if (durataSecondi.present) {
-      map['durata_secondi'] = Variable<int>(durataSecondi.value);
-    }
-    if (recuperoSecondi.present) {
-      map['recupero_secondi'] = Variable<int>(recuperoSecondi.value);
-    }
-    if (saltato.present) {
-      map['saltato'] = Variable<bool>(saltato.value);
-    }
-    if (completato.present) {
-      map['completato'] = Variable<bool>(completato.value);
-    }
-    if (dataCreazione.present) {
-      map['data_creazione'] = Variable<DateTime>(dataCreazione.value);
-    }
-    if (dataModifica.present) {
-      map['data_modifica'] = Variable<DateTime>(dataModifica.value);
-    }
-    return map;
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('SessioniEserciziTableCompanion(')
-          ..write('id: $id, ')
-          ..write('idSessione: $idSessione, ')
-          ..write('idAllenamentoEsercizio: $idAllenamentoEsercizio, ')
-          ..write('idEsercizio: $idEsercizio, ')
-          ..write('ordine: $ordine, ')
-          ..write('serieTotali: $serieTotali, ')
-          ..write('serieCompletate: $serieCompletate, ')
-          ..write('ripetizioni: $ripetizioni, ')
-          ..write('durataSecondi: $durataSecondi, ')
-          ..write('recuperoSecondi: $recuperoSecondi, ')
-          ..write('saltato: $saltato, ')
-          ..write('completato: $completato, ')
-          ..write('dataCreazione: $dataCreazione, ')
-          ..write('dataModifica: $dataModifica')
-          ..write(')'))
-        .toString();
-  }
-}
-
-abstract class _$AppDatabase extends GeneratedDatabase {
-  _$AppDatabase(QueryExecutor e) : super(e);
-  $AppDatabaseManager get managers => $AppDatabaseManager(this);
+abstract class _$_SchemaV3Database extends GeneratedDatabase {
+  _$_SchemaV3Database(QueryExecutor e) : super(e);
+  $_SchemaV3DatabaseManager get managers => $_SchemaV3DatabaseManager(this);
   late final $AppSettingsTableTable appSettingsTable = $AppSettingsTableTable(
     this,
   );
@@ -12726,10 +10845,6 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   );
   late final $AllenamentiEserciziTableTable allenamentiEserciziTable =
       $AllenamentiEserciziTableTable(this);
-  late final $SessioniAllenamentoTableTable sessioniAllenamentoTable =
-      $SessioniAllenamentoTableTable(this);
-  late final $SessioniEserciziTableTable sessioniEserciziTable =
-      $SessioniEserciziTableTable(this);
   late final Index idxEserciziIdCategoria = Index(
     'idx_esercizi_id_categoria',
     'CREATE INDEX idx_esercizi_id_categoria ON esercizi (id_categoria)',
@@ -12786,67 +10901,6 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     'idx_allenamenti_esercizi_id_esercizio',
     'CREATE INDEX idx_allenamenti_esercizi_id_esercizio ON allenamenti_esercizi (id_esercizio)',
   );
-  late final Index idxSessioniAllenamentoIdAllenamento = Index(
-    'idx_sessioni_allenamento_id_allenamento',
-    'CREATE INDEX idx_sessioni_allenamento_id_allenamento ON sessioni_allenamento (id_allenamento)',
-  );
-  late final Index idxSessioniAllenamentoIdProfilo = Index(
-    'idx_sessioni_allenamento_id_profilo',
-    'CREATE INDEX idx_sessioni_allenamento_id_profilo ON sessioni_allenamento (id_profilo)',
-  );
-  late final Index idxSessioniAllenamentoStato = Index(
-    'idx_sessioni_allenamento_stato',
-    'CREATE INDEX idx_sessioni_allenamento_stato ON sessioni_allenamento (stato)',
-  );
-  late final Index idxSessioniEserciziIdSessione = Index(
-    'idx_sessioni_esercizi_id_sessione',
-    'CREATE INDEX idx_sessioni_esercizi_id_sessione ON sessioni_esercizi (id_sessione)',
-  );
-  late final Index idxSessioniEserciziIdAllenamentoEsercizio = Index(
-    'idx_sessioni_esercizi_id_allenamento_esercizio',
-    'CREATE INDEX idx_sessioni_esercizi_id_allenamento_esercizio ON sessioni_esercizi (id_allenamento_esercizio)',
-  );
-  late final AppSettingsDao appSettingsDao = AppSettingsDao(
-    this as AppDatabase,
-  );
-  late final UserProfileDao userProfileDao = UserProfileDao(
-    this as AppDatabase,
-  );
-  late final BodyMeasurementsDao bodyMeasurementsDao = BodyMeasurementsDao(
-    this as AppDatabase,
-  );
-  late final PressureMeasurementsDao pressureMeasurementsDao =
-      PressureMeasurementsDao(this as AppDatabase);
-  late final UserEquipmentDao userEquipmentDao = UserEquipmentDao(
-    this as AppDatabase,
-  );
-  late final CategorieEserciziDao categorieEserciziDao = CategorieEserciziDao(
-    this as AppDatabase,
-  );
-  late final GruppiMuscolariDao gruppiMuscolariDao = GruppiMuscolariDao(
-    this as AppDatabase,
-  );
-  late final AttrezzatureDao attrezzatureDao = AttrezzatureDao(
-    this as AppDatabase,
-  );
-  late final EserciziDao eserciziDao = EserciziDao(this as AppDatabase);
-  late final ImmaginiEserciziDao immaginiEserciziDao = ImmaginiEserciziDao(
-    this as AppDatabase,
-  );
-  late final ProgressioniEserciziDao progressioniEserciziDao =
-      ProgressioniEserciziDao(this as AppDatabase);
-  late final AlternativeEserciziDao alternativeEserciziDao =
-      AlternativeEserciziDao(this as AppDatabase);
-  late final AllenamentiDao allenamentiDao = AllenamentiDao(
-    this as AppDatabase,
-  );
-  late final AllenamentiEserciziDao allenamentiEserciziDao =
-      AllenamentiEserciziDao(this as AppDatabase);
-  late final SessioniAllenamentoDao sessioniAllenamentoDao =
-      SessioniAllenamentoDao(this as AppDatabase);
-  late final SessioniEserciziDao sessioniEserciziDao = SessioniEserciziDao(
-    this as AppDatabase,
-  );
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -12869,8 +10923,6 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     versioniCatalogoTable,
     allenamentiTable,
     allenamentiEserciziTable,
-    sessioniAllenamentoTable,
-    sessioniEserciziTable,
     idxEserciziIdCategoria,
     idxEserciziLivelloMinimo,
     idxEserciziAttivo,
@@ -12885,11 +10937,6 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     idxAllenamentiAttivo,
     idxAllenamentiEserciziIdAllenamento,
     idxAllenamentiEserciziIdEsercizio,
-    idxSessioniAllenamentoIdAllenamento,
-    idxSessioniAllenamentoIdProfilo,
-    idxSessioniAllenamentoStato,
-    idxSessioniEserciziIdSessione,
-    idxSessioniEserciziIdAllenamentoEsercizio,
   ];
   @override
   StreamQueryUpdateRules get streamUpdateRules => const StreamQueryUpdateRules([
@@ -12899,27 +10946,6 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         limitUpdateKind: UpdateKind.delete,
       ),
       result: [TableUpdate('allenamenti_esercizi', kind: UpdateKind.delete)],
-    ),
-    WritePropagation(
-      on: TableUpdateQuery.onTableName(
-        'allenamenti',
-        limitUpdateKind: UpdateKind.delete,
-      ),
-      result: [TableUpdate('sessioni_allenamento', kind: UpdateKind.update)],
-    ),
-    WritePropagation(
-      on: TableUpdateQuery.onTableName(
-        'sessioni_allenamento',
-        limitUpdateKind: UpdateKind.delete,
-      ),
-      result: [TableUpdate('sessioni_esercizi', kind: UpdateKind.delete)],
-    ),
-    WritePropagation(
-      on: TableUpdateQuery.onTableName(
-        'allenamenti_esercizi',
-        limitUpdateKind: UpdateKind.delete,
-      ),
-      result: [TableUpdate('sessioni_esercizi', kind: UpdateKind.update)],
     ),
   ]);
 }
@@ -12938,7 +10964,7 @@ typedef $$AppSettingsTableTableUpdateCompanionBuilder =
     });
 
 class $$AppSettingsTableTableFilterComposer
-    extends Composer<_$AppDatabase, $AppSettingsTableTable> {
+    extends Composer<_$_SchemaV3Database, $AppSettingsTableTable> {
   $$AppSettingsTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -12958,7 +10984,7 @@ class $$AppSettingsTableTableFilterComposer
 }
 
 class $$AppSettingsTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $AppSettingsTableTable> {
+    extends Composer<_$_SchemaV3Database, $AppSettingsTableTable> {
   $$AppSettingsTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -12978,7 +11004,7 @@ class $$AppSettingsTableTableOrderingComposer
 }
 
 class $$AppSettingsTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $AppSettingsTableTable> {
+    extends Composer<_$_SchemaV3Database, $AppSettingsTableTable> {
   $$AppSettingsTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -12996,7 +11022,7 @@ class $$AppSettingsTableTableAnnotationComposer
 class $$AppSettingsTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $AppSettingsTableTable,
           AppSettingsTableData,
           $$AppSettingsTableTableFilterComposer,
@@ -13007,7 +11033,7 @@ class $$AppSettingsTableTableTableManager
           (
             AppSettingsTableData,
             BaseReferences<
-              _$AppDatabase,
+              _$_SchemaV3Database,
               $AppSettingsTableTable,
               AppSettingsTableData
             >,
@@ -13016,7 +11042,7 @@ class $$AppSettingsTableTableTableManager
           PrefetchHooks Function()
         > {
   $$AppSettingsTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV3Database db,
     $AppSettingsTableTable table,
   ) : super(
         TableManagerState(
@@ -13058,7 +11084,7 @@ class $$AppSettingsTableTableTableManager
 
 typedef $$AppSettingsTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV3Database,
       $AppSettingsTableTable,
       AppSettingsTableData,
       $$AppSettingsTableTableFilterComposer,
@@ -13069,7 +11095,7 @@ typedef $$AppSettingsTableTableProcessedTableManager =
       (
         AppSettingsTableData,
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $AppSettingsTableTable,
           AppSettingsTableData
         >,
@@ -13113,7 +11139,7 @@ typedef $$UserProfilesTableTableUpdateCompanionBuilder =
 final class $$UserProfilesTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $UserProfilesTableTable,
           UserProfilesTableData
         > {
@@ -13127,7 +11153,7 @@ final class $$UserProfilesTableTableReferences
     $BodyMeasurementsTableTable,
     List<BodyMeasurementsTableData>
   >
-  _bodyMeasurementsTableRefsTable(_$AppDatabase db) =>
+  _bodyMeasurementsTableRefsTable(_$_SchemaV3Database db) =>
       MultiTypedResultKey.fromTable(
         db.bodyMeasurementsTable,
         aliasName: 'profili_utente__id__misurazioni_corporee__profile_id',
@@ -13152,7 +11178,7 @@ final class $$UserProfilesTableTableReferences
     $PressureMeasurementsTableTable,
     List<PressureMeasurementsTableData>
   >
-  _pressureMeasurementsTableRefsTable(_$AppDatabase db) =>
+  _pressureMeasurementsTableRefsTable(_$_SchemaV3Database db) =>
       MultiTypedResultKey.fromTable(
         db.pressureMeasurementsTable,
         aliasName: 'profili_utente__id__misurazioni_pressione__profile_id',
@@ -13177,7 +11203,7 @@ final class $$UserProfilesTableTableReferences
     $UserEquipmentTableTable,
     List<UserEquipmentTableData>
   >
-  _userEquipmentTableRefsTable(_$AppDatabase db) =>
+  _userEquipmentTableRefsTable(_$_SchemaV3Database db) =>
       MultiTypedResultKey.fromTable(
         db.userEquipmentTable,
         aliasName: 'profili_utente__id__attrezzature_utente__profile_id',
@@ -13198,10 +11224,11 @@ final class $$UserProfilesTableTableReferences
   }
 
   static MultiTypedResultKey<$AllenamentiTableTable, List<AllenamentiTableData>>
-  _allenamentiTableRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
-    db.allenamentiTable,
-    aliasName: 'profili_utente__id__allenamenti__id_profilo',
-  );
+  _allenamentiTableRefsTable(_$_SchemaV3Database db) =>
+      MultiTypedResultKey.fromTable(
+        db.allenamentiTable,
+        aliasName: 'profili_utente__id__allenamenti__id_profilo',
+      );
 
   $$AllenamentiTableTableProcessedTableManager get allenamentiTableRefs {
     final manager = $$AllenamentiTableTableTableManager(
@@ -13216,35 +11243,10 @@ final class $$UserProfilesTableTableReferences
       manager.$state.copyWith(prefetchedData: cache),
     );
   }
-
-  static MultiTypedResultKey<
-    $SessioniAllenamentoTableTable,
-    List<SessioniAllenamentoTableData>
-  >
-  _sessioniAllenamentoTableRefsTable(_$AppDatabase db) =>
-      MultiTypedResultKey.fromTable(
-        db.sessioniAllenamentoTable,
-        aliasName: 'profili_utente__id__sessioni_allenamento__id_profilo',
-      );
-
-  $$SessioniAllenamentoTableTableProcessedTableManager
-  get sessioniAllenamentoTableRefs {
-    final manager = $$SessioniAllenamentoTableTableTableManager(
-      $_db,
-      $_db.sessioniAllenamentoTable,
-    ).filter((f) => f.idProfilo.id.sqlEquals($_itemColumn<int>('id')!));
-
-    final cache = $_typedResult.readTableOrNull(
-      _sessioniAllenamentoTableRefsTable($_db),
-    );
-    return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: cache),
-    );
-  }
 }
 
 class $$UserProfilesTableTableFilterComposer
-    extends Composer<_$AppDatabase, $UserProfilesTableTable> {
+    extends Composer<_$_SchemaV3Database, $UserProfilesTableTable> {
   $$UserProfilesTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -13419,37 +11421,10 @@ class $$UserProfilesTableTableFilterComposer
     );
     return f(composer);
   }
-
-  Expression<bool> sessioniAllenamentoTableRefs(
-    Expression<bool> Function($$SessioniAllenamentoTableTableFilterComposer f)
-    f,
-  ) {
-    final $$SessioniAllenamentoTableTableFilterComposer composer =
-        $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.id,
-          referencedTable: $db.sessioniAllenamentoTable,
-          getReferencedColumn: (t) => t.idProfilo,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$SessioniAllenamentoTableTableFilterComposer(
-                $db: $db,
-                $table: $db.sessioniAllenamentoTable,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
-    return f(composer);
-  }
 }
 
 class $$UserProfilesTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $UserProfilesTableTable> {
+    extends Composer<_$_SchemaV3Database, $UserProfilesTableTable> {
   $$UserProfilesTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -13524,7 +11499,7 @@ class $$UserProfilesTableTableOrderingComposer
 }
 
 class $$UserProfilesTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $UserProfilesTableTable> {
+    extends Composer<_$_SchemaV3Database, $UserProfilesTableTable> {
   $$UserProfilesTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -13686,39 +11661,12 @@ class $$UserProfilesTableTableAnnotationComposer
     );
     return f(composer);
   }
-
-  Expression<T> sessioniAllenamentoTableRefs<T extends Object>(
-    Expression<T> Function($$SessioniAllenamentoTableTableAnnotationComposer a)
-    f,
-  ) {
-    final $$SessioniAllenamentoTableTableAnnotationComposer composer =
-        $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.id,
-          referencedTable: $db.sessioniAllenamentoTable,
-          getReferencedColumn: (t) => t.idProfilo,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$SessioniAllenamentoTableTableAnnotationComposer(
-                $db: $db,
-                $table: $db.sessioniAllenamentoTable,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
-    return f(composer);
-  }
 }
 
 class $$UserProfilesTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $UserProfilesTableTable,
           UserProfilesTableData,
           $$UserProfilesTableTableFilterComposer,
@@ -13733,11 +11681,10 @@ class $$UserProfilesTableTableTableManager
             bool pressureMeasurementsTableRefs,
             bool userEquipmentTableRefs,
             bool allenamentiTableRefs,
-            bool sessioniAllenamentoTableRefs,
           })
         > {
   $$UserProfilesTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV3Database db,
     $UserProfilesTableTable table,
   ) : super(
         TableManagerState(
@@ -13826,7 +11773,6 @@ class $$UserProfilesTableTableTableManager
                 pressureMeasurementsTableRefs = false,
                 userEquipmentTableRefs = false,
                 allenamentiTableRefs = false,
-                sessioniAllenamentoTableRefs = false,
               }) {
                 return PrefetchHooks(
                   db: db,
@@ -13836,8 +11782,6 @@ class $$UserProfilesTableTableTableManager
                       db.pressureMeasurementsTable,
                     if (userEquipmentTableRefs) db.userEquipmentTable,
                     if (allenamentiTableRefs) db.allenamentiTable,
-                    if (sessioniAllenamentoTableRefs)
-                      db.sessioniAllenamentoTable,
                   ],
                   addJoins: null,
                   getPrefetchedDataCallback: (items) async {
@@ -13926,27 +11870,6 @@ class $$UserProfilesTableTableTableManager
                               ),
                           typedResults: items,
                         ),
-                      if (sessioniAllenamentoTableRefs)
-                        await $_getPrefetchedData<
-                          UserProfilesTableData,
-                          $UserProfilesTableTable,
-                          SessioniAllenamentoTableData
-                        >(
-                          currentTable: table,
-                          referencedTable: $$UserProfilesTableTableReferences
-                              ._sessioniAllenamentoTableRefsTable(db),
-                          managerFromTypedResult: (p0) =>
-                              $$UserProfilesTableTableReferences(
-                                db,
-                                table,
-                                p0,
-                              ).sessioniAllenamentoTableRefs,
-                          referencedItemsForCurrentItem:
-                              (item, referencedItems) => referencedItems.where(
-                                (e) => e.idProfilo == item.id,
-                              ),
-                          typedResults: items,
-                        ),
                     ];
                   },
                 );
@@ -13957,7 +11880,7 @@ class $$UserProfilesTableTableTableManager
 
 typedef $$UserProfilesTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV3Database,
       $UserProfilesTableTable,
       UserProfilesTableData,
       $$UserProfilesTableTableFilterComposer,
@@ -13972,7 +11895,6 @@ typedef $$UserProfilesTableTableProcessedTableManager =
         bool pressureMeasurementsTableRefs,
         bool userEquipmentTableRefs,
         bool allenamentiTableRefs,
-        bool sessioniAllenamentoTableRefs,
       })
     >;
 typedef $$BodyMeasurementsTableTableCreateCompanionBuilder =
@@ -14017,7 +11939,7 @@ typedef $$BodyMeasurementsTableTableUpdateCompanionBuilder =
 final class $$BodyMeasurementsTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $BodyMeasurementsTableTable,
           BodyMeasurementsTableData
         > {
@@ -14027,7 +11949,7 @@ final class $$BodyMeasurementsTableTableReferences
     super.$_typedResult,
   );
 
-  static $UserProfilesTableTable _profileIdTable(_$AppDatabase db) => db
+  static $UserProfilesTableTable _profileIdTable(_$_SchemaV3Database db) => db
       .userProfilesTable
       .createAlias('misurazioni_corporee__profile_id__profili_utente__id');
 
@@ -14047,7 +11969,7 @@ final class $$BodyMeasurementsTableTableReferences
 }
 
 class $$BodyMeasurementsTableTableFilterComposer
-    extends Composer<_$AppDatabase, $BodyMeasurementsTableTable> {
+    extends Composer<_$_SchemaV3Database, $BodyMeasurementsTableTable> {
   $$BodyMeasurementsTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -14155,7 +12077,7 @@ class $$BodyMeasurementsTableTableFilterComposer
 }
 
 class $$BodyMeasurementsTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $BodyMeasurementsTableTable> {
+    extends Composer<_$_SchemaV3Database, $BodyMeasurementsTableTable> {
   $$BodyMeasurementsTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -14263,7 +12185,7 @@ class $$BodyMeasurementsTableTableOrderingComposer
 }
 
 class $$BodyMeasurementsTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $BodyMeasurementsTableTable> {
+    extends Composer<_$_SchemaV3Database, $BodyMeasurementsTableTable> {
   $$BodyMeasurementsTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -14356,7 +12278,7 @@ class $$BodyMeasurementsTableTableAnnotationComposer
 class $$BodyMeasurementsTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $BodyMeasurementsTableTable,
           BodyMeasurementsTableData,
           $$BodyMeasurementsTableTableFilterComposer,
@@ -14369,7 +12291,7 @@ class $$BodyMeasurementsTableTableTableManager
           PrefetchHooks Function({bool profileId})
         > {
   $$BodyMeasurementsTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV3Database db,
     $BodyMeasurementsTableTable table,
   ) : super(
         TableManagerState(
@@ -14519,7 +12441,7 @@ class $$BodyMeasurementsTableTableTableManager
 
 typedef $$BodyMeasurementsTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV3Database,
       $BodyMeasurementsTableTable,
       BodyMeasurementsTableData,
       $$BodyMeasurementsTableTableFilterComposer,
@@ -14557,7 +12479,7 @@ typedef $$PressureMeasurementsTableTableUpdateCompanionBuilder =
 final class $$PressureMeasurementsTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $PressureMeasurementsTableTable,
           PressureMeasurementsTableData
         > {
@@ -14567,7 +12489,7 @@ final class $$PressureMeasurementsTableTableReferences
     super.$_typedResult,
   );
 
-  static $UserProfilesTableTable _profileIdTable(_$AppDatabase db) => db
+  static $UserProfilesTableTable _profileIdTable(_$_SchemaV3Database db) => db
       .userProfilesTable
       .createAlias('misurazioni_pressione__profile_id__profili_utente__id');
 
@@ -14587,7 +12509,7 @@ final class $$PressureMeasurementsTableTableReferences
 }
 
 class $$PressureMeasurementsTableTableFilterComposer
-    extends Composer<_$AppDatabase, $PressureMeasurementsTableTable> {
+    extends Composer<_$_SchemaV3Database, $PressureMeasurementsTableTable> {
   $$PressureMeasurementsTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -14655,7 +12577,7 @@ class $$PressureMeasurementsTableTableFilterComposer
 }
 
 class $$PressureMeasurementsTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $PressureMeasurementsTableTable> {
+    extends Composer<_$_SchemaV3Database, $PressureMeasurementsTableTable> {
   $$PressureMeasurementsTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -14723,7 +12645,7 @@ class $$PressureMeasurementsTableTableOrderingComposer
 }
 
 class $$PressureMeasurementsTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $PressureMeasurementsTableTable> {
+    extends Composer<_$_SchemaV3Database, $PressureMeasurementsTableTable> {
   $$PressureMeasurementsTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -14784,7 +12706,7 @@ class $$PressureMeasurementsTableTableAnnotationComposer
 class $$PressureMeasurementsTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $PressureMeasurementsTableTable,
           PressureMeasurementsTableData,
           $$PressureMeasurementsTableTableFilterComposer,
@@ -14800,7 +12722,7 @@ class $$PressureMeasurementsTableTableTableManager
           PrefetchHooks Function({bool profileId})
         > {
   $$PressureMeasurementsTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV3Database db,
     $PressureMeasurementsTableTable table,
   ) : super(
         TableManagerState(
@@ -14918,7 +12840,7 @@ class $$PressureMeasurementsTableTableTableManager
 
 typedef $$PressureMeasurementsTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV3Database,
       $PressureMeasurementsTableTable,
       PressureMeasurementsTableData,
       $$PressureMeasurementsTableTableFilterComposer,
@@ -14955,7 +12877,7 @@ typedef $$UserEquipmentTableTableUpdateCompanionBuilder =
 final class $$UserEquipmentTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $UserEquipmentTableTable,
           UserEquipmentTableData
         > {
@@ -14965,7 +12887,7 @@ final class $$UserEquipmentTableTableReferences
     super.$_typedResult,
   );
 
-  static $UserProfilesTableTable _profileIdTable(_$AppDatabase db) => db
+  static $UserProfilesTableTable _profileIdTable(_$_SchemaV3Database db) => db
       .userProfilesTable
       .createAlias('attrezzature_utente__profile_id__profili_utente__id');
 
@@ -14985,7 +12907,7 @@ final class $$UserEquipmentTableTableReferences
 }
 
 class $$UserEquipmentTableTableFilterComposer
-    extends Composer<_$AppDatabase, $UserEquipmentTableTable> {
+    extends Composer<_$_SchemaV3Database, $UserEquipmentTableTable> {
   $$UserEquipmentTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -15043,7 +12965,7 @@ class $$UserEquipmentTableTableFilterComposer
 }
 
 class $$UserEquipmentTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $UserEquipmentTableTable> {
+    extends Composer<_$_SchemaV3Database, $UserEquipmentTableTable> {
   $$UserEquipmentTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -15101,7 +13023,7 @@ class $$UserEquipmentTableTableOrderingComposer
 }
 
 class $$UserEquipmentTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $UserEquipmentTableTable> {
+    extends Composer<_$_SchemaV3Database, $UserEquipmentTableTable> {
   $$UserEquipmentTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -15156,7 +13078,7 @@ class $$UserEquipmentTableTableAnnotationComposer
 class $$UserEquipmentTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $UserEquipmentTableTable,
           UserEquipmentTableData,
           $$UserEquipmentTableTableFilterComposer,
@@ -15169,7 +13091,7 @@ class $$UserEquipmentTableTableTableManager
           PrefetchHooks Function({bool profileId})
         > {
   $$UserEquipmentTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV3Database db,
     $UserEquipmentTableTable table,
   ) : super(
         TableManagerState(
@@ -15273,7 +13195,7 @@ class $$UserEquipmentTableTableTableManager
 
 typedef $$UserEquipmentTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV3Database,
       $UserEquipmentTableTable,
       UserEquipmentTableData,
       $$UserEquipmentTableTableFilterComposer,
@@ -15311,7 +13233,7 @@ typedef $$CategorieEserciziTableTableUpdateCompanionBuilder =
 final class $$CategorieEserciziTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $CategorieEserciziTableTable,
           CategorieEserciziTableData
         > {
@@ -15322,10 +13244,11 @@ final class $$CategorieEserciziTableTableReferences
   );
 
   static MultiTypedResultKey<$EserciziTableTable, List<EserciziTableData>>
-  _eserciziTableRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
-    db.eserciziTable,
-    aliasName: 'categorie_esercizi__id__esercizi__id_categoria',
-  );
+  _eserciziTableRefsTable(_$_SchemaV3Database db) =>
+      MultiTypedResultKey.fromTable(
+        db.eserciziTable,
+        aliasName: 'categorie_esercizi__id__esercizi__id_categoria',
+      );
 
   $$EserciziTableTableProcessedTableManager get eserciziTableRefs {
     final manager = $$EserciziTableTableTableManager(
@@ -15341,7 +13264,7 @@ final class $$CategorieEserciziTableTableReferences
 }
 
 class $$CategorieEserciziTableTableFilterComposer
-    extends Composer<_$AppDatabase, $CategorieEserciziTableTable> {
+    extends Composer<_$_SchemaV3Database, $CategorieEserciziTableTable> {
   $$CategorieEserciziTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -15416,7 +13339,7 @@ class $$CategorieEserciziTableTableFilterComposer
 }
 
 class $$CategorieEserciziTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $CategorieEserciziTableTable> {
+    extends Composer<_$_SchemaV3Database, $CategorieEserciziTableTable> {
   $$CategorieEserciziTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -15466,7 +13389,7 @@ class $$CategorieEserciziTableTableOrderingComposer
 }
 
 class $$CategorieEserciziTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $CategorieEserciziTableTable> {
+    extends Composer<_$_SchemaV3Database, $CategorieEserciziTableTable> {
   $$CategorieEserciziTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -15535,7 +13458,7 @@ class $$CategorieEserciziTableTableAnnotationComposer
 class $$CategorieEserciziTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $CategorieEserciziTableTable,
           CategorieEserciziTableData,
           $$CategorieEserciziTableTableFilterComposer,
@@ -15548,7 +13471,7 @@ class $$CategorieEserciziTableTableTableManager
           PrefetchHooks Function({bool eserciziTableRefs})
         > {
   $$CategorieEserciziTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV3Database db,
     $CategorieEserciziTableTable table,
   ) : super(
         TableManagerState(
@@ -15657,7 +13580,7 @@ class $$CategorieEserciziTableTableTableManager
 
 typedef $$CategorieEserciziTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV3Database,
       $CategorieEserciziTableTable,
       CategorieEserciziTableData,
       $$CategorieEserciziTableTableFilterComposer,
@@ -15693,7 +13616,7 @@ typedef $$GruppiMuscolariTableTableUpdateCompanionBuilder =
 final class $$GruppiMuscolariTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $GruppiMuscolariTableTable,
           GruppiMuscolariTableData
         > {
@@ -15708,7 +13631,7 @@ final class $$GruppiMuscolariTableTableReferences
     List<EserciziGruppiMuscolariTableData>
   >
   _eserciziGruppiMuscolariTableRefsTable(
-    _$AppDatabase db,
+    _$_SchemaV3Database db,
   ) => MultiTypedResultKey.fromTable(
     db.eserciziGruppiMuscolariTable,
     aliasName:
@@ -15732,7 +13655,7 @@ final class $$GruppiMuscolariTableTableReferences
 }
 
 class $$GruppiMuscolariTableTableFilterComposer
-    extends Composer<_$AppDatabase, $GruppiMuscolariTableTable> {
+    extends Composer<_$_SchemaV3Database, $GruppiMuscolariTableTable> {
   $$GruppiMuscolariTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -15806,7 +13729,7 @@ class $$GruppiMuscolariTableTableFilterComposer
 }
 
 class $$GruppiMuscolariTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $GruppiMuscolariTableTable> {
+    extends Composer<_$_SchemaV3Database, $GruppiMuscolariTableTable> {
   $$GruppiMuscolariTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -15851,7 +13774,7 @@ class $$GruppiMuscolariTableTableOrderingComposer
 }
 
 class $$GruppiMuscolariTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $GruppiMuscolariTableTable> {
+    extends Composer<_$_SchemaV3Database, $GruppiMuscolariTableTable> {
   $$GruppiMuscolariTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -15919,7 +13842,7 @@ class $$GruppiMuscolariTableTableAnnotationComposer
 class $$GruppiMuscolariTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $GruppiMuscolariTableTable,
           GruppiMuscolariTableData,
           $$GruppiMuscolariTableTableFilterComposer,
@@ -15932,7 +13855,7 @@ class $$GruppiMuscolariTableTableTableManager
           PrefetchHooks Function({bool eserciziGruppiMuscolariTableRefs})
         > {
   $$GruppiMuscolariTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV3Database db,
     $GruppiMuscolariTableTable table,
   ) : super(
         TableManagerState(
@@ -16035,7 +13958,7 @@ class $$GruppiMuscolariTableTableTableManager
 
 typedef $$GruppiMuscolariTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV3Database,
       $GruppiMuscolariTableTable,
       GruppiMuscolariTableData,
       $$GruppiMuscolariTableTableFilterComposer,
@@ -16108,16 +14031,22 @@ typedef $$EserciziTableTableUpdateCompanionBuilder =
 
 final class $$EserciziTableTableReferences
     extends
-        BaseReferences<_$AppDatabase, $EserciziTableTable, EserciziTableData> {
+        BaseReferences<
+          _$_SchemaV3Database,
+          $EserciziTableTable,
+          EserciziTableData
+        > {
   $$EserciziTableTableReferences(
     super.$_db,
     super.$_table,
     super.$_typedResult,
   );
 
-  static $CategorieEserciziTableTable _idCategoriaTable(_$AppDatabase db) => db
-      .categorieEserciziTable
-      .createAlias('esercizi__id_categoria__categorie_esercizi__id');
+  static $CategorieEserciziTableTable _idCategoriaTable(
+    _$_SchemaV3Database db,
+  ) => db.categorieEserciziTable.createAlias(
+    'esercizi__id_categoria__categorie_esercizi__id',
+  );
 
   $$CategorieEserciziTableTableProcessedTableManager get idCategoria {
     final $_column = $_itemColumn<int>('id_categoria')!;
@@ -16137,7 +14066,7 @@ final class $$EserciziTableTableReferences
     $EserciziGruppiMuscolariTableTable,
     List<EserciziGruppiMuscolariTableData>
   >
-  _eserciziGruppiMuscolariTableRefsTable(_$AppDatabase db) =>
+  _eserciziGruppiMuscolariTableRefsTable(_$_SchemaV3Database db) =>
       MultiTypedResultKey.fromTable(
         db.eserciziGruppiMuscolariTable,
         aliasName: 'esercizi__id__esercizi_gruppi_muscolari__id_esercizio',
@@ -16162,7 +14091,7 @@ final class $$EserciziTableTableReferences
     $AttrezzatureEserciziTableTable,
     List<AttrezzatureEserciziTableData>
   >
-  _attrezzatureEserciziTableRefsTable(_$AppDatabase db) =>
+  _attrezzatureEserciziTableRefsTable(_$_SchemaV3Database db) =>
       MultiTypedResultKey.fromTable(
         db.attrezzatureEserciziTable,
         aliasName: 'esercizi__id__attrezzature_esercizi__id_esercizio',
@@ -16187,7 +14116,7 @@ final class $$EserciziTableTableReferences
     $ImmaginiEserciziTableTable,
     List<ImmaginiEserciziTableData>
   >
-  _immaginiEserciziTableRefsTable(_$AppDatabase db) =>
+  _immaginiEserciziTableRefsTable(_$_SchemaV3Database db) =>
       MultiTypedResultKey.fromTable(
         db.immaginiEserciziTable,
         aliasName: 'esercizi__id__immagini_esercizi__id_esercizio',
@@ -16212,7 +14141,7 @@ final class $$EserciziTableTableReferences
     $ProgressioniEserciziTableTable,
     List<ProgressioniEserciziTableData>
   >
-  _progressioniComePrecedenteTable(_$AppDatabase db) =>
+  _progressioniComePrecedenteTable(_$_SchemaV3Database db) =>
       MultiTypedResultKey.fromTable(
         db.progressioniEserciziTable,
         aliasName: 'esercizi__id__progressioni_esercizi__id_esercizio',
@@ -16237,7 +14166,7 @@ final class $$EserciziTableTableReferences
     $ProgressioniEserciziTableTable,
     List<ProgressioniEserciziTableData>
   >
-  _progressioniComeSuccessivoTable(_$AppDatabase db) =>
+  _progressioniComeSuccessivoTable(_$_SchemaV3Database db) =>
       MultiTypedResultKey.fromTable(
         db.progressioniEserciziTable,
         aliasName:
@@ -16266,7 +14195,7 @@ final class $$EserciziTableTableReferences
     $AlternativeEserciziTableTable,
     List<AlternativeEserciziTableData>
   >
-  _alternativeComeOriginaleTable(_$AppDatabase db) =>
+  _alternativeComeOriginaleTable(_$_SchemaV3Database db) =>
       MultiTypedResultKey.fromTable(
         db.alternativeEserciziTable,
         aliasName: 'esercizi__id__alternative_esercizi__id_esercizio',
@@ -16291,7 +14220,7 @@ final class $$EserciziTableTableReferences
     $AlternativeEserciziTableTable,
     List<AlternativeEserciziTableData>
   >
-  _alternativeComeAlternativaTable(_$AppDatabase db) =>
+  _alternativeComeAlternativaTable(_$_SchemaV3Database db) =>
       MultiTypedResultKey.fromTable(
         db.alternativeEserciziTable,
         aliasName:
@@ -16321,7 +14250,7 @@ final class $$EserciziTableTableReferences
     $AllenamentiEserciziTableTable,
     List<AllenamentiEserciziTableData>
   >
-  _allenamentiEserciziTableRefsTable(_$AppDatabase db) =>
+  _allenamentiEserciziTableRefsTable(_$_SchemaV3Database db) =>
       MultiTypedResultKey.fromTable(
         db.allenamentiEserciziTable,
         aliasName: 'esercizi__id__allenamenti_esercizi__id_esercizio',
@@ -16341,35 +14270,10 @@ final class $$EserciziTableTableReferences
       manager.$state.copyWith(prefetchedData: cache),
     );
   }
-
-  static MultiTypedResultKey<
-    $SessioniEserciziTableTable,
-    List<SessioniEserciziTableData>
-  >
-  _sessioniEserciziTableRefsTable(_$AppDatabase db) =>
-      MultiTypedResultKey.fromTable(
-        db.sessioniEserciziTable,
-        aliasName: 'esercizi__id__sessioni_esercizi__id_esercizio',
-      );
-
-  $$SessioniEserciziTableTableProcessedTableManager
-  get sessioniEserciziTableRefs {
-    final manager = $$SessioniEserciziTableTableTableManager(
-      $_db,
-      $_db.sessioniEserciziTable,
-    ).filter((f) => f.idEsercizio.id.sqlEquals($_itemColumn<int>('id')!));
-
-    final cache = $_typedResult.readTableOrNull(
-      _sessioniEserciziTableRefsTable($_db),
-    );
-    return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: cache),
-    );
-  }
 }
 
 class $$EserciziTableTableFilterComposer
-    extends Composer<_$AppDatabase, $EserciziTableTable> {
+    extends Composer<_$_SchemaV3Database, $EserciziTableTable> {
   $$EserciziTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -16742,36 +14646,10 @@ class $$EserciziTableTableFilterComposer
         );
     return f(composer);
   }
-
-  Expression<bool> sessioniEserciziTableRefs(
-    Expression<bool> Function($$SessioniEserciziTableTableFilterComposer f) f,
-  ) {
-    final $$SessioniEserciziTableTableFilterComposer composer =
-        $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.id,
-          referencedTable: $db.sessioniEserciziTable,
-          getReferencedColumn: (t) => t.idEsercizio,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$SessioniEserciziTableTableFilterComposer(
-                $db: $db,
-                $table: $db.sessioniEserciziTable,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
-    return f(composer);
-  }
 }
 
 class $$EserciziTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $EserciziTableTable> {
+    extends Composer<_$_SchemaV3Database, $EserciziTableTable> {
   $$EserciziTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -16930,7 +14808,7 @@ class $$EserciziTableTableOrderingComposer
 }
 
 class $$EserciziTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $EserciziTableTable> {
+    extends Composer<_$_SchemaV3Database, $EserciziTableTable> {
   $$EserciziTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -17295,38 +15173,12 @@ class $$EserciziTableTableAnnotationComposer
         );
     return f(composer);
   }
-
-  Expression<T> sessioniEserciziTableRefs<T extends Object>(
-    Expression<T> Function($$SessioniEserciziTableTableAnnotationComposer a) f,
-  ) {
-    final $$SessioniEserciziTableTableAnnotationComposer composer =
-        $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.id,
-          referencedTable: $db.sessioniEserciziTable,
-          getReferencedColumn: (t) => t.idEsercizio,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$SessioniEserciziTableTableAnnotationComposer(
-                $db: $db,
-                $table: $db.sessioniEserciziTable,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
-    return f(composer);
-  }
 }
 
 class $$EserciziTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $EserciziTableTable,
           EserciziTableData,
           $$EserciziTableTableFilterComposer,
@@ -17346,11 +15198,12 @@ class $$EserciziTableTableTableManager
             bool alternativeComeOriginale,
             bool alternativeComeAlternativa,
             bool allenamentiEserciziTableRefs,
-            bool sessioniEserciziTableRefs,
           })
         > {
-  $$EserciziTableTableTableManager(_$AppDatabase db, $EserciziTableTable table)
-    : super(
+  $$EserciziTableTableTableManager(
+    _$_SchemaV3Database db,
+    $EserciziTableTable table,
+  ) : super(
         TableManagerState(
           db: db,
           table: table,
@@ -17491,7 +15344,6 @@ class $$EserciziTableTableTableManager
                 alternativeComeOriginale = false,
                 alternativeComeAlternativa = false,
                 allenamentiEserciziTableRefs = false,
-                sessioniEserciziTableRefs = false,
               }) {
                 return PrefetchHooks(
                   db: db,
@@ -17509,7 +15361,6 @@ class $$EserciziTableTableTableManager
                     if (alternativeComeAlternativa) db.alternativeEserciziTable,
                     if (allenamentiEserciziTableRefs)
                       db.allenamentiEserciziTable,
-                    if (sessioniEserciziTableRefs) db.sessioniEserciziTable,
                   ],
                   addJoins:
                       <
@@ -17715,27 +15566,6 @@ class $$EserciziTableTableTableManager
                               ),
                           typedResults: items,
                         ),
-                      if (sessioniEserciziTableRefs)
-                        await $_getPrefetchedData<
-                          EserciziTableData,
-                          $EserciziTableTable,
-                          SessioniEserciziTableData
-                        >(
-                          currentTable: table,
-                          referencedTable: $$EserciziTableTableReferences
-                              ._sessioniEserciziTableRefsTable(db),
-                          managerFromTypedResult: (p0) =>
-                              $$EserciziTableTableReferences(
-                                db,
-                                table,
-                                p0,
-                              ).sessioniEserciziTableRefs,
-                          referencedItemsForCurrentItem:
-                              (item, referencedItems) => referencedItems.where(
-                                (e) => e.idEsercizio == item.id,
-                              ),
-                          typedResults: items,
-                        ),
                     ];
                   },
                 );
@@ -17746,7 +15576,7 @@ class $$EserciziTableTableTableManager
 
 typedef $$EserciziTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV3Database,
       $EserciziTableTable,
       EserciziTableData,
       $$EserciziTableTableFilterComposer,
@@ -17766,7 +15596,6 @@ typedef $$EserciziTableTableProcessedTableManager =
         bool alternativeComeOriginale,
         bool alternativeComeAlternativa,
         bool allenamentiEserciziTableRefs,
-        bool sessioniEserciziTableRefs,
       })
     >;
 typedef $$EserciziGruppiMuscolariTableTableCreateCompanionBuilder =
@@ -17787,7 +15616,7 @@ typedef $$EserciziGruppiMuscolariTableTableUpdateCompanionBuilder =
 final class $$EserciziGruppiMuscolariTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $EserciziGruppiMuscolariTableTable,
           EserciziGruppiMuscolariTableData
         > {
@@ -17797,7 +15626,7 @@ final class $$EserciziGruppiMuscolariTableTableReferences
     super.$_typedResult,
   );
 
-  static $EserciziTableTable _idEsercizioTable(_$AppDatabase db) => db
+  static $EserciziTableTable _idEsercizioTable(_$_SchemaV3Database db) => db
       .eserciziTable
       .createAlias('esercizi_gruppi_muscolari__id_esercizio__esercizi__id');
 
@@ -17815,10 +15644,11 @@ final class $$EserciziGruppiMuscolariTableTableReferences
     );
   }
 
-  static $GruppiMuscolariTableTable _idGruppoMuscolareTable(_$AppDatabase db) =>
-      db.gruppiMuscolariTable.createAlias(
-        'esercizi_gruppi_muscolari__id_gruppo_muscolare__gruppi_muscolari__id',
-      );
+  static $GruppiMuscolariTableTable _idGruppoMuscolareTable(
+    _$_SchemaV3Database db,
+  ) => db.gruppiMuscolariTable.createAlias(
+    'esercizi_gruppi_muscolari__id_gruppo_muscolare__gruppi_muscolari__id',
+  );
 
   $$GruppiMuscolariTableTableProcessedTableManager get idGruppoMuscolare {
     final $_column = $_itemColumn<int>('id_gruppo_muscolare')!;
@@ -17836,7 +15666,7 @@ final class $$EserciziGruppiMuscolariTableTableReferences
 }
 
 class $$EserciziGruppiMuscolariTableTableFilterComposer
-    extends Composer<_$AppDatabase, $EserciziGruppiMuscolariTableTable> {
+    extends Composer<_$_SchemaV3Database, $EserciziGruppiMuscolariTableTable> {
   $$EserciziGruppiMuscolariTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -17902,7 +15732,7 @@ class $$EserciziGruppiMuscolariTableTableFilterComposer
 }
 
 class $$EserciziGruppiMuscolariTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $EserciziGruppiMuscolariTableTable> {
+    extends Composer<_$_SchemaV3Database, $EserciziGruppiMuscolariTableTable> {
   $$EserciziGruppiMuscolariTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -17969,7 +15799,7 @@ class $$EserciziGruppiMuscolariTableTableOrderingComposer
 }
 
 class $$EserciziGruppiMuscolariTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $EserciziGruppiMuscolariTableTable> {
+    extends Composer<_$_SchemaV3Database, $EserciziGruppiMuscolariTableTable> {
   $$EserciziGruppiMuscolariTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -18036,7 +15866,7 @@ class $$EserciziGruppiMuscolariTableTableAnnotationComposer
 class $$EserciziGruppiMuscolariTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $EserciziGruppiMuscolariTableTable,
           EserciziGruppiMuscolariTableData,
           $$EserciziGruppiMuscolariTableTableFilterComposer,
@@ -18052,7 +15882,7 @@ class $$EserciziGruppiMuscolariTableTableTableManager
           PrefetchHooks Function({bool idEsercizio, bool idGruppoMuscolare})
         > {
   $$EserciziGruppiMuscolariTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV3Database db,
     $EserciziGruppiMuscolariTableTable table,
   ) : super(
         TableManagerState(
@@ -18169,7 +15999,7 @@ class $$EserciziGruppiMuscolariTableTableTableManager
 
 typedef $$EserciziGruppiMuscolariTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV3Database,
       $EserciziGruppiMuscolariTableTable,
       EserciziGruppiMuscolariTableData,
       $$EserciziGruppiMuscolariTableTableFilterComposer,
@@ -18220,7 +16050,7 @@ typedef $$AttrezzatureTableTableUpdateCompanionBuilder =
 final class $$AttrezzatureTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $AttrezzatureTableTable,
           AttrezzatureTableData
         > {
@@ -18234,7 +16064,7 @@ final class $$AttrezzatureTableTableReferences
     $AttrezzatureEserciziTableTable,
     List<AttrezzatureEserciziTableData>
   >
-  _attrezzatureEserciziTableRefsTable(_$AppDatabase db) =>
+  _attrezzatureEserciziTableRefsTable(_$_SchemaV3Database db) =>
       MultiTypedResultKey.fromTable(
         db.attrezzatureEserciziTable,
         aliasName: 'attrezzature__id__attrezzature_esercizi__id_attrezzatura',
@@ -18257,7 +16087,7 @@ final class $$AttrezzatureTableTableReferences
 }
 
 class $$AttrezzatureTableTableFilterComposer
-    extends Composer<_$AppDatabase, $AttrezzatureTableTable> {
+    extends Composer<_$_SchemaV3Database, $AttrezzatureTableTable> {
   $$AttrezzatureTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -18359,7 +16189,7 @@ class $$AttrezzatureTableTableFilterComposer
 }
 
 class $$AttrezzatureTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $AttrezzatureTableTable> {
+    extends Composer<_$_SchemaV3Database, $AttrezzatureTableTable> {
   $$AttrezzatureTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -18434,7 +16264,7 @@ class $$AttrezzatureTableTableOrderingComposer
 }
 
 class $$AttrezzatureTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $AttrezzatureTableTable> {
+    extends Composer<_$_SchemaV3Database, $AttrezzatureTableTable> {
   $$AttrezzatureTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -18526,7 +16356,7 @@ class $$AttrezzatureTableTableAnnotationComposer
 class $$AttrezzatureTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $AttrezzatureTableTable,
           AttrezzatureTableData,
           $$AttrezzatureTableTableFilterComposer,
@@ -18539,7 +16369,7 @@ class $$AttrezzatureTableTableTableManager
           PrefetchHooks Function({bool attrezzatureEserciziTableRefs})
         > {
   $$AttrezzatureTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV3Database db,
     $AttrezzatureTableTable table,
   ) : super(
         TableManagerState(
@@ -18662,7 +16492,7 @@ class $$AttrezzatureTableTableTableManager
 
 typedef $$AttrezzatureTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV3Database,
       $AttrezzatureTableTable,
       AttrezzatureTableData,
       $$AttrezzatureTableTableFilterComposer,
@@ -18692,7 +16522,7 @@ typedef $$AttrezzatureEserciziTableTableUpdateCompanionBuilder =
 final class $$AttrezzatureEserciziTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $AttrezzatureEserciziTableTable,
           AttrezzatureEserciziTableData
         > {
@@ -18702,7 +16532,7 @@ final class $$AttrezzatureEserciziTableTableReferences
     super.$_typedResult,
   );
 
-  static $EserciziTableTable _idEsercizioTable(_$AppDatabase db) => db
+  static $EserciziTableTable _idEsercizioTable(_$_SchemaV3Database db) => db
       .eserciziTable
       .createAlias('attrezzature_esercizi__id_esercizio__esercizi__id');
 
@@ -18720,9 +16550,10 @@ final class $$AttrezzatureEserciziTableTableReferences
     );
   }
 
-  static $AttrezzatureTableTable _idAttrezzaturaTable(_$AppDatabase db) => db
-      .attrezzatureTable
-      .createAlias('attrezzature_esercizi__id_attrezzatura__attrezzature__id');
+  static $AttrezzatureTableTable _idAttrezzaturaTable(_$_SchemaV3Database db) =>
+      db.attrezzatureTable.createAlias(
+        'attrezzature_esercizi__id_attrezzatura__attrezzature__id',
+      );
 
   $$AttrezzatureTableTableProcessedTableManager get idAttrezzatura {
     final $_column = $_itemColumn<int>('id_attrezzatura')!;
@@ -18740,7 +16571,7 @@ final class $$AttrezzatureEserciziTableTableReferences
 }
 
 class $$AttrezzatureEserciziTableTableFilterComposer
-    extends Composer<_$AppDatabase, $AttrezzatureEserciziTableTable> {
+    extends Composer<_$_SchemaV3Database, $AttrezzatureEserciziTableTable> {
   $$AttrezzatureEserciziTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -18806,7 +16637,7 @@ class $$AttrezzatureEserciziTableTableFilterComposer
 }
 
 class $$AttrezzatureEserciziTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $AttrezzatureEserciziTableTable> {
+    extends Composer<_$_SchemaV3Database, $AttrezzatureEserciziTableTable> {
   $$AttrezzatureEserciziTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -18872,7 +16703,7 @@ class $$AttrezzatureEserciziTableTableOrderingComposer
 }
 
 class $$AttrezzatureEserciziTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $AttrezzatureEserciziTableTable> {
+    extends Composer<_$_SchemaV3Database, $AttrezzatureEserciziTableTable> {
   $$AttrezzatureEserciziTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -18939,7 +16770,7 @@ class $$AttrezzatureEserciziTableTableAnnotationComposer
 class $$AttrezzatureEserciziTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $AttrezzatureEserciziTableTable,
           AttrezzatureEserciziTableData,
           $$AttrezzatureEserciziTableTableFilterComposer,
@@ -18955,7 +16786,7 @@ class $$AttrezzatureEserciziTableTableTableManager
           PrefetchHooks Function({bool idEsercizio, bool idAttrezzatura})
         > {
   $$AttrezzatureEserciziTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV3Database db,
     $AttrezzatureEserciziTableTable table,
   ) : super(
         TableManagerState(
@@ -19072,7 +16903,7 @@ class $$AttrezzatureEserciziTableTableTableManager
 
 typedef $$AttrezzatureEserciziTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV3Database,
       $AttrezzatureEserciziTableTable,
       AttrezzatureEserciziTableData,
       $$AttrezzatureEserciziTableTableFilterComposer,
@@ -19119,7 +16950,7 @@ typedef $$ImmaginiEserciziTableTableUpdateCompanionBuilder =
 final class $$ImmaginiEserciziTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $ImmaginiEserciziTableTable,
           ImmaginiEserciziTableData
         > {
@@ -19129,7 +16960,7 @@ final class $$ImmaginiEserciziTableTableReferences
     super.$_typedResult,
   );
 
-  static $EserciziTableTable _idEsercizioTable(_$AppDatabase db) => db
+  static $EserciziTableTable _idEsercizioTable(_$_SchemaV3Database db) => db
       .eserciziTable
       .createAlias('immagini_esercizi__id_esercizio__esercizi__id');
 
@@ -19149,7 +16980,7 @@ final class $$ImmaginiEserciziTableTableReferences
 }
 
 class $$ImmaginiEserciziTableTableFilterComposer
-    extends Composer<_$AppDatabase, $ImmaginiEserciziTableTable> {
+    extends Composer<_$_SchemaV3Database, $ImmaginiEserciziTableTable> {
   $$ImmaginiEserciziTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -19232,7 +17063,7 @@ class $$ImmaginiEserciziTableTableFilterComposer
 }
 
 class $$ImmaginiEserciziTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $ImmaginiEserciziTableTable> {
+    extends Composer<_$_SchemaV3Database, $ImmaginiEserciziTableTable> {
   $$ImmaginiEserciziTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -19315,7 +17146,7 @@ class $$ImmaginiEserciziTableTableOrderingComposer
 }
 
 class $$ImmaginiEserciziTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $ImmaginiEserciziTableTable> {
+    extends Composer<_$_SchemaV3Database, $ImmaginiEserciziTableTable> {
   $$ImmaginiEserciziTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -19396,7 +17227,7 @@ class $$ImmaginiEserciziTableTableAnnotationComposer
 class $$ImmaginiEserciziTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $ImmaginiEserciziTableTable,
           ImmaginiEserciziTableData,
           $$ImmaginiEserciziTableTableFilterComposer,
@@ -19409,7 +17240,7 @@ class $$ImmaginiEserciziTableTableTableManager
           PrefetchHooks Function({bool idEsercizio})
         > {
   $$ImmaginiEserciziTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV3Database db,
     $ImmaginiEserciziTableTable table,
   ) : super(
         TableManagerState(
@@ -19539,7 +17370,7 @@ class $$ImmaginiEserciziTableTableTableManager
 
 typedef $$ImmaginiEserciziTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV3Database,
       $ImmaginiEserciziTableTable,
       ImmaginiEserciziTableData,
       $$ImmaginiEserciziTableTableFilterComposer,
@@ -19581,7 +17412,7 @@ typedef $$ProgressioniEserciziTableTableUpdateCompanionBuilder =
 final class $$ProgressioniEserciziTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $ProgressioniEserciziTableTable,
           ProgressioniEserciziTableData
         > {
@@ -19591,7 +17422,7 @@ final class $$ProgressioniEserciziTableTableReferences
     super.$_typedResult,
   );
 
-  static $EserciziTableTable _idEsercizioTable(_$AppDatabase db) => db
+  static $EserciziTableTable _idEsercizioTable(_$_SchemaV3Database db) => db
       .eserciziTable
       .createAlias('progressioni_esercizi__id_esercizio__esercizi__id');
 
@@ -19609,10 +17440,11 @@ final class $$ProgressioniEserciziTableTableReferences
     );
   }
 
-  static $EserciziTableTable _idEsercizioSuccessivoTable(_$AppDatabase db) =>
-      db.eserciziTable.createAlias(
-        'progressioni_esercizi__id_esercizio_successivo__esercizi__id',
-      );
+  static $EserciziTableTable _idEsercizioSuccessivoTable(
+    _$_SchemaV3Database db,
+  ) => db.eserciziTable.createAlias(
+    'progressioni_esercizi__id_esercizio_successivo__esercizi__id',
+  );
 
   $$EserciziTableTableProcessedTableManager get idEsercizioSuccessivo {
     final $_column = $_itemColumn<int>('id_esercizio_successivo')!;
@@ -19632,7 +17464,7 @@ final class $$ProgressioniEserciziTableTableReferences
 }
 
 class $$ProgressioniEserciziTableTableFilterComposer
-    extends Composer<_$AppDatabase, $ProgressioniEserciziTableTable> {
+    extends Composer<_$_SchemaV3Database, $ProgressioniEserciziTableTable> {
   $$ProgressioniEserciziTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -19728,7 +17560,7 @@ class $$ProgressioniEserciziTableTableFilterComposer
 }
 
 class $$ProgressioniEserciziTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $ProgressioniEserciziTableTable> {
+    extends Composer<_$_SchemaV3Database, $ProgressioniEserciziTableTable> {
   $$ProgressioniEserciziTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -19824,7 +17656,7 @@ class $$ProgressioniEserciziTableTableOrderingComposer
 }
 
 class $$ProgressioniEserciziTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $ProgressioniEserciziTableTable> {
+    extends Composer<_$_SchemaV3Database, $ProgressioniEserciziTableTable> {
   $$ProgressioniEserciziTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -19914,7 +17746,7 @@ class $$ProgressioniEserciziTableTableAnnotationComposer
 class $$ProgressioniEserciziTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $ProgressioniEserciziTableTable,
           ProgressioniEserciziTableData,
           $$ProgressioniEserciziTableTableFilterComposer,
@@ -19930,7 +17762,7 @@ class $$ProgressioniEserciziTableTableTableManager
           PrefetchHooks Function({bool idEsercizio, bool idEsercizioSuccessivo})
         > {
   $$ProgressioniEserciziTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV3Database db,
     $ProgressioniEserciziTableTable table,
   ) : super(
         TableManagerState(
@@ -20072,7 +17904,7 @@ class $$ProgressioniEserciziTableTableTableManager
 
 typedef $$ProgressioniEserciziTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV3Database,
       $ProgressioniEserciziTableTable,
       ProgressioniEserciziTableData,
       $$ProgressioniEserciziTableTableFilterComposer,
@@ -20115,7 +17947,7 @@ typedef $$AlternativeEserciziTableTableUpdateCompanionBuilder =
 final class $$AlternativeEserciziTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $AlternativeEserciziTableTable,
           AlternativeEserciziTableData
         > {
@@ -20125,7 +17957,7 @@ final class $$AlternativeEserciziTableTableReferences
     super.$_typedResult,
   );
 
-  static $EserciziTableTable _idEsercizioTable(_$AppDatabase db) => db
+  static $EserciziTableTable _idEsercizioTable(_$_SchemaV3Database db) => db
       .eserciziTable
       .createAlias('alternative_esercizi__id_esercizio__esercizi__id');
 
@@ -20143,10 +17975,11 @@ final class $$AlternativeEserciziTableTableReferences
     );
   }
 
-  static $EserciziTableTable _idEsercizioAlternativoTable(_$AppDatabase db) =>
-      db.eserciziTable.createAlias(
-        'alternative_esercizi__id_esercizio_alternativo__esercizi__id',
-      );
+  static $EserciziTableTable _idEsercizioAlternativoTable(
+    _$_SchemaV3Database db,
+  ) => db.eserciziTable.createAlias(
+    'alternative_esercizi__id_esercizio_alternativo__esercizi__id',
+  );
 
   $$EserciziTableTableProcessedTableManager get idEsercizioAlternativo {
     final $_column = $_itemColumn<int>('id_esercizio_alternativo')!;
@@ -20166,7 +17999,7 @@ final class $$AlternativeEserciziTableTableReferences
 }
 
 class $$AlternativeEserciziTableTableFilterComposer
-    extends Composer<_$AppDatabase, $AlternativeEserciziTableTable> {
+    extends Composer<_$_SchemaV3Database, $AlternativeEserciziTableTable> {
   $$AlternativeEserciziTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -20257,7 +18090,7 @@ class $$AlternativeEserciziTableTableFilterComposer
 }
 
 class $$AlternativeEserciziTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $AlternativeEserciziTableTable> {
+    extends Composer<_$_SchemaV3Database, $AlternativeEserciziTableTable> {
   $$AlternativeEserciziTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -20348,7 +18181,7 @@ class $$AlternativeEserciziTableTableOrderingComposer
 }
 
 class $$AlternativeEserciziTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $AlternativeEserciziTableTable> {
+    extends Composer<_$_SchemaV3Database, $AlternativeEserciziTableTable> {
   $$AlternativeEserciziTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -20433,7 +18266,7 @@ class $$AlternativeEserciziTableTableAnnotationComposer
 class $$AlternativeEserciziTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $AlternativeEserciziTableTable,
           AlternativeEserciziTableData,
           $$AlternativeEserciziTableTableFilterComposer,
@@ -20452,7 +18285,7 @@ class $$AlternativeEserciziTableTableTableManager
           })
         > {
   $$AlternativeEserciziTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV3Database db,
     $AlternativeEserciziTableTable table,
   ) : super(
         TableManagerState(
@@ -20590,7 +18423,7 @@ class $$AlternativeEserciziTableTableTableManager
 
 typedef $$AlternativeEserciziTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV3Database,
       $AlternativeEserciziTableTable,
       AlternativeEserciziTableData,
       $$AlternativeEserciziTableTableFilterComposer,
@@ -20622,7 +18455,7 @@ typedef $$VersioniCatalogoTableTableUpdateCompanionBuilder =
     });
 
 class $$VersioniCatalogoTableTableFilterComposer
-    extends Composer<_$AppDatabase, $VersioniCatalogoTableTable> {
+    extends Composer<_$_SchemaV3Database, $VersioniCatalogoTableTable> {
   $$VersioniCatalogoTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -20662,7 +18495,7 @@ class $$VersioniCatalogoTableTableFilterComposer
 }
 
 class $$VersioniCatalogoTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $VersioniCatalogoTableTable> {
+    extends Composer<_$_SchemaV3Database, $VersioniCatalogoTableTable> {
   $$VersioniCatalogoTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -20702,7 +18535,7 @@ class $$VersioniCatalogoTableTableOrderingComposer
 }
 
 class $$VersioniCatalogoTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $VersioniCatalogoTableTable> {
+    extends Composer<_$_SchemaV3Database, $VersioniCatalogoTableTable> {
   $$VersioniCatalogoTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -20736,7 +18569,7 @@ class $$VersioniCatalogoTableTableAnnotationComposer
 class $$VersioniCatalogoTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $VersioniCatalogoTableTable,
           VersioniCatalogoTableData,
           $$VersioniCatalogoTableTableFilterComposer,
@@ -20747,7 +18580,7 @@ class $$VersioniCatalogoTableTableTableManager
           (
             VersioniCatalogoTableData,
             BaseReferences<
-              _$AppDatabase,
+              _$_SchemaV3Database,
               $VersioniCatalogoTableTable,
               VersioniCatalogoTableData
             >,
@@ -20756,7 +18589,7 @@ class $$VersioniCatalogoTableTableTableManager
           PrefetchHooks Function()
         > {
   $$VersioniCatalogoTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV3Database db,
     $VersioniCatalogoTableTable table,
   ) : super(
         TableManagerState(
@@ -20819,7 +18652,7 @@ class $$VersioniCatalogoTableTableTableManager
 
 typedef $$VersioniCatalogoTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV3Database,
       $VersioniCatalogoTableTable,
       VersioniCatalogoTableData,
       $$VersioniCatalogoTableTableFilterComposer,
@@ -20830,7 +18663,7 @@ typedef $$VersioniCatalogoTableTableProcessedTableManager =
       (
         VersioniCatalogoTableData,
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $VersioniCatalogoTableTable,
           VersioniCatalogoTableData
         >,
@@ -20872,7 +18705,7 @@ typedef $$AllenamentiTableTableUpdateCompanionBuilder =
 final class $$AllenamentiTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $AllenamentiTableTable,
           AllenamentiTableData
         > {
@@ -20882,7 +18715,7 @@ final class $$AllenamentiTableTableReferences
     super.$_typedResult,
   );
 
-  static $UserProfilesTableTable _idProfiloTable(_$AppDatabase db) => db
+  static $UserProfilesTableTable _idProfiloTable(_$_SchemaV3Database db) => db
       .userProfilesTable
       .createAlias('allenamenti__id_profilo__profili_utente__id');
 
@@ -20904,7 +18737,7 @@ final class $$AllenamentiTableTableReferences
     $AllenamentiEserciziTableTable,
     List<AllenamentiEserciziTableData>
   >
-  _allenamentiEserciziTableRefsTable(_$AppDatabase db) =>
+  _allenamentiEserciziTableRefsTable(_$_SchemaV3Database db) =>
       MultiTypedResultKey.fromTable(
         db.allenamentiEserciziTable,
         aliasName: 'allenamenti__id__allenamenti_esercizi__id_allenamento',
@@ -20924,35 +18757,10 @@ final class $$AllenamentiTableTableReferences
       manager.$state.copyWith(prefetchedData: cache),
     );
   }
-
-  static MultiTypedResultKey<
-    $SessioniAllenamentoTableTable,
-    List<SessioniAllenamentoTableData>
-  >
-  _sessioniAllenamentoTableRefsTable(_$AppDatabase db) =>
-      MultiTypedResultKey.fromTable(
-        db.sessioniAllenamentoTable,
-        aliasName: 'allenamenti__id__sessioni_allenamento__id_allenamento',
-      );
-
-  $$SessioniAllenamentoTableTableProcessedTableManager
-  get sessioniAllenamentoTableRefs {
-    final manager = $$SessioniAllenamentoTableTableTableManager(
-      $_db,
-      $_db.sessioniAllenamentoTable,
-    ).filter((f) => f.idAllenamento.id.sqlEquals($_itemColumn<int>('id')!));
-
-    final cache = $_typedResult.readTableOrNull(
-      _sessioniAllenamentoTableRefsTable($_db),
-    );
-    return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: cache),
-    );
-  }
 }
 
 class $$AllenamentiTableTableFilterComposer
-    extends Composer<_$AppDatabase, $AllenamentiTableTable> {
+    extends Composer<_$_SchemaV3Database, $AllenamentiTableTable> {
   $$AllenamentiTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -21064,37 +18872,10 @@ class $$AllenamentiTableTableFilterComposer
         );
     return f(composer);
   }
-
-  Expression<bool> sessioniAllenamentoTableRefs(
-    Expression<bool> Function($$SessioniAllenamentoTableTableFilterComposer f)
-    f,
-  ) {
-    final $$SessioniAllenamentoTableTableFilterComposer composer =
-        $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.id,
-          referencedTable: $db.sessioniAllenamentoTable,
-          getReferencedColumn: (t) => t.idAllenamento,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$SessioniAllenamentoTableTableFilterComposer(
-                $db: $db,
-                $table: $db.sessioniAllenamentoTable,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
-    return f(composer);
-  }
 }
 
 class $$AllenamentiTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $AllenamentiTableTable> {
+    extends Composer<_$_SchemaV3Database, $AllenamentiTableTable> {
   $$AllenamentiTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -21182,7 +18963,7 @@ class $$AllenamentiTableTableOrderingComposer
 }
 
 class $$AllenamentiTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $AllenamentiTableTable> {
+    extends Composer<_$_SchemaV3Database, $AllenamentiTableTable> {
   $$AllenamentiTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -21283,39 +19064,12 @@ class $$AllenamentiTableTableAnnotationComposer
         );
     return f(composer);
   }
-
-  Expression<T> sessioniAllenamentoTableRefs<T extends Object>(
-    Expression<T> Function($$SessioniAllenamentoTableTableAnnotationComposer a)
-    f,
-  ) {
-    final $$SessioniAllenamentoTableTableAnnotationComposer composer =
-        $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.id,
-          referencedTable: $db.sessioniAllenamentoTable,
-          getReferencedColumn: (t) => t.idAllenamento,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$SessioniAllenamentoTableTableAnnotationComposer(
-                $db: $db,
-                $table: $db.sessioniAllenamentoTable,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
-    return f(composer);
-  }
 }
 
 class $$AllenamentiTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $AllenamentiTableTable,
           AllenamentiTableData,
           $$AllenamentiTableTableFilterComposer,
@@ -21328,11 +19082,10 @@ class $$AllenamentiTableTableTableManager
           PrefetchHooks Function({
             bool idProfilo,
             bool allenamentiEserciziTableRefs,
-            bool sessioniAllenamentoTableRefs,
           })
         > {
   $$AllenamentiTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV3Database db,
     $AllenamentiTableTable table,
   ) : super(
         TableManagerState(
@@ -21409,18 +19162,12 @@ class $$AllenamentiTableTableTableManager
               )
               .toList(),
           prefetchHooksCallback:
-              ({
-                idProfilo = false,
-                allenamentiEserciziTableRefs = false,
-                sessioniAllenamentoTableRefs = false,
-              }) {
+              ({idProfilo = false, allenamentiEserciziTableRefs = false}) {
                 return PrefetchHooks(
                   db: db,
                   explicitlyWatchedTables: [
                     if (allenamentiEserciziTableRefs)
                       db.allenamentiEserciziTable,
-                    if (sessioniAllenamentoTableRefs)
-                      db.sessioniAllenamentoTable,
                   ],
                   addJoins:
                       <
@@ -21479,27 +19226,6 @@ class $$AllenamentiTableTableTableManager
                               ),
                           typedResults: items,
                         ),
-                      if (sessioniAllenamentoTableRefs)
-                        await $_getPrefetchedData<
-                          AllenamentiTableData,
-                          $AllenamentiTableTable,
-                          SessioniAllenamentoTableData
-                        >(
-                          currentTable: table,
-                          referencedTable: $$AllenamentiTableTableReferences
-                              ._sessioniAllenamentoTableRefsTable(db),
-                          managerFromTypedResult: (p0) =>
-                              $$AllenamentiTableTableReferences(
-                                db,
-                                table,
-                                p0,
-                              ).sessioniAllenamentoTableRefs,
-                          referencedItemsForCurrentItem:
-                              (item, referencedItems) => referencedItems.where(
-                                (e) => e.idAllenamento == item.id,
-                              ),
-                          typedResults: items,
-                        ),
                     ];
                   },
                 );
@@ -21510,7 +19236,7 @@ class $$AllenamentiTableTableTableManager
 
 typedef $$AllenamentiTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV3Database,
       $AllenamentiTableTable,
       AllenamentiTableData,
       $$AllenamentiTableTableFilterComposer,
@@ -21523,7 +19249,6 @@ typedef $$AllenamentiTableTableProcessedTableManager =
       PrefetchHooks Function({
         bool idProfilo,
         bool allenamentiEserciziTableRefs,
-        bool sessioniAllenamentoTableRefs,
       })
     >;
 typedef $$AllenamentiEserciziTableTableCreateCompanionBuilder =
@@ -21560,7 +19285,7 @@ typedef $$AllenamentiEserciziTableTableUpdateCompanionBuilder =
 final class $$AllenamentiEserciziTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $AllenamentiEserciziTableTable,
           AllenamentiEserciziTableData
         > {
@@ -21570,9 +19295,10 @@ final class $$AllenamentiEserciziTableTableReferences
     super.$_typedResult,
   );
 
-  static $AllenamentiTableTable _idAllenamentoTable(_$AppDatabase db) => db
-      .allenamentiTable
-      .createAlias('allenamenti_esercizi__id_allenamento__allenamenti__id');
+  static $AllenamentiTableTable _idAllenamentoTable(_$_SchemaV3Database db) =>
+      db.allenamentiTable.createAlias(
+        'allenamenti_esercizi__id_allenamento__allenamenti__id',
+      );
 
   $$AllenamentiTableTableProcessedTableManager get idAllenamento {
     final $_column = $_itemColumn<int>('id_allenamento')!;
@@ -21588,7 +19314,7 @@ final class $$AllenamentiEserciziTableTableReferences
     );
   }
 
-  static $EserciziTableTable _idEsercizioTable(_$AppDatabase db) => db
+  static $EserciziTableTable _idEsercizioTable(_$_SchemaV3Database db) => db
       .eserciziTable
       .createAlias('allenamenti_esercizi__id_esercizio__esercizi__id');
 
@@ -21605,41 +19331,10 @@ final class $$AllenamentiEserciziTableTableReferences
       manager.$state.copyWith(prefetchedData: [item]),
     );
   }
-
-  static MultiTypedResultKey<
-    $SessioniEserciziTableTable,
-    List<SessioniEserciziTableData>
-  >
-  _sessioniEserciziTableRefsTable(
-    _$AppDatabase db,
-  ) => MultiTypedResultKey.fromTable(
-    db.sessioniEserciziTable,
-    aliasName:
-        'allenamenti_esercizi__id__sessioni_esercizi__id_allenamento_esercizio',
-  );
-
-  $$SessioniEserciziTableTableProcessedTableManager
-  get sessioniEserciziTableRefs {
-    final manager =
-        $$SessioniEserciziTableTableTableManager(
-          $_db,
-          $_db.sessioniEserciziTable,
-        ).filter(
-          (f) =>
-              f.idAllenamentoEsercizio.id.sqlEquals($_itemColumn<int>('id')!),
-        );
-
-    final cache = $_typedResult.readTableOrNull(
-      _sessioniEserciziTableRefsTable($_db),
-    );
-    return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: cache),
-    );
-  }
 }
 
 class $$AllenamentiEserciziTableTableFilterComposer
-    extends Composer<_$AppDatabase, $AllenamentiEserciziTableTable> {
+    extends Composer<_$_SchemaV3Database, $AllenamentiEserciziTableTable> {
   $$AllenamentiEserciziTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -21742,36 +19437,10 @@ class $$AllenamentiEserciziTableTableFilterComposer
     );
     return composer;
   }
-
-  Expression<bool> sessioniEserciziTableRefs(
-    Expression<bool> Function($$SessioniEserciziTableTableFilterComposer f) f,
-  ) {
-    final $$SessioniEserciziTableTableFilterComposer composer =
-        $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.id,
-          referencedTable: $db.sessioniEserciziTable,
-          getReferencedColumn: (t) => t.idAllenamentoEsercizio,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$SessioniEserciziTableTableFilterComposer(
-                $db: $db,
-                $table: $db.sessioniEserciziTable,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
-    return f(composer);
-  }
 }
 
 class $$AllenamentiEserciziTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $AllenamentiEserciziTableTable> {
+    extends Composer<_$_SchemaV3Database, $AllenamentiEserciziTableTable> {
   $$AllenamentiEserciziTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -21877,7 +19546,7 @@ class $$AllenamentiEserciziTableTableOrderingComposer
 }
 
 class $$AllenamentiEserciziTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $AllenamentiEserciziTableTable> {
+    extends Composer<_$_SchemaV3Database, $AllenamentiEserciziTableTable> {
   $$AllenamentiEserciziTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -21970,38 +19639,12 @@ class $$AllenamentiEserciziTableTableAnnotationComposer
     );
     return composer;
   }
-
-  Expression<T> sessioniEserciziTableRefs<T extends Object>(
-    Expression<T> Function($$SessioniEserciziTableTableAnnotationComposer a) f,
-  ) {
-    final $$SessioniEserciziTableTableAnnotationComposer composer =
-        $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.id,
-          referencedTable: $db.sessioniEserciziTable,
-          getReferencedColumn: (t) => t.idAllenamentoEsercizio,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$SessioniEserciziTableTableAnnotationComposer(
-                $db: $db,
-                $table: $db.sessioniEserciziTable,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
-    return f(composer);
-  }
 }
 
 class $$AllenamentiEserciziTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV3Database,
           $AllenamentiEserciziTableTable,
           AllenamentiEserciziTableData,
           $$AllenamentiEserciziTableTableFilterComposer,
@@ -22014,14 +19657,10 @@ class $$AllenamentiEserciziTableTableTableManager
             $$AllenamentiEserciziTableTableReferences,
           ),
           AllenamentiEserciziTableData,
-          PrefetchHooks Function({
-            bool idAllenamento,
-            bool idEsercizio,
-            bool sessioniEserciziTableRefs,
-          })
+          PrefetchHooks Function({bool idAllenamento, bool idEsercizio})
         > {
   $$AllenamentiEserciziTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV3Database db,
     $AllenamentiEserciziTableTable table,
   ) : super(
         TableManagerState(
@@ -22106,101 +19745,71 @@ class $$AllenamentiEserciziTableTableTableManager
                 ),
               )
               .toList(),
-          prefetchHooksCallback:
-              ({
-                idAllenamento = false,
-                idEsercizio = false,
-                sessioniEserciziTableRefs = false,
-              }) {
-                return PrefetchHooks(
-                  db: db,
-                  explicitlyWatchedTables: [
-                    if (sessioniEserciziTableRefs) db.sessioniEserciziTable,
-                  ],
-                  addJoins:
-                      <
-                        T extends TableManagerState<
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic
-                        >
-                      >(state) {
-                        if (idAllenamento) {
-                          state =
-                              state.withJoin(
-                                    currentTable: table,
-                                    currentColumn: table.idAllenamento,
-                                    referencedTable:
-                                        $$AllenamentiEserciziTableTableReferences
-                                            ._idAllenamentoTable(db),
-                                    referencedColumn:
-                                        $$AllenamentiEserciziTableTableReferences
-                                            ._idAllenamentoTable(db)
-                                            .id,
-                                  )
-                                  as T;
-                        }
-                        if (idEsercizio) {
-                          state =
-                              state.withJoin(
-                                    currentTable: table,
-                                    currentColumn: table.idEsercizio,
-                                    referencedTable:
-                                        $$AllenamentiEserciziTableTableReferences
-                                            ._idEsercizioTable(db),
-                                    referencedColumn:
-                                        $$AllenamentiEserciziTableTableReferences
-                                            ._idEsercizioTable(db)
-                                            .id,
-                                  )
-                                  as T;
-                        }
+          prefetchHooksCallback: ({idAllenamento = false, idEsercizio = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (idAllenamento) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.idAllenamento,
+                                referencedTable:
+                                    $$AllenamentiEserciziTableTableReferences
+                                        ._idAllenamentoTable(db),
+                                referencedColumn:
+                                    $$AllenamentiEserciziTableTableReferences
+                                        ._idAllenamentoTable(db)
+                                        .id,
+                              )
+                              as T;
+                    }
+                    if (idEsercizio) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.idEsercizio,
+                                referencedTable:
+                                    $$AllenamentiEserciziTableTableReferences
+                                        ._idEsercizioTable(db),
+                                referencedColumn:
+                                    $$AllenamentiEserciziTableTableReferences
+                                        ._idEsercizioTable(db)
+                                        .id,
+                              )
+                              as T;
+                    }
 
-                        return state;
-                      },
-                  getPrefetchedDataCallback: (items) async {
-                    return [
-                      if (sessioniEserciziTableRefs)
-                        await $_getPrefetchedData<
-                          AllenamentiEserciziTableData,
-                          $AllenamentiEserciziTableTable,
-                          SessioniEserciziTableData
-                        >(
-                          currentTable: table,
-                          referencedTable:
-                              $$AllenamentiEserciziTableTableReferences
-                                  ._sessioniEserciziTableRefsTable(db),
-                          managerFromTypedResult: (p0) =>
-                              $$AllenamentiEserciziTableTableReferences(
-                                db,
-                                table,
-                                p0,
-                              ).sessioniEserciziTableRefs,
-                          referencedItemsForCurrentItem:
-                              (item, referencedItems) => referencedItems.where(
-                                (e) => e.idAllenamentoEsercizio == item.id,
-                              ),
-                          typedResults: items,
-                        ),
-                    ];
+                    return state;
                   },
-                );
+              getPrefetchedDataCallback: (items) async {
+                return [];
               },
+            );
+          },
         ),
       );
 }
 
 typedef $$AllenamentiEserciziTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV3Database,
       $AllenamentiEserciziTableTable,
       AllenamentiEserciziTableData,
       $$AllenamentiEserciziTableTableFilterComposer,
@@ -22210,1508 +19819,12 @@ typedef $$AllenamentiEserciziTableTableProcessedTableManager =
       $$AllenamentiEserciziTableTableUpdateCompanionBuilder,
       (AllenamentiEserciziTableData, $$AllenamentiEserciziTableTableReferences),
       AllenamentiEserciziTableData,
-      PrefetchHooks Function({
-        bool idAllenamento,
-        bool idEsercizio,
-        bool sessioniEserciziTableRefs,
-      })
-    >;
-typedef $$SessioniAllenamentoTableTableCreateCompanionBuilder =
-    SessioniAllenamentoTableCompanion Function({
-      Value<int> id,
-      Value<int?> idAllenamento,
-      required int idProfilo,
-      required String nomeAllenamentoSnapshot,
-      required String stato,
-      Value<int> indiceEsercizioCorrente,
-      required DateTime dataInizio,
-      Value<DateTime?> dataFine,
-      Value<bool> inPausa,
-      Value<bool> completata,
-      Value<String?> timerTipo,
-      Value<DateTime?> timerStartedAt,
-      Value<int?> timerTargetSeconds,
-      Value<int?> timerRemainingPaused,
-      required DateTime dataCreazione,
-      required DateTime dataModifica,
-    });
-typedef $$SessioniAllenamentoTableTableUpdateCompanionBuilder =
-    SessioniAllenamentoTableCompanion Function({
-      Value<int> id,
-      Value<int?> idAllenamento,
-      Value<int> idProfilo,
-      Value<String> nomeAllenamentoSnapshot,
-      Value<String> stato,
-      Value<int> indiceEsercizioCorrente,
-      Value<DateTime> dataInizio,
-      Value<DateTime?> dataFine,
-      Value<bool> inPausa,
-      Value<bool> completata,
-      Value<String?> timerTipo,
-      Value<DateTime?> timerStartedAt,
-      Value<int?> timerTargetSeconds,
-      Value<int?> timerRemainingPaused,
-      Value<DateTime> dataCreazione,
-      Value<DateTime> dataModifica,
-    });
-
-final class $$SessioniAllenamentoTableTableReferences
-    extends
-        BaseReferences<
-          _$AppDatabase,
-          $SessioniAllenamentoTableTable,
-          SessioniAllenamentoTableData
-        > {
-  $$SessioniAllenamentoTableTableReferences(
-    super.$_db,
-    super.$_table,
-    super.$_typedResult,
-  );
-
-  static $AllenamentiTableTable _idAllenamentoTable(_$AppDatabase db) => db
-      .allenamentiTable
-      .createAlias('sessioni_allenamento__id_allenamento__allenamenti__id');
-
-  $$AllenamentiTableTableProcessedTableManager? get idAllenamento {
-    final $_column = $_itemColumn<int>('id_allenamento');
-    if ($_column == null) return null;
-    final manager = $$AllenamentiTableTableTableManager(
-      $_db,
-      $_db.allenamentiTable,
-    ).filter((f) => f.id.sqlEquals($_column));
-    final item = $_typedResult.readTableOrNull(_idAllenamentoTable($_db));
-    if (item == null) return manager;
-    return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: [item]),
-    );
-  }
-
-  static $UserProfilesTableTable _idProfiloTable(_$AppDatabase db) => db
-      .userProfilesTable
-      .createAlias('sessioni_allenamento__id_profilo__profili_utente__id');
-
-  $$UserProfilesTableTableProcessedTableManager get idProfilo {
-    final $_column = $_itemColumn<int>('id_profilo')!;
-
-    final manager = $$UserProfilesTableTableTableManager(
-      $_db,
-      $_db.userProfilesTable,
-    ).filter((f) => f.id.sqlEquals($_column));
-    final item = $_typedResult.readTableOrNull(_idProfiloTable($_db));
-    if (item == null) return manager;
-    return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: [item]),
-    );
-  }
-
-  static MultiTypedResultKey<
-    $SessioniEserciziTableTable,
-    List<SessioniEserciziTableData>
-  >
-  _sessioniEserciziTableRefsTable(_$AppDatabase db) =>
-      MultiTypedResultKey.fromTable(
-        db.sessioniEserciziTable,
-        aliasName: 'sessioni_allenamento__id__sessioni_esercizi__id_sessione',
-      );
-
-  $$SessioniEserciziTableTableProcessedTableManager
-  get sessioniEserciziTableRefs {
-    final manager = $$SessioniEserciziTableTableTableManager(
-      $_db,
-      $_db.sessioniEserciziTable,
-    ).filter((f) => f.idSessione.id.sqlEquals($_itemColumn<int>('id')!));
-
-    final cache = $_typedResult.readTableOrNull(
-      _sessioniEserciziTableRefsTable($_db),
-    );
-    return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: cache),
-    );
-  }
-}
-
-class $$SessioniAllenamentoTableTableFilterComposer
-    extends Composer<_$AppDatabase, $SessioniAllenamentoTableTable> {
-  $$SessioniAllenamentoTableTableFilterComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  ColumnFilters<int> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get nomeAllenamentoSnapshot => $composableBuilder(
-    column: $table.nomeAllenamentoSnapshot,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get stato => $composableBuilder(
-    column: $table.stato,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<int> get indiceEsercizioCorrente => $composableBuilder(
-    column: $table.indiceEsercizioCorrente,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<DateTime> get dataInizio => $composableBuilder(
-    column: $table.dataInizio,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<DateTime> get dataFine => $composableBuilder(
-    column: $table.dataFine,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<bool> get inPausa => $composableBuilder(
-    column: $table.inPausa,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<bool> get completata => $composableBuilder(
-    column: $table.completata,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get timerTipo => $composableBuilder(
-    column: $table.timerTipo,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<DateTime> get timerStartedAt => $composableBuilder(
-    column: $table.timerStartedAt,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<int> get timerTargetSeconds => $composableBuilder(
-    column: $table.timerTargetSeconds,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<int> get timerRemainingPaused => $composableBuilder(
-    column: $table.timerRemainingPaused,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<DateTime> get dataCreazione => $composableBuilder(
-    column: $table.dataCreazione,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<DateTime> get dataModifica => $composableBuilder(
-    column: $table.dataModifica,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  $$AllenamentiTableTableFilterComposer get idAllenamento {
-    final $$AllenamentiTableTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.idAllenamento,
-      referencedTable: $db.allenamentiTable,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$AllenamentiTableTableFilterComposer(
-            $db: $db,
-            $table: $db.allenamentiTable,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return composer;
-  }
-
-  $$UserProfilesTableTableFilterComposer get idProfilo {
-    final $$UserProfilesTableTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.idProfilo,
-      referencedTable: $db.userProfilesTable,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$UserProfilesTableTableFilterComposer(
-            $db: $db,
-            $table: $db.userProfilesTable,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return composer;
-  }
-
-  Expression<bool> sessioniEserciziTableRefs(
-    Expression<bool> Function($$SessioniEserciziTableTableFilterComposer f) f,
-  ) {
-    final $$SessioniEserciziTableTableFilterComposer composer =
-        $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.id,
-          referencedTable: $db.sessioniEserciziTable,
-          getReferencedColumn: (t) => t.idSessione,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$SessioniEserciziTableTableFilterComposer(
-                $db: $db,
-                $table: $db.sessioniEserciziTable,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
-    return f(composer);
-  }
-}
-
-class $$SessioniAllenamentoTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $SessioniAllenamentoTableTable> {
-  $$SessioniAllenamentoTableTableOrderingComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  ColumnOrderings<int> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get nomeAllenamentoSnapshot => $composableBuilder(
-    column: $table.nomeAllenamentoSnapshot,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get stato => $composableBuilder(
-    column: $table.stato,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<int> get indiceEsercizioCorrente => $composableBuilder(
-    column: $table.indiceEsercizioCorrente,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<DateTime> get dataInizio => $composableBuilder(
-    column: $table.dataInizio,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<DateTime> get dataFine => $composableBuilder(
-    column: $table.dataFine,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<bool> get inPausa => $composableBuilder(
-    column: $table.inPausa,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<bool> get completata => $composableBuilder(
-    column: $table.completata,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get timerTipo => $composableBuilder(
-    column: $table.timerTipo,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<DateTime> get timerStartedAt => $composableBuilder(
-    column: $table.timerStartedAt,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<int> get timerTargetSeconds => $composableBuilder(
-    column: $table.timerTargetSeconds,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<int> get timerRemainingPaused => $composableBuilder(
-    column: $table.timerRemainingPaused,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<DateTime> get dataCreazione => $composableBuilder(
-    column: $table.dataCreazione,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<DateTime> get dataModifica => $composableBuilder(
-    column: $table.dataModifica,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  $$AllenamentiTableTableOrderingComposer get idAllenamento {
-    final $$AllenamentiTableTableOrderingComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.idAllenamento,
-      referencedTable: $db.allenamentiTable,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$AllenamentiTableTableOrderingComposer(
-            $db: $db,
-            $table: $db.allenamentiTable,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return composer;
-  }
-
-  $$UserProfilesTableTableOrderingComposer get idProfilo {
-    final $$UserProfilesTableTableOrderingComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.idProfilo,
-      referencedTable: $db.userProfilesTable,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$UserProfilesTableTableOrderingComposer(
-            $db: $db,
-            $table: $db.userProfilesTable,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return composer;
-  }
-}
-
-class $$SessioniAllenamentoTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $SessioniAllenamentoTableTable> {
-  $$SessioniAllenamentoTableTableAnnotationComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  GeneratedColumn<int> get id =>
-      $composableBuilder(column: $table.id, builder: (column) => column);
-
-  GeneratedColumn<String> get nomeAllenamentoSnapshot => $composableBuilder(
-    column: $table.nomeAllenamentoSnapshot,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<String> get stato =>
-      $composableBuilder(column: $table.stato, builder: (column) => column);
-
-  GeneratedColumn<int> get indiceEsercizioCorrente => $composableBuilder(
-    column: $table.indiceEsercizioCorrente,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<DateTime> get dataInizio => $composableBuilder(
-    column: $table.dataInizio,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<DateTime> get dataFine =>
-      $composableBuilder(column: $table.dataFine, builder: (column) => column);
-
-  GeneratedColumn<bool> get inPausa =>
-      $composableBuilder(column: $table.inPausa, builder: (column) => column);
-
-  GeneratedColumn<bool> get completata => $composableBuilder(
-    column: $table.completata,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<String> get timerTipo =>
-      $composableBuilder(column: $table.timerTipo, builder: (column) => column);
-
-  GeneratedColumn<DateTime> get timerStartedAt => $composableBuilder(
-    column: $table.timerStartedAt,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<int> get timerTargetSeconds => $composableBuilder(
-    column: $table.timerTargetSeconds,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<int> get timerRemainingPaused => $composableBuilder(
-    column: $table.timerRemainingPaused,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<DateTime> get dataCreazione => $composableBuilder(
-    column: $table.dataCreazione,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<DateTime> get dataModifica => $composableBuilder(
-    column: $table.dataModifica,
-    builder: (column) => column,
-  );
-
-  $$AllenamentiTableTableAnnotationComposer get idAllenamento {
-    final $$AllenamentiTableTableAnnotationComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.idAllenamento,
-      referencedTable: $db.allenamentiTable,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$AllenamentiTableTableAnnotationComposer(
-            $db: $db,
-            $table: $db.allenamentiTable,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return composer;
-  }
-
-  $$UserProfilesTableTableAnnotationComposer get idProfilo {
-    final $$UserProfilesTableTableAnnotationComposer composer =
-        $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.idProfilo,
-          referencedTable: $db.userProfilesTable,
-          getReferencedColumn: (t) => t.id,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$UserProfilesTableTableAnnotationComposer(
-                $db: $db,
-                $table: $db.userProfilesTable,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
-    return composer;
-  }
-
-  Expression<T> sessioniEserciziTableRefs<T extends Object>(
-    Expression<T> Function($$SessioniEserciziTableTableAnnotationComposer a) f,
-  ) {
-    final $$SessioniEserciziTableTableAnnotationComposer composer =
-        $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.id,
-          referencedTable: $db.sessioniEserciziTable,
-          getReferencedColumn: (t) => t.idSessione,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$SessioniEserciziTableTableAnnotationComposer(
-                $db: $db,
-                $table: $db.sessioniEserciziTable,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
-    return f(composer);
-  }
-}
-
-class $$SessioniAllenamentoTableTableTableManager
-    extends
-        RootTableManager<
-          _$AppDatabase,
-          $SessioniAllenamentoTableTable,
-          SessioniAllenamentoTableData,
-          $$SessioniAllenamentoTableTableFilterComposer,
-          $$SessioniAllenamentoTableTableOrderingComposer,
-          $$SessioniAllenamentoTableTableAnnotationComposer,
-          $$SessioniAllenamentoTableTableCreateCompanionBuilder,
-          $$SessioniAllenamentoTableTableUpdateCompanionBuilder,
-          (
-            SessioniAllenamentoTableData,
-            $$SessioniAllenamentoTableTableReferences,
-          ),
-          SessioniAllenamentoTableData,
-          PrefetchHooks Function({
-            bool idAllenamento,
-            bool idProfilo,
-            bool sessioniEserciziTableRefs,
-          })
-        > {
-  $$SessioniAllenamentoTableTableTableManager(
-    _$AppDatabase db,
-    $SessioniAllenamentoTableTable table,
-  ) : super(
-        TableManagerState(
-          db: db,
-          table: table,
-          createFilteringComposer: () =>
-              $$SessioniAllenamentoTableTableFilterComposer(
-                $db: db,
-                $table: table,
-              ),
-          createOrderingComposer: () =>
-              $$SessioniAllenamentoTableTableOrderingComposer(
-                $db: db,
-                $table: table,
-              ),
-          createComputedFieldComposer: () =>
-              $$SessioniAllenamentoTableTableAnnotationComposer(
-                $db: db,
-                $table: table,
-              ),
-          updateCompanionCallback:
-              ({
-                Value<int> id = const Value.absent(),
-                Value<int?> idAllenamento = const Value.absent(),
-                Value<int> idProfilo = const Value.absent(),
-                Value<String> nomeAllenamentoSnapshot = const Value.absent(),
-                Value<String> stato = const Value.absent(),
-                Value<int> indiceEsercizioCorrente = const Value.absent(),
-                Value<DateTime> dataInizio = const Value.absent(),
-                Value<DateTime?> dataFine = const Value.absent(),
-                Value<bool> inPausa = const Value.absent(),
-                Value<bool> completata = const Value.absent(),
-                Value<String?> timerTipo = const Value.absent(),
-                Value<DateTime?> timerStartedAt = const Value.absent(),
-                Value<int?> timerTargetSeconds = const Value.absent(),
-                Value<int?> timerRemainingPaused = const Value.absent(),
-                Value<DateTime> dataCreazione = const Value.absent(),
-                Value<DateTime> dataModifica = const Value.absent(),
-              }) => SessioniAllenamentoTableCompanion(
-                id: id,
-                idAllenamento: idAllenamento,
-                idProfilo: idProfilo,
-                nomeAllenamentoSnapshot: nomeAllenamentoSnapshot,
-                stato: stato,
-                indiceEsercizioCorrente: indiceEsercizioCorrente,
-                dataInizio: dataInizio,
-                dataFine: dataFine,
-                inPausa: inPausa,
-                completata: completata,
-                timerTipo: timerTipo,
-                timerStartedAt: timerStartedAt,
-                timerTargetSeconds: timerTargetSeconds,
-                timerRemainingPaused: timerRemainingPaused,
-                dataCreazione: dataCreazione,
-                dataModifica: dataModifica,
-              ),
-          createCompanionCallback:
-              ({
-                Value<int> id = const Value.absent(),
-                Value<int?> idAllenamento = const Value.absent(),
-                required int idProfilo,
-                required String nomeAllenamentoSnapshot,
-                required String stato,
-                Value<int> indiceEsercizioCorrente = const Value.absent(),
-                required DateTime dataInizio,
-                Value<DateTime?> dataFine = const Value.absent(),
-                Value<bool> inPausa = const Value.absent(),
-                Value<bool> completata = const Value.absent(),
-                Value<String?> timerTipo = const Value.absent(),
-                Value<DateTime?> timerStartedAt = const Value.absent(),
-                Value<int?> timerTargetSeconds = const Value.absent(),
-                Value<int?> timerRemainingPaused = const Value.absent(),
-                required DateTime dataCreazione,
-                required DateTime dataModifica,
-              }) => SessioniAllenamentoTableCompanion.insert(
-                id: id,
-                idAllenamento: idAllenamento,
-                idProfilo: idProfilo,
-                nomeAllenamentoSnapshot: nomeAllenamentoSnapshot,
-                stato: stato,
-                indiceEsercizioCorrente: indiceEsercizioCorrente,
-                dataInizio: dataInizio,
-                dataFine: dataFine,
-                inPausa: inPausa,
-                completata: completata,
-                timerTipo: timerTipo,
-                timerStartedAt: timerStartedAt,
-                timerTargetSeconds: timerTargetSeconds,
-                timerRemainingPaused: timerRemainingPaused,
-                dataCreazione: dataCreazione,
-                dataModifica: dataModifica,
-              ),
-          withReferenceMapper: (p0) => p0
-              .map(
-                (e) => (
-                  e.readTable(table),
-                  $$SessioniAllenamentoTableTableReferences(db, table, e),
-                ),
-              )
-              .toList(),
-          prefetchHooksCallback:
-              ({
-                idAllenamento = false,
-                idProfilo = false,
-                sessioniEserciziTableRefs = false,
-              }) {
-                return PrefetchHooks(
-                  db: db,
-                  explicitlyWatchedTables: [
-                    if (sessioniEserciziTableRefs) db.sessioniEserciziTable,
-                  ],
-                  addJoins:
-                      <
-                        T extends TableManagerState<
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic
-                        >
-                      >(state) {
-                        if (idAllenamento) {
-                          state =
-                              state.withJoin(
-                                    currentTable: table,
-                                    currentColumn: table.idAllenamento,
-                                    referencedTable:
-                                        $$SessioniAllenamentoTableTableReferences
-                                            ._idAllenamentoTable(db),
-                                    referencedColumn:
-                                        $$SessioniAllenamentoTableTableReferences
-                                            ._idAllenamentoTable(db)
-                                            .id,
-                                  )
-                                  as T;
-                        }
-                        if (idProfilo) {
-                          state =
-                              state.withJoin(
-                                    currentTable: table,
-                                    currentColumn: table.idProfilo,
-                                    referencedTable:
-                                        $$SessioniAllenamentoTableTableReferences
-                                            ._idProfiloTable(db),
-                                    referencedColumn:
-                                        $$SessioniAllenamentoTableTableReferences
-                                            ._idProfiloTable(db)
-                                            .id,
-                                  )
-                                  as T;
-                        }
-
-                        return state;
-                      },
-                  getPrefetchedDataCallback: (items) async {
-                    return [
-                      if (sessioniEserciziTableRefs)
-                        await $_getPrefetchedData<
-                          SessioniAllenamentoTableData,
-                          $SessioniAllenamentoTableTable,
-                          SessioniEserciziTableData
-                        >(
-                          currentTable: table,
-                          referencedTable:
-                              $$SessioniAllenamentoTableTableReferences
-                                  ._sessioniEserciziTableRefsTable(db),
-                          managerFromTypedResult: (p0) =>
-                              $$SessioniAllenamentoTableTableReferences(
-                                db,
-                                table,
-                                p0,
-                              ).sessioniEserciziTableRefs,
-                          referencedItemsForCurrentItem:
-                              (item, referencedItems) => referencedItems.where(
-                                (e) => e.idSessione == item.id,
-                              ),
-                          typedResults: items,
-                        ),
-                    ];
-                  },
-                );
-              },
-        ),
-      );
-}
-
-typedef $$SessioniAllenamentoTableTableProcessedTableManager =
-    ProcessedTableManager<
-      _$AppDatabase,
-      $SessioniAllenamentoTableTable,
-      SessioniAllenamentoTableData,
-      $$SessioniAllenamentoTableTableFilterComposer,
-      $$SessioniAllenamentoTableTableOrderingComposer,
-      $$SessioniAllenamentoTableTableAnnotationComposer,
-      $$SessioniAllenamentoTableTableCreateCompanionBuilder,
-      $$SessioniAllenamentoTableTableUpdateCompanionBuilder,
-      (SessioniAllenamentoTableData, $$SessioniAllenamentoTableTableReferences),
-      SessioniAllenamentoTableData,
-      PrefetchHooks Function({
-        bool idAllenamento,
-        bool idProfilo,
-        bool sessioniEserciziTableRefs,
-      })
-    >;
-typedef $$SessioniEserciziTableTableCreateCompanionBuilder =
-    SessioniEserciziTableCompanion Function({
-      Value<int> id,
-      required int idSessione,
-      Value<int?> idAllenamentoEsercizio,
-      required int idEsercizio,
-      required int ordine,
-      required int serieTotali,
-      Value<int> serieCompletate,
-      Value<int?> ripetizioni,
-      Value<int?> durataSecondi,
-      Value<int?> recuperoSecondi,
-      Value<bool> saltato,
-      Value<bool> completato,
-      required DateTime dataCreazione,
-      required DateTime dataModifica,
-    });
-typedef $$SessioniEserciziTableTableUpdateCompanionBuilder =
-    SessioniEserciziTableCompanion Function({
-      Value<int> id,
-      Value<int> idSessione,
-      Value<int?> idAllenamentoEsercizio,
-      Value<int> idEsercizio,
-      Value<int> ordine,
-      Value<int> serieTotali,
-      Value<int> serieCompletate,
-      Value<int?> ripetizioni,
-      Value<int?> durataSecondi,
-      Value<int?> recuperoSecondi,
-      Value<bool> saltato,
-      Value<bool> completato,
-      Value<DateTime> dataCreazione,
-      Value<DateTime> dataModifica,
-    });
-
-final class $$SessioniEserciziTableTableReferences
-    extends
-        BaseReferences<
-          _$AppDatabase,
-          $SessioniEserciziTableTable,
-          SessioniEserciziTableData
-        > {
-  $$SessioniEserciziTableTableReferences(
-    super.$_db,
-    super.$_table,
-    super.$_typedResult,
-  );
-
-  static $SessioniAllenamentoTableTable _idSessioneTable(_$AppDatabase db) => db
-      .sessioniAllenamentoTable
-      .createAlias('sessioni_esercizi__id_sessione__sessioni_allenamento__id');
-
-  $$SessioniAllenamentoTableTableProcessedTableManager get idSessione {
-    final $_column = $_itemColumn<int>('id_sessione')!;
-
-    final manager = $$SessioniAllenamentoTableTableTableManager(
-      $_db,
-      $_db.sessioniAllenamentoTable,
-    ).filter((f) => f.id.sqlEquals($_column));
-    final item = $_typedResult.readTableOrNull(_idSessioneTable($_db));
-    if (item == null) return manager;
-    return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: [item]),
-    );
-  }
-
-  static $AllenamentiEserciziTableTable _idAllenamentoEsercizioTable(
-    _$AppDatabase db,
-  ) => db.allenamentiEserciziTable.createAlias(
-    'sessioni_esercizi__id_allenamento_esercizio__allenamenti_esercizi__id',
-  );
-
-  $$AllenamentiEserciziTableTableProcessedTableManager?
-  get idAllenamentoEsercizio {
-    final $_column = $_itemColumn<int>('id_allenamento_esercizio');
-    if ($_column == null) return null;
-    final manager = $$AllenamentiEserciziTableTableTableManager(
-      $_db,
-      $_db.allenamentiEserciziTable,
-    ).filter((f) => f.id.sqlEquals($_column));
-    final item = $_typedResult.readTableOrNull(
-      _idAllenamentoEsercizioTable($_db),
-    );
-    if (item == null) return manager;
-    return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: [item]),
-    );
-  }
-
-  static $EserciziTableTable _idEsercizioTable(_$AppDatabase db) => db
-      .eserciziTable
-      .createAlias('sessioni_esercizi__id_esercizio__esercizi__id');
-
-  $$EserciziTableTableProcessedTableManager get idEsercizio {
-    final $_column = $_itemColumn<int>('id_esercizio')!;
-
-    final manager = $$EserciziTableTableTableManager(
-      $_db,
-      $_db.eserciziTable,
-    ).filter((f) => f.id.sqlEquals($_column));
-    final item = $_typedResult.readTableOrNull(_idEsercizioTable($_db));
-    if (item == null) return manager;
-    return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: [item]),
-    );
-  }
-}
-
-class $$SessioniEserciziTableTableFilterComposer
-    extends Composer<_$AppDatabase, $SessioniEserciziTableTable> {
-  $$SessioniEserciziTableTableFilterComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  ColumnFilters<int> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<int> get ordine => $composableBuilder(
-    column: $table.ordine,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<int> get serieTotali => $composableBuilder(
-    column: $table.serieTotali,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<int> get serieCompletate => $composableBuilder(
-    column: $table.serieCompletate,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<int> get ripetizioni => $composableBuilder(
-    column: $table.ripetizioni,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<int> get durataSecondi => $composableBuilder(
-    column: $table.durataSecondi,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<int> get recuperoSecondi => $composableBuilder(
-    column: $table.recuperoSecondi,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<bool> get saltato => $composableBuilder(
-    column: $table.saltato,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<bool> get completato => $composableBuilder(
-    column: $table.completato,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<DateTime> get dataCreazione => $composableBuilder(
-    column: $table.dataCreazione,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<DateTime> get dataModifica => $composableBuilder(
-    column: $table.dataModifica,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  $$SessioniAllenamentoTableTableFilterComposer get idSessione {
-    final $$SessioniAllenamentoTableTableFilterComposer composer =
-        $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.idSessione,
-          referencedTable: $db.sessioniAllenamentoTable,
-          getReferencedColumn: (t) => t.id,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$SessioniAllenamentoTableTableFilterComposer(
-                $db: $db,
-                $table: $db.sessioniAllenamentoTable,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
-    return composer;
-  }
-
-  $$AllenamentiEserciziTableTableFilterComposer get idAllenamentoEsercizio {
-    final $$AllenamentiEserciziTableTableFilterComposer composer =
-        $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.idAllenamentoEsercizio,
-          referencedTable: $db.allenamentiEserciziTable,
-          getReferencedColumn: (t) => t.id,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$AllenamentiEserciziTableTableFilterComposer(
-                $db: $db,
-                $table: $db.allenamentiEserciziTable,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
-    return composer;
-  }
-
-  $$EserciziTableTableFilterComposer get idEsercizio {
-    final $$EserciziTableTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.idEsercizio,
-      referencedTable: $db.eserciziTable,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$EserciziTableTableFilterComposer(
-            $db: $db,
-            $table: $db.eserciziTable,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return composer;
-  }
-}
-
-class $$SessioniEserciziTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $SessioniEserciziTableTable> {
-  $$SessioniEserciziTableTableOrderingComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  ColumnOrderings<int> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<int> get ordine => $composableBuilder(
-    column: $table.ordine,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<int> get serieTotali => $composableBuilder(
-    column: $table.serieTotali,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<int> get serieCompletate => $composableBuilder(
-    column: $table.serieCompletate,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<int> get ripetizioni => $composableBuilder(
-    column: $table.ripetizioni,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<int> get durataSecondi => $composableBuilder(
-    column: $table.durataSecondi,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<int> get recuperoSecondi => $composableBuilder(
-    column: $table.recuperoSecondi,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<bool> get saltato => $composableBuilder(
-    column: $table.saltato,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<bool> get completato => $composableBuilder(
-    column: $table.completato,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<DateTime> get dataCreazione => $composableBuilder(
-    column: $table.dataCreazione,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<DateTime> get dataModifica => $composableBuilder(
-    column: $table.dataModifica,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  $$SessioniAllenamentoTableTableOrderingComposer get idSessione {
-    final $$SessioniAllenamentoTableTableOrderingComposer composer =
-        $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.idSessione,
-          referencedTable: $db.sessioniAllenamentoTable,
-          getReferencedColumn: (t) => t.id,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$SessioniAllenamentoTableTableOrderingComposer(
-                $db: $db,
-                $table: $db.sessioniAllenamentoTable,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
-    return composer;
-  }
-
-  $$AllenamentiEserciziTableTableOrderingComposer get idAllenamentoEsercizio {
-    final $$AllenamentiEserciziTableTableOrderingComposer composer =
-        $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.idAllenamentoEsercizio,
-          referencedTable: $db.allenamentiEserciziTable,
-          getReferencedColumn: (t) => t.id,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$AllenamentiEserciziTableTableOrderingComposer(
-                $db: $db,
-                $table: $db.allenamentiEserciziTable,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
-    return composer;
-  }
-
-  $$EserciziTableTableOrderingComposer get idEsercizio {
-    final $$EserciziTableTableOrderingComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.idEsercizio,
-      referencedTable: $db.eserciziTable,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$EserciziTableTableOrderingComposer(
-            $db: $db,
-            $table: $db.eserciziTable,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return composer;
-  }
-}
-
-class $$SessioniEserciziTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $SessioniEserciziTableTable> {
-  $$SessioniEserciziTableTableAnnotationComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  GeneratedColumn<int> get id =>
-      $composableBuilder(column: $table.id, builder: (column) => column);
-
-  GeneratedColumn<int> get ordine =>
-      $composableBuilder(column: $table.ordine, builder: (column) => column);
-
-  GeneratedColumn<int> get serieTotali => $composableBuilder(
-    column: $table.serieTotali,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<int> get serieCompletate => $composableBuilder(
-    column: $table.serieCompletate,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<int> get ripetizioni => $composableBuilder(
-    column: $table.ripetizioni,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<int> get durataSecondi => $composableBuilder(
-    column: $table.durataSecondi,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<int> get recuperoSecondi => $composableBuilder(
-    column: $table.recuperoSecondi,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<bool> get saltato =>
-      $composableBuilder(column: $table.saltato, builder: (column) => column);
-
-  GeneratedColumn<bool> get completato => $composableBuilder(
-    column: $table.completato,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<DateTime> get dataCreazione => $composableBuilder(
-    column: $table.dataCreazione,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<DateTime> get dataModifica => $composableBuilder(
-    column: $table.dataModifica,
-    builder: (column) => column,
-  );
-
-  $$SessioniAllenamentoTableTableAnnotationComposer get idSessione {
-    final $$SessioniAllenamentoTableTableAnnotationComposer composer =
-        $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.idSessione,
-          referencedTable: $db.sessioniAllenamentoTable,
-          getReferencedColumn: (t) => t.id,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$SessioniAllenamentoTableTableAnnotationComposer(
-                $db: $db,
-                $table: $db.sessioniAllenamentoTable,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
-    return composer;
-  }
-
-  $$AllenamentiEserciziTableTableAnnotationComposer get idAllenamentoEsercizio {
-    final $$AllenamentiEserciziTableTableAnnotationComposer composer =
-        $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.idAllenamentoEsercizio,
-          referencedTable: $db.allenamentiEserciziTable,
-          getReferencedColumn: (t) => t.id,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$AllenamentiEserciziTableTableAnnotationComposer(
-                $db: $db,
-                $table: $db.allenamentiEserciziTable,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
-    return composer;
-  }
-
-  $$EserciziTableTableAnnotationComposer get idEsercizio {
-    final $$EserciziTableTableAnnotationComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.idEsercizio,
-      referencedTable: $db.eserciziTable,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$EserciziTableTableAnnotationComposer(
-            $db: $db,
-            $table: $db.eserciziTable,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return composer;
-  }
-}
-
-class $$SessioniEserciziTableTableTableManager
-    extends
-        RootTableManager<
-          _$AppDatabase,
-          $SessioniEserciziTableTable,
-          SessioniEserciziTableData,
-          $$SessioniEserciziTableTableFilterComposer,
-          $$SessioniEserciziTableTableOrderingComposer,
-          $$SessioniEserciziTableTableAnnotationComposer,
-          $$SessioniEserciziTableTableCreateCompanionBuilder,
-          $$SessioniEserciziTableTableUpdateCompanionBuilder,
-          (SessioniEserciziTableData, $$SessioniEserciziTableTableReferences),
-          SessioniEserciziTableData,
-          PrefetchHooks Function({
-            bool idSessione,
-            bool idAllenamentoEsercizio,
-            bool idEsercizio,
-          })
-        > {
-  $$SessioniEserciziTableTableTableManager(
-    _$AppDatabase db,
-    $SessioniEserciziTableTable table,
-  ) : super(
-        TableManagerState(
-          db: db,
-          table: table,
-          createFilteringComposer: () =>
-              $$SessioniEserciziTableTableFilterComposer(
-                $db: db,
-                $table: table,
-              ),
-          createOrderingComposer: () =>
-              $$SessioniEserciziTableTableOrderingComposer(
-                $db: db,
-                $table: table,
-              ),
-          createComputedFieldComposer: () =>
-              $$SessioniEserciziTableTableAnnotationComposer(
-                $db: db,
-                $table: table,
-              ),
-          updateCompanionCallback:
-              ({
-                Value<int> id = const Value.absent(),
-                Value<int> idSessione = const Value.absent(),
-                Value<int?> idAllenamentoEsercizio = const Value.absent(),
-                Value<int> idEsercizio = const Value.absent(),
-                Value<int> ordine = const Value.absent(),
-                Value<int> serieTotali = const Value.absent(),
-                Value<int> serieCompletate = const Value.absent(),
-                Value<int?> ripetizioni = const Value.absent(),
-                Value<int?> durataSecondi = const Value.absent(),
-                Value<int?> recuperoSecondi = const Value.absent(),
-                Value<bool> saltato = const Value.absent(),
-                Value<bool> completato = const Value.absent(),
-                Value<DateTime> dataCreazione = const Value.absent(),
-                Value<DateTime> dataModifica = const Value.absent(),
-              }) => SessioniEserciziTableCompanion(
-                id: id,
-                idSessione: idSessione,
-                idAllenamentoEsercizio: idAllenamentoEsercizio,
-                idEsercizio: idEsercizio,
-                ordine: ordine,
-                serieTotali: serieTotali,
-                serieCompletate: serieCompletate,
-                ripetizioni: ripetizioni,
-                durataSecondi: durataSecondi,
-                recuperoSecondi: recuperoSecondi,
-                saltato: saltato,
-                completato: completato,
-                dataCreazione: dataCreazione,
-                dataModifica: dataModifica,
-              ),
-          createCompanionCallback:
-              ({
-                Value<int> id = const Value.absent(),
-                required int idSessione,
-                Value<int?> idAllenamentoEsercizio = const Value.absent(),
-                required int idEsercizio,
-                required int ordine,
-                required int serieTotali,
-                Value<int> serieCompletate = const Value.absent(),
-                Value<int?> ripetizioni = const Value.absent(),
-                Value<int?> durataSecondi = const Value.absent(),
-                Value<int?> recuperoSecondi = const Value.absent(),
-                Value<bool> saltato = const Value.absent(),
-                Value<bool> completato = const Value.absent(),
-                required DateTime dataCreazione,
-                required DateTime dataModifica,
-              }) => SessioniEserciziTableCompanion.insert(
-                id: id,
-                idSessione: idSessione,
-                idAllenamentoEsercizio: idAllenamentoEsercizio,
-                idEsercizio: idEsercizio,
-                ordine: ordine,
-                serieTotali: serieTotali,
-                serieCompletate: serieCompletate,
-                ripetizioni: ripetizioni,
-                durataSecondi: durataSecondi,
-                recuperoSecondi: recuperoSecondi,
-                saltato: saltato,
-                completato: completato,
-                dataCreazione: dataCreazione,
-                dataModifica: dataModifica,
-              ),
-          withReferenceMapper: (p0) => p0
-              .map(
-                (e) => (
-                  e.readTable(table),
-                  $$SessioniEserciziTableTableReferences(db, table, e),
-                ),
-              )
-              .toList(),
-          prefetchHooksCallback:
-              ({
-                idSessione = false,
-                idAllenamentoEsercizio = false,
-                idEsercizio = false,
-              }) {
-                return PrefetchHooks(
-                  db: db,
-                  explicitlyWatchedTables: [],
-                  addJoins:
-                      <
-                        T extends TableManagerState<
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic
-                        >
-                      >(state) {
-                        if (idSessione) {
-                          state =
-                              state.withJoin(
-                                    currentTable: table,
-                                    currentColumn: table.idSessione,
-                                    referencedTable:
-                                        $$SessioniEserciziTableTableReferences
-                                            ._idSessioneTable(db),
-                                    referencedColumn:
-                                        $$SessioniEserciziTableTableReferences
-                                            ._idSessioneTable(db)
-                                            .id,
-                                  )
-                                  as T;
-                        }
-                        if (idAllenamentoEsercizio) {
-                          state =
-                              state.withJoin(
-                                    currentTable: table,
-                                    currentColumn: table.idAllenamentoEsercizio,
-                                    referencedTable:
-                                        $$SessioniEserciziTableTableReferences
-                                            ._idAllenamentoEsercizioTable(db),
-                                    referencedColumn:
-                                        $$SessioniEserciziTableTableReferences
-                                            ._idAllenamentoEsercizioTable(db)
-                                            .id,
-                                  )
-                                  as T;
-                        }
-                        if (idEsercizio) {
-                          state =
-                              state.withJoin(
-                                    currentTable: table,
-                                    currentColumn: table.idEsercizio,
-                                    referencedTable:
-                                        $$SessioniEserciziTableTableReferences
-                                            ._idEsercizioTable(db),
-                                    referencedColumn:
-                                        $$SessioniEserciziTableTableReferences
-                                            ._idEsercizioTable(db)
-                                            .id,
-                                  )
-                                  as T;
-                        }
-
-                        return state;
-                      },
-                  getPrefetchedDataCallback: (items) async {
-                    return [];
-                  },
-                );
-              },
-        ),
-      );
-}
-
-typedef $$SessioniEserciziTableTableProcessedTableManager =
-    ProcessedTableManager<
-      _$AppDatabase,
-      $SessioniEserciziTableTable,
-      SessioniEserciziTableData,
-      $$SessioniEserciziTableTableFilterComposer,
-      $$SessioniEserciziTableTableOrderingComposer,
-      $$SessioniEserciziTableTableAnnotationComposer,
-      $$SessioniEserciziTableTableCreateCompanionBuilder,
-      $$SessioniEserciziTableTableUpdateCompanionBuilder,
-      (SessioniEserciziTableData, $$SessioniEserciziTableTableReferences),
-      SessioniEserciziTableData,
-      PrefetchHooks Function({
-        bool idSessione,
-        bool idAllenamentoEsercizio,
-        bool idEsercizio,
-      })
+      PrefetchHooks Function({bool idAllenamento, bool idEsercizio})
     >;
 
-class $AppDatabaseManager {
-  final _$AppDatabase _db;
-  $AppDatabaseManager(this._db);
+class $_SchemaV3DatabaseManager {
+  final _$_SchemaV3Database _db;
+  $_SchemaV3DatabaseManager(this._db);
   $$AppSettingsTableTableTableManager get appSettingsTable =>
       $$AppSettingsTableTableTableManager(_db, _db.appSettingsTable);
   $$UserProfilesTableTableTableManager get userProfilesTable =>
@@ -23768,11 +19881,4 @@ class $AppDatabaseManager {
         _db,
         _db.allenamentiEserciziTable,
       );
-  $$SessioniAllenamentoTableTableTableManager get sessioniAllenamentoTable =>
-      $$SessioniAllenamentoTableTableTableManager(
-        _db,
-        _db.sessioniAllenamentoTable,
-      );
-  $$SessioniEserciziTableTableTableManager get sessioniEserciziTable =>
-      $$SessioniEserciziTableTableTableManager(_db, _db.sessioniEserciziTable);
 }

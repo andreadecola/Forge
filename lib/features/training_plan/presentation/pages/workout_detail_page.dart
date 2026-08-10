@@ -5,18 +5,89 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/routing/app_routes.dart';
 import '../../../../core/theme/forge_colors.dart';
 import '../../../../data/repositories/workout_providers.dart';
+import '../../../../domain/entities/workout_details.dart';
+import '../../../../domain/entities/workout_enums.dart';
 import '../../../../domain/entities/workout_exercise_details.dart';
+import '../../application/workout_session_controller.dart';
 import '../workout_labels.dart';
 import '../widgets/workout_status_badge.dart';
 
 /// Vista di sola lettura di una scheda (Milestone 4.3, sezione 29): nessuna
-/// azione di modifica/rimozione/riordino qui, solo la CTA "Modifica" verso
-/// `WorkoutEditPage`. Non mostra "Inizia allenamento": l'esecuzione guidata
-/// non è ancora parte di questa milestone (vedi 07_Training_Engine.md).
+/// azione di modifica/rimozione/riordino qui, solo le CTA "Inizia
+/// allenamento" (solo per schede PRONTE, Milestone 4.4.1) e "Modifica"
+/// verso `WorkoutEditPage`.
 class WorkoutDetailPage extends ConsumerWidget {
   const WorkoutDetailPage({super.key, required this.workoutId});
 
   final int workoutId;
+
+  void _showMessage(BuildContext context, String message) {
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  /// Forge permette una sola sessione runtime attiva alla volta: se ce n'è
+  /// già una (per questa scheda o per un'altra) non viene sostituita in
+  /// silenzio, si informa l'utente con un dialog e si offre di riprendere
+  /// quella già in corso.
+  Future<void> _showActiveSessionDialog(
+    BuildContext context,
+    WidgetRef ref,
+  ) async {
+    final activeWorkoutId = ref
+        .read(workoutSessionControllerProvider)!
+        .workoutId;
+    final goToActive = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Allenamento già in corso'),
+        content: const Text(
+          'Hai già un allenamento in corso. Terminalo o abbandonalo prima '
+          'di iniziarne un altro.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Chiudi'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('Vai alla sessione attiva'),
+          ),
+        ],
+      ),
+    );
+    if ((goToActive ?? false) && context.mounted) {
+      context.push(AppRoutes.workoutSessionPath(activeWorkoutId));
+    }
+  }
+
+  Future<void> _startWorkout(
+    BuildContext context,
+    WidgetRef ref,
+    WorkoutDetails details,
+  ) async {
+    if (details.workout.status != WorkoutDefinitionStatus.ready) {
+      _showMessage(context, 'Solo una scheda pronta può essere avviata.');
+      return;
+    }
+    if (details.exercises.isEmpty) {
+      _showMessage(context, 'Aggiungi almeno un esercizio prima di iniziare.');
+      return;
+    }
+
+    final started = await ref
+        .read(workoutSessionControllerProvider.notifier)
+        .startSession(details);
+    if (!context.mounted) return;
+    if (!started) {
+      await _showActiveSessionDialog(context, ref);
+      return;
+    }
+    if (!context.mounted) return;
+    context.push(AppRoutes.workoutSessionPath(workoutId));
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -87,13 +158,30 @@ class WorkoutDetailPage extends ConsumerWidget {
                 top: false,
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: FilledButton(
-                      onPressed: () =>
-                          context.push(AppRoutes.workoutEditPath(workoutId)),
-                      child: const Text('Modifica'),
-                    ),
+                  child: Column(
+                    children: [
+                      if (workout.status == WorkoutDefinitionStatus.ready) ...[
+                        SizedBox(
+                          width: double.infinity,
+                          child: FilledButton.icon(
+                            onPressed: () =>
+                                _startWorkout(context, ref, details),
+                            icon: const Icon(Icons.play_arrow),
+                            label: const Text('Inizia allenamento'),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                      ],
+                      SizedBox(
+                        width: double.infinity,
+                        child: FilledButton(
+                          onPressed: () => context.push(
+                            AppRoutes.workoutEditPath(workoutId),
+                          ),
+                          child: const Text('Modifica'),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

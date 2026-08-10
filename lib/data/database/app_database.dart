@@ -14,6 +14,8 @@ import 'daos/gruppi_muscolari_dao.dart';
 import 'daos/immagini_esercizi_dao.dart';
 import 'daos/pressure_measurements_dao.dart';
 import 'daos/progressioni_esercizi_dao.dart';
+import 'daos/sessioni_allenamento_dao.dart';
+import 'daos/sessioni_esercizi_dao.dart';
 import 'daos/user_equipment_dao.dart';
 import 'daos/user_profile_dao.dart';
 import 'tables/allenamenti_esercizi_table.dart';
@@ -30,6 +32,8 @@ import 'tables/gruppi_muscolari_table.dart';
 import 'tables/immagini_esercizi_table.dart';
 import 'tables/pressure_measurements_table.dart';
 import 'tables/progressioni_esercizi_table.dart';
+import 'tables/sessioni_allenamento_table.dart';
+import 'tables/sessioni_esercizi_table.dart';
 import 'tables/user_equipment_table.dart';
 import 'tables/user_profiles_table.dart';
 import 'tables/versioni_catalogo_table.dart';
@@ -49,6 +53,9 @@ part 'app_database.g.dart';
 ///   (`allenamenti`, `allenamenti_esercizi`).
 /// - Milestone 4.2: DAO/repository/dominio per gli allenamenti (nessuna
 ///   modifica di schema: resta 3).
+/// - Milestone 4.4.3 (schema 4): persistenza della sessione di allenamento
+///   in corso (`sessioni_allenamento`, `sessioni_esercizi`), per poterla
+///   ripristinare dopo la chiusura dell'app (vedi 07_Training_Engine.md).
 @DriftDatabase(
   tables: [
     AppSettingsTable,
@@ -68,6 +75,8 @@ part 'app_database.g.dart';
     VersioniCatalogoTable,
     AllenamentiTable,
     AllenamentiEserciziTable,
+    SessioniAllenamentoTable,
+    SessioniEserciziTable,
   ],
   daos: [
     AppSettingsDao,
@@ -84,13 +93,15 @@ part 'app_database.g.dart';
     AlternativeEserciziDao,
     AllenamentiDao,
     AllenamentiEserciziDao,
+    SessioniAllenamentoDao,
+    SessioniEserciziDao,
   ],
 )
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor]) : super(executor ?? _openConnection());
 
   @override
-  int get schemaVersion => 3;
+  int get schemaVersion => 4;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -109,12 +120,17 @@ class AppDatabase extends _$AppDatabase {
         await m.renameTable(userEquipmentTable, 'user_equipment_table');
         await m.renameTable(appSettingsTable, 'app_settings_table');
 
-        // Da schema 1 il catalogo esercizi (schema 2) e le schede
-        // allenamento (schema 3) sono entrambi nuovi per questo
-        // dispositivo: createTable() usa CREATE TABLE IF NOT EXISTS, quindi
-        // è sicuro crearli tutti in un solo passaggio.
+        // Da schema 1 il catalogo esercizi (schema 2), le schede
+        // allenamento (schema 3) e le sessioni (schema 4) sono tutti nuovi
+        // per questo dispositivo: createTable() usa CREATE TABLE IF NOT
+        // EXISTS, quindi è sicuro crearli tutti in un solo passaggio.
+        // `return` evita di ripassare anche dai rami seguenti, che
+        // useranno `createIndex()` — a differenza di createTable() non
+        // idempotente — su indici che createAll() ha già creato qui.
         await m.createAll();
-      } else if (from < 3) {
+        return;
+      }
+      if (from < 3) {
         // Da schema 2 il catalogo esercizi esiste già: un createAll()
         // indiscriminato fallirebbe, perché Migrator.createIndex() (a
         // differenza di createTable()) non genera "IF NOT EXISTS" e
@@ -126,6 +142,21 @@ class AppDatabase extends _$AppDatabase {
         await m.createIndex(idxAllenamentiAttivo);
         await m.createIndex(idxAllenamentiEserciziIdAllenamento);
         await m.createIndex(idxAllenamentiEserciziIdEsercizio);
+      }
+      if (from < 4) {
+        // Stesso motivo del ramo precedente: da schema 3 tutto il resto
+        // esiste già, quindi si creano solo le tabelle/indici nuovi di
+        // questa versione (sessione di allenamento persistita, Milestone
+        // 4.4.3). Questo ramo viene raggiunto sia da un dispositivo già a
+        // schema 3, sia da uno appena passato da schema 2 a 3 dal ramo
+        // precedente (nessun `return` lì: from<4 resta vero).
+        await m.createTable(sessioniAllenamentoTable);
+        await m.createTable(sessioniEserciziTable);
+        await m.createIndex(idxSessioniAllenamentoIdAllenamento);
+        await m.createIndex(idxSessioniAllenamentoIdProfilo);
+        await m.createIndex(idxSessioniAllenamentoStato);
+        await m.createIndex(idxSessioniEserciziIdSessione);
+        await m.createIndex(idxSessioniEserciziIdAllenamentoEsercizio);
       }
     },
     beforeOpen: (details) async {
