@@ -9,6 +9,15 @@ abstract final class AppRoutes {
   static const String equipment = '/equipment';
   static const String exercises = '/exercises';
   static const String exerciseDetail = '/exercises/:id';
+  static const String workouts = '/workouts';
+  static const String workoutNew = '/workouts/new';
+  static const String workoutArchived = '/workouts/archived';
+  static const String workoutDetail = '/workouts/:id';
+  static const String workoutEdit = '/workouts/:id/edit';
+  static const String workoutExercisePicker = '/workouts/:id/exercises';
 
   static String exerciseDetailPath(int id) => '/exercises/$id';
+  static String workoutDetailPath(int id) => '/workouts/$id';
+  static String workoutEditPath(int id) => '/workouts/$id/edit';
+  static String workoutExercisePickerPath(int id) => '/workouts/$id/exercises';
 }

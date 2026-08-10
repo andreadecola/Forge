@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -8,6 +6,7 @@ import '../../../../core/routing/app_routes.dart';
 import '../../application/exercise_catalog_providers.dart';
 import '../widgets/exercise_card.dart';
 import '../widgets/exercise_filters_sheet.dart';
+import '../widgets/exercise_search_field.dart';
 
 class ExerciseCatalogPage extends ConsumerWidget {
   const ExerciseCatalogPage({super.key});
@@ -26,7 +25,7 @@ class ExerciseCatalogPage extends ConsumerWidget {
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-            child: _SearchField(),
+            child: ExerciseSearchField(),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
@@ -89,75 +88,6 @@ class ExerciseCatalogPage extends ConsumerWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _SearchField extends ConsumerStatefulWidget {
-  @override
-  ConsumerState<_SearchField> createState() => _SearchFieldState();
-}
-
-class _SearchFieldState extends ConsumerState<_SearchField> {
-  late final TextEditingController _controller;
-  Timer? _debounce;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = TextEditingController(
-      text: ref.read(exerciseFiltersProvider).searchQuery ?? '',
-    );
-  }
-
-  @override
-  void dispose() {
-    _debounce?.cancel();
-    _controller.dispose();
-    super.dispose();
-  }
-
-  void _onChanged(String value) {
-    _debounce?.cancel();
-    _debounce = Timer(const Duration(milliseconds: 300), () {
-      ref.read(exerciseFiltersProvider.notifier).setSearchQuery(value);
-    });
-  }
-
-  void _clear() {
-    _debounce?.cancel();
-    _controller.clear();
-    ref.read(exerciseFiltersProvider.notifier).setSearchQuery('');
-    setState(() {});
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // Se il testo viene azzerato dall'esterno (es. "Reimposta filtri"),
-    // sincronizza il campo: altrimenti resterebbe con testo non più valido.
-    ref.listen(exerciseFiltersProvider, (previous, next) {
-      final resetExternally =
-          (next.searchQuery == null || next.searchQuery!.isEmpty) &&
-          _controller.text.isNotEmpty;
-      if (resetExternally) {
-        _debounce?.cancel();
-        _controller.clear();
-      }
-    });
-
-    return TextField(
-      controller: _controller,
-      onChanged: (value) {
-        _onChanged(value);
-        setState(() {});
-      },
-      decoration: InputDecoration(
-        hintText: 'Cerca esercizio',
-        prefixIcon: const Icon(Icons.search),
-        suffixIcon: _controller.text.isEmpty
-            ? null
-            : IconButton(icon: const Icon(Icons.clear), onPressed: _clear),
       ),
     );
   }

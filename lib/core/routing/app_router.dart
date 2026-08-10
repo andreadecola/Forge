@@ -11,7 +11,13 @@ import '../../features/onboarding/presentation/pages/onboarding_page.dart';
 import '../../features/pressure/presentation/pages/pressure_page.dart';
 import '../../features/progress/presentation/pages/progress_page.dart';
 import '../../features/settings/presentation/pages/profile_page.dart';
+import '../../features/training_plan/presentation/pages/archived_workouts_page.dart';
+import '../../features/training_plan/presentation/pages/create_workout_page.dart';
+import '../../features/training_plan/presentation/pages/exercise_picker_page.dart';
 import '../../features/training_plan/presentation/pages/program_page.dart';
+import '../../features/training_plan/presentation/pages/workout_detail_page.dart';
+import '../../features/training_plan/presentation/pages/workout_edit_page.dart';
+import '../../features/training_plan/presentation/pages/workout_list_page.dart';
 import '../../features/weight/presentation/pages/weight_page.dart';
 import 'app_routes.dart';
 import 'app_shell.dart';
@@ -73,6 +79,51 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           return ExerciseDetailPage(exerciseId: id);
         },
       ),
+      // Rotte scheda allenamento: piatte come `/exercises`/`/exercises/:id`
+      // (non annidate sotto `/workouts`) — un GoRoute con figli valuta il
+      // proprio `redirect` anche per i figli, quindi un redirect su
+      // `/workouts` da solo finirebbe per intercettare anche
+      // `/workouts/new` ecc. Qui `/workouts` ha semplicemente la stessa
+      // pagina della voce "Programma" della bottom navigation.
+      GoRoute(
+        path: AppRoutes.workouts,
+        builder: (context, state) => const WorkoutListPage(),
+      ),
+      GoRoute(
+        path: AppRoutes.workoutNew,
+        builder: (context, state) => const CreateWorkoutPage(),
+      ),
+      // Deve precedere `workoutDetail` (`/workouts/:id`): con rotte piatte
+      // il primo match vince, e senza questa il segmento letterale
+      // "archived" verrebbe interpretato come un `:id` non valido.
+      GoRoute(
+        path: AppRoutes.workoutArchived,
+        builder: (context, state) => const ArchivedWorkoutsPage(),
+      ),
+      GoRoute(
+        path: AppRoutes.workoutDetail,
+        builder: (context, state) {
+          final id = int.tryParse(state.pathParameters['id'] ?? '');
+          if (id == null) return const _InvalidWorkoutIdPage();
+          return WorkoutDetailPage(workoutId: id);
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.workoutEdit,
+        builder: (context, state) {
+          final id = int.tryParse(state.pathParameters['id'] ?? '');
+          if (id == null) return const _InvalidWorkoutIdPage();
+          return WorkoutEditPage(workoutId: id);
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.workoutExercisePicker,
+        builder: (context, state) {
+          final id = int.tryParse(state.pathParameters['id'] ?? '');
+          if (id == null) return const _InvalidWorkoutIdPage();
+          return ExercisePickerPage(workoutId: id);
+        },
+      ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) =>
             AppShell(navigationShell: navigationShell),
@@ -114,3 +165,15 @@ final appRouterProvider = Provider<GoRouter>((ref) {
     ],
   );
 });
+
+class _InvalidWorkoutIdPage extends StatelessWidget {
+  const _InvalidWorkoutIdPage();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Scheda allenamento')),
+      body: const Center(child: Text('Identificativo scheda non valido.')),
+    );
+  }
+}

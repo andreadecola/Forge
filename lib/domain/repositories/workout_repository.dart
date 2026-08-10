@@ -19,6 +19,11 @@ abstract class WorkoutRepository {
 
   Stream<List<Workout>> watchWorkouts({required int profileId});
 
+  /// Schede archiviate del profilo (complementare a [watchWorkouts], che
+  /// le esclude): unico modo per l'utente di rivederle dopo
+  /// [archiveWorkout].
+  Stream<List<Workout>> watchArchivedWorkouts({required int profileId});
+
   Future<Workout?> getWorkoutById(int id);
 
   Future<WorkoutDetails?> getWorkoutDetails(int id);

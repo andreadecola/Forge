@@ -98,12 +98,8 @@ void main() {
     await tester.tap(find.text('Programma'));
     await tester.pumpAndSettle();
 
-    expect(
-      find.text(
-        'Il piano di allenamento sarà disponibile nelle prossime milestone.',
-      ),
-      findsOneWidget,
-    );
+    expect(find.text('I tuoi allenamenti'), findsOneWidget);
+    expect(find.text('Non hai ancora creato allenamenti.'), findsOneWidget);
 
     await _disposeCleanly(tester);
   });

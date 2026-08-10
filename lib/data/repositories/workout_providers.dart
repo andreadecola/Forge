@@ -40,6 +40,16 @@ final watchWorkoutsProvider = StreamProvider.family<List<Workout>, int>((
       .watchWorkouts(profileId: profileId);
 });
 
+/// Schede archiviate del profilo (Milestone 4.3.1): unico modo per
+/// l'utente di rivederle, dato che [watchWorkoutsProvider] le esclude.
+final watchArchivedWorkoutsProvider = StreamProvider.family<List<Workout>, int>(
+  (ref, profileId) {
+    return ref
+        .watch(workoutRepositoryProvider)
+        .watchArchivedWorkouts(profileId: profileId);
+  },
+);
+
 final workoutDetailsProvider = FutureProvider.family<WorkoutDetails?, int>((
   ref,
   workoutId,
