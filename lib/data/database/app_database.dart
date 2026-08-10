@@ -2,9 +2,16 @@ import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
 
 import '../../core/constants/app_constants.dart';
+import 'daos/alternative_esercizi_dao.dart';
 import 'daos/app_settings_dao.dart';
+import 'daos/attrezzature_dao.dart';
 import 'daos/body_measurements_dao.dart';
+import 'daos/categorie_esercizi_dao.dart';
+import 'daos/esercizi_dao.dart';
+import 'daos/gruppi_muscolari_dao.dart';
+import 'daos/immagini_esercizi_dao.dart';
 import 'daos/pressure_measurements_dao.dart';
+import 'daos/progressioni_esercizi_dao.dart';
 import 'daos/user_equipment_dao.dart';
 import 'daos/user_profile_dao.dart';
 import 'tables/alternative_esercizi_table.dart';
@@ -58,6 +65,13 @@ part 'app_database.g.dart';
     BodyMeasurementsDao,
     PressureMeasurementsDao,
     UserEquipmentDao,
+    CategorieEserciziDao,
+    GruppiMuscolariDao,
+    AttrezzatureDao,
+    EserciziDao,
+    ImmaginiEserciziDao,
+    ProgressioniEserciziDao,
+    AlternativeEserciziDao,
   ],
 )
 class AppDatabase extends _$AppDatabase {

@@ -9406,6 +9406,23 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final UserEquipmentDao userEquipmentDao = UserEquipmentDao(
     this as AppDatabase,
   );
+  late final CategorieEserciziDao categorieEserciziDao = CategorieEserciziDao(
+    this as AppDatabase,
+  );
+  late final GruppiMuscolariDao gruppiMuscolariDao = GruppiMuscolariDao(
+    this as AppDatabase,
+  );
+  late final AttrezzatureDao attrezzatureDao = AttrezzatureDao(
+    this as AppDatabase,
+  );
+  late final EserciziDao eserciziDao = EserciziDao(this as AppDatabase);
+  late final ImmaginiEserciziDao immaginiEserciziDao = ImmaginiEserciziDao(
+    this as AppDatabase,
+  );
+  late final ProgressioniEserciziDao progressioniEserciziDao =
+      ProgressioniEserciziDao(this as AppDatabase);
+  late final AlternativeEserciziDao alternativeEserciziDao =
+      AlternativeEserciziDao(this as AppDatabase);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();

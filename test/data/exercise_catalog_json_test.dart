@@ -20,9 +20,11 @@ void main() {
     expect(catalog.exercises, isNotEmpty);
   });
 
-  test('catalogType è ESERCIZI e catalogVersion è 1', () {
+  test('catalogType è ESERCIZI e catalogVersion è 2', () {
+    // v2 dalla Milestone 3.3.1: stessa struttura/conteggi di v1, contenuti
+    // (description/instructions/breathing/mistakes/safety) completati.
     expect(catalog.catalogType, 'ESERCIZI');
-    expect(catalog.catalogVersion, 1);
+    expect(catalog.catalogVersion, 2);
   });
 
   test('i codici categoria sono univoci', () {

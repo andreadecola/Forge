@@ -15,6 +15,9 @@ enum ExerciseImpactLevel {
   const ExerciseImpactLevel(this.code);
 
   final String code;
+
+  static ExerciseImpactLevel fromCode(String code) =>
+      values.firstWhere((e) => e.code == code);
 }
 
 /// Intensità cardio, centralizzata dalla Milestone 3.2 (in 3.1 era testo
@@ -29,6 +32,9 @@ enum ExerciseCardioIntensity {
   const ExerciseCardioIntensity(this.code);
 
   final String code;
+
+  static ExerciseCardioIntensity fromCode(String code) =>
+      values.firstWhere((e) => e.code == code);
 }
 
 enum ExerciseMuscleRole {
@@ -38,6 +44,9 @@ enum ExerciseMuscleRole {
   const ExerciseMuscleRole(this.code);
 
   final String code;
+
+  static ExerciseMuscleRole fromCode(String code) =>
+      values.firstWhere((e) => e.code == code);
 }
 
 enum ExerciseImageSourceType {
@@ -47,6 +56,9 @@ enum ExerciseImageSourceType {
   const ExerciseImageSourceType(this.code);
 
   final String code;
+
+  static ExerciseImageSourceType fromCode(String code) =>
+      values.firstWhere((e) => e.code == code);
 }
 
 enum ExerciseImageType {
@@ -60,6 +72,9 @@ enum ExerciseImageType {
   const ExerciseImageType(this.code);
 
   final String code;
+
+  static ExerciseImageType fromCode(String code) =>
+      values.firstWhere((e) => e.code == code);
 }
 
 enum ExerciseProgressionType {
@@ -73,6 +88,9 @@ enum ExerciseProgressionType {
   const ExerciseProgressionType(this.code);
 
   final String code;
+
+  static ExerciseProgressionType fromCode(String code) =>
+      values.firstWhere((e) => e.code == code);
 }
 
 enum ExerciseAlternativeReason {
@@ -87,4 +105,7 @@ enum ExerciseAlternativeReason {
   const ExerciseAlternativeReason(this.code);
 
   final String code;
+
+  static ExerciseAlternativeReason fromCode(String code) =>
+      values.firstWhere((e) => e.code == code);
 }
