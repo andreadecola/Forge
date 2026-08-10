@@ -2,6 +2,8 @@ import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
 
 import '../../core/constants/app_constants.dart';
+import 'daos/allenamenti_dao.dart';
+import 'daos/allenamenti_esercizi_dao.dart';
 import 'daos/alternative_esercizi_dao.dart';
 import 'daos/app_settings_dao.dart';
 import 'daos/attrezzature_dao.dart';
@@ -44,8 +46,9 @@ part 'app_database.g.dart';
 ///   alternative, versionamento). Nessun dato ancora importato: il seed
 ///   arriva con la Milestone 3.2.
 /// - Milestone 4.1 (schema 3): struttura dati delle schede allenamento
-///   (`allenamenti`, `allenamenti_esercizi`). Solo tabelle: nessun
-///   DAO/repository/UI applicativo (arrivano con la Milestone 4.2).
+///   (`allenamenti`, `allenamenti_esercizi`).
+/// - Milestone 4.2: DAO/repository/dominio per gli allenamenti (nessuna
+///   modifica di schema: resta 3).
 @DriftDatabase(
   tables: [
     AppSettingsTable,
@@ -79,6 +82,8 @@ part 'app_database.g.dart';
     ImmaginiEserciziDao,
     ProgressioniEserciziDao,
     AlternativeEserciziDao,
+    AllenamentiDao,
+    AllenamentiEserciziDao,
   ],
 )
 class AppDatabase extends _$AppDatabase {
