@@ -1,7 +1,9 @@
 import '../../domain/entities/exercise.dart';
 import '../../domain/entities/exercise_alternative.dart';
 import '../../domain/entities/exercise_catalog_enums.dart';
+import '../../domain/entities/exercise_category.dart';
 import '../../domain/entities/exercise_details.dart';
+import '../../domain/entities/exercise_image.dart';
 import '../../domain/entities/exercise_progression.dart';
 import '../../domain/entities/equipment.dart';
 import '../../domain/repositories/exercise_repository.dart';
@@ -17,6 +19,25 @@ class DriftExerciseRepository implements ExerciseRepository {
   Future<List<Exercise>> getExercises() async {
     final rows = await db.eserciziDao.getActiveExercises();
     return rows.map(CatalogMappers.exercise).toList();
+  }
+
+  @override
+  Future<List<ExerciseCategory>> getCategories() async {
+    final rows = await db.categorieEserciziDao.getAll();
+    return rows.map(CatalogMappers.category).toList();
+  }
+
+  @override
+  Future<Map<int, Set<String>>> getRequiredEquipmentCodesByExercise() async {
+    final links = await db.attrezzatureDao.getAllExerciseEquipmentLinks();
+    final requiredByExercise = <int, Set<String>>{};
+    for (final link in links) {
+      if (!link.required) continue;
+      requiredByExercise
+          .putIfAbsent(link.exerciseId, () => <String>{})
+          .add(link.masterCode);
+    }
+    return requiredByExercise;
   }
 
   @override
@@ -61,22 +82,13 @@ class DriftExerciseRepository implements ExerciseRepository {
   Future<List<Exercise>> getExercisesByAvailableEquipment(
     Set<String> ownedEquipmentCodes,
   ) async {
-    final links = await db.attrezzatureDao.getAllExerciseEquipmentLinks();
-
-    // Attrezzature obbligatorie per esercizio (NONE escluso: non è un
-    // requisito di inventario).
-    final requiredByExercise = <int, Set<String>>{};
-    for (final link in links) {
-      if (!link.required) continue;
-      if (link.masterCode == Equipment.noneCode) continue;
-      requiredByExercise
-          .putIfAbsent(link.exerciseId, () => <String>{})
-          .add(link.masterCode);
-    }
-
+    final requiredByExercise = await getRequiredEquipmentCodesByExercise();
     final exercises = await getExercises();
     return exercises.where((e) {
-      final required = requiredByExercise[e.id] ?? const <String>{};
+      // NONE non è un requisito di inventario: si esclude dal confronto.
+      final required = (requiredByExercise[e.id] ?? const <String>{}).where(
+        (code) => code != Equipment.noneCode,
+      );
       return required.every(ownedEquipmentCodes.contains);
     }).toList();
   }
@@ -122,6 +134,12 @@ class DriftExerciseRepository implements ExerciseRepository {
       regressions: regressions,
       alternatives: alternatives,
     );
+  }
+
+  @override
+  Future<List<ExerciseImage>> getImages(int exerciseId) async {
+    final rows = await db.immaginiEserciziDao.getForExercise(exerciseId);
+    return rows.map(CatalogMappers.image).toList();
   }
 
   @override

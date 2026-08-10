@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/constants/activity_level.dart';
 import '../../../../core/routing/app_routes.dart';
+import '../../../../core/theme/forge_colors.dart';
 import '../../../../core/utils/age_calculator.dart';
 import '../../../../data/repositories/repository_providers.dart';
 import '../../../../domain/entities/user_profile.dart';
@@ -76,6 +77,14 @@ class _DashboardBody extends ConsumerWidget {
         Text(
           'Ciao, ${profile.name}',
           style: Theme.of(context).textTheme.headlineMedium,
+        ),
+        const SizedBox(height: 4),
+        Text(
+          'Il bisogno di ricominciare.',
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+            color: ForgeColors.textSecondary,
+            fontStyle: FontStyle.italic,
+          ),
         ),
         const SizedBox(height: 16),
         Card(
@@ -157,6 +166,19 @@ class _DashboardBody extends ConsumerWidget {
                 ),
               ],
             ),
+          ),
+        ),
+        const SizedBox(height: 24),
+        Card(
+          child: ListTile(
+            contentPadding: const EdgeInsets.all(16),
+            leading: const Icon(Icons.menu_book_outlined),
+            title: const Text('Catalogo esercizi'),
+            subtitle: const Text(
+              '118 esercizi domestici, con filtri e progressioni',
+            ),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => context.push(AppRoutes.exercises),
           ),
         ),
         const SizedBox(height: 24),

@@ -1,9 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../data/repositories/repository_providers.dart';
 import '../../features/dashboard/presentation/pages/dashboard_page.dart';
 import '../../features/equipment/presentation/pages/my_equipment_page.dart';
+import '../../features/exercises/presentation/pages/exercise_catalog_page.dart';
+import '../../features/exercises/presentation/pages/exercise_detail_page.dart';
 import '../../features/onboarding/presentation/pages/onboarding_page.dart';
 import '../../features/pressure/presentation/pages/pressure_page.dart';
 import '../../features/progress/presentation/pages/progress_page.dart';
@@ -50,6 +53,25 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.equipment,
         builder: (context, state) => const MyEquipmentPage(),
+      ),
+      GoRoute(
+        path: AppRoutes.exercises,
+        builder: (context, state) => const ExerciseCatalogPage(),
+      ),
+      GoRoute(
+        path: AppRoutes.exerciseDetail,
+        builder: (context, state) {
+          final id = int.tryParse(state.pathParameters['id'] ?? '');
+          if (id == null) {
+            return Scaffold(
+              appBar: AppBar(title: const Text('Dettaglio esercizio')),
+              body: const Center(
+                child: Text('Identificativo esercizio non valido.'),
+              ),
+            );
+          }
+          return ExerciseDetailPage(exerciseId: id);
+        },
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) =>
