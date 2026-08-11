@@ -144,7 +144,7 @@ void main() {
     addTearDown(database.close);
 
     // 1. Dati precedenti preservati.
-    expect(database.schemaVersion, 4);
+    expect(database.schemaVersion, 6);
     final profile = await database.userProfileDao.getCurrentProfile();
     expect(profile, isNotNull);
     expect(profile!.name, 'Alex');

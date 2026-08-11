@@ -8,6 +8,7 @@ import 'daos/alternative_esercizi_dao.dart';
 import 'daos/app_settings_dao.dart';
 import 'daos/attrezzature_dao.dart';
 import 'daos/body_measurements_dao.dart';
+import 'daos/camminate_dao.dart';
 import 'daos/categorie_esercizi_dao.dart';
 import 'daos/esercizi_dao.dart';
 import 'daos/gruppi_muscolari_dao.dart';
@@ -25,6 +26,7 @@ import 'tables/app_settings_table.dart';
 import 'tables/attrezzature_esercizi_table.dart';
 import 'tables/attrezzature_table.dart';
 import 'tables/body_measurements_table.dart';
+import 'tables/camminate_table.dart';
 import 'tables/categorie_esercizi_table.dart';
 import 'tables/esercizi_gruppi_muscolari_table.dart';
 import 'tables/esercizi_table.dart';
@@ -56,11 +58,14 @@ part 'app_database.g.dart';
 /// - Milestone 4.4.3 (schema 4): persistenza della sessione di allenamento
 ///   in corso (`sessioni_allenamento`, `sessioni_esercizi`), per poterla
 ///   ripristinare dopo la chiusura dell'app (vedi 07_Training_Engine.md).
+/// - Milestone 6.3.2 (schema 6): stato e timestamp della pausa persistita
+///   della camminata; il tempo attivo resta derivato.
 @DriftDatabase(
   tables: [
     AppSettingsTable,
     UserProfilesTable,
     BodyMeasurementsTable,
+    CamminateTable,
     PressureMeasurementsTable,
     UserEquipmentTable,
     CategorieEserciziTable,
@@ -82,6 +87,7 @@ part 'app_database.g.dart';
     AppSettingsDao,
     UserProfileDao,
     BodyMeasurementsDao,
+    CamminateDao,
     PressureMeasurementsDao,
     UserEquipmentDao,
     CategorieEserciziDao,
@@ -101,7 +107,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor]) : super(executor ?? _openConnection());
 
   @override
-  int get schemaVersion => 4;
+  int get schemaVersion => 6;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -157,6 +163,20 @@ class AppDatabase extends _$AppDatabase {
         await m.createIndex(idxSessioniAllenamentoStato);
         await m.createIndex(idxSessioniEserciziIdSessione);
         await m.createIndex(idxSessioniEserciziIdAllenamentoEsercizio);
+      }
+      if (from < 5) {
+        // Da schema 4 la nuova tabella è isolata: si crea esplicitamente
+        // tabella e indici, evitando createAll() che ricreerebbe gli indici
+        // già presenti. L'indice UNIQUE parziale garantisce inoltre una sola
+        // camminata IN_PROGRESS per profilo anche in caso di concorrenza.
+        await m.createTable(camminateTable);
+        await m.createIndex(idxCamminateIdProfiloDataInizio);
+        await m.createIndex(idxCamminateAttivaPerProfilo);
+      }
+      if (from >= 5 && from < 6) {
+        await m.addColumn(camminateTable, camminateTable.pausaInCorso);
+        await m.addColumn(camminateTable, camminateTable.dataInizioPausa);
+        await m.addColumn(camminateTable, camminateTable.durataPausaSecondi);
       }
     },
     beforeOpen: (details) async {

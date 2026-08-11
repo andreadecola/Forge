@@ -25,6 +25,10 @@ import '../../features/training_plan/presentation/pages/workout_list_page.dart';
 import '../../features/training_plan/presentation/pages/workout_session_page.dart';
 import '../../features/training_plan/presentation/pages/workout_statistics_page.dart';
 import '../../features/weight/presentation/pages/weight_page.dart';
+import '../../features/walking/presentation/pages/walking_session_page.dart';
+import '../../features/walking/presentation/pages/walking_history_detail_page.dart';
+import '../../features/walking/presentation/pages/walking_history_page.dart';
+import '../../features/walking/presentation/pages/walking_statistics_page.dart';
 import 'app_routes.dart';
 import 'app_shell.dart';
 
@@ -170,6 +174,30 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: AppRoutes.forgePreview,
         builder: (context, state) => const ForgeWorkoutPreviewPage(),
       ),
+      // Sessione walking fuori dalla bottom navigation, come la sessione
+      // allenamento: è una modalità runtime, non una sezione principale.
+      GoRoute(
+        path: AppRoutes.walkingHistory,
+        builder: (context, state) => const WalkingHistoryPage(),
+      ),
+      GoRoute(
+        path: AppRoutes.walkingHistoryDetail,
+        builder: (context, state) {
+          final id = int.tryParse(
+            state.pathParameters['walkingSessionId'] ?? '',
+          );
+          if (id == null) return const _InvalidWalkingIdPage();
+          return WalkingHistoryDetailPage(sessionId: id);
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.walkingStatistics,
+        builder: (context, state) => const WalkingStatisticsPage(),
+      ),
+      GoRoute(
+        path: AppRoutes.walkingSession,
+        builder: (context, state) => const WalkingSessionPage(),
+      ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) =>
             AppShell(navigationShell: navigationShell),
@@ -220,6 +248,18 @@ class _InvalidWorkoutIdPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Scheda allenamento')),
       body: const Center(child: Text('Identificativo scheda non valido.')),
+    );
+  }
+}
+
+class _InvalidWalkingIdPage extends StatelessWidget {
+  const _InvalidWalkingIdPage();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Storico camminate')),
+      body: const Center(child: Text('Identificativo camminata non valido.')),
     );
   }
 }

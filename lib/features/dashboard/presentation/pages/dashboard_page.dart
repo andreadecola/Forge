@@ -12,6 +12,7 @@ import '../../../../domain/services/body_metrics_service.dart';
 import '../../../equipment/application/equipment_providers.dart';
 import '../../../pressure/application/pressure_providers.dart';
 import '../../../training_plan/presentation/widgets/active_session_banner.dart';
+import '../../../walking/presentation/widgets/walking_entry_card.dart';
 import '../../../weight/application/weight_providers.dart';
 
 class DashboardPage extends ConsumerWidget {
@@ -88,6 +89,8 @@ class _DashboardBody extends ConsumerWidget {
           ),
         ),
         const ActiveSessionBanner(),
+        const SizedBox(height: 16),
+        WalkingEntryCard(profileId: profile.id!),
         const SizedBox(height: 16),
         Card(
           child: Padding(

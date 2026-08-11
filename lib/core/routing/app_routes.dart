@@ -21,6 +21,11 @@ abstract final class AppRoutes {
   static const String workoutSession = '/workouts/:id/session';
   static const String forgeGenerator = '/forge';
   static const String forgePreview = '/forge/preview';
+  static const String walkingSession = '/walking/session';
+  static const String walkingHistory = '/walking/history';
+  static const String walkingHistoryDetail =
+      '/walking/history/:walkingSessionId';
+  static const String walkingStatistics = '/walking/statistics';
 
   static String exerciseDetailPath(int id) => '/exercises/$id';
   static String workoutDetailPath(int id) => '/workouts/$id';
@@ -29,4 +34,6 @@ abstract final class AppRoutes {
   static String workoutSessionPath(int id) => '/workouts/$id/session';
   static String workoutHistoryDetailPath(int sessionId) =>
       '/workouts/history/$sessionId';
+  static String walkingHistoryDetailPath(int sessionId) =>
+      '/walking/history/$sessionId';
 }

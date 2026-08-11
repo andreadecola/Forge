@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'app_database.dart';
+part of 'walking_session_migration_v5_to_v6_test.dart';
 
 // ignore_for_file: type=lint
 class $AppSettingsTableTable extends AppSettingsTable
@@ -1945,12 +1945,12 @@ class BodyMeasurementsTableCompanion
   }
 }
 
-class $CamminateTableTable extends CamminateTable
-    with TableInfo<$CamminateTableTable, CamminateTableData> {
+class $CamminateTableV5Table extends CamminateTableV5
+    with TableInfo<$CamminateTableV5Table, CamminateTableV5Data> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $CamminateTableTable(this.attachedDatabase, [this._alias]);
+  $CamminateTableV5Table(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
@@ -2020,44 +2020,6 @@ class $CamminateTableTable extends CamminateTable
     type: DriftSqlType.int,
     requiredDuringInsert: false,
   );
-  static const VerificationMeta _pausaInCorsoMeta = const VerificationMeta(
-    'pausaInCorso',
-  );
-  @override
-  late final GeneratedColumn<bool> pausaInCorso = GeneratedColumn<bool>(
-    'pausa_in_corso',
-    aliasedName,
-    false,
-    type: DriftSqlType.bool,
-    requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'CHECK ("pausa_in_corso" IN (0, 1))',
-    ),
-    defaultValue: const Constant(false),
-  );
-  static const VerificationMeta _dataInizioPausaMeta = const VerificationMeta(
-    'dataInizioPausa',
-  );
-  @override
-  late final GeneratedColumn<DateTime> dataInizioPausa =
-      GeneratedColumn<DateTime>(
-        'data_inizio_pausa',
-        aliasedName,
-        true,
-        type: DriftSqlType.dateTime,
-        requiredDuringInsert: false,
-      );
-  static const VerificationMeta _durataPausaSecondiMeta =
-      const VerificationMeta('durataPausaSecondi');
-  @override
-  late final GeneratedColumn<int> durataPausaSecondi = GeneratedColumn<int>(
-    'durata_pausa_secondi',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-    defaultValue: const Constant(0),
-  );
   static const VerificationMeta _statoMeta = const VerificationMeta('stato');
   @override
   late final GeneratedColumn<String> stato = GeneratedColumn<String>(
@@ -2107,9 +2069,6 @@ class $CamminateTableTable extends CamminateTable
     dataFine,
     distanzaMetri,
     passi,
-    pausaInCorso,
-    dataInizioPausa,
-    durataPausaSecondi,
     stato,
     note,
     dataCreazione,
@@ -2122,7 +2081,7 @@ class $CamminateTableTable extends CamminateTable
   static const String $name = 'camminate';
   @override
   VerificationContext validateIntegrity(
-    Insertable<CamminateTableData> instance, {
+    Insertable<CamminateTableV5Data> instance, {
     bool isInserting = false,
   }) {
     final context = VerificationContext();
@@ -2167,33 +2126,6 @@ class $CamminateTableTable extends CamminateTable
         passi.isAcceptableOrUnknown(data['passi']!, _passiMeta),
       );
     }
-    if (data.containsKey('pausa_in_corso')) {
-      context.handle(
-        _pausaInCorsoMeta,
-        pausaInCorso.isAcceptableOrUnknown(
-          data['pausa_in_corso']!,
-          _pausaInCorsoMeta,
-        ),
-      );
-    }
-    if (data.containsKey('data_inizio_pausa')) {
-      context.handle(
-        _dataInizioPausaMeta,
-        dataInizioPausa.isAcceptableOrUnknown(
-          data['data_inizio_pausa']!,
-          _dataInizioPausaMeta,
-        ),
-      );
-    }
-    if (data.containsKey('durata_pausa_secondi')) {
-      context.handle(
-        _durataPausaSecondiMeta,
-        durataPausaSecondi.isAcceptableOrUnknown(
-          data['durata_pausa_secondi']!,
-          _durataPausaSecondiMeta,
-        ),
-      );
-    }
     if (data.containsKey('stato')) {
       context.handle(
         _statoMeta,
@@ -2236,9 +2168,9 @@ class $CamminateTableTable extends CamminateTable
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  CamminateTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
+  CamminateTableV5Data map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return CamminateTableData(
+    return CamminateTableV5Data(
       id: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}id'],
@@ -2263,18 +2195,6 @@ class $CamminateTableTable extends CamminateTable
         DriftSqlType.int,
         data['${effectivePrefix}passi'],
       ),
-      pausaInCorso: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
-        data['${effectivePrefix}pausa_in_corso'],
-      )!,
-      dataInizioPausa: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}data_inizio_pausa'],
-      ),
-      durataPausaSecondi: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}durata_pausa_secondi'],
-      )!,
       stato: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}stato'],
@@ -2295,36 +2215,30 @@ class $CamminateTableTable extends CamminateTable
   }
 
   @override
-  $CamminateTableTable createAlias(String alias) {
-    return $CamminateTableTable(attachedDatabase, alias);
+  $CamminateTableV5Table createAlias(String alias) {
+    return $CamminateTableV5Table(attachedDatabase, alias);
   }
 }
 
-class CamminateTableData extends DataClass
-    implements Insertable<CamminateTableData> {
+class CamminateTableV5Data extends DataClass
+    implements Insertable<CamminateTableV5Data> {
   final int id;
   final int idProfilo;
   final DateTime dataInizio;
   final DateTime? dataFine;
   final int? distanzaMetri;
   final int? passi;
-  final bool pausaInCorso;
-  final DateTime? dataInizioPausa;
-  final int durataPausaSecondi;
   final String stato;
   final String? note;
   final DateTime dataCreazione;
   final DateTime dataModifica;
-  const CamminateTableData({
+  const CamminateTableV5Data({
     required this.id,
     required this.idProfilo,
     required this.dataInizio,
     this.dataFine,
     this.distanzaMetri,
     this.passi,
-    required this.pausaInCorso,
-    this.dataInizioPausa,
-    required this.durataPausaSecondi,
     required this.stato,
     this.note,
     required this.dataCreazione,
@@ -2345,11 +2259,6 @@ class CamminateTableData extends DataClass
     if (!nullToAbsent || passi != null) {
       map['passi'] = Variable<int>(passi);
     }
-    map['pausa_in_corso'] = Variable<bool>(pausaInCorso);
-    if (!nullToAbsent || dataInizioPausa != null) {
-      map['data_inizio_pausa'] = Variable<DateTime>(dataInizioPausa);
-    }
-    map['durata_pausa_secondi'] = Variable<int>(durataPausaSecondi);
     map['stato'] = Variable<String>(stato);
     if (!nullToAbsent || note != null) {
       map['note'] = Variable<String>(note);
@@ -2359,8 +2268,8 @@ class CamminateTableData extends DataClass
     return map;
   }
 
-  CamminateTableCompanion toCompanion(bool nullToAbsent) {
-    return CamminateTableCompanion(
+  CamminateTableV5Companion toCompanion(bool nullToAbsent) {
+    return CamminateTableV5Companion(
       id: Value(id),
       idProfilo: Value(idProfilo),
       dataInizio: Value(dataInizio),
@@ -2373,11 +2282,6 @@ class CamminateTableData extends DataClass
       passi: passi == null && nullToAbsent
           ? const Value.absent()
           : Value(passi),
-      pausaInCorso: Value(pausaInCorso),
-      dataInizioPausa: dataInizioPausa == null && nullToAbsent
-          ? const Value.absent()
-          : Value(dataInizioPausa),
-      durataPausaSecondi: Value(durataPausaSecondi),
       stato: Value(stato),
       note: note == null && nullToAbsent ? const Value.absent() : Value(note),
       dataCreazione: Value(dataCreazione),
@@ -2385,21 +2289,18 @@ class CamminateTableData extends DataClass
     );
   }
 
-  factory CamminateTableData.fromJson(
+  factory CamminateTableV5Data.fromJson(
     Map<String, dynamic> json, {
     ValueSerializer? serializer,
   }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return CamminateTableData(
+    return CamminateTableV5Data(
       id: serializer.fromJson<int>(json['id']),
       idProfilo: serializer.fromJson<int>(json['idProfilo']),
       dataInizio: serializer.fromJson<DateTime>(json['dataInizio']),
       dataFine: serializer.fromJson<DateTime?>(json['dataFine']),
       distanzaMetri: serializer.fromJson<int?>(json['distanzaMetri']),
       passi: serializer.fromJson<int?>(json['passi']),
-      pausaInCorso: serializer.fromJson<bool>(json['pausaInCorso']),
-      dataInizioPausa: serializer.fromJson<DateTime?>(json['dataInizioPausa']),
-      durataPausaSecondi: serializer.fromJson<int>(json['durataPausaSecondi']),
       stato: serializer.fromJson<String>(json['stato']),
       note: serializer.fromJson<String?>(json['note']),
       dataCreazione: serializer.fromJson<DateTime>(json['dataCreazione']),
@@ -2416,9 +2317,6 @@ class CamminateTableData extends DataClass
       'dataFine': serializer.toJson<DateTime?>(dataFine),
       'distanzaMetri': serializer.toJson<int?>(distanzaMetri),
       'passi': serializer.toJson<int?>(passi),
-      'pausaInCorso': serializer.toJson<bool>(pausaInCorso),
-      'dataInizioPausa': serializer.toJson<DateTime?>(dataInizioPausa),
-      'durataPausaSecondi': serializer.toJson<int>(durataPausaSecondi),
       'stato': serializer.toJson<String>(stato),
       'note': serializer.toJson<String?>(note),
       'dataCreazione': serializer.toJson<DateTime>(dataCreazione),
@@ -2426,21 +2324,18 @@ class CamminateTableData extends DataClass
     };
   }
 
-  CamminateTableData copyWith({
+  CamminateTableV5Data copyWith({
     int? id,
     int? idProfilo,
     DateTime? dataInizio,
     Value<DateTime?> dataFine = const Value.absent(),
     Value<int?> distanzaMetri = const Value.absent(),
     Value<int?> passi = const Value.absent(),
-    bool? pausaInCorso,
-    Value<DateTime?> dataInizioPausa = const Value.absent(),
-    int? durataPausaSecondi,
     String? stato,
     Value<String?> note = const Value.absent(),
     DateTime? dataCreazione,
     DateTime? dataModifica,
-  }) => CamminateTableData(
+  }) => CamminateTableV5Data(
     id: id ?? this.id,
     idProfilo: idProfilo ?? this.idProfilo,
     dataInizio: dataInizio ?? this.dataInizio,
@@ -2449,18 +2344,13 @@ class CamminateTableData extends DataClass
         ? distanzaMetri.value
         : this.distanzaMetri,
     passi: passi.present ? passi.value : this.passi,
-    pausaInCorso: pausaInCorso ?? this.pausaInCorso,
-    dataInizioPausa: dataInizioPausa.present
-        ? dataInizioPausa.value
-        : this.dataInizioPausa,
-    durataPausaSecondi: durataPausaSecondi ?? this.durataPausaSecondi,
     stato: stato ?? this.stato,
     note: note.present ? note.value : this.note,
     dataCreazione: dataCreazione ?? this.dataCreazione,
     dataModifica: dataModifica ?? this.dataModifica,
   );
-  CamminateTableData copyWithCompanion(CamminateTableCompanion data) {
-    return CamminateTableData(
+  CamminateTableV5Data copyWithCompanion(CamminateTableV5Companion data) {
+    return CamminateTableV5Data(
       id: data.id.present ? data.id.value : this.id,
       idProfilo: data.idProfilo.present ? data.idProfilo.value : this.idProfilo,
       dataInizio: data.dataInizio.present
@@ -2471,15 +2361,6 @@ class CamminateTableData extends DataClass
           ? data.distanzaMetri.value
           : this.distanzaMetri,
       passi: data.passi.present ? data.passi.value : this.passi,
-      pausaInCorso: data.pausaInCorso.present
-          ? data.pausaInCorso.value
-          : this.pausaInCorso,
-      dataInizioPausa: data.dataInizioPausa.present
-          ? data.dataInizioPausa.value
-          : this.dataInizioPausa,
-      durataPausaSecondi: data.durataPausaSecondi.present
-          ? data.durataPausaSecondi.value
-          : this.durataPausaSecondi,
       stato: data.stato.present ? data.stato.value : this.stato,
       note: data.note.present ? data.note.value : this.note,
       dataCreazione: data.dataCreazione.present
@@ -2493,16 +2374,13 @@ class CamminateTableData extends DataClass
 
   @override
   String toString() {
-    return (StringBuffer('CamminateTableData(')
+    return (StringBuffer('CamminateTableV5Data(')
           ..write('id: $id, ')
           ..write('idProfilo: $idProfilo, ')
           ..write('dataInizio: $dataInizio, ')
           ..write('dataFine: $dataFine, ')
           ..write('distanzaMetri: $distanzaMetri, ')
           ..write('passi: $passi, ')
-          ..write('pausaInCorso: $pausaInCorso, ')
-          ..write('dataInizioPausa: $dataInizioPausa, ')
-          ..write('durataPausaSecondi: $durataPausaSecondi, ')
           ..write('stato: $stato, ')
           ..write('note: $note, ')
           ..write('dataCreazione: $dataCreazione, ')
@@ -2519,9 +2397,6 @@ class CamminateTableData extends DataClass
     dataFine,
     distanzaMetri,
     passi,
-    pausaInCorso,
-    dataInizioPausa,
-    durataPausaSecondi,
     stato,
     note,
     dataCreazione,
@@ -2530,61 +2405,49 @@ class CamminateTableData extends DataClass
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is CamminateTableData &&
+      (other is CamminateTableV5Data &&
           other.id == this.id &&
           other.idProfilo == this.idProfilo &&
           other.dataInizio == this.dataInizio &&
           other.dataFine == this.dataFine &&
           other.distanzaMetri == this.distanzaMetri &&
           other.passi == this.passi &&
-          other.pausaInCorso == this.pausaInCorso &&
-          other.dataInizioPausa == this.dataInizioPausa &&
-          other.durataPausaSecondi == this.durataPausaSecondi &&
           other.stato == this.stato &&
           other.note == this.note &&
           other.dataCreazione == this.dataCreazione &&
           other.dataModifica == this.dataModifica);
 }
 
-class CamminateTableCompanion extends UpdateCompanion<CamminateTableData> {
+class CamminateTableV5Companion extends UpdateCompanion<CamminateTableV5Data> {
   final Value<int> id;
   final Value<int> idProfilo;
   final Value<DateTime> dataInizio;
   final Value<DateTime?> dataFine;
   final Value<int?> distanzaMetri;
   final Value<int?> passi;
-  final Value<bool> pausaInCorso;
-  final Value<DateTime?> dataInizioPausa;
-  final Value<int> durataPausaSecondi;
   final Value<String> stato;
   final Value<String?> note;
   final Value<DateTime> dataCreazione;
   final Value<DateTime> dataModifica;
-  const CamminateTableCompanion({
+  const CamminateTableV5Companion({
     this.id = const Value.absent(),
     this.idProfilo = const Value.absent(),
     this.dataInizio = const Value.absent(),
     this.dataFine = const Value.absent(),
     this.distanzaMetri = const Value.absent(),
     this.passi = const Value.absent(),
-    this.pausaInCorso = const Value.absent(),
-    this.dataInizioPausa = const Value.absent(),
-    this.durataPausaSecondi = const Value.absent(),
     this.stato = const Value.absent(),
     this.note = const Value.absent(),
     this.dataCreazione = const Value.absent(),
     this.dataModifica = const Value.absent(),
   });
-  CamminateTableCompanion.insert({
+  CamminateTableV5Companion.insert({
     this.id = const Value.absent(),
     required int idProfilo,
     required DateTime dataInizio,
     this.dataFine = const Value.absent(),
     this.distanzaMetri = const Value.absent(),
     this.passi = const Value.absent(),
-    this.pausaInCorso = const Value.absent(),
-    this.dataInizioPausa = const Value.absent(),
-    this.durataPausaSecondi = const Value.absent(),
     required String stato,
     this.note = const Value.absent(),
     required DateTime dataCreazione,
@@ -2594,16 +2457,13 @@ class CamminateTableCompanion extends UpdateCompanion<CamminateTableData> {
        stato = Value(stato),
        dataCreazione = Value(dataCreazione),
        dataModifica = Value(dataModifica);
-  static Insertable<CamminateTableData> custom({
+  static Insertable<CamminateTableV5Data> custom({
     Expression<int>? id,
     Expression<int>? idProfilo,
     Expression<DateTime>? dataInizio,
     Expression<DateTime>? dataFine,
     Expression<int>? distanzaMetri,
     Expression<int>? passi,
-    Expression<bool>? pausaInCorso,
-    Expression<DateTime>? dataInizioPausa,
-    Expression<int>? durataPausaSecondi,
     Expression<String>? stato,
     Expression<String>? note,
     Expression<DateTime>? dataCreazione,
@@ -2616,10 +2476,6 @@ class CamminateTableCompanion extends UpdateCompanion<CamminateTableData> {
       if (dataFine != null) 'data_fine': dataFine,
       if (distanzaMetri != null) 'distanza_metri': distanzaMetri,
       if (passi != null) 'passi': passi,
-      if (pausaInCorso != null) 'pausa_in_corso': pausaInCorso,
-      if (dataInizioPausa != null) 'data_inizio_pausa': dataInizioPausa,
-      if (durataPausaSecondi != null)
-        'durata_pausa_secondi': durataPausaSecondi,
       if (stato != null) 'stato': stato,
       if (note != null) 'note': note,
       if (dataCreazione != null) 'data_creazione': dataCreazione,
@@ -2627,31 +2483,25 @@ class CamminateTableCompanion extends UpdateCompanion<CamminateTableData> {
     });
   }
 
-  CamminateTableCompanion copyWith({
+  CamminateTableV5Companion copyWith({
     Value<int>? id,
     Value<int>? idProfilo,
     Value<DateTime>? dataInizio,
     Value<DateTime?>? dataFine,
     Value<int?>? distanzaMetri,
     Value<int?>? passi,
-    Value<bool>? pausaInCorso,
-    Value<DateTime?>? dataInizioPausa,
-    Value<int>? durataPausaSecondi,
     Value<String>? stato,
     Value<String?>? note,
     Value<DateTime>? dataCreazione,
     Value<DateTime>? dataModifica,
   }) {
-    return CamminateTableCompanion(
+    return CamminateTableV5Companion(
       id: id ?? this.id,
       idProfilo: idProfilo ?? this.idProfilo,
       dataInizio: dataInizio ?? this.dataInizio,
       dataFine: dataFine ?? this.dataFine,
       distanzaMetri: distanzaMetri ?? this.distanzaMetri,
       passi: passi ?? this.passi,
-      pausaInCorso: pausaInCorso ?? this.pausaInCorso,
-      dataInizioPausa: dataInizioPausa ?? this.dataInizioPausa,
-      durataPausaSecondi: durataPausaSecondi ?? this.durataPausaSecondi,
       stato: stato ?? this.stato,
       note: note ?? this.note,
       dataCreazione: dataCreazione ?? this.dataCreazione,
@@ -2680,15 +2530,6 @@ class CamminateTableCompanion extends UpdateCompanion<CamminateTableData> {
     if (passi.present) {
       map['passi'] = Variable<int>(passi.value);
     }
-    if (pausaInCorso.present) {
-      map['pausa_in_corso'] = Variable<bool>(pausaInCorso.value);
-    }
-    if (dataInizioPausa.present) {
-      map['data_inizio_pausa'] = Variable<DateTime>(dataInizioPausa.value);
-    }
-    if (durataPausaSecondi.present) {
-      map['durata_pausa_secondi'] = Variable<int>(durataPausaSecondi.value);
-    }
     if (stato.present) {
       map['stato'] = Variable<String>(stato.value);
     }
@@ -2706,16 +2547,13 @@ class CamminateTableCompanion extends UpdateCompanion<CamminateTableData> {
 
   @override
   String toString() {
-    return (StringBuffer('CamminateTableCompanion(')
+    return (StringBuffer('CamminateTableV5Companion(')
           ..write('id: $id, ')
           ..write('idProfilo: $idProfilo, ')
           ..write('dataInizio: $dataInizio, ')
           ..write('dataFine: $dataFine, ')
           ..write('distanzaMetri: $distanzaMetri, ')
           ..write('passi: $passi, ')
-          ..write('pausaInCorso: $pausaInCorso, ')
-          ..write('dataInizioPausa: $dataInizioPausa, ')
-          ..write('durataPausaSecondi: $durataPausaSecondi, ')
           ..write('stato: $stato, ')
           ..write('note: $note, ')
           ..write('dataCreazione: $dataCreazione, ')
@@ -13468,9 +13306,9 @@ class SessioniEserciziTableCompanion
   }
 }
 
-abstract class _$AppDatabase extends GeneratedDatabase {
-  _$AppDatabase(QueryExecutor e) : super(e);
-  $AppDatabaseManager get managers => $AppDatabaseManager(this);
+abstract class _$_SchemaV5Database extends GeneratedDatabase {
+  _$_SchemaV5Database(QueryExecutor e) : super(e);
+  $_SchemaV5DatabaseManager get managers => $_SchemaV5DatabaseManager(this);
   late final $AppSettingsTableTable appSettingsTable = $AppSettingsTableTable(
     this,
   );
@@ -13478,7 +13316,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       $UserProfilesTableTable(this);
   late final $BodyMeasurementsTableTable bodyMeasurementsTable =
       $BodyMeasurementsTableTable(this);
-  late final $CamminateTableTable camminateTable = $CamminateTableTable(this);
+  late final $CamminateTableV5Table camminateTableV5 = $CamminateTableV5Table(
+    this,
+  );
   late final $PressureMeasurementsTableTable pressureMeasurementsTable =
       $PressureMeasurementsTableTable(this);
   late final $UserEquipmentTableTable userEquipmentTable =
@@ -13595,48 +13435,6 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     'idx_sessioni_esercizi_id_allenamento_esercizio',
     'CREATE INDEX idx_sessioni_esercizi_id_allenamento_esercizio ON sessioni_esercizi (id_allenamento_esercizio)',
   );
-  late final AppSettingsDao appSettingsDao = AppSettingsDao(
-    this as AppDatabase,
-  );
-  late final UserProfileDao userProfileDao = UserProfileDao(
-    this as AppDatabase,
-  );
-  late final BodyMeasurementsDao bodyMeasurementsDao = BodyMeasurementsDao(
-    this as AppDatabase,
-  );
-  late final CamminateDao camminateDao = CamminateDao(this as AppDatabase);
-  late final PressureMeasurementsDao pressureMeasurementsDao =
-      PressureMeasurementsDao(this as AppDatabase);
-  late final UserEquipmentDao userEquipmentDao = UserEquipmentDao(
-    this as AppDatabase,
-  );
-  late final CategorieEserciziDao categorieEserciziDao = CategorieEserciziDao(
-    this as AppDatabase,
-  );
-  late final GruppiMuscolariDao gruppiMuscolariDao = GruppiMuscolariDao(
-    this as AppDatabase,
-  );
-  late final AttrezzatureDao attrezzatureDao = AttrezzatureDao(
-    this as AppDatabase,
-  );
-  late final EserciziDao eserciziDao = EserciziDao(this as AppDatabase);
-  late final ImmaginiEserciziDao immaginiEserciziDao = ImmaginiEserciziDao(
-    this as AppDatabase,
-  );
-  late final ProgressioniEserciziDao progressioniEserciziDao =
-      ProgressioniEserciziDao(this as AppDatabase);
-  late final AlternativeEserciziDao alternativeEserciziDao =
-      AlternativeEserciziDao(this as AppDatabase);
-  late final AllenamentiDao allenamentiDao = AllenamentiDao(
-    this as AppDatabase,
-  );
-  late final AllenamentiEserciziDao allenamentiEserciziDao =
-      AllenamentiEserciziDao(this as AppDatabase);
-  late final SessioniAllenamentoDao sessioniAllenamentoDao =
-      SessioniAllenamentoDao(this as AppDatabase);
-  late final SessioniEserciziDao sessioniEserciziDao = SessioniEserciziDao(
-    this as AppDatabase,
-  );
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -13645,7 +13443,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     appSettingsTable,
     userProfilesTable,
     bodyMeasurementsTable,
-    camminateTable,
+    camminateTableV5,
     pressureMeasurementsTable,
     userEquipmentTable,
     categorieEserciziTable,
@@ -13731,7 +13529,7 @@ typedef $$AppSettingsTableTableUpdateCompanionBuilder =
     });
 
 class $$AppSettingsTableTableFilterComposer
-    extends Composer<_$AppDatabase, $AppSettingsTableTable> {
+    extends Composer<_$_SchemaV5Database, $AppSettingsTableTable> {
   $$AppSettingsTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -13751,7 +13549,7 @@ class $$AppSettingsTableTableFilterComposer
 }
 
 class $$AppSettingsTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $AppSettingsTableTable> {
+    extends Composer<_$_SchemaV5Database, $AppSettingsTableTable> {
   $$AppSettingsTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -13771,7 +13569,7 @@ class $$AppSettingsTableTableOrderingComposer
 }
 
 class $$AppSettingsTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $AppSettingsTableTable> {
+    extends Composer<_$_SchemaV5Database, $AppSettingsTableTable> {
   $$AppSettingsTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -13789,7 +13587,7 @@ class $$AppSettingsTableTableAnnotationComposer
 class $$AppSettingsTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $AppSettingsTableTable,
           AppSettingsTableData,
           $$AppSettingsTableTableFilterComposer,
@@ -13800,7 +13598,7 @@ class $$AppSettingsTableTableTableManager
           (
             AppSettingsTableData,
             BaseReferences<
-              _$AppDatabase,
+              _$_SchemaV5Database,
               $AppSettingsTableTable,
               AppSettingsTableData
             >,
@@ -13809,7 +13607,7 @@ class $$AppSettingsTableTableTableManager
           PrefetchHooks Function()
         > {
   $$AppSettingsTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV5Database db,
     $AppSettingsTableTable table,
   ) : super(
         TableManagerState(
@@ -13851,7 +13649,7 @@ class $$AppSettingsTableTableTableManager
 
 typedef $$AppSettingsTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV5Database,
       $AppSettingsTableTable,
       AppSettingsTableData,
       $$AppSettingsTableTableFilterComposer,
@@ -13862,7 +13660,7 @@ typedef $$AppSettingsTableTableProcessedTableManager =
       (
         AppSettingsTableData,
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $AppSettingsTableTable,
           AppSettingsTableData
         >,
@@ -13906,7 +13704,7 @@ typedef $$UserProfilesTableTableUpdateCompanionBuilder =
 final class $$UserProfilesTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $UserProfilesTableTable,
           UserProfilesTableData
         > {
@@ -13920,7 +13718,7 @@ final class $$UserProfilesTableTableReferences
     $BodyMeasurementsTableTable,
     List<BodyMeasurementsTableData>
   >
-  _bodyMeasurementsTableRefsTable(_$AppDatabase db) =>
+  _bodyMeasurementsTableRefsTable(_$_SchemaV5Database db) =>
       MultiTypedResultKey.fromTable(
         db.bodyMeasurementsTable,
         aliasName: 'profili_utente__id__misurazioni_corporee__profile_id',
@@ -13941,19 +13739,22 @@ final class $$UserProfilesTableTableReferences
     );
   }
 
-  static MultiTypedResultKey<$CamminateTableTable, List<CamminateTableData>>
-  _camminateTableRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
-    db.camminateTable,
-    aliasName: 'profili_utente__id__camminate__id_profilo',
-  );
+  static MultiTypedResultKey<$CamminateTableV5Table, List<CamminateTableV5Data>>
+  _camminateTableV5RefsTable(_$_SchemaV5Database db) =>
+      MultiTypedResultKey.fromTable(
+        db.camminateTableV5,
+        aliasName: 'profili_utente__id__camminate__id_profilo',
+      );
 
-  $$CamminateTableTableProcessedTableManager get camminateTableRefs {
-    final manager = $$CamminateTableTableTableManager(
+  $$CamminateTableV5TableProcessedTableManager get camminateTableV5Refs {
+    final manager = $$CamminateTableV5TableTableManager(
       $_db,
-      $_db.camminateTable,
+      $_db.camminateTableV5,
     ).filter((f) => f.idProfilo.id.sqlEquals($_itemColumn<int>('id')!));
 
-    final cache = $_typedResult.readTableOrNull(_camminateTableRefsTable($_db));
+    final cache = $_typedResult.readTableOrNull(
+      _camminateTableV5RefsTable($_db),
+    );
     return ProcessedTableManager(
       manager.$state.copyWith(prefetchedData: cache),
     );
@@ -13963,7 +13764,7 @@ final class $$UserProfilesTableTableReferences
     $PressureMeasurementsTableTable,
     List<PressureMeasurementsTableData>
   >
-  _pressureMeasurementsTableRefsTable(_$AppDatabase db) =>
+  _pressureMeasurementsTableRefsTable(_$_SchemaV5Database db) =>
       MultiTypedResultKey.fromTable(
         db.pressureMeasurementsTable,
         aliasName: 'profili_utente__id__misurazioni_pressione__profile_id',
@@ -13988,7 +13789,7 @@ final class $$UserProfilesTableTableReferences
     $UserEquipmentTableTable,
     List<UserEquipmentTableData>
   >
-  _userEquipmentTableRefsTable(_$AppDatabase db) =>
+  _userEquipmentTableRefsTable(_$_SchemaV5Database db) =>
       MultiTypedResultKey.fromTable(
         db.userEquipmentTable,
         aliasName: 'profili_utente__id__attrezzature_utente__profile_id',
@@ -14009,10 +13810,11 @@ final class $$UserProfilesTableTableReferences
   }
 
   static MultiTypedResultKey<$AllenamentiTableTable, List<AllenamentiTableData>>
-  _allenamentiTableRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
-    db.allenamentiTable,
-    aliasName: 'profili_utente__id__allenamenti__id_profilo',
-  );
+  _allenamentiTableRefsTable(_$_SchemaV5Database db) =>
+      MultiTypedResultKey.fromTable(
+        db.allenamentiTable,
+        aliasName: 'profili_utente__id__allenamenti__id_profilo',
+      );
 
   $$AllenamentiTableTableProcessedTableManager get allenamentiTableRefs {
     final manager = $$AllenamentiTableTableTableManager(
@@ -14032,7 +13834,7 @@ final class $$UserProfilesTableTableReferences
     $SessioniAllenamentoTableTable,
     List<SessioniAllenamentoTableData>
   >
-  _sessioniAllenamentoTableRefsTable(_$AppDatabase db) =>
+  _sessioniAllenamentoTableRefsTable(_$_SchemaV5Database db) =>
       MultiTypedResultKey.fromTable(
         db.sessioniAllenamentoTable,
         aliasName: 'profili_utente__id__sessioni_allenamento__id_profilo',
@@ -14055,7 +13857,7 @@ final class $$UserProfilesTableTableReferences
 }
 
 class $$UserProfilesTableTableFilterComposer
-    extends Composer<_$AppDatabase, $UserProfilesTableTable> {
+    extends Composer<_$_SchemaV5Database, $UserProfilesTableTable> {
   $$UserProfilesTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -14154,22 +13956,22 @@ class $$UserProfilesTableTableFilterComposer
     return f(composer);
   }
 
-  Expression<bool> camminateTableRefs(
-    Expression<bool> Function($$CamminateTableTableFilterComposer f) f,
+  Expression<bool> camminateTableV5Refs(
+    Expression<bool> Function($$CamminateTableV5TableFilterComposer f) f,
   ) {
-    final $$CamminateTableTableFilterComposer composer = $composerBuilder(
+    final $$CamminateTableV5TableFilterComposer composer = $composerBuilder(
       composer: this,
       getCurrentColumn: (t) => t.id,
-      referencedTable: $db.camminateTable,
+      referencedTable: $db.camminateTableV5,
       getReferencedColumn: (t) => t.idProfilo,
       builder:
           (
             joinBuilder, {
             $addJoinBuilderToRootComposer,
             $removeJoinBuilderFromRootComposer,
-          }) => $$CamminateTableTableFilterComposer(
+          }) => $$CamminateTableV5TableFilterComposer(
             $db: $db,
-            $table: $db.camminateTable,
+            $table: $db.camminateTableV5,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -14285,7 +14087,7 @@ class $$UserProfilesTableTableFilterComposer
 }
 
 class $$UserProfilesTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $UserProfilesTableTable> {
+    extends Composer<_$_SchemaV5Database, $UserProfilesTableTable> {
   $$UserProfilesTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -14360,7 +14162,7 @@ class $$UserProfilesTableTableOrderingComposer
 }
 
 class $$UserProfilesTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $UserProfilesTableTable> {
+    extends Composer<_$_SchemaV5Database, $UserProfilesTableTable> {
   $$UserProfilesTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -14445,22 +14247,22 @@ class $$UserProfilesTableTableAnnotationComposer
     return f(composer);
   }
 
-  Expression<T> camminateTableRefs<T extends Object>(
-    Expression<T> Function($$CamminateTableTableAnnotationComposer a) f,
+  Expression<T> camminateTableV5Refs<T extends Object>(
+    Expression<T> Function($$CamminateTableV5TableAnnotationComposer a) f,
   ) {
-    final $$CamminateTableTableAnnotationComposer composer = $composerBuilder(
+    final $$CamminateTableV5TableAnnotationComposer composer = $composerBuilder(
       composer: this,
       getCurrentColumn: (t) => t.id,
-      referencedTable: $db.camminateTable,
+      referencedTable: $db.camminateTableV5,
       getReferencedColumn: (t) => t.idProfilo,
       builder:
           (
             joinBuilder, {
             $addJoinBuilderToRootComposer,
             $removeJoinBuilderFromRootComposer,
-          }) => $$CamminateTableTableAnnotationComposer(
+          }) => $$CamminateTableV5TableAnnotationComposer(
             $db: $db,
-            $table: $db.camminateTable,
+            $table: $db.camminateTableV5,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -14579,7 +14381,7 @@ class $$UserProfilesTableTableAnnotationComposer
 class $$UserProfilesTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $UserProfilesTableTable,
           UserProfilesTableData,
           $$UserProfilesTableTableFilterComposer,
@@ -14591,7 +14393,7 @@ class $$UserProfilesTableTableTableManager
           UserProfilesTableData,
           PrefetchHooks Function({
             bool bodyMeasurementsTableRefs,
-            bool camminateTableRefs,
+            bool camminateTableV5Refs,
             bool pressureMeasurementsTableRefs,
             bool userEquipmentTableRefs,
             bool allenamentiTableRefs,
@@ -14599,7 +14401,7 @@ class $$UserProfilesTableTableTableManager
           })
         > {
   $$UserProfilesTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV5Database db,
     $UserProfilesTableTable table,
   ) : super(
         TableManagerState(
@@ -14685,7 +14487,7 @@ class $$UserProfilesTableTableTableManager
           prefetchHooksCallback:
               ({
                 bodyMeasurementsTableRefs = false,
-                camminateTableRefs = false,
+                camminateTableV5Refs = false,
                 pressureMeasurementsTableRefs = false,
                 userEquipmentTableRefs = false,
                 allenamentiTableRefs = false,
@@ -14695,7 +14497,7 @@ class $$UserProfilesTableTableTableManager
                   db: db,
                   explicitlyWatchedTables: [
                     if (bodyMeasurementsTableRefs) db.bodyMeasurementsTable,
-                    if (camminateTableRefs) db.camminateTable,
+                    if (camminateTableV5Refs) db.camminateTableV5,
                     if (pressureMeasurementsTableRefs)
                       db.pressureMeasurementsTable,
                     if (userEquipmentTableRefs) db.userEquipmentTable,
@@ -14727,21 +14529,21 @@ class $$UserProfilesTableTableTableManager
                               ),
                           typedResults: items,
                         ),
-                      if (camminateTableRefs)
+                      if (camminateTableV5Refs)
                         await $_getPrefetchedData<
                           UserProfilesTableData,
                           $UserProfilesTableTable,
-                          CamminateTableData
+                          CamminateTableV5Data
                         >(
                           currentTable: table,
                           referencedTable: $$UserProfilesTableTableReferences
-                              ._camminateTableRefsTable(db),
+                              ._camminateTableV5RefsTable(db),
                           managerFromTypedResult: (p0) =>
                               $$UserProfilesTableTableReferences(
                                 db,
                                 table,
                                 p0,
-                              ).camminateTableRefs,
+                              ).camminateTableV5Refs,
                           referencedItemsForCurrentItem:
                               (item, referencedItems) => referencedItems.where(
                                 (e) => e.idProfilo == item.id,
@@ -14842,7 +14644,7 @@ class $$UserProfilesTableTableTableManager
 
 typedef $$UserProfilesTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV5Database,
       $UserProfilesTableTable,
       UserProfilesTableData,
       $$UserProfilesTableTableFilterComposer,
@@ -14854,7 +14656,7 @@ typedef $$UserProfilesTableTableProcessedTableManager =
       UserProfilesTableData,
       PrefetchHooks Function({
         bool bodyMeasurementsTableRefs,
-        bool camminateTableRefs,
+        bool camminateTableV5Refs,
         bool pressureMeasurementsTableRefs,
         bool userEquipmentTableRefs,
         bool allenamentiTableRefs,
@@ -14903,7 +14705,7 @@ typedef $$BodyMeasurementsTableTableUpdateCompanionBuilder =
 final class $$BodyMeasurementsTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $BodyMeasurementsTableTable,
           BodyMeasurementsTableData
         > {
@@ -14913,7 +14715,7 @@ final class $$BodyMeasurementsTableTableReferences
     super.$_typedResult,
   );
 
-  static $UserProfilesTableTable _profileIdTable(_$AppDatabase db) => db
+  static $UserProfilesTableTable _profileIdTable(_$_SchemaV5Database db) => db
       .userProfilesTable
       .createAlias('misurazioni_corporee__profile_id__profili_utente__id');
 
@@ -14933,7 +14735,7 @@ final class $$BodyMeasurementsTableTableReferences
 }
 
 class $$BodyMeasurementsTableTableFilterComposer
-    extends Composer<_$AppDatabase, $BodyMeasurementsTableTable> {
+    extends Composer<_$_SchemaV5Database, $BodyMeasurementsTableTable> {
   $$BodyMeasurementsTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -15041,7 +14843,7 @@ class $$BodyMeasurementsTableTableFilterComposer
 }
 
 class $$BodyMeasurementsTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $BodyMeasurementsTableTable> {
+    extends Composer<_$_SchemaV5Database, $BodyMeasurementsTableTable> {
   $$BodyMeasurementsTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -15149,7 +14951,7 @@ class $$BodyMeasurementsTableTableOrderingComposer
 }
 
 class $$BodyMeasurementsTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $BodyMeasurementsTableTable> {
+    extends Composer<_$_SchemaV5Database, $BodyMeasurementsTableTable> {
   $$BodyMeasurementsTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -15242,7 +15044,7 @@ class $$BodyMeasurementsTableTableAnnotationComposer
 class $$BodyMeasurementsTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $BodyMeasurementsTableTable,
           BodyMeasurementsTableData,
           $$BodyMeasurementsTableTableFilterComposer,
@@ -15255,7 +15057,7 @@ class $$BodyMeasurementsTableTableTableManager
           PrefetchHooks Function({bool profileId})
         > {
   $$BodyMeasurementsTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV5Database db,
     $BodyMeasurementsTableTable table,
   ) : super(
         TableManagerState(
@@ -15405,7 +15207,7 @@ class $$BodyMeasurementsTableTableTableManager
 
 typedef $$BodyMeasurementsTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV5Database,
       $BodyMeasurementsTableTable,
       BodyMeasurementsTableData,
       $$BodyMeasurementsTableTableFilterComposer,
@@ -15417,53 +15219,47 @@ typedef $$BodyMeasurementsTableTableProcessedTableManager =
       BodyMeasurementsTableData,
       PrefetchHooks Function({bool profileId})
     >;
-typedef $$CamminateTableTableCreateCompanionBuilder =
-    CamminateTableCompanion Function({
+typedef $$CamminateTableV5TableCreateCompanionBuilder =
+    CamminateTableV5Companion Function({
       Value<int> id,
       required int idProfilo,
       required DateTime dataInizio,
       Value<DateTime?> dataFine,
       Value<int?> distanzaMetri,
       Value<int?> passi,
-      Value<bool> pausaInCorso,
-      Value<DateTime?> dataInizioPausa,
-      Value<int> durataPausaSecondi,
       required String stato,
       Value<String?> note,
       required DateTime dataCreazione,
       required DateTime dataModifica,
     });
-typedef $$CamminateTableTableUpdateCompanionBuilder =
-    CamminateTableCompanion Function({
+typedef $$CamminateTableV5TableUpdateCompanionBuilder =
+    CamminateTableV5Companion Function({
       Value<int> id,
       Value<int> idProfilo,
       Value<DateTime> dataInizio,
       Value<DateTime?> dataFine,
       Value<int?> distanzaMetri,
       Value<int?> passi,
-      Value<bool> pausaInCorso,
-      Value<DateTime?> dataInizioPausa,
-      Value<int> durataPausaSecondi,
       Value<String> stato,
       Value<String?> note,
       Value<DateTime> dataCreazione,
       Value<DateTime> dataModifica,
     });
 
-final class $$CamminateTableTableReferences
+final class $$CamminateTableV5TableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
-          $CamminateTableTable,
-          CamminateTableData
+          _$_SchemaV5Database,
+          $CamminateTableV5Table,
+          CamminateTableV5Data
         > {
-  $$CamminateTableTableReferences(
+  $$CamminateTableV5TableReferences(
     super.$_db,
     super.$_table,
     super.$_typedResult,
   );
 
-  static $UserProfilesTableTable _idProfiloTable(_$AppDatabase db) => db
+  static $UserProfilesTableTable _idProfiloTable(_$_SchemaV5Database db) => db
       .userProfilesTable
       .createAlias('camminate__id_profilo__profili_utente__id');
 
@@ -15482,9 +15278,9 @@ final class $$CamminateTableTableReferences
   }
 }
 
-class $$CamminateTableTableFilterComposer
-    extends Composer<_$AppDatabase, $CamminateTableTable> {
-  $$CamminateTableTableFilterComposer({
+class $$CamminateTableV5TableFilterComposer
+    extends Composer<_$_SchemaV5Database, $CamminateTableV5Table> {
+  $$CamminateTableV5TableFilterComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
@@ -15513,21 +15309,6 @@ class $$CamminateTableTableFilterComposer
 
   ColumnFilters<int> get passi => $composableBuilder(
     column: $table.passi,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<bool> get pausaInCorso => $composableBuilder(
-    column: $table.pausaInCorso,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<DateTime> get dataInizioPausa => $composableBuilder(
-    column: $table.dataInizioPausa,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<int> get durataPausaSecondi => $composableBuilder(
-    column: $table.durataPausaSecondi,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -15575,9 +15356,9 @@ class $$CamminateTableTableFilterComposer
   }
 }
 
-class $$CamminateTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $CamminateTableTable> {
-  $$CamminateTableTableOrderingComposer({
+class $$CamminateTableV5TableOrderingComposer
+    extends Composer<_$_SchemaV5Database, $CamminateTableV5Table> {
+  $$CamminateTableV5TableOrderingComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
@@ -15606,21 +15387,6 @@ class $$CamminateTableTableOrderingComposer
 
   ColumnOrderings<int> get passi => $composableBuilder(
     column: $table.passi,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<bool> get pausaInCorso => $composableBuilder(
-    column: $table.pausaInCorso,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<DateTime> get dataInizioPausa => $composableBuilder(
-    column: $table.dataInizioPausa,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<int> get durataPausaSecondi => $composableBuilder(
-    column: $table.durataPausaSecondi,
     builder: (column) => ColumnOrderings(column),
   );
 
@@ -15668,9 +15434,9 @@ class $$CamminateTableTableOrderingComposer
   }
 }
 
-class $$CamminateTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $CamminateTableTable> {
-  $$CamminateTableTableAnnotationComposer({
+class $$CamminateTableV5TableAnnotationComposer
+    extends Composer<_$_SchemaV5Database, $CamminateTableV5Table> {
+  $$CamminateTableV5TableAnnotationComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
@@ -15695,21 +15461,6 @@ class $$CamminateTableTableAnnotationComposer
 
   GeneratedColumn<int> get passi =>
       $composableBuilder(column: $table.passi, builder: (column) => column);
-
-  GeneratedColumn<bool> get pausaInCorso => $composableBuilder(
-    column: $table.pausaInCorso,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<DateTime> get dataInizioPausa => $composableBuilder(
-    column: $table.dataInizioPausa,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<int> get durataPausaSecondi => $composableBuilder(
-    column: $table.durataPausaSecondi,
-    builder: (column) => column,
-  );
 
   GeneratedColumn<String> get stato =>
       $composableBuilder(column: $table.stato, builder: (column) => column);
@@ -15752,34 +15503,34 @@ class $$CamminateTableTableAnnotationComposer
   }
 }
 
-class $$CamminateTableTableTableManager
+class $$CamminateTableV5TableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
-          $CamminateTableTable,
-          CamminateTableData,
-          $$CamminateTableTableFilterComposer,
-          $$CamminateTableTableOrderingComposer,
-          $$CamminateTableTableAnnotationComposer,
-          $$CamminateTableTableCreateCompanionBuilder,
-          $$CamminateTableTableUpdateCompanionBuilder,
-          (CamminateTableData, $$CamminateTableTableReferences),
-          CamminateTableData,
+          _$_SchemaV5Database,
+          $CamminateTableV5Table,
+          CamminateTableV5Data,
+          $$CamminateTableV5TableFilterComposer,
+          $$CamminateTableV5TableOrderingComposer,
+          $$CamminateTableV5TableAnnotationComposer,
+          $$CamminateTableV5TableCreateCompanionBuilder,
+          $$CamminateTableV5TableUpdateCompanionBuilder,
+          (CamminateTableV5Data, $$CamminateTableV5TableReferences),
+          CamminateTableV5Data,
           PrefetchHooks Function({bool idProfilo})
         > {
-  $$CamminateTableTableTableManager(
-    _$AppDatabase db,
-    $CamminateTableTable table,
+  $$CamminateTableV5TableTableManager(
+    _$_SchemaV5Database db,
+    $CamminateTableV5Table table,
   ) : super(
         TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
-              $$CamminateTableTableFilterComposer($db: db, $table: table),
+              $$CamminateTableV5TableFilterComposer($db: db, $table: table),
           createOrderingComposer: () =>
-              $$CamminateTableTableOrderingComposer($db: db, $table: table),
+              $$CamminateTableV5TableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
-              $$CamminateTableTableAnnotationComposer($db: db, $table: table),
+              $$CamminateTableV5TableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -15788,23 +15539,17 @@ class $$CamminateTableTableTableManager
                 Value<DateTime?> dataFine = const Value.absent(),
                 Value<int?> distanzaMetri = const Value.absent(),
                 Value<int?> passi = const Value.absent(),
-                Value<bool> pausaInCorso = const Value.absent(),
-                Value<DateTime?> dataInizioPausa = const Value.absent(),
-                Value<int> durataPausaSecondi = const Value.absent(),
                 Value<String> stato = const Value.absent(),
                 Value<String?> note = const Value.absent(),
                 Value<DateTime> dataCreazione = const Value.absent(),
                 Value<DateTime> dataModifica = const Value.absent(),
-              }) => CamminateTableCompanion(
+              }) => CamminateTableV5Companion(
                 id: id,
                 idProfilo: idProfilo,
                 dataInizio: dataInizio,
                 dataFine: dataFine,
                 distanzaMetri: distanzaMetri,
                 passi: passi,
-                pausaInCorso: pausaInCorso,
-                dataInizioPausa: dataInizioPausa,
-                durataPausaSecondi: durataPausaSecondi,
                 stato: stato,
                 note: note,
                 dataCreazione: dataCreazione,
@@ -15818,23 +15563,17 @@ class $$CamminateTableTableTableManager
                 Value<DateTime?> dataFine = const Value.absent(),
                 Value<int?> distanzaMetri = const Value.absent(),
                 Value<int?> passi = const Value.absent(),
-                Value<bool> pausaInCorso = const Value.absent(),
-                Value<DateTime?> dataInizioPausa = const Value.absent(),
-                Value<int> durataPausaSecondi = const Value.absent(),
                 required String stato,
                 Value<String?> note = const Value.absent(),
                 required DateTime dataCreazione,
                 required DateTime dataModifica,
-              }) => CamminateTableCompanion.insert(
+              }) => CamminateTableV5Companion.insert(
                 id: id,
                 idProfilo: idProfilo,
                 dataInizio: dataInizio,
                 dataFine: dataFine,
                 distanzaMetri: distanzaMetri,
                 passi: passi,
-                pausaInCorso: pausaInCorso,
-                dataInizioPausa: dataInizioPausa,
-                durataPausaSecondi: durataPausaSecondi,
                 stato: stato,
                 note: note,
                 dataCreazione: dataCreazione,
@@ -15844,7 +15583,7 @@ class $$CamminateTableTableTableManager
               .map(
                 (e) => (
                   e.readTable(table),
-                  $$CamminateTableTableReferences(db, table, e),
+                  $$CamminateTableV5TableReferences(db, table, e),
                 ),
               )
               .toList(),
@@ -15873,10 +15612,11 @@ class $$CamminateTableTableTableManager
                           state.withJoin(
                                 currentTable: table,
                                 currentColumn: table.idProfilo,
-                                referencedTable: $$CamminateTableTableReferences
-                                    ._idProfiloTable(db),
+                                referencedTable:
+                                    $$CamminateTableV5TableReferences
+                                        ._idProfiloTable(db),
                                 referencedColumn:
-                                    $$CamminateTableTableReferences
+                                    $$CamminateTableV5TableReferences
                                         ._idProfiloTable(db)
                                         .id,
                               )
@@ -15894,18 +15634,18 @@ class $$CamminateTableTableTableManager
       );
 }
 
-typedef $$CamminateTableTableProcessedTableManager =
+typedef $$CamminateTableV5TableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
-      $CamminateTableTable,
-      CamminateTableData,
-      $$CamminateTableTableFilterComposer,
-      $$CamminateTableTableOrderingComposer,
-      $$CamminateTableTableAnnotationComposer,
-      $$CamminateTableTableCreateCompanionBuilder,
-      $$CamminateTableTableUpdateCompanionBuilder,
-      (CamminateTableData, $$CamminateTableTableReferences),
-      CamminateTableData,
+      _$_SchemaV5Database,
+      $CamminateTableV5Table,
+      CamminateTableV5Data,
+      $$CamminateTableV5TableFilterComposer,
+      $$CamminateTableV5TableOrderingComposer,
+      $$CamminateTableV5TableAnnotationComposer,
+      $$CamminateTableV5TableCreateCompanionBuilder,
+      $$CamminateTableV5TableUpdateCompanionBuilder,
+      (CamminateTableV5Data, $$CamminateTableV5TableReferences),
+      CamminateTableV5Data,
       PrefetchHooks Function({bool idProfilo})
     >;
 typedef $$PressureMeasurementsTableTableCreateCompanionBuilder =
@@ -15934,7 +15674,7 @@ typedef $$PressureMeasurementsTableTableUpdateCompanionBuilder =
 final class $$PressureMeasurementsTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $PressureMeasurementsTableTable,
           PressureMeasurementsTableData
         > {
@@ -15944,7 +15684,7 @@ final class $$PressureMeasurementsTableTableReferences
     super.$_typedResult,
   );
 
-  static $UserProfilesTableTable _profileIdTable(_$AppDatabase db) => db
+  static $UserProfilesTableTable _profileIdTable(_$_SchemaV5Database db) => db
       .userProfilesTable
       .createAlias('misurazioni_pressione__profile_id__profili_utente__id');
 
@@ -15964,7 +15704,7 @@ final class $$PressureMeasurementsTableTableReferences
 }
 
 class $$PressureMeasurementsTableTableFilterComposer
-    extends Composer<_$AppDatabase, $PressureMeasurementsTableTable> {
+    extends Composer<_$_SchemaV5Database, $PressureMeasurementsTableTable> {
   $$PressureMeasurementsTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -16032,7 +15772,7 @@ class $$PressureMeasurementsTableTableFilterComposer
 }
 
 class $$PressureMeasurementsTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $PressureMeasurementsTableTable> {
+    extends Composer<_$_SchemaV5Database, $PressureMeasurementsTableTable> {
   $$PressureMeasurementsTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -16100,7 +15840,7 @@ class $$PressureMeasurementsTableTableOrderingComposer
 }
 
 class $$PressureMeasurementsTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $PressureMeasurementsTableTable> {
+    extends Composer<_$_SchemaV5Database, $PressureMeasurementsTableTable> {
   $$PressureMeasurementsTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -16161,7 +15901,7 @@ class $$PressureMeasurementsTableTableAnnotationComposer
 class $$PressureMeasurementsTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $PressureMeasurementsTableTable,
           PressureMeasurementsTableData,
           $$PressureMeasurementsTableTableFilterComposer,
@@ -16177,7 +15917,7 @@ class $$PressureMeasurementsTableTableTableManager
           PrefetchHooks Function({bool profileId})
         > {
   $$PressureMeasurementsTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV5Database db,
     $PressureMeasurementsTableTable table,
   ) : super(
         TableManagerState(
@@ -16295,7 +16035,7 @@ class $$PressureMeasurementsTableTableTableManager
 
 typedef $$PressureMeasurementsTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV5Database,
       $PressureMeasurementsTableTable,
       PressureMeasurementsTableData,
       $$PressureMeasurementsTableTableFilterComposer,
@@ -16332,7 +16072,7 @@ typedef $$UserEquipmentTableTableUpdateCompanionBuilder =
 final class $$UserEquipmentTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $UserEquipmentTableTable,
           UserEquipmentTableData
         > {
@@ -16342,7 +16082,7 @@ final class $$UserEquipmentTableTableReferences
     super.$_typedResult,
   );
 
-  static $UserProfilesTableTable _profileIdTable(_$AppDatabase db) => db
+  static $UserProfilesTableTable _profileIdTable(_$_SchemaV5Database db) => db
       .userProfilesTable
       .createAlias('attrezzature_utente__profile_id__profili_utente__id');
 
@@ -16362,7 +16102,7 @@ final class $$UserEquipmentTableTableReferences
 }
 
 class $$UserEquipmentTableTableFilterComposer
-    extends Composer<_$AppDatabase, $UserEquipmentTableTable> {
+    extends Composer<_$_SchemaV5Database, $UserEquipmentTableTable> {
   $$UserEquipmentTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -16420,7 +16160,7 @@ class $$UserEquipmentTableTableFilterComposer
 }
 
 class $$UserEquipmentTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $UserEquipmentTableTable> {
+    extends Composer<_$_SchemaV5Database, $UserEquipmentTableTable> {
   $$UserEquipmentTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -16478,7 +16218,7 @@ class $$UserEquipmentTableTableOrderingComposer
 }
 
 class $$UserEquipmentTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $UserEquipmentTableTable> {
+    extends Composer<_$_SchemaV5Database, $UserEquipmentTableTable> {
   $$UserEquipmentTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -16533,7 +16273,7 @@ class $$UserEquipmentTableTableAnnotationComposer
 class $$UserEquipmentTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $UserEquipmentTableTable,
           UserEquipmentTableData,
           $$UserEquipmentTableTableFilterComposer,
@@ -16546,7 +16286,7 @@ class $$UserEquipmentTableTableTableManager
           PrefetchHooks Function({bool profileId})
         > {
   $$UserEquipmentTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV5Database db,
     $UserEquipmentTableTable table,
   ) : super(
         TableManagerState(
@@ -16650,7 +16390,7 @@ class $$UserEquipmentTableTableTableManager
 
 typedef $$UserEquipmentTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV5Database,
       $UserEquipmentTableTable,
       UserEquipmentTableData,
       $$UserEquipmentTableTableFilterComposer,
@@ -16688,7 +16428,7 @@ typedef $$CategorieEserciziTableTableUpdateCompanionBuilder =
 final class $$CategorieEserciziTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $CategorieEserciziTableTable,
           CategorieEserciziTableData
         > {
@@ -16699,10 +16439,11 @@ final class $$CategorieEserciziTableTableReferences
   );
 
   static MultiTypedResultKey<$EserciziTableTable, List<EserciziTableData>>
-  _eserciziTableRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
-    db.eserciziTable,
-    aliasName: 'categorie_esercizi__id__esercizi__id_categoria',
-  );
+  _eserciziTableRefsTable(_$_SchemaV5Database db) =>
+      MultiTypedResultKey.fromTable(
+        db.eserciziTable,
+        aliasName: 'categorie_esercizi__id__esercizi__id_categoria',
+      );
 
   $$EserciziTableTableProcessedTableManager get eserciziTableRefs {
     final manager = $$EserciziTableTableTableManager(
@@ -16718,7 +16459,7 @@ final class $$CategorieEserciziTableTableReferences
 }
 
 class $$CategorieEserciziTableTableFilterComposer
-    extends Composer<_$AppDatabase, $CategorieEserciziTableTable> {
+    extends Composer<_$_SchemaV5Database, $CategorieEserciziTableTable> {
   $$CategorieEserciziTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -16793,7 +16534,7 @@ class $$CategorieEserciziTableTableFilterComposer
 }
 
 class $$CategorieEserciziTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $CategorieEserciziTableTable> {
+    extends Composer<_$_SchemaV5Database, $CategorieEserciziTableTable> {
   $$CategorieEserciziTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -16843,7 +16584,7 @@ class $$CategorieEserciziTableTableOrderingComposer
 }
 
 class $$CategorieEserciziTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $CategorieEserciziTableTable> {
+    extends Composer<_$_SchemaV5Database, $CategorieEserciziTableTable> {
   $$CategorieEserciziTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -16912,7 +16653,7 @@ class $$CategorieEserciziTableTableAnnotationComposer
 class $$CategorieEserciziTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $CategorieEserciziTableTable,
           CategorieEserciziTableData,
           $$CategorieEserciziTableTableFilterComposer,
@@ -16925,7 +16666,7 @@ class $$CategorieEserciziTableTableTableManager
           PrefetchHooks Function({bool eserciziTableRefs})
         > {
   $$CategorieEserciziTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV5Database db,
     $CategorieEserciziTableTable table,
   ) : super(
         TableManagerState(
@@ -17034,7 +16775,7 @@ class $$CategorieEserciziTableTableTableManager
 
 typedef $$CategorieEserciziTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV5Database,
       $CategorieEserciziTableTable,
       CategorieEserciziTableData,
       $$CategorieEserciziTableTableFilterComposer,
@@ -17070,7 +16811,7 @@ typedef $$GruppiMuscolariTableTableUpdateCompanionBuilder =
 final class $$GruppiMuscolariTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $GruppiMuscolariTableTable,
           GruppiMuscolariTableData
         > {
@@ -17085,7 +16826,7 @@ final class $$GruppiMuscolariTableTableReferences
     List<EserciziGruppiMuscolariTableData>
   >
   _eserciziGruppiMuscolariTableRefsTable(
-    _$AppDatabase db,
+    _$_SchemaV5Database db,
   ) => MultiTypedResultKey.fromTable(
     db.eserciziGruppiMuscolariTable,
     aliasName:
@@ -17109,7 +16850,7 @@ final class $$GruppiMuscolariTableTableReferences
 }
 
 class $$GruppiMuscolariTableTableFilterComposer
-    extends Composer<_$AppDatabase, $GruppiMuscolariTableTable> {
+    extends Composer<_$_SchemaV5Database, $GruppiMuscolariTableTable> {
   $$GruppiMuscolariTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -17183,7 +16924,7 @@ class $$GruppiMuscolariTableTableFilterComposer
 }
 
 class $$GruppiMuscolariTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $GruppiMuscolariTableTable> {
+    extends Composer<_$_SchemaV5Database, $GruppiMuscolariTableTable> {
   $$GruppiMuscolariTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -17228,7 +16969,7 @@ class $$GruppiMuscolariTableTableOrderingComposer
 }
 
 class $$GruppiMuscolariTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $GruppiMuscolariTableTable> {
+    extends Composer<_$_SchemaV5Database, $GruppiMuscolariTableTable> {
   $$GruppiMuscolariTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -17296,7 +17037,7 @@ class $$GruppiMuscolariTableTableAnnotationComposer
 class $$GruppiMuscolariTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $GruppiMuscolariTableTable,
           GruppiMuscolariTableData,
           $$GruppiMuscolariTableTableFilterComposer,
@@ -17309,7 +17050,7 @@ class $$GruppiMuscolariTableTableTableManager
           PrefetchHooks Function({bool eserciziGruppiMuscolariTableRefs})
         > {
   $$GruppiMuscolariTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV5Database db,
     $GruppiMuscolariTableTable table,
   ) : super(
         TableManagerState(
@@ -17412,7 +17153,7 @@ class $$GruppiMuscolariTableTableTableManager
 
 typedef $$GruppiMuscolariTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV5Database,
       $GruppiMuscolariTableTable,
       GruppiMuscolariTableData,
       $$GruppiMuscolariTableTableFilterComposer,
@@ -17485,16 +17226,22 @@ typedef $$EserciziTableTableUpdateCompanionBuilder =
 
 final class $$EserciziTableTableReferences
     extends
-        BaseReferences<_$AppDatabase, $EserciziTableTable, EserciziTableData> {
+        BaseReferences<
+          _$_SchemaV5Database,
+          $EserciziTableTable,
+          EserciziTableData
+        > {
   $$EserciziTableTableReferences(
     super.$_db,
     super.$_table,
     super.$_typedResult,
   );
 
-  static $CategorieEserciziTableTable _idCategoriaTable(_$AppDatabase db) => db
-      .categorieEserciziTable
-      .createAlias('esercizi__id_categoria__categorie_esercizi__id');
+  static $CategorieEserciziTableTable _idCategoriaTable(
+    _$_SchemaV5Database db,
+  ) => db.categorieEserciziTable.createAlias(
+    'esercizi__id_categoria__categorie_esercizi__id',
+  );
 
   $$CategorieEserciziTableTableProcessedTableManager get idCategoria {
     final $_column = $_itemColumn<int>('id_categoria')!;
@@ -17514,7 +17261,7 @@ final class $$EserciziTableTableReferences
     $EserciziGruppiMuscolariTableTable,
     List<EserciziGruppiMuscolariTableData>
   >
-  _eserciziGruppiMuscolariTableRefsTable(_$AppDatabase db) =>
+  _eserciziGruppiMuscolariTableRefsTable(_$_SchemaV5Database db) =>
       MultiTypedResultKey.fromTable(
         db.eserciziGruppiMuscolariTable,
         aliasName: 'esercizi__id__esercizi_gruppi_muscolari__id_esercizio',
@@ -17539,7 +17286,7 @@ final class $$EserciziTableTableReferences
     $AttrezzatureEserciziTableTable,
     List<AttrezzatureEserciziTableData>
   >
-  _attrezzatureEserciziTableRefsTable(_$AppDatabase db) =>
+  _attrezzatureEserciziTableRefsTable(_$_SchemaV5Database db) =>
       MultiTypedResultKey.fromTable(
         db.attrezzatureEserciziTable,
         aliasName: 'esercizi__id__attrezzature_esercizi__id_esercizio',
@@ -17564,7 +17311,7 @@ final class $$EserciziTableTableReferences
     $ImmaginiEserciziTableTable,
     List<ImmaginiEserciziTableData>
   >
-  _immaginiEserciziTableRefsTable(_$AppDatabase db) =>
+  _immaginiEserciziTableRefsTable(_$_SchemaV5Database db) =>
       MultiTypedResultKey.fromTable(
         db.immaginiEserciziTable,
         aliasName: 'esercizi__id__immagini_esercizi__id_esercizio',
@@ -17589,7 +17336,7 @@ final class $$EserciziTableTableReferences
     $ProgressioniEserciziTableTable,
     List<ProgressioniEserciziTableData>
   >
-  _progressioniComePrecedenteTable(_$AppDatabase db) =>
+  _progressioniComePrecedenteTable(_$_SchemaV5Database db) =>
       MultiTypedResultKey.fromTable(
         db.progressioniEserciziTable,
         aliasName: 'esercizi__id__progressioni_esercizi__id_esercizio',
@@ -17614,7 +17361,7 @@ final class $$EserciziTableTableReferences
     $ProgressioniEserciziTableTable,
     List<ProgressioniEserciziTableData>
   >
-  _progressioniComeSuccessivoTable(_$AppDatabase db) =>
+  _progressioniComeSuccessivoTable(_$_SchemaV5Database db) =>
       MultiTypedResultKey.fromTable(
         db.progressioniEserciziTable,
         aliasName:
@@ -17643,7 +17390,7 @@ final class $$EserciziTableTableReferences
     $AlternativeEserciziTableTable,
     List<AlternativeEserciziTableData>
   >
-  _alternativeComeOriginaleTable(_$AppDatabase db) =>
+  _alternativeComeOriginaleTable(_$_SchemaV5Database db) =>
       MultiTypedResultKey.fromTable(
         db.alternativeEserciziTable,
         aliasName: 'esercizi__id__alternative_esercizi__id_esercizio',
@@ -17668,7 +17415,7 @@ final class $$EserciziTableTableReferences
     $AlternativeEserciziTableTable,
     List<AlternativeEserciziTableData>
   >
-  _alternativeComeAlternativaTable(_$AppDatabase db) =>
+  _alternativeComeAlternativaTable(_$_SchemaV5Database db) =>
       MultiTypedResultKey.fromTable(
         db.alternativeEserciziTable,
         aliasName:
@@ -17698,7 +17445,7 @@ final class $$EserciziTableTableReferences
     $AllenamentiEserciziTableTable,
     List<AllenamentiEserciziTableData>
   >
-  _allenamentiEserciziTableRefsTable(_$AppDatabase db) =>
+  _allenamentiEserciziTableRefsTable(_$_SchemaV5Database db) =>
       MultiTypedResultKey.fromTable(
         db.allenamentiEserciziTable,
         aliasName: 'esercizi__id__allenamenti_esercizi__id_esercizio',
@@ -17723,7 +17470,7 @@ final class $$EserciziTableTableReferences
     $SessioniEserciziTableTable,
     List<SessioniEserciziTableData>
   >
-  _sessioniEserciziTableRefsTable(_$AppDatabase db) =>
+  _sessioniEserciziTableRefsTable(_$_SchemaV5Database db) =>
       MultiTypedResultKey.fromTable(
         db.sessioniEserciziTable,
         aliasName: 'esercizi__id__sessioni_esercizi__id_esercizio',
@@ -17746,7 +17493,7 @@ final class $$EserciziTableTableReferences
 }
 
 class $$EserciziTableTableFilterComposer
-    extends Composer<_$AppDatabase, $EserciziTableTable> {
+    extends Composer<_$_SchemaV5Database, $EserciziTableTable> {
   $$EserciziTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -18148,7 +17895,7 @@ class $$EserciziTableTableFilterComposer
 }
 
 class $$EserciziTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $EserciziTableTable> {
+    extends Composer<_$_SchemaV5Database, $EserciziTableTable> {
   $$EserciziTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -18307,7 +18054,7 @@ class $$EserciziTableTableOrderingComposer
 }
 
 class $$EserciziTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $EserciziTableTable> {
+    extends Composer<_$_SchemaV5Database, $EserciziTableTable> {
   $$EserciziTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -18703,7 +18450,7 @@ class $$EserciziTableTableAnnotationComposer
 class $$EserciziTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $EserciziTableTable,
           EserciziTableData,
           $$EserciziTableTableFilterComposer,
@@ -18726,8 +18473,10 @@ class $$EserciziTableTableTableManager
             bool sessioniEserciziTableRefs,
           })
         > {
-  $$EserciziTableTableTableManager(_$AppDatabase db, $EserciziTableTable table)
-    : super(
+  $$EserciziTableTableTableManager(
+    _$_SchemaV5Database db,
+    $EserciziTableTable table,
+  ) : super(
         TableManagerState(
           db: db,
           table: table,
@@ -19123,7 +18872,7 @@ class $$EserciziTableTableTableManager
 
 typedef $$EserciziTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV5Database,
       $EserciziTableTable,
       EserciziTableData,
       $$EserciziTableTableFilterComposer,
@@ -19164,7 +18913,7 @@ typedef $$EserciziGruppiMuscolariTableTableUpdateCompanionBuilder =
 final class $$EserciziGruppiMuscolariTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $EserciziGruppiMuscolariTableTable,
           EserciziGruppiMuscolariTableData
         > {
@@ -19174,7 +18923,7 @@ final class $$EserciziGruppiMuscolariTableTableReferences
     super.$_typedResult,
   );
 
-  static $EserciziTableTable _idEsercizioTable(_$AppDatabase db) => db
+  static $EserciziTableTable _idEsercizioTable(_$_SchemaV5Database db) => db
       .eserciziTable
       .createAlias('esercizi_gruppi_muscolari__id_esercizio__esercizi__id');
 
@@ -19192,10 +18941,11 @@ final class $$EserciziGruppiMuscolariTableTableReferences
     );
   }
 
-  static $GruppiMuscolariTableTable _idGruppoMuscolareTable(_$AppDatabase db) =>
-      db.gruppiMuscolariTable.createAlias(
-        'esercizi_gruppi_muscolari__id_gruppo_muscolare__gruppi_muscolari__id',
-      );
+  static $GruppiMuscolariTableTable _idGruppoMuscolareTable(
+    _$_SchemaV5Database db,
+  ) => db.gruppiMuscolariTable.createAlias(
+    'esercizi_gruppi_muscolari__id_gruppo_muscolare__gruppi_muscolari__id',
+  );
 
   $$GruppiMuscolariTableTableProcessedTableManager get idGruppoMuscolare {
     final $_column = $_itemColumn<int>('id_gruppo_muscolare')!;
@@ -19213,7 +18963,7 @@ final class $$EserciziGruppiMuscolariTableTableReferences
 }
 
 class $$EserciziGruppiMuscolariTableTableFilterComposer
-    extends Composer<_$AppDatabase, $EserciziGruppiMuscolariTableTable> {
+    extends Composer<_$_SchemaV5Database, $EserciziGruppiMuscolariTableTable> {
   $$EserciziGruppiMuscolariTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -19279,7 +19029,7 @@ class $$EserciziGruppiMuscolariTableTableFilterComposer
 }
 
 class $$EserciziGruppiMuscolariTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $EserciziGruppiMuscolariTableTable> {
+    extends Composer<_$_SchemaV5Database, $EserciziGruppiMuscolariTableTable> {
   $$EserciziGruppiMuscolariTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -19346,7 +19096,7 @@ class $$EserciziGruppiMuscolariTableTableOrderingComposer
 }
 
 class $$EserciziGruppiMuscolariTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $EserciziGruppiMuscolariTableTable> {
+    extends Composer<_$_SchemaV5Database, $EserciziGruppiMuscolariTableTable> {
   $$EserciziGruppiMuscolariTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -19413,7 +19163,7 @@ class $$EserciziGruppiMuscolariTableTableAnnotationComposer
 class $$EserciziGruppiMuscolariTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $EserciziGruppiMuscolariTableTable,
           EserciziGruppiMuscolariTableData,
           $$EserciziGruppiMuscolariTableTableFilterComposer,
@@ -19429,7 +19179,7 @@ class $$EserciziGruppiMuscolariTableTableTableManager
           PrefetchHooks Function({bool idEsercizio, bool idGruppoMuscolare})
         > {
   $$EserciziGruppiMuscolariTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV5Database db,
     $EserciziGruppiMuscolariTableTable table,
   ) : super(
         TableManagerState(
@@ -19546,7 +19296,7 @@ class $$EserciziGruppiMuscolariTableTableTableManager
 
 typedef $$EserciziGruppiMuscolariTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV5Database,
       $EserciziGruppiMuscolariTableTable,
       EserciziGruppiMuscolariTableData,
       $$EserciziGruppiMuscolariTableTableFilterComposer,
@@ -19597,7 +19347,7 @@ typedef $$AttrezzatureTableTableUpdateCompanionBuilder =
 final class $$AttrezzatureTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $AttrezzatureTableTable,
           AttrezzatureTableData
         > {
@@ -19611,7 +19361,7 @@ final class $$AttrezzatureTableTableReferences
     $AttrezzatureEserciziTableTable,
     List<AttrezzatureEserciziTableData>
   >
-  _attrezzatureEserciziTableRefsTable(_$AppDatabase db) =>
+  _attrezzatureEserciziTableRefsTable(_$_SchemaV5Database db) =>
       MultiTypedResultKey.fromTable(
         db.attrezzatureEserciziTable,
         aliasName: 'attrezzature__id__attrezzature_esercizi__id_attrezzatura',
@@ -19634,7 +19384,7 @@ final class $$AttrezzatureTableTableReferences
 }
 
 class $$AttrezzatureTableTableFilterComposer
-    extends Composer<_$AppDatabase, $AttrezzatureTableTable> {
+    extends Composer<_$_SchemaV5Database, $AttrezzatureTableTable> {
   $$AttrezzatureTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -19736,7 +19486,7 @@ class $$AttrezzatureTableTableFilterComposer
 }
 
 class $$AttrezzatureTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $AttrezzatureTableTable> {
+    extends Composer<_$_SchemaV5Database, $AttrezzatureTableTable> {
   $$AttrezzatureTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -19811,7 +19561,7 @@ class $$AttrezzatureTableTableOrderingComposer
 }
 
 class $$AttrezzatureTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $AttrezzatureTableTable> {
+    extends Composer<_$_SchemaV5Database, $AttrezzatureTableTable> {
   $$AttrezzatureTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -19903,7 +19653,7 @@ class $$AttrezzatureTableTableAnnotationComposer
 class $$AttrezzatureTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $AttrezzatureTableTable,
           AttrezzatureTableData,
           $$AttrezzatureTableTableFilterComposer,
@@ -19916,7 +19666,7 @@ class $$AttrezzatureTableTableTableManager
           PrefetchHooks Function({bool attrezzatureEserciziTableRefs})
         > {
   $$AttrezzatureTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV5Database db,
     $AttrezzatureTableTable table,
   ) : super(
         TableManagerState(
@@ -20039,7 +19789,7 @@ class $$AttrezzatureTableTableTableManager
 
 typedef $$AttrezzatureTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV5Database,
       $AttrezzatureTableTable,
       AttrezzatureTableData,
       $$AttrezzatureTableTableFilterComposer,
@@ -20069,7 +19819,7 @@ typedef $$AttrezzatureEserciziTableTableUpdateCompanionBuilder =
 final class $$AttrezzatureEserciziTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $AttrezzatureEserciziTableTable,
           AttrezzatureEserciziTableData
         > {
@@ -20079,7 +19829,7 @@ final class $$AttrezzatureEserciziTableTableReferences
     super.$_typedResult,
   );
 
-  static $EserciziTableTable _idEsercizioTable(_$AppDatabase db) => db
+  static $EserciziTableTable _idEsercizioTable(_$_SchemaV5Database db) => db
       .eserciziTable
       .createAlias('attrezzature_esercizi__id_esercizio__esercizi__id');
 
@@ -20097,9 +19847,10 @@ final class $$AttrezzatureEserciziTableTableReferences
     );
   }
 
-  static $AttrezzatureTableTable _idAttrezzaturaTable(_$AppDatabase db) => db
-      .attrezzatureTable
-      .createAlias('attrezzature_esercizi__id_attrezzatura__attrezzature__id');
+  static $AttrezzatureTableTable _idAttrezzaturaTable(_$_SchemaV5Database db) =>
+      db.attrezzatureTable.createAlias(
+        'attrezzature_esercizi__id_attrezzatura__attrezzature__id',
+      );
 
   $$AttrezzatureTableTableProcessedTableManager get idAttrezzatura {
     final $_column = $_itemColumn<int>('id_attrezzatura')!;
@@ -20117,7 +19868,7 @@ final class $$AttrezzatureEserciziTableTableReferences
 }
 
 class $$AttrezzatureEserciziTableTableFilterComposer
-    extends Composer<_$AppDatabase, $AttrezzatureEserciziTableTable> {
+    extends Composer<_$_SchemaV5Database, $AttrezzatureEserciziTableTable> {
   $$AttrezzatureEserciziTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -20183,7 +19934,7 @@ class $$AttrezzatureEserciziTableTableFilterComposer
 }
 
 class $$AttrezzatureEserciziTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $AttrezzatureEserciziTableTable> {
+    extends Composer<_$_SchemaV5Database, $AttrezzatureEserciziTableTable> {
   $$AttrezzatureEserciziTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -20249,7 +20000,7 @@ class $$AttrezzatureEserciziTableTableOrderingComposer
 }
 
 class $$AttrezzatureEserciziTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $AttrezzatureEserciziTableTable> {
+    extends Composer<_$_SchemaV5Database, $AttrezzatureEserciziTableTable> {
   $$AttrezzatureEserciziTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -20316,7 +20067,7 @@ class $$AttrezzatureEserciziTableTableAnnotationComposer
 class $$AttrezzatureEserciziTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $AttrezzatureEserciziTableTable,
           AttrezzatureEserciziTableData,
           $$AttrezzatureEserciziTableTableFilterComposer,
@@ -20332,7 +20083,7 @@ class $$AttrezzatureEserciziTableTableTableManager
           PrefetchHooks Function({bool idEsercizio, bool idAttrezzatura})
         > {
   $$AttrezzatureEserciziTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV5Database db,
     $AttrezzatureEserciziTableTable table,
   ) : super(
         TableManagerState(
@@ -20449,7 +20200,7 @@ class $$AttrezzatureEserciziTableTableTableManager
 
 typedef $$AttrezzatureEserciziTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV5Database,
       $AttrezzatureEserciziTableTable,
       AttrezzatureEserciziTableData,
       $$AttrezzatureEserciziTableTableFilterComposer,
@@ -20496,7 +20247,7 @@ typedef $$ImmaginiEserciziTableTableUpdateCompanionBuilder =
 final class $$ImmaginiEserciziTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $ImmaginiEserciziTableTable,
           ImmaginiEserciziTableData
         > {
@@ -20506,7 +20257,7 @@ final class $$ImmaginiEserciziTableTableReferences
     super.$_typedResult,
   );
 
-  static $EserciziTableTable _idEsercizioTable(_$AppDatabase db) => db
+  static $EserciziTableTable _idEsercizioTable(_$_SchemaV5Database db) => db
       .eserciziTable
       .createAlias('immagini_esercizi__id_esercizio__esercizi__id');
 
@@ -20526,7 +20277,7 @@ final class $$ImmaginiEserciziTableTableReferences
 }
 
 class $$ImmaginiEserciziTableTableFilterComposer
-    extends Composer<_$AppDatabase, $ImmaginiEserciziTableTable> {
+    extends Composer<_$_SchemaV5Database, $ImmaginiEserciziTableTable> {
   $$ImmaginiEserciziTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -20609,7 +20360,7 @@ class $$ImmaginiEserciziTableTableFilterComposer
 }
 
 class $$ImmaginiEserciziTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $ImmaginiEserciziTableTable> {
+    extends Composer<_$_SchemaV5Database, $ImmaginiEserciziTableTable> {
   $$ImmaginiEserciziTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -20692,7 +20443,7 @@ class $$ImmaginiEserciziTableTableOrderingComposer
 }
 
 class $$ImmaginiEserciziTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $ImmaginiEserciziTableTable> {
+    extends Composer<_$_SchemaV5Database, $ImmaginiEserciziTableTable> {
   $$ImmaginiEserciziTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -20773,7 +20524,7 @@ class $$ImmaginiEserciziTableTableAnnotationComposer
 class $$ImmaginiEserciziTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $ImmaginiEserciziTableTable,
           ImmaginiEserciziTableData,
           $$ImmaginiEserciziTableTableFilterComposer,
@@ -20786,7 +20537,7 @@ class $$ImmaginiEserciziTableTableTableManager
           PrefetchHooks Function({bool idEsercizio})
         > {
   $$ImmaginiEserciziTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV5Database db,
     $ImmaginiEserciziTableTable table,
   ) : super(
         TableManagerState(
@@ -20916,7 +20667,7 @@ class $$ImmaginiEserciziTableTableTableManager
 
 typedef $$ImmaginiEserciziTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV5Database,
       $ImmaginiEserciziTableTable,
       ImmaginiEserciziTableData,
       $$ImmaginiEserciziTableTableFilterComposer,
@@ -20958,7 +20709,7 @@ typedef $$ProgressioniEserciziTableTableUpdateCompanionBuilder =
 final class $$ProgressioniEserciziTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $ProgressioniEserciziTableTable,
           ProgressioniEserciziTableData
         > {
@@ -20968,7 +20719,7 @@ final class $$ProgressioniEserciziTableTableReferences
     super.$_typedResult,
   );
 
-  static $EserciziTableTable _idEsercizioTable(_$AppDatabase db) => db
+  static $EserciziTableTable _idEsercizioTable(_$_SchemaV5Database db) => db
       .eserciziTable
       .createAlias('progressioni_esercizi__id_esercizio__esercizi__id');
 
@@ -20986,10 +20737,11 @@ final class $$ProgressioniEserciziTableTableReferences
     );
   }
 
-  static $EserciziTableTable _idEsercizioSuccessivoTable(_$AppDatabase db) =>
-      db.eserciziTable.createAlias(
-        'progressioni_esercizi__id_esercizio_successivo__esercizi__id',
-      );
+  static $EserciziTableTable _idEsercizioSuccessivoTable(
+    _$_SchemaV5Database db,
+  ) => db.eserciziTable.createAlias(
+    'progressioni_esercizi__id_esercizio_successivo__esercizi__id',
+  );
 
   $$EserciziTableTableProcessedTableManager get idEsercizioSuccessivo {
     final $_column = $_itemColumn<int>('id_esercizio_successivo')!;
@@ -21009,7 +20761,7 @@ final class $$ProgressioniEserciziTableTableReferences
 }
 
 class $$ProgressioniEserciziTableTableFilterComposer
-    extends Composer<_$AppDatabase, $ProgressioniEserciziTableTable> {
+    extends Composer<_$_SchemaV5Database, $ProgressioniEserciziTableTable> {
   $$ProgressioniEserciziTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -21105,7 +20857,7 @@ class $$ProgressioniEserciziTableTableFilterComposer
 }
 
 class $$ProgressioniEserciziTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $ProgressioniEserciziTableTable> {
+    extends Composer<_$_SchemaV5Database, $ProgressioniEserciziTableTable> {
   $$ProgressioniEserciziTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -21201,7 +20953,7 @@ class $$ProgressioniEserciziTableTableOrderingComposer
 }
 
 class $$ProgressioniEserciziTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $ProgressioniEserciziTableTable> {
+    extends Composer<_$_SchemaV5Database, $ProgressioniEserciziTableTable> {
   $$ProgressioniEserciziTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -21291,7 +21043,7 @@ class $$ProgressioniEserciziTableTableAnnotationComposer
 class $$ProgressioniEserciziTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $ProgressioniEserciziTableTable,
           ProgressioniEserciziTableData,
           $$ProgressioniEserciziTableTableFilterComposer,
@@ -21307,7 +21059,7 @@ class $$ProgressioniEserciziTableTableTableManager
           PrefetchHooks Function({bool idEsercizio, bool idEsercizioSuccessivo})
         > {
   $$ProgressioniEserciziTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV5Database db,
     $ProgressioniEserciziTableTable table,
   ) : super(
         TableManagerState(
@@ -21449,7 +21201,7 @@ class $$ProgressioniEserciziTableTableTableManager
 
 typedef $$ProgressioniEserciziTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV5Database,
       $ProgressioniEserciziTableTable,
       ProgressioniEserciziTableData,
       $$ProgressioniEserciziTableTableFilterComposer,
@@ -21492,7 +21244,7 @@ typedef $$AlternativeEserciziTableTableUpdateCompanionBuilder =
 final class $$AlternativeEserciziTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $AlternativeEserciziTableTable,
           AlternativeEserciziTableData
         > {
@@ -21502,7 +21254,7 @@ final class $$AlternativeEserciziTableTableReferences
     super.$_typedResult,
   );
 
-  static $EserciziTableTable _idEsercizioTable(_$AppDatabase db) => db
+  static $EserciziTableTable _idEsercizioTable(_$_SchemaV5Database db) => db
       .eserciziTable
       .createAlias('alternative_esercizi__id_esercizio__esercizi__id');
 
@@ -21520,10 +21272,11 @@ final class $$AlternativeEserciziTableTableReferences
     );
   }
 
-  static $EserciziTableTable _idEsercizioAlternativoTable(_$AppDatabase db) =>
-      db.eserciziTable.createAlias(
-        'alternative_esercizi__id_esercizio_alternativo__esercizi__id',
-      );
+  static $EserciziTableTable _idEsercizioAlternativoTable(
+    _$_SchemaV5Database db,
+  ) => db.eserciziTable.createAlias(
+    'alternative_esercizi__id_esercizio_alternativo__esercizi__id',
+  );
 
   $$EserciziTableTableProcessedTableManager get idEsercizioAlternativo {
     final $_column = $_itemColumn<int>('id_esercizio_alternativo')!;
@@ -21543,7 +21296,7 @@ final class $$AlternativeEserciziTableTableReferences
 }
 
 class $$AlternativeEserciziTableTableFilterComposer
-    extends Composer<_$AppDatabase, $AlternativeEserciziTableTable> {
+    extends Composer<_$_SchemaV5Database, $AlternativeEserciziTableTable> {
   $$AlternativeEserciziTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -21634,7 +21387,7 @@ class $$AlternativeEserciziTableTableFilterComposer
 }
 
 class $$AlternativeEserciziTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $AlternativeEserciziTableTable> {
+    extends Composer<_$_SchemaV5Database, $AlternativeEserciziTableTable> {
   $$AlternativeEserciziTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -21725,7 +21478,7 @@ class $$AlternativeEserciziTableTableOrderingComposer
 }
 
 class $$AlternativeEserciziTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $AlternativeEserciziTableTable> {
+    extends Composer<_$_SchemaV5Database, $AlternativeEserciziTableTable> {
   $$AlternativeEserciziTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -21810,7 +21563,7 @@ class $$AlternativeEserciziTableTableAnnotationComposer
 class $$AlternativeEserciziTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $AlternativeEserciziTableTable,
           AlternativeEserciziTableData,
           $$AlternativeEserciziTableTableFilterComposer,
@@ -21829,7 +21582,7 @@ class $$AlternativeEserciziTableTableTableManager
           })
         > {
   $$AlternativeEserciziTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV5Database db,
     $AlternativeEserciziTableTable table,
   ) : super(
         TableManagerState(
@@ -21967,7 +21720,7 @@ class $$AlternativeEserciziTableTableTableManager
 
 typedef $$AlternativeEserciziTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV5Database,
       $AlternativeEserciziTableTable,
       AlternativeEserciziTableData,
       $$AlternativeEserciziTableTableFilterComposer,
@@ -21999,7 +21752,7 @@ typedef $$VersioniCatalogoTableTableUpdateCompanionBuilder =
     });
 
 class $$VersioniCatalogoTableTableFilterComposer
-    extends Composer<_$AppDatabase, $VersioniCatalogoTableTable> {
+    extends Composer<_$_SchemaV5Database, $VersioniCatalogoTableTable> {
   $$VersioniCatalogoTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -22039,7 +21792,7 @@ class $$VersioniCatalogoTableTableFilterComposer
 }
 
 class $$VersioniCatalogoTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $VersioniCatalogoTableTable> {
+    extends Composer<_$_SchemaV5Database, $VersioniCatalogoTableTable> {
   $$VersioniCatalogoTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -22079,7 +21832,7 @@ class $$VersioniCatalogoTableTableOrderingComposer
 }
 
 class $$VersioniCatalogoTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $VersioniCatalogoTableTable> {
+    extends Composer<_$_SchemaV5Database, $VersioniCatalogoTableTable> {
   $$VersioniCatalogoTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -22113,7 +21866,7 @@ class $$VersioniCatalogoTableTableAnnotationComposer
 class $$VersioniCatalogoTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $VersioniCatalogoTableTable,
           VersioniCatalogoTableData,
           $$VersioniCatalogoTableTableFilterComposer,
@@ -22124,7 +21877,7 @@ class $$VersioniCatalogoTableTableTableManager
           (
             VersioniCatalogoTableData,
             BaseReferences<
-              _$AppDatabase,
+              _$_SchemaV5Database,
               $VersioniCatalogoTableTable,
               VersioniCatalogoTableData
             >,
@@ -22133,7 +21886,7 @@ class $$VersioniCatalogoTableTableTableManager
           PrefetchHooks Function()
         > {
   $$VersioniCatalogoTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV5Database db,
     $VersioniCatalogoTableTable table,
   ) : super(
         TableManagerState(
@@ -22196,7 +21949,7 @@ class $$VersioniCatalogoTableTableTableManager
 
 typedef $$VersioniCatalogoTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV5Database,
       $VersioniCatalogoTableTable,
       VersioniCatalogoTableData,
       $$VersioniCatalogoTableTableFilterComposer,
@@ -22207,7 +21960,7 @@ typedef $$VersioniCatalogoTableTableProcessedTableManager =
       (
         VersioniCatalogoTableData,
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $VersioniCatalogoTableTable,
           VersioniCatalogoTableData
         >,
@@ -22249,7 +22002,7 @@ typedef $$AllenamentiTableTableUpdateCompanionBuilder =
 final class $$AllenamentiTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $AllenamentiTableTable,
           AllenamentiTableData
         > {
@@ -22259,7 +22012,7 @@ final class $$AllenamentiTableTableReferences
     super.$_typedResult,
   );
 
-  static $UserProfilesTableTable _idProfiloTable(_$AppDatabase db) => db
+  static $UserProfilesTableTable _idProfiloTable(_$_SchemaV5Database db) => db
       .userProfilesTable
       .createAlias('allenamenti__id_profilo__profili_utente__id');
 
@@ -22281,7 +22034,7 @@ final class $$AllenamentiTableTableReferences
     $AllenamentiEserciziTableTable,
     List<AllenamentiEserciziTableData>
   >
-  _allenamentiEserciziTableRefsTable(_$AppDatabase db) =>
+  _allenamentiEserciziTableRefsTable(_$_SchemaV5Database db) =>
       MultiTypedResultKey.fromTable(
         db.allenamentiEserciziTable,
         aliasName: 'allenamenti__id__allenamenti_esercizi__id_allenamento',
@@ -22306,7 +22059,7 @@ final class $$AllenamentiTableTableReferences
     $SessioniAllenamentoTableTable,
     List<SessioniAllenamentoTableData>
   >
-  _sessioniAllenamentoTableRefsTable(_$AppDatabase db) =>
+  _sessioniAllenamentoTableRefsTable(_$_SchemaV5Database db) =>
       MultiTypedResultKey.fromTable(
         db.sessioniAllenamentoTable,
         aliasName: 'allenamenti__id__sessioni_allenamento__id_allenamento',
@@ -22329,7 +22082,7 @@ final class $$AllenamentiTableTableReferences
 }
 
 class $$AllenamentiTableTableFilterComposer
-    extends Composer<_$AppDatabase, $AllenamentiTableTable> {
+    extends Composer<_$_SchemaV5Database, $AllenamentiTableTable> {
   $$AllenamentiTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -22471,7 +22224,7 @@ class $$AllenamentiTableTableFilterComposer
 }
 
 class $$AllenamentiTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $AllenamentiTableTable> {
+    extends Composer<_$_SchemaV5Database, $AllenamentiTableTable> {
   $$AllenamentiTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -22559,7 +22312,7 @@ class $$AllenamentiTableTableOrderingComposer
 }
 
 class $$AllenamentiTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $AllenamentiTableTable> {
+    extends Composer<_$_SchemaV5Database, $AllenamentiTableTable> {
   $$AllenamentiTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -22692,7 +22445,7 @@ class $$AllenamentiTableTableAnnotationComposer
 class $$AllenamentiTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $AllenamentiTableTable,
           AllenamentiTableData,
           $$AllenamentiTableTableFilterComposer,
@@ -22709,7 +22462,7 @@ class $$AllenamentiTableTableTableManager
           })
         > {
   $$AllenamentiTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV5Database db,
     $AllenamentiTableTable table,
   ) : super(
         TableManagerState(
@@ -22887,7 +22640,7 @@ class $$AllenamentiTableTableTableManager
 
 typedef $$AllenamentiTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV5Database,
       $AllenamentiTableTable,
       AllenamentiTableData,
       $$AllenamentiTableTableFilterComposer,
@@ -22937,7 +22690,7 @@ typedef $$AllenamentiEserciziTableTableUpdateCompanionBuilder =
 final class $$AllenamentiEserciziTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $AllenamentiEserciziTableTable,
           AllenamentiEserciziTableData
         > {
@@ -22947,9 +22700,10 @@ final class $$AllenamentiEserciziTableTableReferences
     super.$_typedResult,
   );
 
-  static $AllenamentiTableTable _idAllenamentoTable(_$AppDatabase db) => db
-      .allenamentiTable
-      .createAlias('allenamenti_esercizi__id_allenamento__allenamenti__id');
+  static $AllenamentiTableTable _idAllenamentoTable(_$_SchemaV5Database db) =>
+      db.allenamentiTable.createAlias(
+        'allenamenti_esercizi__id_allenamento__allenamenti__id',
+      );
 
   $$AllenamentiTableTableProcessedTableManager get idAllenamento {
     final $_column = $_itemColumn<int>('id_allenamento')!;
@@ -22965,7 +22719,7 @@ final class $$AllenamentiEserciziTableTableReferences
     );
   }
 
-  static $EserciziTableTable _idEsercizioTable(_$AppDatabase db) => db
+  static $EserciziTableTable _idEsercizioTable(_$_SchemaV5Database db) => db
       .eserciziTable
       .createAlias('allenamenti_esercizi__id_esercizio__esercizi__id');
 
@@ -22988,7 +22742,7 @@ final class $$AllenamentiEserciziTableTableReferences
     List<SessioniEserciziTableData>
   >
   _sessioniEserciziTableRefsTable(
-    _$AppDatabase db,
+    _$_SchemaV5Database db,
   ) => MultiTypedResultKey.fromTable(
     db.sessioniEserciziTable,
     aliasName:
@@ -23016,7 +22770,7 @@ final class $$AllenamentiEserciziTableTableReferences
 }
 
 class $$AllenamentiEserciziTableTableFilterComposer
-    extends Composer<_$AppDatabase, $AllenamentiEserciziTableTable> {
+    extends Composer<_$_SchemaV5Database, $AllenamentiEserciziTableTable> {
   $$AllenamentiEserciziTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -23148,7 +22902,7 @@ class $$AllenamentiEserciziTableTableFilterComposer
 }
 
 class $$AllenamentiEserciziTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $AllenamentiEserciziTableTable> {
+    extends Composer<_$_SchemaV5Database, $AllenamentiEserciziTableTable> {
   $$AllenamentiEserciziTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -23254,7 +23008,7 @@ class $$AllenamentiEserciziTableTableOrderingComposer
 }
 
 class $$AllenamentiEserciziTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $AllenamentiEserciziTableTable> {
+    extends Composer<_$_SchemaV5Database, $AllenamentiEserciziTableTable> {
   $$AllenamentiEserciziTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -23378,7 +23132,7 @@ class $$AllenamentiEserciziTableTableAnnotationComposer
 class $$AllenamentiEserciziTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $AllenamentiEserciziTableTable,
           AllenamentiEserciziTableData,
           $$AllenamentiEserciziTableTableFilterComposer,
@@ -23398,7 +23152,7 @@ class $$AllenamentiEserciziTableTableTableManager
           })
         > {
   $$AllenamentiEserciziTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV5Database db,
     $AllenamentiEserciziTableTable table,
   ) : super(
         TableManagerState(
@@ -23577,7 +23331,7 @@ class $$AllenamentiEserciziTableTableTableManager
 
 typedef $$AllenamentiEserciziTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV5Database,
       $AllenamentiEserciziTableTable,
       AllenamentiEserciziTableData,
       $$AllenamentiEserciziTableTableFilterComposer,
@@ -23635,7 +23389,7 @@ typedef $$SessioniAllenamentoTableTableUpdateCompanionBuilder =
 final class $$SessioniAllenamentoTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $SessioniAllenamentoTableTable,
           SessioniAllenamentoTableData
         > {
@@ -23645,9 +23399,10 @@ final class $$SessioniAllenamentoTableTableReferences
     super.$_typedResult,
   );
 
-  static $AllenamentiTableTable _idAllenamentoTable(_$AppDatabase db) => db
-      .allenamentiTable
-      .createAlias('sessioni_allenamento__id_allenamento__allenamenti__id');
+  static $AllenamentiTableTable _idAllenamentoTable(_$_SchemaV5Database db) =>
+      db.allenamentiTable.createAlias(
+        'sessioni_allenamento__id_allenamento__allenamenti__id',
+      );
 
   $$AllenamentiTableTableProcessedTableManager? get idAllenamento {
     final $_column = $_itemColumn<int>('id_allenamento');
@@ -23663,7 +23418,7 @@ final class $$SessioniAllenamentoTableTableReferences
     );
   }
 
-  static $UserProfilesTableTable _idProfiloTable(_$AppDatabase db) => db
+  static $UserProfilesTableTable _idProfiloTable(_$_SchemaV5Database db) => db
       .userProfilesTable
       .createAlias('sessioni_allenamento__id_profilo__profili_utente__id');
 
@@ -23685,7 +23440,7 @@ final class $$SessioniAllenamentoTableTableReferences
     $SessioniEserciziTableTable,
     List<SessioniEserciziTableData>
   >
-  _sessioniEserciziTableRefsTable(_$AppDatabase db) =>
+  _sessioniEserciziTableRefsTable(_$_SchemaV5Database db) =>
       MultiTypedResultKey.fromTable(
         db.sessioniEserciziTable,
         aliasName: 'sessioni_allenamento__id__sessioni_esercizi__id_sessione',
@@ -23708,7 +23463,7 @@ final class $$SessioniAllenamentoTableTableReferences
 }
 
 class $$SessioniAllenamentoTableTableFilterComposer
-    extends Composer<_$AppDatabase, $SessioniAllenamentoTableTable> {
+    extends Composer<_$_SchemaV5Database, $SessioniAllenamentoTableTable> {
   $$SessioniAllenamentoTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -23860,7 +23615,7 @@ class $$SessioniAllenamentoTableTableFilterComposer
 }
 
 class $$SessioniAllenamentoTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $SessioniAllenamentoTableTable> {
+    extends Composer<_$_SchemaV5Database, $SessioniAllenamentoTableTable> {
   $$SessioniAllenamentoTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -23986,7 +23741,7 @@ class $$SessioniAllenamentoTableTableOrderingComposer
 }
 
 class $$SessioniAllenamentoTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $SessioniAllenamentoTableTable> {
+    extends Composer<_$_SchemaV5Database, $SessioniAllenamentoTableTable> {
   $$SessioniAllenamentoTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -24131,7 +23886,7 @@ class $$SessioniAllenamentoTableTableAnnotationComposer
 class $$SessioniAllenamentoTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $SessioniAllenamentoTableTable,
           SessioniAllenamentoTableData,
           $$SessioniAllenamentoTableTableFilterComposer,
@@ -24151,7 +23906,7 @@ class $$SessioniAllenamentoTableTableTableManager
           })
         > {
   $$SessioniAllenamentoTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV5Database db,
     $SessioniAllenamentoTableTable table,
   ) : super(
         TableManagerState(
@@ -24346,7 +24101,7 @@ class $$SessioniAllenamentoTableTableTableManager
 
 typedef $$SessioniAllenamentoTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV5Database,
       $SessioniAllenamentoTableTable,
       SessioniAllenamentoTableData,
       $$SessioniAllenamentoTableTableFilterComposer,
@@ -24400,7 +24155,7 @@ typedef $$SessioniEserciziTableTableUpdateCompanionBuilder =
 final class $$SessioniEserciziTableTableReferences
     extends
         BaseReferences<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $SessioniEserciziTableTable,
           SessioniEserciziTableData
         > {
@@ -24410,9 +24165,11 @@ final class $$SessioniEserciziTableTableReferences
     super.$_typedResult,
   );
 
-  static $SessioniAllenamentoTableTable _idSessioneTable(_$AppDatabase db) => db
-      .sessioniAllenamentoTable
-      .createAlias('sessioni_esercizi__id_sessione__sessioni_allenamento__id');
+  static $SessioniAllenamentoTableTable _idSessioneTable(
+    _$_SchemaV5Database db,
+  ) => db.sessioniAllenamentoTable.createAlias(
+    'sessioni_esercizi__id_sessione__sessioni_allenamento__id',
+  );
 
   $$SessioniAllenamentoTableTableProcessedTableManager get idSessione {
     final $_column = $_itemColumn<int>('id_sessione')!;
@@ -24429,7 +24186,7 @@ final class $$SessioniEserciziTableTableReferences
   }
 
   static $AllenamentiEserciziTableTable _idAllenamentoEsercizioTable(
-    _$AppDatabase db,
+    _$_SchemaV5Database db,
   ) => db.allenamentiEserciziTable.createAlias(
     'sessioni_esercizi__id_allenamento_esercizio__allenamenti_esercizi__id',
   );
@@ -24451,7 +24208,7 @@ final class $$SessioniEserciziTableTableReferences
     );
   }
 
-  static $EserciziTableTable _idEsercizioTable(_$AppDatabase db) => db
+  static $EserciziTableTable _idEsercizioTable(_$_SchemaV5Database db) => db
       .eserciziTable
       .createAlias('sessioni_esercizi__id_esercizio__esercizi__id');
 
@@ -24471,7 +24228,7 @@ final class $$SessioniEserciziTableTableReferences
 }
 
 class $$SessioniEserciziTableTableFilterComposer
-    extends Composer<_$AppDatabase, $SessioniEserciziTableTable> {
+    extends Composer<_$_SchemaV5Database, $SessioniEserciziTableTable> {
   $$SessioniEserciziTableTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -24607,7 +24364,7 @@ class $$SessioniEserciziTableTableFilterComposer
 }
 
 class $$SessioniEserciziTableTableOrderingComposer
-    extends Composer<_$AppDatabase, $SessioniEserciziTableTable> {
+    extends Composer<_$_SchemaV5Database, $SessioniEserciziTableTable> {
   $$SessioniEserciziTableTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -24743,7 +24500,7 @@ class $$SessioniEserciziTableTableOrderingComposer
 }
 
 class $$SessioniEserciziTableTableAnnotationComposer
-    extends Composer<_$AppDatabase, $SessioniEserciziTableTable> {
+    extends Composer<_$_SchemaV5Database, $SessioniEserciziTableTable> {
   $$SessioniEserciziTableTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -24875,7 +24632,7 @@ class $$SessioniEserciziTableTableAnnotationComposer
 class $$SessioniEserciziTableTableTableManager
     extends
         RootTableManager<
-          _$AppDatabase,
+          _$_SchemaV5Database,
           $SessioniEserciziTableTable,
           SessioniEserciziTableData,
           $$SessioniEserciziTableTableFilterComposer,
@@ -24892,7 +24649,7 @@ class $$SessioniEserciziTableTableTableManager
           })
         > {
   $$SessioniEserciziTableTableTableManager(
-    _$AppDatabase db,
+    _$_SchemaV5Database db,
     $SessioniEserciziTableTable table,
   ) : super(
         TableManagerState(
@@ -25069,7 +24826,7 @@ class $$SessioniEserciziTableTableTableManager
 
 typedef $$SessioniEserciziTableTableProcessedTableManager =
     ProcessedTableManager<
-      _$AppDatabase,
+      _$_SchemaV5Database,
       $SessioniEserciziTableTable,
       SessioniEserciziTableData,
       $$SessioniEserciziTableTableFilterComposer,
@@ -25086,17 +24843,17 @@ typedef $$SessioniEserciziTableTableProcessedTableManager =
       })
     >;
 
-class $AppDatabaseManager {
-  final _$AppDatabase _db;
-  $AppDatabaseManager(this._db);
+class $_SchemaV5DatabaseManager {
+  final _$_SchemaV5Database _db;
+  $_SchemaV5DatabaseManager(this._db);
   $$AppSettingsTableTableTableManager get appSettingsTable =>
       $$AppSettingsTableTableTableManager(_db, _db.appSettingsTable);
   $$UserProfilesTableTableTableManager get userProfilesTable =>
       $$UserProfilesTableTableTableManager(_db, _db.userProfilesTable);
   $$BodyMeasurementsTableTableTableManager get bodyMeasurementsTable =>
       $$BodyMeasurementsTableTableTableManager(_db, _db.bodyMeasurementsTable);
-  $$CamminateTableTableTableManager get camminateTable =>
-      $$CamminateTableTableTableManager(_db, _db.camminateTable);
+  $$CamminateTableV5TableTableManager get camminateTableV5 =>
+      $$CamminateTableV5TableTableManager(_db, _db.camminateTableV5);
   $$PressureMeasurementsTableTableTableManager get pressureMeasurementsTable =>
       $$PressureMeasurementsTableTableTableManager(
         _db,
