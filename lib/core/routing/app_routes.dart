@@ -19,6 +19,8 @@ abstract final class AppRoutes {
   static const String workoutEdit = '/workouts/:id/edit';
   static const String workoutExercisePicker = '/workouts/:id/exercises';
   static const String workoutSession = '/workouts/:id/session';
+  static const String forgeGenerator = '/forge';
+  static const String forgePreview = '/forge/preview';
 
   static String exerciseDetailPath(int id) => '/exercises/$id';
   static String workoutDetailPath(int id) => '/workouts/$id';

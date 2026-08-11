@@ -14,6 +14,8 @@ import '../../features/settings/presentation/pages/profile_page.dart';
 import '../../features/training_plan/presentation/pages/archived_workouts_page.dart';
 import '../../features/training_plan/presentation/pages/create_workout_page.dart';
 import '../../features/training_plan/presentation/pages/exercise_picker_page.dart';
+import '../../features/training_plan/presentation/pages/forge_generator_page.dart';
+import '../../features/training_plan/presentation/pages/forge_workout_preview_page.dart';
 import '../../features/training_plan/presentation/pages/program_page.dart';
 import '../../features/training_plan/presentation/pages/workout_detail_page.dart';
 import '../../features/training_plan/presentation/pages/workout_edit_page.dart';
@@ -156,6 +158,17 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           if (id == null) return const _InvalidWorkoutIdPage();
           return WorkoutSessionPage(workoutId: id);
         },
+      ),
+      // Rotte del generatore Forge (Milestone 5.5): piatte come le altre
+      // rotte scheda, fuori dalla bottom navigation — configurazione e
+      // anteprima non sono voci della StatefulShellRoute.
+      GoRoute(
+        path: AppRoutes.forgeGenerator,
+        builder: (context, state) => const ForgeGeneratorPage(),
+      ),
+      GoRoute(
+        path: AppRoutes.forgePreview,
+        builder: (context, state) => const ForgeWorkoutPreviewPage(),
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) =>

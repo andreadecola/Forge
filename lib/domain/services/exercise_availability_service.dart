@@ -32,14 +32,26 @@ class ExerciseAvailabilityService {
       return ExerciseAvailabilityStatus.lockedLevel;
     }
 
-    final missing = requiredEquipmentCodes
-        .where((code) => code != Equipment.noneCode)
-        .where((code) => !ownedEquipmentCodes.contains(code));
-
-    if (missing.isNotEmpty) {
+    if (missingEquipment(
+      requiredEquipmentCodes: requiredEquipmentCodes,
+      ownedEquipmentCodes: ownedEquipmentCodes,
+    ).isNotEmpty) {
       return ExerciseAvailabilityStatus.lockedEquipment;
     }
 
     return ExerciseAvailabilityStatus.available;
+  }
+
+  /// Attrezzatura obbligatoria (`NONE` escluso) non presente in
+  /// [ownedEquipmentCodes]: punto unico della regola, condiviso anche dal
+  /// Forge Engine (`ForgeEligibilityService`, Milestone 5.1) — evita una
+  /// seconda interpretazione della stessa regola.
+  static Iterable<String> missingEquipment({
+    required Iterable<String> requiredEquipmentCodes,
+    required Set<String> ownedEquipmentCodes,
+  }) {
+    return requiredEquipmentCodes
+        .where((code) => code != Equipment.noneCode)
+        .where((code) => !ownedEquipmentCodes.contains(code));
   }
 }

@@ -215,10 +215,7 @@ class _SessionBody extends ConsumerWidget {
                     ),
                   ),
                 const SizedBox(height: 16),
-                AspectRatio(
-                  aspectRatio: 4 / 3,
-                  child: _ExerciseImage(exerciseId: entry.exercise.id),
-                ),
+                _ExerciseImage(exerciseId: entry.exercise.id),
                 const SizedBox(height: 20),
                 Text(
                   'Serie ${session.currentCompletedSets + 1} di '
@@ -485,13 +482,16 @@ class _ExerciseImage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final imagesAsync = ref.watch(exerciseImagesProvider(exerciseId));
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(12),
-      child: imagesAsync.when(
-        data: (images) => ExerciseImageGallery(images: images),
-        loading: () => Container(color: ForgeColors.anthraciteSurfaceHigh),
-        error: (error, stackTrace) => const ExerciseImageGallery(images: []),
+    return imagesAsync.when(
+      data: (images) => ExerciseImageGallery(images: images),
+      loading: () => AspectRatio(
+        aspectRatio: 4 / 3,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: Container(color: ForgeColors.anthraciteSurfaceHigh),
+        ),
       ),
+      error: (error, stackTrace) => const ExerciseImageGallery(images: []),
     );
   }
 }

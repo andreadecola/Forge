@@ -71,6 +71,26 @@ class DriftWorkoutRepository implements WorkoutRepository {
   }
 
   @override
+  Future<int> createWorkoutWithExercises({
+    required Workout workout,
+    required List<WorkoutExercise> exercises,
+  }) {
+    return db.transaction(() async {
+      final workoutId = await db.allenamentiDao.create(
+        WorkoutMappers.workoutToCompanion(workout),
+      );
+      for (final exercise in exercises) {
+        await db.allenamentiEserciziDao.insert(
+          WorkoutMappers.workoutExerciseToCompanion(
+            exercise.copyWith(workoutId: workoutId),
+          ),
+        );
+      }
+      return workoutId;
+    });
+  }
+
+  @override
   Future<void> updateWorkout(Workout workout) async {
     assert(
       workout.id != null,

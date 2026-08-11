@@ -49,6 +49,10 @@ class WorkoutListPage extends ConsumerWidget {
           const ActiveSessionBanner(
             padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
           ),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
+            child: _ForgeGeneratorEntryPoint(),
+          ),
           Expanded(
             child: profileAsync.when(
               data: (profile) => profile?.id == null
@@ -156,7 +160,7 @@ class _EmptyState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Padding(
+      child: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -174,6 +178,61 @@ class _EmptyState extends StatelessWidget {
               child: const Text('Crea il primo allenamento'),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+/// CTA evidente e distinta da "Nuovo allenamento" (Milestone 5.5, sezione
+/// 3): quella crea una scheda vuota da comporre a mano, questa avvia la
+/// generazione automatica tramite il Forge Engine. Nessuna delle due
+/// sostituisce l'altra.
+class _ForgeGeneratorEntryPoint extends StatelessWidget {
+  const _ForgeGeneratorEntryPoint();
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Theme.of(context).colorScheme.primaryContainer,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(16),
+        onTap: () => context.push(AppRoutes.forgeGenerator),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            children: [
+              Icon(
+                Icons.bolt,
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Genera con Forge',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    Text(
+                      'Generazione automatica di un allenamento',
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Icon(
+                Icons.chevron_right,
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
+              ),
+            ],
+          ),
         ),
       ),
     );

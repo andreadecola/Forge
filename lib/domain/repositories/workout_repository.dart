@@ -30,6 +30,21 @@ abstract class WorkoutRepository {
 
   Future<int> createWorkout(Workout workout);
 
+  /// Crea [workout] e le sue [exercises] in un'unica transazione
+  /// atomica (Milestone 5.3): se una qualunque scrittura fallisce, nessun
+  /// record — né la scheda né una qualunque riga scheda — resta nel
+  /// database. `workoutId` nei [exercises] passati viene ignorato e
+  /// sostituito con l'id reale assegnato a [workout] durante la
+  /// transazione (i chiamanti tipicamente li costruiscono con un
+  /// placeholder, come `GeneratedWorkoutExercise`, Milestone 5.2). Gli
+  /// [exercises] vengono inseriti nell'ordine della lista, con il loro
+  /// `order` già assegnato dal chiamante — non vengono mai riassegnati o
+  /// riordinati qui.
+  Future<int> createWorkoutWithExercises({
+    required Workout workout,
+    required List<WorkoutExercise> exercises,
+  });
+
   Future<void> updateWorkout(Workout workout);
 
   /// Archivia la scheda (`status = ARCHIVED`, `isActive = false`): non

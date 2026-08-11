@@ -37,6 +37,14 @@ class DriftWorkoutSessionRepository implements WorkoutSessionRepository {
   }
 
   @override
+  Future<List<PersistedSessionExercise>> getSessionExercisesForSessions(
+    List<int> sessionIds,
+  ) async {
+    final rows = await db.sessioniEserciziDao.getBySessionIds(sessionIds);
+    return rows.map(WorkoutSessionMappers.sessionExercise).toList();
+  }
+
+  @override
   Future<int> createSession({
     required int profileId,
     required WorkoutDetails details,

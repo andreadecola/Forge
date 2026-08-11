@@ -23,6 +23,15 @@ abstract class WorkoutSessionRepository {
   /// ripristino per ricostruire `WorkoutSessionState.exercises`).
   Future<List<PersistedSessionExercise>> getSessionExercises(int sessionId);
 
+  /// Righe snapshot esercizio di più sessioni in un colpo solo (Milestone
+  /// 5.4): usata da `ForgeProgressionAnalyzer` per aggregare per esercizio
+  /// sulla finestra storica recente senza una query per sessione (sezione
+  /// 42 — "evitare N+1"), stesso principio già applicato da
+  /// `getBySessionIds` per lo storico (Milestone 4.5.1).
+  Future<List<PersistedSessionExercise>> getSessionExercisesForSessions(
+    List<int> sessionIds,
+  );
+
   /// Crea la sessione e lo snapshot di ogni sua riga scheda in un'unica
   /// transazione. Ritorna l'id della sessione creata. Lancia
   /// [ActiveSessionAlreadyExistsException] se il profilo ha già una
