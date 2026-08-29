@@ -23,12 +23,20 @@ class BodyMeasurementsDao extends DatabaseAccessor<AppDatabase>
     bodyMeasurementsTable,
   )..where((t) => t.id.equals(id))).getSingleOrNull();
 
+  /// Ordinate per `measuredAt` decrescente, con tie-break su `id`
+  /// decrescente a parità di timestamp (Milestone 7.7): stesso principio già
+  /// applicato a `PressureMeasurementsDao` e alle query "latest" qui sotto —
+  /// determinismo anche con più misurazioni nello stesso istante, senza
+  /// assumere l'ordine fisico delle righe su disco.
   Future<List<BodyMeasurementsTableData>> getMeasurementsByProfile(
     int profileId,
   ) {
     return (select(bodyMeasurementsTable)
           ..where((t) => t.profileId.equals(profileId))
-          ..orderBy([(t) => OrderingTerm.desc(t.measuredAt)]))
+          ..orderBy([
+            (t) => OrderingTerm.desc(t.measuredAt),
+            (t) => OrderingTerm.desc(t.id),
+          ]))
         .get();
   }
 
@@ -37,14 +45,35 @@ class BodyMeasurementsDao extends DatabaseAccessor<AppDatabase>
   ) {
     return (select(bodyMeasurementsTable)
           ..where((t) => t.profileId.equals(profileId))
-          ..orderBy([(t) => OrderingTerm.desc(t.measuredAt)]))
+          ..orderBy([
+            (t) => OrderingTerm.desc(t.measuredAt),
+            (t) => OrderingTerm.desc(t.id),
+          ]))
         .watch();
   }
 
+  /// Solo righe con peso presente (Milestone 7.2: da quando `weightKg` può
+  /// essere `null` per una misurazione "solo girovita", la più recente in
+  /// assoluto non è necessariamente la più recente con un peso).
   Future<BodyMeasurementsTableData?> getLatestWeight(int profileId) {
     return (select(bodyMeasurementsTable)
-          ..where((t) => t.profileId.equals(profileId))
-          ..orderBy([(t) => OrderingTerm.desc(t.measuredAt)])
+          ..where((t) => t.profileId.equals(profileId) & t.weightKg.isNotNull())
+          ..orderBy([
+            (t) => OrderingTerm.desc(t.measuredAt),
+            (t) => OrderingTerm.desc(t.id),
+          ])
+          ..limit(1))
+        .getSingleOrNull();
+  }
+
+  /// Speculare a [getLatestWeight] per il girovita (Milestone 7.2).
+  Future<BodyMeasurementsTableData?> getLatestWaist(int profileId) {
+    return (select(bodyMeasurementsTable)
+          ..where((t) => t.profileId.equals(profileId) & t.waistCm.isNotNull())
+          ..orderBy([
+            (t) => OrderingTerm.desc(t.measuredAt),
+            (t) => OrderingTerm.desc(t.id),
+          ])
           ..limit(1))
         .getSingleOrNull();
   }

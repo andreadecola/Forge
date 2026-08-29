@@ -24,6 +24,12 @@ class BodyMetricsRepositoryImpl implements BodyMetricsRepository {
   Future<void> deleteMeasurement(int id) => _dao.deleteMeasurement(id);
 
   @override
+  Future<BodyMeasurement?> getById(int id) async {
+    final row = await _dao.getById(id);
+    return row == null ? null : _toEntity(row);
+  }
+
+  @override
   Future<List<BodyMeasurement>> getMeasurementsByProfile(int profileId) async {
     final rows = await _dao.getMeasurementsByProfile(profileId);
     return rows.map(_toEntity).toList();
@@ -39,6 +45,12 @@ class BodyMetricsRepositoryImpl implements BodyMetricsRepository {
   @override
   Future<BodyMeasurement?> getLatestWeight(int profileId) async {
     final row = await _dao.getLatestWeight(profileId);
+    return row == null ? null : _toEntity(row);
+  }
+
+  @override
+  Future<BodyMeasurement?> getLatestWaist(int profileId) async {
+    final row = await _dao.getLatestWaist(profileId);
     return row == null ? null : _toEntity(row);
   }
 

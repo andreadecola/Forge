@@ -186,9 +186,9 @@ void main() {
 
     // 4. Le nuove tabelle della Milestone 4.1 devono essere disponibili
     // e vuote (nessun seed allenamenti in questa milestone). La versione
-    // finale è quella corrente (4, Milestone 4.4.3): un dispositivo reale
+    // finale è quella corrente (8, Milestone 7.2): un dispositivo reale
     // a schema 2 arriva sempre all'ultimo schema, non si ferma a metà.
-    expect(database.schemaVersion, 6);
+    expect(database.schemaVersion, 8);
     expect(await database.select(database.allenamentiTable).get(), isEmpty);
     expect(
       await database.select(database.allenamentiEserciziTable).get(),

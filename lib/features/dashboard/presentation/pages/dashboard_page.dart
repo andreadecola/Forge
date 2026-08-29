@@ -197,7 +197,7 @@ class _DashboardBody extends ConsumerWidget {
               context,
               Icons.monitor_weight_outlined,
               'Peso',
-              AppRoutes.weight,
+              AppRoutes.progress,
             ),
             _quickAction(
               context,

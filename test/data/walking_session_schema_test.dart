@@ -44,8 +44,8 @@ void main() {
     );
   }
 
-  test('schema 6 e tabella camminate esistono', () async {
-    expect(database.schemaVersion, 6);
+  test('schema 8 e tabella camminate esistono', () async {
+    expect(database.schemaVersion, 8);
     expect(await database.select(database.camminateTable).get(), isEmpty);
   });
 

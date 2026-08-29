@@ -24,7 +24,6 @@ import '../../features/training_plan/presentation/pages/workout_history_page.dar
 import '../../features/training_plan/presentation/pages/workout_list_page.dart';
 import '../../features/training_plan/presentation/pages/workout_session_page.dart';
 import '../../features/training_plan/presentation/pages/workout_statistics_page.dart';
-import '../../features/weight/presentation/pages/weight_page.dart';
 import '../../features/walking/presentation/pages/walking_session_page.dart';
 import '../../features/walking/presentation/pages/walking_history_detail_page.dart';
 import '../../features/walking/presentation/pages/walking_history_page.dart';
@@ -57,10 +56,6 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.onboarding,
         builder: (context, state) => const OnboardingPage(),
-      ),
-      GoRoute(
-        path: AppRoutes.weight,
-        builder: (context, state) => const WeightPage(),
       ),
       GoRoute(
         path: AppRoutes.pressure,

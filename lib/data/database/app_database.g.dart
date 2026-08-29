@@ -1067,9 +1067,9 @@ class $BodyMeasurementsTableTable extends BodyMeasurementsTable
   late final GeneratedColumn<double> weightKg = GeneratedColumn<double>(
     'weight_kg',
     aliasedName,
-    false,
+    true,
     type: DriftSqlType.double,
-    requiredDuringInsert: true,
+    requiredDuringInsert: false,
   );
   static const VerificationMeta _neckCmMeta = const VerificationMeta('neckCm');
   @override
@@ -1252,8 +1252,6 @@ class $BodyMeasurementsTableTable extends BodyMeasurementsTable
         _weightKgMeta,
         weightKg.isAcceptableOrUnknown(data['weight_kg']!, _weightKgMeta),
       );
-    } else if (isInserting) {
-      context.missing(_weightKgMeta);
     }
     if (data.containsKey('neck_cm')) {
       context.handle(
@@ -1369,7 +1367,7 @@ class $BodyMeasurementsTableTable extends BodyMeasurementsTable
       weightKg: attachedDatabase.typeMapping.read(
         DriftSqlType.double,
         data['${effectivePrefix}weight_kg'],
-      )!,
+      ),
       neckCm: attachedDatabase.typeMapping.read(
         DriftSqlType.double,
         data['${effectivePrefix}neck_cm'],
@@ -1432,7 +1430,12 @@ class BodyMeasurementsTableData extends DataClass
   final int id;
   final int profileId;
   final DateTime measuredAt;
-  final double weightKg;
+
+  /// Nullable da Milestone 7.2 (schema 8): una misurazione può registrare
+  /// solo il girovita, senza peso. "Almeno una metrica presente" (peso o
+  /// girovita) è garantito a runtime da `OnboardingValidators.atLeastOneBodyMetric`,
+  /// non più dal tipo — vedi Docs/M7_2_Weight_Waist.md per la decisione.
+  final double? weightKg;
   final double? neckCm;
   final double? chestCm;
   final double? waistCm;
@@ -1449,7 +1452,7 @@ class BodyMeasurementsTableData extends DataClass
     required this.id,
     required this.profileId,
     required this.measuredAt,
-    required this.weightKg,
+    this.weightKg,
     this.neckCm,
     this.chestCm,
     this.waistCm,
@@ -1469,7 +1472,9 @@ class BodyMeasurementsTableData extends DataClass
     map['id'] = Variable<int>(id);
     map['profile_id'] = Variable<int>(profileId);
     map['measured_at'] = Variable<DateTime>(measuredAt);
-    map['weight_kg'] = Variable<double>(weightKg);
+    if (!nullToAbsent || weightKg != null) {
+      map['weight_kg'] = Variable<double>(weightKg);
+    }
     if (!nullToAbsent || neckCm != null) {
       map['neck_cm'] = Variable<double>(neckCm);
     }
@@ -1514,7 +1519,9 @@ class BodyMeasurementsTableData extends DataClass
       id: Value(id),
       profileId: Value(profileId),
       measuredAt: Value(measuredAt),
-      weightKg: Value(weightKg),
+      weightKg: weightKg == null && nullToAbsent
+          ? const Value.absent()
+          : Value(weightKg),
       neckCm: neckCm == null && nullToAbsent
           ? const Value.absent()
           : Value(neckCm),
@@ -1563,7 +1570,7 @@ class BodyMeasurementsTableData extends DataClass
       id: serializer.fromJson<int>(json['id']),
       profileId: serializer.fromJson<int>(json['profileId']),
       measuredAt: serializer.fromJson<DateTime>(json['measuredAt']),
-      weightKg: serializer.fromJson<double>(json['weightKg']),
+      weightKg: serializer.fromJson<double?>(json['weightKg']),
       neckCm: serializer.fromJson<double?>(json['neckCm']),
       chestCm: serializer.fromJson<double?>(json['chestCm']),
       waistCm: serializer.fromJson<double?>(json['waistCm']),
@@ -1585,7 +1592,7 @@ class BodyMeasurementsTableData extends DataClass
       'id': serializer.toJson<int>(id),
       'profileId': serializer.toJson<int>(profileId),
       'measuredAt': serializer.toJson<DateTime>(measuredAt),
-      'weightKg': serializer.toJson<double>(weightKg),
+      'weightKg': serializer.toJson<double?>(weightKg),
       'neckCm': serializer.toJson<double?>(neckCm),
       'chestCm': serializer.toJson<double?>(chestCm),
       'waistCm': serializer.toJson<double?>(waistCm),
@@ -1605,7 +1612,7 @@ class BodyMeasurementsTableData extends DataClass
     int? id,
     int? profileId,
     DateTime? measuredAt,
-    double? weightKg,
+    Value<double?> weightKg = const Value.absent(),
     Value<double?> neckCm = const Value.absent(),
     Value<double?> chestCm = const Value.absent(),
     Value<double?> waistCm = const Value.absent(),
@@ -1622,7 +1629,7 @@ class BodyMeasurementsTableData extends DataClass
     id: id ?? this.id,
     profileId: profileId ?? this.profileId,
     measuredAt: measuredAt ?? this.measuredAt,
-    weightKg: weightKg ?? this.weightKg,
+    weightKg: weightKg.present ? weightKg.value : this.weightKg,
     neckCm: neckCm.present ? neckCm.value : this.neckCm,
     chestCm: chestCm.present ? chestCm.value : this.chestCm,
     waistCm: waistCm.present ? waistCm.value : this.waistCm,
@@ -1740,7 +1747,7 @@ class BodyMeasurementsTableCompanion
   final Value<int> id;
   final Value<int> profileId;
   final Value<DateTime> measuredAt;
-  final Value<double> weightKg;
+  final Value<double?> weightKg;
   final Value<double?> neckCm;
   final Value<double?> chestCm;
   final Value<double?> waistCm;
@@ -1775,7 +1782,7 @@ class BodyMeasurementsTableCompanion
     this.id = const Value.absent(),
     required int profileId,
     required DateTime measuredAt,
-    required double weightKg,
+    this.weightKg = const Value.absent(),
     this.neckCm = const Value.absent(),
     this.chestCm = const Value.absent(),
     this.waistCm = const Value.absent(),
@@ -1789,8 +1796,7 @@ class BodyMeasurementsTableCompanion
     this.rightCalfCm = const Value.absent(),
     this.notes = const Value.absent(),
   }) : profileId = Value(profileId),
-       measuredAt = Value(measuredAt),
-       weightKg = Value(weightKg);
+       measuredAt = Value(measuredAt);
   static Insertable<BodyMeasurementsTableData> custom({
     Expression<int>? id,
     Expression<int>? profileId,
@@ -1833,7 +1839,7 @@ class BodyMeasurementsTableCompanion
     Value<int>? id,
     Value<int>? profileId,
     Value<DateTime>? measuredAt,
-    Value<double>? weightKg,
+    Value<double?>? weightKg,
     Value<double?>? neckCm,
     Value<double?>? chestCm,
     Value<double?>? waistCm,
@@ -13511,6 +13517,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       $SessioniAllenamentoTableTable(this);
   late final $SessioniEserciziTableTable sessioniEserciziTable =
       $SessioniEserciziTableTable(this);
+  late final Index idxMisurazioniCorporeeProfiloData = Index(
+    'idx_misurazioni_corporee_profilo_data',
+    'CREATE INDEX idx_misurazioni_corporee_profilo_data ON misurazioni_corporee (profile_id, measured_at)',
+  );
   late final Index idxCamminateIdProfiloDataInizio = Index(
     'idx_camminate_id_profilo_data_inizio',
     'CREATE INDEX idx_camminate_id_profilo_data_inizio ON camminate (id_profilo, data_inizio)',
@@ -13518,6 +13528,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final Index idxCamminateAttivaPerProfilo = Index(
     'idx_camminate_attiva_per_profilo',
     'CREATE UNIQUE INDEX idx_camminate_attiva_per_profilo ON camminate (id_profilo) WHERE stato = \'IN_PROGRESS\'',
+  );
+  late final Index idxMisurazioniPressioneProfiloData = Index(
+    'idx_misurazioni_pressione_profilo_data',
+    'CREATE INDEX idx_misurazioni_pressione_profilo_data ON misurazioni_pressione (profile_id, measured_at)',
   );
   late final Index idxEserciziIdCategoria = Index(
     'idx_esercizi_id_categoria',
@@ -13662,8 +13676,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     allenamentiEserciziTable,
     sessioniAllenamentoTable,
     sessioniEserciziTable,
+    idxMisurazioniCorporeeProfiloData,
     idxCamminateIdProfiloDataInizio,
     idxCamminateAttivaPerProfilo,
+    idxMisurazioniPressioneProfiloData,
     idxEserciziIdCategoria,
     idxEserciziLivelloMinimo,
     idxEserciziAttivo,
@@ -14866,7 +14882,7 @@ typedef $$BodyMeasurementsTableTableCreateCompanionBuilder =
       Value<int> id,
       required int profileId,
       required DateTime measuredAt,
-      required double weightKg,
+      Value<double?> weightKg,
       Value<double?> neckCm,
       Value<double?> chestCm,
       Value<double?> waistCm,
@@ -14885,7 +14901,7 @@ typedef $$BodyMeasurementsTableTableUpdateCompanionBuilder =
       Value<int> id,
       Value<int> profileId,
       Value<DateTime> measuredAt,
-      Value<double> weightKg,
+      Value<double?> weightKg,
       Value<double?> neckCm,
       Value<double?> chestCm,
       Value<double?> waistCm,
@@ -15281,7 +15297,7 @@ class $$BodyMeasurementsTableTableTableManager
                 Value<int> id = const Value.absent(),
                 Value<int> profileId = const Value.absent(),
                 Value<DateTime> measuredAt = const Value.absent(),
-                Value<double> weightKg = const Value.absent(),
+                Value<double?> weightKg = const Value.absent(),
                 Value<double?> neckCm = const Value.absent(),
                 Value<double?> chestCm = const Value.absent(),
                 Value<double?> waistCm = const Value.absent(),
@@ -15317,7 +15333,7 @@ class $$BodyMeasurementsTableTableTableManager
                 Value<int> id = const Value.absent(),
                 required int profileId,
                 required DateTime measuredAt,
-                required double weightKg,
+                Value<double?> weightKg = const Value.absent(),
                 Value<double?> neckCm = const Value.absent(),
                 Value<double?> chestCm = const Value.absent(),
                 Value<double?> waistCm = const Value.absent(),

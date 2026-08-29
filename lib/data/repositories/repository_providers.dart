@@ -13,6 +13,11 @@ import 'pressure_repository_impl.dart';
 import 'profile_repository_impl.dart';
 import 'settings_repository_impl.dart';
 
+// Nota: `clockProvider` (Clock/SystemClock condivisi) resta in
+// `forge_providers.dart` (Milestone 5.3) — già riusato da fuori Forge
+// (`features/walking/...`, Milestone 6). Il modulo Progressi (Milestone
+// 7.1) lo importa da lì con lo stesso pattern, invece di duplicarlo qui.
+
 final profileRepositoryProvider = Provider<ProfileRepository>((ref) {
   return ProfileRepositoryImpl(ref.watch(databaseProvider).userProfileDao);
 });

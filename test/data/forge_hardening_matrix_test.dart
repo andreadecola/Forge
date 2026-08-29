@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forge/data/database/app_database.dart';
@@ -25,6 +26,78 @@ import 'package:forge/domain/use_cases/persist_generated_workout.dart';
 
 import 'workout_test_helpers.dart';
 
+/// Conta le query SQL effettivamente eseguite (Milestone 7.2, sezione 64
+/// riformulata): sostituisce l'assert a cronometro reale, sensibile alla
+/// contesa di risorse quando l'intera suite gira insieme ad altri test,
+/// con un conteggio deterministico — stesso numero di query a ogni
+/// esecuzione, su qualsiasi macchina, perché dipende solo dal codice
+/// eseguito e dai dati seminati, mai dalla velocità di CPU/IO del momento.
+/// Usa la `QueryInterceptor` pubblica di drift (pensata esattamente per
+/// intercettare le chiamate a un `QueryExecutor` senza toccarne il
+/// comportamento), non un meccanismo interno/fragile.
+class _QueryCountInterceptor extends QueryInterceptor {
+  int count = 0;
+
+  @override
+  Future<List<Map<String, Object?>>> runSelect(
+    QueryExecutor executor,
+    String statement,
+    List<Object?> args,
+  ) {
+    count++;
+    return super.runSelect(executor, statement, args);
+  }
+
+  @override
+  Future<int> runInsert(
+    QueryExecutor executor,
+    String statement,
+    List<Object?> args,
+  ) {
+    count++;
+    return super.runInsert(executor, statement, args);
+  }
+
+  @override
+  Future<int> runUpdate(
+    QueryExecutor executor,
+    String statement,
+    List<Object?> args,
+  ) {
+    count++;
+    return super.runUpdate(executor, statement, args);
+  }
+
+  @override
+  Future<int> runDelete(
+    QueryExecutor executor,
+    String statement,
+    List<Object?> args,
+  ) {
+    count++;
+    return super.runDelete(executor, statement, args);
+  }
+
+  @override
+  Future<void> runCustom(
+    QueryExecutor executor,
+    String statement,
+    List<Object?> args,
+  ) {
+    count++;
+    return super.runCustom(executor, statement, args);
+  }
+
+  @override
+  Future<void> runBatched(
+    QueryExecutor executor,
+    BatchedStatements statements,
+  ) {
+    count++;
+    return super.runBatched(executor, statements);
+  }
+}
+
 /// Hardening (Milestone 5.6, sezioni 64/65/66): performance dell'adattamento
 /// su 100 pipeline consecutive, e matrice rappresentativa sul catalogo reale
 /// (tipo × livello × durata × attrezzatura) e sullo storico reale (nessuno/
@@ -34,6 +107,7 @@ import 'workout_test_helpers.dart';
 /// matrice, non ripetuto lì.
 void main() {
   late AppDatabase db;
+  late _QueryCountInterceptor queryCounter;
   late ExerciseRepository exerciseRepository;
   late DriftWorkoutRepository workoutRepository;
   late WorkoutSessionRepository sessionRepository;
@@ -43,7 +117,8 @@ void main() {
   late int profileId;
 
   setUp(() async {
-    db = AppDatabase(NativeDatabase.memory());
+    queryCounter = _QueryCountInterceptor();
+    db = AppDatabase(NativeDatabase.memory().interceptWith(queryCounter));
     final raw = File('assets/data/exercises_v1.json').readAsStringSync();
     await ExerciseCatalogSeeder(db).seedFromString(raw);
     profileId = await insertProfilo(db);
@@ -131,7 +206,8 @@ void main() {
     }
 
     final now = DateTime(2026, 1, 10);
-    final stopwatch = Stopwatch()..start();
+    final perIterationQueryCounts = <int>[];
+    var previousQueryCount = queryCounter.count;
     for (var i = 0; i < 100; i++) {
       final result = await generateAdapted(
         request: request(),
@@ -139,12 +215,43 @@ void main() {
         now: now,
       );
       expect(result.success, isTrue, reason: 'iterazione $i: ${result.errors}');
+      final currentQueryCount = queryCounter.count;
+      perIterationQueryCounts.add(currentQueryCount - previousQueryCount);
+      previousQueryCount = currentQueryCount;
     }
-    stopwatch.stop();
-    // Nessuna soglia rigida in millisecondi (richiesto esplicitamente di
-    // evitarla): solo un limite largo per intercettare una regressione
-    // grave (es. loop o query N^2 introdotta per errore).
-    expect(stopwatch.elapsed, lessThan(const Duration(minutes: 2)));
+
+    // Verifica strutturale e deterministica, non a cronometro reale
+    // (quest'ultimo, un budget di 2 minuti su `Stopwatch`, falliva sotto
+    // la contesa di risorse quando l'intera suite gira in parallelo ad
+    // altri test, pur passando sempre in isolamento — mai una regressione
+    // di Forge). Le 100 iterazioni lavorano sullo stesso storico fisso (le
+    // 5 sessioni seminate sopra) con la stessa richiesta: il numero di
+    // query SQL eseguite da ciascuna deve quindi essere **esattamente**
+    // lo stesso a ogni esecuzione, su qualsiasi macchina, perché dipende
+    // solo dal codice e dai dati seminati — mai dalla velocità di CPU/IO
+    // del momento. Un loop o una query N^2 introdotta per errore (la
+    // stessa preoccupazione della soglia a cronometro che sostituisce) si
+    // manifesterebbe qui come un conteggio diverso tra le iterazioni,
+    // individuato in modo esatto invece che probabilistico.
+    expect(
+      perIterationQueryCounts.first,
+      greaterThan(0),
+      reason:
+          'nessuna query intercettata: il contatore non sta osservando '
+          'l\'esecuzione reale (verifica che _QueryCountInterceptor sia '
+          'ancora applicato al database di test)',
+    );
+    final minQueries = perIterationQueryCounts.reduce((a, b) => a < b ? a : b);
+    final maxQueries = perIterationQueryCounts.reduce((a, b) => a > b ? a : b);
+    expect(
+      maxQueries,
+      minQueries,
+      reason:
+          'query per iterazione non costanti: $perIterationQueryCounts '
+          '(min $minQueries, max $maxQueries) — una crescita indica una '
+          'regressione strutturale (es. query ripetuta senza necessità o '
+          'storico riletto per intero a ogni iterazione)',
+    );
   });
 
   test('matrice rappresentativa sul catalogo reale: tipo × livello × durata × '

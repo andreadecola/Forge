@@ -3,6 +3,14 @@ import 'package:drift/drift.dart';
 import 'user_profiles_table.dart';
 
 /// Nome fisico SQLite in italiano (Milestone 3.1).
+///
+/// Indice su (profileId, measuredAt) aggiunto in Milestone 7.1: stesso
+/// motivo di `BodyMeasurementsTable` — lo storico per profilo è già
+/// interrogato ordinato per data, senza indice dedicato da Milestone 2.
+@TableIndex(
+  name: 'idx_misurazioni_pressione_profilo_data',
+  columns: {#profileId, #measuredAt},
+)
 class PressureMeasurementsTable extends Table {
   @override
   String get tableName => 'misurazioni_pressione';

@@ -60,6 +60,13 @@ part 'app_database.g.dart';
 ///   ripristinare dopo la chiusura dell'app (vedi 07_Training_Engine.md).
 /// - Milestone 6.3.2 (schema 6): stato e timestamp della pausa persistita
 ///   della camminata; il tempo attivo resta derivato.
+/// - Milestone 7.1 (schema 7): indici su (profileId, measuredAt) per
+///   `misurazioni_corporee`/`misurazioni_pressione` — nessuna nuova colonna,
+///   nessuna nuova tabella (fondamenta del modulo Progressi, che riusa lo
+///   storico peso/girovita/pressione già esistente dalla Milestone 2).
+/// - Milestone 7.2 (schema 8): `weight_kg` in `misurazioni_corporee` diventa
+///   nullable, per permettere misurazioni "solo girovita" (vedi
+///   Docs/M7_2_Weight_Waist.md). Nessuna nuova tabella.
 @DriftDatabase(
   tables: [
     AppSettingsTable,
@@ -107,7 +114,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor]) : super(executor ?? _openConnection());
 
   @override
-  int get schemaVersion => 6;
+  int get schemaVersion => 8;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -177,6 +184,71 @@ class AppDatabase extends _$AppDatabase {
         await m.addColumn(camminateTable, camminateTable.pausaInCorso);
         await m.addColumn(camminateTable, camminateTable.dataInizioPausa);
         await m.addColumn(camminateTable, camminateTable.durataPausaSecondi);
+      }
+      if (from < 7) {
+        // Da schema 6 le due tabelle esistono già senza indice dedicato:
+        // solo due indici nuovi, nessuna colonna/tabella (Milestone 7.1,
+        // fondamenta del modulo Progressi — vedi Docs/M7_1_Progress_Foundations.md).
+        //
+        // `IF NOT EXISTS` (invece di `m.createIndex()`, che non lo genera)
+        // perché `misurazioni_corporee`/`misurazioni_pressione` sono
+        // tabelle Milestone 2 non cambiate da schema 1: i test di
+        // migrazione più vecchi (es. schema 2->3, 4->5) ricostruiscono il
+        // loro "schema storico" riusando direttamente queste classi Table
+        // correnti (non erano ancora cambiate a quel punto), quindi il
+        // loro DDL catturato include già questo indice — ricrearlo senza
+        // `IF NOT EXISTS` fallirebbe con "index already exists" per quei
+        // soli test, pur non essendoci alcun problema su un dispositivo
+        // reale. Stesso principio già documentato sopra per
+        // `createTable()` vs `createIndex()`.
+        await customStatement(
+          'CREATE INDEX IF NOT EXISTS '
+          'idx_misurazioni_corporee_profilo_data ON misurazioni_corporee '
+          '(profile_id, measured_at)',
+        );
+        await customStatement(
+          'CREATE INDEX IF NOT EXISTS '
+          'idx_misurazioni_pressione_profilo_data ON misurazioni_pressione '
+          '(profile_id, measured_at)',
+        );
+      }
+      if (from < 8) {
+        // SQLite non supporta ALTER COLUMN per rendere una colonna NOT
+        // NULL -> nullable: si ricrea la tabella preservando i dati
+        // (Milestone 7.2 — "solo girovita", vedi
+        // Docs/M7_2_Weight_Waist.md). `bodyMeasurementsTable` qui è già la
+        // definizione con `weight_kg` nullable, quindi createTable() crea
+        // direttamente la nuova forma.
+        //
+        // L'indice su (profile_id, measured_at) segue implicitamente la
+        // tabella nel rename e viene eliminato insieme a
+        // `misurazioni_corporee_old`: va ricreato esplicitamente alla
+        // fine, con `IF NOT EXISTS` per lo stesso motivo del ramo `from <
+        // 7` sopra (test di migrazione più vecchi che riusano la classe
+        // Table corrente, già nullable, per ricostruire schemi storici).
+        await customStatement(
+          'ALTER TABLE misurazioni_corporee '
+          'RENAME TO misurazioni_corporee_old',
+        );
+        await m.createTable(bodyMeasurementsTable);
+        await customStatement(
+          'INSERT INTO misurazioni_corporee '
+          '(id, profile_id, measured_at, weight_kg, neck_cm, chest_cm, '
+          'waist_cm, abdomen_cm, hips_cm, left_arm_cm, right_arm_cm, '
+          'left_thigh_cm, right_thigh_cm, left_calf_cm, right_calf_cm, '
+          'notes) '
+          'SELECT id, profile_id, measured_at, weight_kg, neck_cm, '
+          'chest_cm, waist_cm, abdomen_cm, hips_cm, left_arm_cm, '
+          'right_arm_cm, left_thigh_cm, right_thigh_cm, left_calf_cm, '
+          'right_calf_cm, notes '
+          'FROM misurazioni_corporee_old',
+        );
+        await m.deleteTable('misurazioni_corporee_old');
+        await customStatement(
+          'CREATE INDEX IF NOT EXISTS '
+          'idx_misurazioni_corporee_profilo_data ON misurazioni_corporee '
+          '(profile_id, measured_at)',
+        );
       }
     },
     beforeOpen: (details) async {

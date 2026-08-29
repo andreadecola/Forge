@@ -125,7 +125,7 @@ void main() {
     final database = AppDatabase(NativeDatabase.opened(rawDb));
     addTearDown(database.close);
 
-    expect(database.schemaVersion, 6);
+    expect(database.schemaVersion, 8);
     final legacy = await database.camminateDao.getById(1);
     expect(legacy, isNotNull);
     expect(legacy!.distanzaMetri, 3500);

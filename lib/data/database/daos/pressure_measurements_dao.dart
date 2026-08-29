@@ -25,12 +25,19 @@ class PressureMeasurementsDao extends DatabaseAccessor<AppDatabase>
     pressureMeasurementsTable,
   )..where((t) => t.id.equals(id))).getSingleOrNull();
 
+  /// Ordinati per `measuredAt` decrescente, con tie-break su `id`
+  /// decrescente a parità di timestamp (Milestone 7.3, sezione 24):
+  /// determinismo garantito anche con più misurazioni nello stesso
+  /// istante, senza assumere l'ordine fisico delle righe su disco.
   Future<List<PressureMeasurementsTableData>> getMeasurementsByProfile(
     int profileId,
   ) {
     return (select(pressureMeasurementsTable)
           ..where((t) => t.profileId.equals(profileId))
-          ..orderBy([(t) => OrderingTerm.desc(t.measuredAt)]))
+          ..orderBy([
+            (t) => OrderingTerm.desc(t.measuredAt),
+            (t) => OrderingTerm.desc(t.id),
+          ]))
         .get();
   }
 
@@ -39,14 +46,20 @@ class PressureMeasurementsDao extends DatabaseAccessor<AppDatabase>
   ) {
     return (select(pressureMeasurementsTable)
           ..where((t) => t.profileId.equals(profileId))
-          ..orderBy([(t) => OrderingTerm.desc(t.measuredAt)]))
+          ..orderBy([
+            (t) => OrderingTerm.desc(t.measuredAt),
+            (t) => OrderingTerm.desc(t.id),
+          ]))
         .watch();
   }
 
   Future<PressureMeasurementsTableData?> getLatestPressure(int profileId) {
     return (select(pressureMeasurementsTable)
           ..where((t) => t.profileId.equals(profileId))
-          ..orderBy([(t) => OrderingTerm.desc(t.measuredAt)])
+          ..orderBy([
+            (t) => OrderingTerm.desc(t.measuredAt),
+            (t) => OrderingTerm.desc(t.id),
+          ])
           ..limit(1))
         .getSingleOrNull();
   }

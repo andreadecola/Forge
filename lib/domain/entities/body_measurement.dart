@@ -3,7 +3,7 @@ class BodyMeasurement {
     this.id,
     required this.profileId,
     required this.measuredAt,
-    required this.weightKg,
+    this.weightKg,
     this.neckCm,
     this.chestCm,
     this.waistCm,
@@ -21,7 +21,7 @@ class BodyMeasurement {
   final int? id;
   final int profileId;
   final DateTime measuredAt;
-  final double weightKg;
+  final double? weightKg;
   final double? neckCm;
   final double? chestCm;
   final double? waistCm;
@@ -39,7 +39,7 @@ class BodyMeasurement {
     int? id,
     int? profileId,
     DateTime? measuredAt,
-    double? weightKg,
+    double? Function()? weightKg,
     double? Function()? waistCm,
     String? Function()? notes,
   }) {
@@ -47,7 +47,7 @@ class BodyMeasurement {
       id: id ?? this.id,
       profileId: profileId ?? this.profileId,
       measuredAt: measuredAt ?? this.measuredAt,
-      weightKg: weightKg ?? this.weightKg,
+      weightKg: weightKg != null ? weightKg() : this.weightKg,
       neckCm: neckCm,
       chestCm: chestCm,
       waistCm: waistCm != null ? waistCm() : this.waistCm,

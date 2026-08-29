@@ -133,8 +133,8 @@ void main() {
     return rows.map((r) => r.read<String>('name')).toSet();
   }
 
-  test('schemaVersion è 6', () {
-    expect(database.schemaVersion, 6);
+  test('schemaVersion è 8', () {
+    expect(database.schemaVersion, 8);
   });
 
   test(
