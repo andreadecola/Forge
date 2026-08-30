@@ -56,6 +56,16 @@ class DriftWalkingSessionRepository implements WalkingSessionRepository {
   }
 
   @override
+  Stream<WalkingSession?> watchWalkingSessionById(int id) {
+    return db.camminateDao
+        .watchById(id)
+        .map(
+          (row) =>
+              row == null ? null : WalkingSessionMappers.walkingSession(row),
+        );
+  }
+
+  @override
   Future<List<WalkingSession>> getWalkingSessions({
     required int profileId,
   }) async {

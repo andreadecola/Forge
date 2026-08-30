@@ -73,6 +73,10 @@ class _FakeWorkoutSessionRepository implements WorkoutSessionRepository {
   Future<PersistedWorkoutSession?> getSessionById(int sessionId) async => null;
 
   @override
+  Stream<PersistedWorkoutSession?> watchSessionById(int sessionId) =>
+      Stream.value(null);
+
+  @override
   Future<List<PersistedSessionExercise>> getSessionExercises(
     int sessionId,
   ) async => const [];

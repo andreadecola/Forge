@@ -13474,6 +13474,857 @@ class SessioniEserciziTableCompanion
   }
 }
 
+class $AttivitaPianificateTableTable extends AttivitaPianificateTable
+    with
+        TableInfo<
+          $AttivitaPianificateTableTable,
+          AttivitaPianificateTableData
+        > {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $AttivitaPianificateTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _idProfiloMeta = const VerificationMeta(
+    'idProfilo',
+  );
+  @override
+  late final GeneratedColumn<int> idProfilo = GeneratedColumn<int>(
+    'id_profilo',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES profili_utente (id)',
+    ),
+  );
+  static const VerificationMeta _dataPianificataMeta = const VerificationMeta(
+    'dataPianificata',
+  );
+  @override
+  late final GeneratedColumn<DateTime> dataPianificata =
+      GeneratedColumn<DateTime>(
+        'data_pianificata',
+        aliasedName,
+        false,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: true,
+      );
+  static const VerificationMeta _tipoMeta = const VerificationMeta('tipo');
+  @override
+  late final GeneratedColumn<String> tipo = GeneratedColumn<String>(
+    'tipo',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _idAllenamentoMeta = const VerificationMeta(
+    'idAllenamento',
+  );
+  @override
+  late final GeneratedColumn<int> idAllenamento = GeneratedColumn<int>(
+    'id_allenamento',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES allenamenti (id) ON DELETE SET NULL',
+    ),
+  );
+  static const VerificationMeta _durataPianificataMinutiMeta =
+      const VerificationMeta('durataPianificataMinuti');
+  @override
+  late final GeneratedColumn<int> durataPianificataMinuti =
+      GeneratedColumn<int>(
+        'durata_pianificata_minuti',
+        aliasedName,
+        true,
+        type: DriftSqlType.int,
+        requiredDuringInsert: false,
+      );
+  static const VerificationMeta _statoMeta = const VerificationMeta('stato');
+  @override
+  late final GeneratedColumn<String> stato = GeneratedColumn<String>(
+    'stato',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('PLANNED'),
+  );
+  static const VerificationMeta _origineMeta = const VerificationMeta(
+    'origine',
+  );
+  @override
+  late final GeneratedColumn<String> origine = GeneratedColumn<String>(
+    'origine',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _noteMeta = const VerificationMeta('note');
+  @override
+  late final GeneratedColumn<String> note = GeneratedColumn<String>(
+    'note',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _dataCreazioneMeta = const VerificationMeta(
+    'dataCreazione',
+  );
+  @override
+  late final GeneratedColumn<DateTime> dataCreazione =
+      GeneratedColumn<DateTime>(
+        'data_creazione',
+        aliasedName,
+        false,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: true,
+      );
+  static const VerificationMeta _dataModificaMeta = const VerificationMeta(
+    'dataModifica',
+  );
+  @override
+  late final GeneratedColumn<DateTime> dataModifica = GeneratedColumn<DateTime>(
+    'data_modifica',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _idSessioneAllenamentoMeta =
+      const VerificationMeta('idSessioneAllenamento');
+  @override
+  late final GeneratedColumn<int> idSessioneAllenamento = GeneratedColumn<int>(
+    'id_sessione_allenamento',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES sessioni_allenamento (id) ON DELETE SET NULL',
+    ),
+  );
+  static const VerificationMeta _idSessioneCamminataMeta =
+      const VerificationMeta('idSessioneCamminata');
+  @override
+  late final GeneratedColumn<int> idSessioneCamminata = GeneratedColumn<int>(
+    'id_sessione_camminata',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES camminate (id) ON DELETE SET NULL',
+    ),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    idProfilo,
+    dataPianificata,
+    tipo,
+    idAllenamento,
+    durataPianificataMinuti,
+    stato,
+    origine,
+    note,
+    dataCreazione,
+    dataModifica,
+    idSessioneAllenamento,
+    idSessioneCamminata,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'attivita_pianificate';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<AttivitaPianificateTableData> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('id_profilo')) {
+      context.handle(
+        _idProfiloMeta,
+        idProfilo.isAcceptableOrUnknown(data['id_profilo']!, _idProfiloMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_idProfiloMeta);
+    }
+    if (data.containsKey('data_pianificata')) {
+      context.handle(
+        _dataPianificataMeta,
+        dataPianificata.isAcceptableOrUnknown(
+          data['data_pianificata']!,
+          _dataPianificataMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_dataPianificataMeta);
+    }
+    if (data.containsKey('tipo')) {
+      context.handle(
+        _tipoMeta,
+        tipo.isAcceptableOrUnknown(data['tipo']!, _tipoMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_tipoMeta);
+    }
+    if (data.containsKey('id_allenamento')) {
+      context.handle(
+        _idAllenamentoMeta,
+        idAllenamento.isAcceptableOrUnknown(
+          data['id_allenamento']!,
+          _idAllenamentoMeta,
+        ),
+      );
+    }
+    if (data.containsKey('durata_pianificata_minuti')) {
+      context.handle(
+        _durataPianificataMinutiMeta,
+        durataPianificataMinuti.isAcceptableOrUnknown(
+          data['durata_pianificata_minuti']!,
+          _durataPianificataMinutiMeta,
+        ),
+      );
+    }
+    if (data.containsKey('stato')) {
+      context.handle(
+        _statoMeta,
+        stato.isAcceptableOrUnknown(data['stato']!, _statoMeta),
+      );
+    }
+    if (data.containsKey('origine')) {
+      context.handle(
+        _origineMeta,
+        origine.isAcceptableOrUnknown(data['origine']!, _origineMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_origineMeta);
+    }
+    if (data.containsKey('note')) {
+      context.handle(
+        _noteMeta,
+        note.isAcceptableOrUnknown(data['note']!, _noteMeta),
+      );
+    }
+    if (data.containsKey('data_creazione')) {
+      context.handle(
+        _dataCreazioneMeta,
+        dataCreazione.isAcceptableOrUnknown(
+          data['data_creazione']!,
+          _dataCreazioneMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_dataCreazioneMeta);
+    }
+    if (data.containsKey('data_modifica')) {
+      context.handle(
+        _dataModificaMeta,
+        dataModifica.isAcceptableOrUnknown(
+          data['data_modifica']!,
+          _dataModificaMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_dataModificaMeta);
+    }
+    if (data.containsKey('id_sessione_allenamento')) {
+      context.handle(
+        _idSessioneAllenamentoMeta,
+        idSessioneAllenamento.isAcceptableOrUnknown(
+          data['id_sessione_allenamento']!,
+          _idSessioneAllenamentoMeta,
+        ),
+      );
+    }
+    if (data.containsKey('id_sessione_camminata')) {
+      context.handle(
+        _idSessioneCamminataMeta,
+        idSessioneCamminata.isAcceptableOrUnknown(
+          data['id_sessione_camminata']!,
+          _idSessioneCamminataMeta,
+        ),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  AttivitaPianificateTableData map(
+    Map<String, dynamic> data, {
+    String? tablePrefix,
+  }) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return AttivitaPianificateTableData(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      idProfilo: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id_profilo'],
+      )!,
+      dataPianificata: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}data_pianificata'],
+      )!,
+      tipo: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}tipo'],
+      )!,
+      idAllenamento: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id_allenamento'],
+      ),
+      durataPianificataMinuti: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}durata_pianificata_minuti'],
+      ),
+      stato: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}stato'],
+      )!,
+      origine: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}origine'],
+      )!,
+      note: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}note'],
+      ),
+      dataCreazione: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}data_creazione'],
+      )!,
+      dataModifica: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}data_modifica'],
+      )!,
+      idSessioneAllenamento: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id_sessione_allenamento'],
+      ),
+      idSessioneCamminata: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id_sessione_camminata'],
+      ),
+    );
+  }
+
+  @override
+  $AttivitaPianificateTableTable createAlias(String alias) {
+    return $AttivitaPianificateTableTable(attachedDatabase, alias);
+  }
+}
+
+class AttivitaPianificateTableData extends DataClass
+    implements Insertable<AttivitaPianificateTableData> {
+  final int id;
+  final int idProfilo;
+
+  /// Solo il giorno (mezzanotte locale): vedi [PlannedActivity.scheduledDate].
+  final DateTime dataPianificata;
+
+  /// Codice stabile di `PlannedActivityType`.
+  final String tipo;
+
+  /// Riferimento a `allenamenti.id`, obbligatorio solo per `tipo = WORKOUT`
+  /// (validato dal dominio, non da un CHECK incrociato — stesso principio
+  /// già seguito per `allenamenti_esercizi`). `SET NULL` invece di CASCADE:
+  /// eliminare la scheda non deve eliminare né bloccare l'attività
+  /// pianificata (sezione 20/57), stesso pattern già usato da
+  /// `sessioni_allenamento.idAllenamento`.
+  final int? idAllenamento;
+
+  /// Solo per `tipo = WALK` (sezione 16): durata prevista, mai un target di
+  /// distanza/passi — nessuna duplicazione dei campi di `camminate`.
+  final int? durataPianificataMinuti;
+
+  /// Codice stabile di `PlannedActivityStatus`.
+  final String stato;
+
+  /// Codice stabile di `PlannedActivityOrigin`.
+  final String origine;
+  final String? note;
+  final DateTime dataCreazione;
+  final DateTime dataModifica;
+
+  /// Collegamento esplicito alla `WorkoutSession` reale nata avviando
+  /// questa attività (Milestone 8.5): valorizzato solo per `tipo =
+  /// WORKOUT`, mai dedotto da data/workoutId/durata (nessun matching
+  /// implicito, sezione 15). Un solo valore alla volta: rappresenta la
+  /// sessione corrente/più recente, non uno storico — un nuovo avvio dopo
+  /// un abort sovrascrive il riferimento, ma la sessione precedente resta
+  /// comunque nello storico di `sessioni_allenamento` (mai eliminata,
+  /// sezione 25/26). `SET NULL` invece di CASCADE: coerente con
+  /// `idAllenamento` sopra — eliminare l'attività pianificata non deve mai
+  /// eliminare la sessione reale (sezione 27).
+  final int? idSessioneAllenamento;
+
+  /// Stesso principio per `tipo = WALK`.
+  final int? idSessioneCamminata;
+  const AttivitaPianificateTableData({
+    required this.id,
+    required this.idProfilo,
+    required this.dataPianificata,
+    required this.tipo,
+    this.idAllenamento,
+    this.durataPianificataMinuti,
+    required this.stato,
+    required this.origine,
+    this.note,
+    required this.dataCreazione,
+    required this.dataModifica,
+    this.idSessioneAllenamento,
+    this.idSessioneCamminata,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['id_profilo'] = Variable<int>(idProfilo);
+    map['data_pianificata'] = Variable<DateTime>(dataPianificata);
+    map['tipo'] = Variable<String>(tipo);
+    if (!nullToAbsent || idAllenamento != null) {
+      map['id_allenamento'] = Variable<int>(idAllenamento);
+    }
+    if (!nullToAbsent || durataPianificataMinuti != null) {
+      map['durata_pianificata_minuti'] = Variable<int>(durataPianificataMinuti);
+    }
+    map['stato'] = Variable<String>(stato);
+    map['origine'] = Variable<String>(origine);
+    if (!nullToAbsent || note != null) {
+      map['note'] = Variable<String>(note);
+    }
+    map['data_creazione'] = Variable<DateTime>(dataCreazione);
+    map['data_modifica'] = Variable<DateTime>(dataModifica);
+    if (!nullToAbsent || idSessioneAllenamento != null) {
+      map['id_sessione_allenamento'] = Variable<int>(idSessioneAllenamento);
+    }
+    if (!nullToAbsent || idSessioneCamminata != null) {
+      map['id_sessione_camminata'] = Variable<int>(idSessioneCamminata);
+    }
+    return map;
+  }
+
+  AttivitaPianificateTableCompanion toCompanion(bool nullToAbsent) {
+    return AttivitaPianificateTableCompanion(
+      id: Value(id),
+      idProfilo: Value(idProfilo),
+      dataPianificata: Value(dataPianificata),
+      tipo: Value(tipo),
+      idAllenamento: idAllenamento == null && nullToAbsent
+          ? const Value.absent()
+          : Value(idAllenamento),
+      durataPianificataMinuti: durataPianificataMinuti == null && nullToAbsent
+          ? const Value.absent()
+          : Value(durataPianificataMinuti),
+      stato: Value(stato),
+      origine: Value(origine),
+      note: note == null && nullToAbsent ? const Value.absent() : Value(note),
+      dataCreazione: Value(dataCreazione),
+      dataModifica: Value(dataModifica),
+      idSessioneAllenamento: idSessioneAllenamento == null && nullToAbsent
+          ? const Value.absent()
+          : Value(idSessioneAllenamento),
+      idSessioneCamminata: idSessioneCamminata == null && nullToAbsent
+          ? const Value.absent()
+          : Value(idSessioneCamminata),
+    );
+  }
+
+  factory AttivitaPianificateTableData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return AttivitaPianificateTableData(
+      id: serializer.fromJson<int>(json['id']),
+      idProfilo: serializer.fromJson<int>(json['idProfilo']),
+      dataPianificata: serializer.fromJson<DateTime>(json['dataPianificata']),
+      tipo: serializer.fromJson<String>(json['tipo']),
+      idAllenamento: serializer.fromJson<int?>(json['idAllenamento']),
+      durataPianificataMinuti: serializer.fromJson<int?>(
+        json['durataPianificataMinuti'],
+      ),
+      stato: serializer.fromJson<String>(json['stato']),
+      origine: serializer.fromJson<String>(json['origine']),
+      note: serializer.fromJson<String?>(json['note']),
+      dataCreazione: serializer.fromJson<DateTime>(json['dataCreazione']),
+      dataModifica: serializer.fromJson<DateTime>(json['dataModifica']),
+      idSessioneAllenamento: serializer.fromJson<int?>(
+        json['idSessioneAllenamento'],
+      ),
+      idSessioneCamminata: serializer.fromJson<int?>(
+        json['idSessioneCamminata'],
+      ),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'idProfilo': serializer.toJson<int>(idProfilo),
+      'dataPianificata': serializer.toJson<DateTime>(dataPianificata),
+      'tipo': serializer.toJson<String>(tipo),
+      'idAllenamento': serializer.toJson<int?>(idAllenamento),
+      'durataPianificataMinuti': serializer.toJson<int?>(
+        durataPianificataMinuti,
+      ),
+      'stato': serializer.toJson<String>(stato),
+      'origine': serializer.toJson<String>(origine),
+      'note': serializer.toJson<String?>(note),
+      'dataCreazione': serializer.toJson<DateTime>(dataCreazione),
+      'dataModifica': serializer.toJson<DateTime>(dataModifica),
+      'idSessioneAllenamento': serializer.toJson<int?>(idSessioneAllenamento),
+      'idSessioneCamminata': serializer.toJson<int?>(idSessioneCamminata),
+    };
+  }
+
+  AttivitaPianificateTableData copyWith({
+    int? id,
+    int? idProfilo,
+    DateTime? dataPianificata,
+    String? tipo,
+    Value<int?> idAllenamento = const Value.absent(),
+    Value<int?> durataPianificataMinuti = const Value.absent(),
+    String? stato,
+    String? origine,
+    Value<String?> note = const Value.absent(),
+    DateTime? dataCreazione,
+    DateTime? dataModifica,
+    Value<int?> idSessioneAllenamento = const Value.absent(),
+    Value<int?> idSessioneCamminata = const Value.absent(),
+  }) => AttivitaPianificateTableData(
+    id: id ?? this.id,
+    idProfilo: idProfilo ?? this.idProfilo,
+    dataPianificata: dataPianificata ?? this.dataPianificata,
+    tipo: tipo ?? this.tipo,
+    idAllenamento: idAllenamento.present
+        ? idAllenamento.value
+        : this.idAllenamento,
+    durataPianificataMinuti: durataPianificataMinuti.present
+        ? durataPianificataMinuti.value
+        : this.durataPianificataMinuti,
+    stato: stato ?? this.stato,
+    origine: origine ?? this.origine,
+    note: note.present ? note.value : this.note,
+    dataCreazione: dataCreazione ?? this.dataCreazione,
+    dataModifica: dataModifica ?? this.dataModifica,
+    idSessioneAllenamento: idSessioneAllenamento.present
+        ? idSessioneAllenamento.value
+        : this.idSessioneAllenamento,
+    idSessioneCamminata: idSessioneCamminata.present
+        ? idSessioneCamminata.value
+        : this.idSessioneCamminata,
+  );
+  AttivitaPianificateTableData copyWithCompanion(
+    AttivitaPianificateTableCompanion data,
+  ) {
+    return AttivitaPianificateTableData(
+      id: data.id.present ? data.id.value : this.id,
+      idProfilo: data.idProfilo.present ? data.idProfilo.value : this.idProfilo,
+      dataPianificata: data.dataPianificata.present
+          ? data.dataPianificata.value
+          : this.dataPianificata,
+      tipo: data.tipo.present ? data.tipo.value : this.tipo,
+      idAllenamento: data.idAllenamento.present
+          ? data.idAllenamento.value
+          : this.idAllenamento,
+      durataPianificataMinuti: data.durataPianificataMinuti.present
+          ? data.durataPianificataMinuti.value
+          : this.durataPianificataMinuti,
+      stato: data.stato.present ? data.stato.value : this.stato,
+      origine: data.origine.present ? data.origine.value : this.origine,
+      note: data.note.present ? data.note.value : this.note,
+      dataCreazione: data.dataCreazione.present
+          ? data.dataCreazione.value
+          : this.dataCreazione,
+      dataModifica: data.dataModifica.present
+          ? data.dataModifica.value
+          : this.dataModifica,
+      idSessioneAllenamento: data.idSessioneAllenamento.present
+          ? data.idSessioneAllenamento.value
+          : this.idSessioneAllenamento,
+      idSessioneCamminata: data.idSessioneCamminata.present
+          ? data.idSessioneCamminata.value
+          : this.idSessioneCamminata,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AttivitaPianificateTableData(')
+          ..write('id: $id, ')
+          ..write('idProfilo: $idProfilo, ')
+          ..write('dataPianificata: $dataPianificata, ')
+          ..write('tipo: $tipo, ')
+          ..write('idAllenamento: $idAllenamento, ')
+          ..write('durataPianificataMinuti: $durataPianificataMinuti, ')
+          ..write('stato: $stato, ')
+          ..write('origine: $origine, ')
+          ..write('note: $note, ')
+          ..write('dataCreazione: $dataCreazione, ')
+          ..write('dataModifica: $dataModifica, ')
+          ..write('idSessioneAllenamento: $idSessioneAllenamento, ')
+          ..write('idSessioneCamminata: $idSessioneCamminata')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    idProfilo,
+    dataPianificata,
+    tipo,
+    idAllenamento,
+    durataPianificataMinuti,
+    stato,
+    origine,
+    note,
+    dataCreazione,
+    dataModifica,
+    idSessioneAllenamento,
+    idSessioneCamminata,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is AttivitaPianificateTableData &&
+          other.id == this.id &&
+          other.idProfilo == this.idProfilo &&
+          other.dataPianificata == this.dataPianificata &&
+          other.tipo == this.tipo &&
+          other.idAllenamento == this.idAllenamento &&
+          other.durataPianificataMinuti == this.durataPianificataMinuti &&
+          other.stato == this.stato &&
+          other.origine == this.origine &&
+          other.note == this.note &&
+          other.dataCreazione == this.dataCreazione &&
+          other.dataModifica == this.dataModifica &&
+          other.idSessioneAllenamento == this.idSessioneAllenamento &&
+          other.idSessioneCamminata == this.idSessioneCamminata);
+}
+
+class AttivitaPianificateTableCompanion
+    extends UpdateCompanion<AttivitaPianificateTableData> {
+  final Value<int> id;
+  final Value<int> idProfilo;
+  final Value<DateTime> dataPianificata;
+  final Value<String> tipo;
+  final Value<int?> idAllenamento;
+  final Value<int?> durataPianificataMinuti;
+  final Value<String> stato;
+  final Value<String> origine;
+  final Value<String?> note;
+  final Value<DateTime> dataCreazione;
+  final Value<DateTime> dataModifica;
+  final Value<int?> idSessioneAllenamento;
+  final Value<int?> idSessioneCamminata;
+  const AttivitaPianificateTableCompanion({
+    this.id = const Value.absent(),
+    this.idProfilo = const Value.absent(),
+    this.dataPianificata = const Value.absent(),
+    this.tipo = const Value.absent(),
+    this.idAllenamento = const Value.absent(),
+    this.durataPianificataMinuti = const Value.absent(),
+    this.stato = const Value.absent(),
+    this.origine = const Value.absent(),
+    this.note = const Value.absent(),
+    this.dataCreazione = const Value.absent(),
+    this.dataModifica = const Value.absent(),
+    this.idSessioneAllenamento = const Value.absent(),
+    this.idSessioneCamminata = const Value.absent(),
+  });
+  AttivitaPianificateTableCompanion.insert({
+    this.id = const Value.absent(),
+    required int idProfilo,
+    required DateTime dataPianificata,
+    required String tipo,
+    this.idAllenamento = const Value.absent(),
+    this.durataPianificataMinuti = const Value.absent(),
+    this.stato = const Value.absent(),
+    required String origine,
+    this.note = const Value.absent(),
+    required DateTime dataCreazione,
+    required DateTime dataModifica,
+    this.idSessioneAllenamento = const Value.absent(),
+    this.idSessioneCamminata = const Value.absent(),
+  }) : idProfilo = Value(idProfilo),
+       dataPianificata = Value(dataPianificata),
+       tipo = Value(tipo),
+       origine = Value(origine),
+       dataCreazione = Value(dataCreazione),
+       dataModifica = Value(dataModifica);
+  static Insertable<AttivitaPianificateTableData> custom({
+    Expression<int>? id,
+    Expression<int>? idProfilo,
+    Expression<DateTime>? dataPianificata,
+    Expression<String>? tipo,
+    Expression<int>? idAllenamento,
+    Expression<int>? durataPianificataMinuti,
+    Expression<String>? stato,
+    Expression<String>? origine,
+    Expression<String>? note,
+    Expression<DateTime>? dataCreazione,
+    Expression<DateTime>? dataModifica,
+    Expression<int>? idSessioneAllenamento,
+    Expression<int>? idSessioneCamminata,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (idProfilo != null) 'id_profilo': idProfilo,
+      if (dataPianificata != null) 'data_pianificata': dataPianificata,
+      if (tipo != null) 'tipo': tipo,
+      if (idAllenamento != null) 'id_allenamento': idAllenamento,
+      if (durataPianificataMinuti != null)
+        'durata_pianificata_minuti': durataPianificataMinuti,
+      if (stato != null) 'stato': stato,
+      if (origine != null) 'origine': origine,
+      if (note != null) 'note': note,
+      if (dataCreazione != null) 'data_creazione': dataCreazione,
+      if (dataModifica != null) 'data_modifica': dataModifica,
+      if (idSessioneAllenamento != null)
+        'id_sessione_allenamento': idSessioneAllenamento,
+      if (idSessioneCamminata != null)
+        'id_sessione_camminata': idSessioneCamminata,
+    });
+  }
+
+  AttivitaPianificateTableCompanion copyWith({
+    Value<int>? id,
+    Value<int>? idProfilo,
+    Value<DateTime>? dataPianificata,
+    Value<String>? tipo,
+    Value<int?>? idAllenamento,
+    Value<int?>? durataPianificataMinuti,
+    Value<String>? stato,
+    Value<String>? origine,
+    Value<String?>? note,
+    Value<DateTime>? dataCreazione,
+    Value<DateTime>? dataModifica,
+    Value<int?>? idSessioneAllenamento,
+    Value<int?>? idSessioneCamminata,
+  }) {
+    return AttivitaPianificateTableCompanion(
+      id: id ?? this.id,
+      idProfilo: idProfilo ?? this.idProfilo,
+      dataPianificata: dataPianificata ?? this.dataPianificata,
+      tipo: tipo ?? this.tipo,
+      idAllenamento: idAllenamento ?? this.idAllenamento,
+      durataPianificataMinuti:
+          durataPianificataMinuti ?? this.durataPianificataMinuti,
+      stato: stato ?? this.stato,
+      origine: origine ?? this.origine,
+      note: note ?? this.note,
+      dataCreazione: dataCreazione ?? this.dataCreazione,
+      dataModifica: dataModifica ?? this.dataModifica,
+      idSessioneAllenamento:
+          idSessioneAllenamento ?? this.idSessioneAllenamento,
+      idSessioneCamminata: idSessioneCamminata ?? this.idSessioneCamminata,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (idProfilo.present) {
+      map['id_profilo'] = Variable<int>(idProfilo.value);
+    }
+    if (dataPianificata.present) {
+      map['data_pianificata'] = Variable<DateTime>(dataPianificata.value);
+    }
+    if (tipo.present) {
+      map['tipo'] = Variable<String>(tipo.value);
+    }
+    if (idAllenamento.present) {
+      map['id_allenamento'] = Variable<int>(idAllenamento.value);
+    }
+    if (durataPianificataMinuti.present) {
+      map['durata_pianificata_minuti'] = Variable<int>(
+        durataPianificataMinuti.value,
+      );
+    }
+    if (stato.present) {
+      map['stato'] = Variable<String>(stato.value);
+    }
+    if (origine.present) {
+      map['origine'] = Variable<String>(origine.value);
+    }
+    if (note.present) {
+      map['note'] = Variable<String>(note.value);
+    }
+    if (dataCreazione.present) {
+      map['data_creazione'] = Variable<DateTime>(dataCreazione.value);
+    }
+    if (dataModifica.present) {
+      map['data_modifica'] = Variable<DateTime>(dataModifica.value);
+    }
+    if (idSessioneAllenamento.present) {
+      map['id_sessione_allenamento'] = Variable<int>(
+        idSessioneAllenamento.value,
+      );
+    }
+    if (idSessioneCamminata.present) {
+      map['id_sessione_camminata'] = Variable<int>(idSessioneCamminata.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AttivitaPianificateTableCompanion(')
+          ..write('id: $id, ')
+          ..write('idProfilo: $idProfilo, ')
+          ..write('dataPianificata: $dataPianificata, ')
+          ..write('tipo: $tipo, ')
+          ..write('idAllenamento: $idAllenamento, ')
+          ..write('durataPianificataMinuti: $durataPianificataMinuti, ')
+          ..write('stato: $stato, ')
+          ..write('origine: $origine, ')
+          ..write('note: $note, ')
+          ..write('dataCreazione: $dataCreazione, ')
+          ..write('dataModifica: $dataModifica, ')
+          ..write('idSessioneAllenamento: $idSessioneAllenamento, ')
+          ..write('idSessioneCamminata: $idSessioneCamminata')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -13517,6 +14368,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       $SessioniAllenamentoTableTable(this);
   late final $SessioniEserciziTableTable sessioniEserciziTable =
       $SessioniEserciziTableTable(this);
+  late final $AttivitaPianificateTableTable attivitaPianificateTable =
+      $AttivitaPianificateTableTable(this);
   late final Index idxMisurazioniCorporeeProfiloData = Index(
     'idx_misurazioni_corporee_profilo_data',
     'CREATE INDEX idx_misurazioni_corporee_profilo_data ON misurazioni_corporee (profile_id, measured_at)',
@@ -13609,6 +14462,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     'idx_sessioni_esercizi_id_allenamento_esercizio',
     'CREATE INDEX idx_sessioni_esercizi_id_allenamento_esercizio ON sessioni_esercizi (id_allenamento_esercizio)',
   );
+  late final Index idxAttivitaPianificateProfiloData = Index(
+    'idx_attivita_pianificate_profilo_data',
+    'CREATE INDEX idx_attivita_pianificate_profilo_data ON attivita_pianificate (id_profilo, data_pianificata)',
+  );
   late final AppSettingsDao appSettingsDao = AppSettingsDao(
     this as AppDatabase,
   );
@@ -13651,6 +14508,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final SessioniEserciziDao sessioniEserciziDao = SessioniEserciziDao(
     this as AppDatabase,
   );
+  late final AttivitaPianificateDao attivitaPianificateDao =
+      AttivitaPianificateDao(this as AppDatabase);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -13676,6 +14535,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     allenamentiEserciziTable,
     sessioniAllenamentoTable,
     sessioniEserciziTable,
+    attivitaPianificateTable,
     idxMisurazioniCorporeeProfiloData,
     idxCamminateIdProfiloDataInizio,
     idxCamminateAttivaPerProfilo,
@@ -13699,6 +14559,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     idxSessioniAllenamentoStato,
     idxSessioniEserciziIdSessione,
     idxSessioniEserciziIdAllenamentoEsercizio,
+    idxAttivitaPianificateProfiloData,
   ];
   @override
   StreamQueryUpdateRules get streamUpdateRules => const StreamQueryUpdateRules([
@@ -13729,6 +14590,27 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         limitUpdateKind: UpdateKind.delete,
       ),
       result: [TableUpdate('sessioni_esercizi', kind: UpdateKind.update)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'allenamenti',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('attivita_pianificate', kind: UpdateKind.update)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'sessioni_allenamento',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('attivita_pianificate', kind: UpdateKind.update)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'camminate',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('attivita_pianificate', kind: UpdateKind.update)],
     ),
   ]);
 }
@@ -14068,6 +14950,31 @@ final class $$UserProfilesTableTableReferences
       manager.$state.copyWith(prefetchedData: cache),
     );
   }
+
+  static MultiTypedResultKey<
+    $AttivitaPianificateTableTable,
+    List<AttivitaPianificateTableData>
+  >
+  _attivitaPianificateTableRefsTable(_$AppDatabase db) =>
+      MultiTypedResultKey.fromTable(
+        db.attivitaPianificateTable,
+        aliasName: 'profili_utente__id__attivita_pianificate__id_profilo',
+      );
+
+  $$AttivitaPianificateTableTableProcessedTableManager
+  get attivitaPianificateTableRefs {
+    final manager = $$AttivitaPianificateTableTableTableManager(
+      $_db,
+      $_db.attivitaPianificateTable,
+    ).filter((f) => f.idProfilo.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(
+      _attivitaPianificateTableRefsTable($_db),
+    );
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
 }
 
 class $$UserProfilesTableTableFilterComposer
@@ -14290,6 +15197,33 @@ class $$UserProfilesTableTableFilterComposer
               }) => $$SessioniAllenamentoTableTableFilterComposer(
                 $db: $db,
                 $table: $db.sessioniAllenamentoTable,
+                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                joinBuilder: joinBuilder,
+                $removeJoinBuilderFromRootComposer:
+                    $removeJoinBuilderFromRootComposer,
+              ),
+        );
+    return f(composer);
+  }
+
+  Expression<bool> attivitaPianificateTableRefs(
+    Expression<bool> Function($$AttivitaPianificateTableTableFilterComposer f)
+    f,
+  ) {
+    final $$AttivitaPianificateTableTableFilterComposer composer =
+        $composerBuilder(
+          composer: this,
+          getCurrentColumn: (t) => t.id,
+          referencedTable: $db.attivitaPianificateTable,
+          getReferencedColumn: (t) => t.idProfilo,
+          builder:
+              (
+                joinBuilder, {
+                $addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer,
+              }) => $$AttivitaPianificateTableTableFilterComposer(
+                $db: $db,
+                $table: $db.attivitaPianificateTable,
                 $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
                 joinBuilder: joinBuilder,
                 $removeJoinBuilderFromRootComposer:
@@ -14590,6 +15524,33 @@ class $$UserProfilesTableTableAnnotationComposer
         );
     return f(composer);
   }
+
+  Expression<T> attivitaPianificateTableRefs<T extends Object>(
+    Expression<T> Function($$AttivitaPianificateTableTableAnnotationComposer a)
+    f,
+  ) {
+    final $$AttivitaPianificateTableTableAnnotationComposer composer =
+        $composerBuilder(
+          composer: this,
+          getCurrentColumn: (t) => t.id,
+          referencedTable: $db.attivitaPianificateTable,
+          getReferencedColumn: (t) => t.idProfilo,
+          builder:
+              (
+                joinBuilder, {
+                $addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer,
+              }) => $$AttivitaPianificateTableTableAnnotationComposer(
+                $db: $db,
+                $table: $db.attivitaPianificateTable,
+                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                joinBuilder: joinBuilder,
+                $removeJoinBuilderFromRootComposer:
+                    $removeJoinBuilderFromRootComposer,
+              ),
+        );
+    return f(composer);
+  }
 }
 
 class $$UserProfilesTableTableTableManager
@@ -14612,6 +15573,7 @@ class $$UserProfilesTableTableTableManager
             bool userEquipmentTableRefs,
             bool allenamentiTableRefs,
             bool sessioniAllenamentoTableRefs,
+            bool attivitaPianificateTableRefs,
           })
         > {
   $$UserProfilesTableTableTableManager(
@@ -14706,6 +15668,7 @@ class $$UserProfilesTableTableTableManager
                 userEquipmentTableRefs = false,
                 allenamentiTableRefs = false,
                 sessioniAllenamentoTableRefs = false,
+                attivitaPianificateTableRefs = false,
               }) {
                 return PrefetchHooks(
                   db: db,
@@ -14718,6 +15681,8 @@ class $$UserProfilesTableTableTableManager
                     if (allenamentiTableRefs) db.allenamentiTable,
                     if (sessioniAllenamentoTableRefs)
                       db.sessioniAllenamentoTable,
+                    if (attivitaPianificateTableRefs)
+                      db.attivitaPianificateTable,
                   ],
                   addJoins: null,
                   getPrefetchedDataCallback: (items) async {
@@ -14848,6 +15813,27 @@ class $$UserProfilesTableTableTableManager
                               ),
                           typedResults: items,
                         ),
+                      if (attivitaPianificateTableRefs)
+                        await $_getPrefetchedData<
+                          UserProfilesTableData,
+                          $UserProfilesTableTable,
+                          AttivitaPianificateTableData
+                        >(
+                          currentTable: table,
+                          referencedTable: $$UserProfilesTableTableReferences
+                              ._attivitaPianificateTableRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$UserProfilesTableTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).attivitaPianificateTableRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.idProfilo == item.id,
+                              ),
+                          typedResults: items,
+                        ),
                     ];
                   },
                 );
@@ -14875,6 +15861,7 @@ typedef $$UserProfilesTableTableProcessedTableManager =
         bool userEquipmentTableRefs,
         bool allenamentiTableRefs,
         bool sessioniAllenamentoTableRefs,
+        bool attivitaPianificateTableRefs,
       })
     >;
 typedef $$BodyMeasurementsTableTableCreateCompanionBuilder =
@@ -15496,6 +16483,34 @@ final class $$CamminateTableTableReferences
       manager.$state.copyWith(prefetchedData: [item]),
     );
   }
+
+  static MultiTypedResultKey<
+    $AttivitaPianificateTableTable,
+    List<AttivitaPianificateTableData>
+  >
+  _attivitaPianificateTableRefsTable(_$AppDatabase db) =>
+      MultiTypedResultKey.fromTable(
+        db.attivitaPianificateTable,
+        aliasName: 'camminate__id__attivita_pianificate__id_sessione_camminata',
+      );
+
+  $$AttivitaPianificateTableTableProcessedTableManager
+  get attivitaPianificateTableRefs {
+    final manager =
+        $$AttivitaPianificateTableTableTableManager(
+          $_db,
+          $_db.attivitaPianificateTable,
+        ).filter(
+          (f) => f.idSessioneCamminata.id.sqlEquals($_itemColumn<int>('id')!),
+        );
+
+    final cache = $_typedResult.readTableOrNull(
+      _attivitaPianificateTableRefsTable($_db),
+    );
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
 }
 
 class $$CamminateTableTableFilterComposer
@@ -15588,6 +16603,33 @@ class $$CamminateTableTableFilterComposer
           ),
     );
     return composer;
+  }
+
+  Expression<bool> attivitaPianificateTableRefs(
+    Expression<bool> Function($$AttivitaPianificateTableTableFilterComposer f)
+    f,
+  ) {
+    final $$AttivitaPianificateTableTableFilterComposer composer =
+        $composerBuilder(
+          composer: this,
+          getCurrentColumn: (t) => t.id,
+          referencedTable: $db.attivitaPianificateTable,
+          getReferencedColumn: (t) => t.idSessioneCamminata,
+          builder:
+              (
+                joinBuilder, {
+                $addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer,
+              }) => $$AttivitaPianificateTableTableFilterComposer(
+                $db: $db,
+                $table: $db.attivitaPianificateTable,
+                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                joinBuilder: joinBuilder,
+                $removeJoinBuilderFromRootComposer:
+                    $removeJoinBuilderFromRootComposer,
+              ),
+        );
+    return f(composer);
   }
 }
 
@@ -15766,6 +16808,33 @@ class $$CamminateTableTableAnnotationComposer
         );
     return composer;
   }
+
+  Expression<T> attivitaPianificateTableRefs<T extends Object>(
+    Expression<T> Function($$AttivitaPianificateTableTableAnnotationComposer a)
+    f,
+  ) {
+    final $$AttivitaPianificateTableTableAnnotationComposer composer =
+        $composerBuilder(
+          composer: this,
+          getCurrentColumn: (t) => t.id,
+          referencedTable: $db.attivitaPianificateTable,
+          getReferencedColumn: (t) => t.idSessioneCamminata,
+          builder:
+              (
+                joinBuilder, {
+                $addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer,
+              }) => $$AttivitaPianificateTableTableAnnotationComposer(
+                $db: $db,
+                $table: $db.attivitaPianificateTable,
+                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                joinBuilder: joinBuilder,
+                $removeJoinBuilderFromRootComposer:
+                    $removeJoinBuilderFromRootComposer,
+              ),
+        );
+    return f(composer);
+  }
 }
 
 class $$CamminateTableTableTableManager
@@ -15781,7 +16850,10 @@ class $$CamminateTableTableTableManager
           $$CamminateTableTableUpdateCompanionBuilder,
           (CamminateTableData, $$CamminateTableTableReferences),
           CamminateTableData,
-          PrefetchHooks Function({bool idProfilo})
+          PrefetchHooks Function({
+            bool idProfilo,
+            bool attivitaPianificateTableRefs,
+          })
         > {
   $$CamminateTableTableTableManager(
     _$AppDatabase db,
@@ -15864,48 +16936,75 @@ class $$CamminateTableTableTableManager
                 ),
               )
               .toList(),
-          prefetchHooksCallback: ({idProfilo = false}) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [],
-              addJoins:
-                  <
-                    T extends TableManagerState<
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic
-                    >
-                  >(state) {
-                    if (idProfilo) {
-                      state =
-                          state.withJoin(
-                                currentTable: table,
-                                currentColumn: table.idProfilo,
-                                referencedTable: $$CamminateTableTableReferences
-                                    ._idProfiloTable(db),
-                                referencedColumn:
-                                    $$CamminateTableTableReferences
-                                        ._idProfiloTable(db)
-                                        .id,
-                              )
-                              as T;
-                    }
+          prefetchHooksCallback:
+              ({idProfilo = false, attivitaPianificateTableRefs = false}) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [
+                    if (attivitaPianificateTableRefs)
+                      db.attivitaPianificateTable,
+                  ],
+                  addJoins:
+                      <
+                        T extends TableManagerState<
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic
+                        >
+                      >(state) {
+                        if (idProfilo) {
+                          state =
+                              state.withJoin(
+                                    currentTable: table,
+                                    currentColumn: table.idProfilo,
+                                    referencedTable:
+                                        $$CamminateTableTableReferences
+                                            ._idProfiloTable(db),
+                                    referencedColumn:
+                                        $$CamminateTableTableReferences
+                                            ._idProfiloTable(db)
+                                            .id,
+                                  )
+                                  as T;
+                        }
 
-                    return state;
+                        return state;
+                      },
+                  getPrefetchedDataCallback: (items) async {
+                    return [
+                      if (attivitaPianificateTableRefs)
+                        await $_getPrefetchedData<
+                          CamminateTableData,
+                          $CamminateTableTable,
+                          AttivitaPianificateTableData
+                        >(
+                          currentTable: table,
+                          referencedTable: $$CamminateTableTableReferences
+                              ._attivitaPianificateTableRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$CamminateTableTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).attivitaPianificateTableRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.idSessioneCamminata == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                    ];
                   },
-              getPrefetchedDataCallback: (items) async {
-                return [];
+                );
               },
-            );
-          },
         ),
       );
 }
@@ -15922,7 +17021,10 @@ typedef $$CamminateTableTableProcessedTableManager =
       $$CamminateTableTableUpdateCompanionBuilder,
       (CamminateTableData, $$CamminateTableTableReferences),
       CamminateTableData,
-      PrefetchHooks Function({bool idProfilo})
+      PrefetchHooks Function({
+        bool idProfilo,
+        bool attivitaPianificateTableRefs,
+      })
     >;
 typedef $$PressureMeasurementsTableTableCreateCompanionBuilder =
     PressureMeasurementsTableCompanion Function({
@@ -22342,6 +23444,31 @@ final class $$AllenamentiTableTableReferences
       manager.$state.copyWith(prefetchedData: cache),
     );
   }
+
+  static MultiTypedResultKey<
+    $AttivitaPianificateTableTable,
+    List<AttivitaPianificateTableData>
+  >
+  _attivitaPianificateTableRefsTable(_$AppDatabase db) =>
+      MultiTypedResultKey.fromTable(
+        db.attivitaPianificateTable,
+        aliasName: 'allenamenti__id__attivita_pianificate__id_allenamento',
+      );
+
+  $$AttivitaPianificateTableTableProcessedTableManager
+  get attivitaPianificateTableRefs {
+    final manager = $$AttivitaPianificateTableTableTableManager(
+      $_db,
+      $_db.attivitaPianificateTable,
+    ).filter((f) => f.idAllenamento.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(
+      _attivitaPianificateTableRefsTable($_db),
+    );
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
 }
 
 class $$AllenamentiTableTableFilterComposer
@@ -22476,6 +23603,33 @@ class $$AllenamentiTableTableFilterComposer
               }) => $$SessioniAllenamentoTableTableFilterComposer(
                 $db: $db,
                 $table: $db.sessioniAllenamentoTable,
+                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                joinBuilder: joinBuilder,
+                $removeJoinBuilderFromRootComposer:
+                    $removeJoinBuilderFromRootComposer,
+              ),
+        );
+    return f(composer);
+  }
+
+  Expression<bool> attivitaPianificateTableRefs(
+    Expression<bool> Function($$AttivitaPianificateTableTableFilterComposer f)
+    f,
+  ) {
+    final $$AttivitaPianificateTableTableFilterComposer composer =
+        $composerBuilder(
+          composer: this,
+          getCurrentColumn: (t) => t.id,
+          referencedTable: $db.attivitaPianificateTable,
+          getReferencedColumn: (t) => t.idAllenamento,
+          builder:
+              (
+                joinBuilder, {
+                $addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer,
+              }) => $$AttivitaPianificateTableTableFilterComposer(
+                $db: $db,
+                $table: $db.attivitaPianificateTable,
                 $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
                 joinBuilder: joinBuilder,
                 $removeJoinBuilderFromRootComposer:
@@ -22703,6 +23857,33 @@ class $$AllenamentiTableTableAnnotationComposer
         );
     return f(composer);
   }
+
+  Expression<T> attivitaPianificateTableRefs<T extends Object>(
+    Expression<T> Function($$AttivitaPianificateTableTableAnnotationComposer a)
+    f,
+  ) {
+    final $$AttivitaPianificateTableTableAnnotationComposer composer =
+        $composerBuilder(
+          composer: this,
+          getCurrentColumn: (t) => t.id,
+          referencedTable: $db.attivitaPianificateTable,
+          getReferencedColumn: (t) => t.idAllenamento,
+          builder:
+              (
+                joinBuilder, {
+                $addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer,
+              }) => $$AttivitaPianificateTableTableAnnotationComposer(
+                $db: $db,
+                $table: $db.attivitaPianificateTable,
+                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                joinBuilder: joinBuilder,
+                $removeJoinBuilderFromRootComposer:
+                    $removeJoinBuilderFromRootComposer,
+              ),
+        );
+    return f(composer);
+  }
 }
 
 class $$AllenamentiTableTableTableManager
@@ -22722,6 +23903,7 @@ class $$AllenamentiTableTableTableManager
             bool idProfilo,
             bool allenamentiEserciziTableRefs,
             bool sessioniAllenamentoTableRefs,
+            bool attivitaPianificateTableRefs,
           })
         > {
   $$AllenamentiTableTableTableManager(
@@ -22806,6 +23988,7 @@ class $$AllenamentiTableTableTableManager
                 idProfilo = false,
                 allenamentiEserciziTableRefs = false,
                 sessioniAllenamentoTableRefs = false,
+                attivitaPianificateTableRefs = false,
               }) {
                 return PrefetchHooks(
                   db: db,
@@ -22814,6 +23997,8 @@ class $$AllenamentiTableTableTableManager
                       db.allenamentiEserciziTable,
                     if (sessioniAllenamentoTableRefs)
                       db.sessioniAllenamentoTable,
+                    if (attivitaPianificateTableRefs)
+                      db.attivitaPianificateTable,
                   ],
                   addJoins:
                       <
@@ -22893,6 +24078,27 @@ class $$AllenamentiTableTableTableManager
                               ),
                           typedResults: items,
                         ),
+                      if (attivitaPianificateTableRefs)
+                        await $_getPrefetchedData<
+                          AllenamentiTableData,
+                          $AllenamentiTableTable,
+                          AttivitaPianificateTableData
+                        >(
+                          currentTable: table,
+                          referencedTable: $$AllenamentiTableTableReferences
+                              ._attivitaPianificateTableRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$AllenamentiTableTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).attivitaPianificateTableRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.idAllenamento == item.id,
+                              ),
+                          typedResults: items,
+                        ),
                     ];
                   },
                 );
@@ -22917,6 +24123,7 @@ typedef $$AllenamentiTableTableProcessedTableManager =
         bool idProfilo,
         bool allenamentiEserciziTableRefs,
         bool sessioniAllenamentoTableRefs,
+        bool attivitaPianificateTableRefs,
       })
     >;
 typedef $$AllenamentiEserciziTableTableCreateCompanionBuilder =
@@ -23721,6 +24928,36 @@ final class $$SessioniAllenamentoTableTableReferences
       manager.$state.copyWith(prefetchedData: cache),
     );
   }
+
+  static MultiTypedResultKey<
+    $AttivitaPianificateTableTable,
+    List<AttivitaPianificateTableData>
+  >
+  _attivitaPianificateTableRefsTable(
+    _$AppDatabase db,
+  ) => MultiTypedResultKey.fromTable(
+    db.attivitaPianificateTable,
+    aliasName:
+        'sessioni_allenamento__id__attivita_pianificate__id_sessione_allenamento',
+  );
+
+  $$AttivitaPianificateTableTableProcessedTableManager
+  get attivitaPianificateTableRefs {
+    final manager =
+        $$AttivitaPianificateTableTableTableManager(
+          $_db,
+          $_db.attivitaPianificateTable,
+        ).filter(
+          (f) => f.idSessioneAllenamento.id.sqlEquals($_itemColumn<int>('id')!),
+        );
+
+    final cache = $_typedResult.readTableOrNull(
+      _attivitaPianificateTableRefsTable($_db),
+    );
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
 }
 
 class $$SessioniAllenamentoTableTableFilterComposer
@@ -23865,6 +25102,33 @@ class $$SessioniAllenamentoTableTableFilterComposer
               }) => $$SessioniEserciziTableTableFilterComposer(
                 $db: $db,
                 $table: $db.sessioniEserciziTable,
+                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                joinBuilder: joinBuilder,
+                $removeJoinBuilderFromRootComposer:
+                    $removeJoinBuilderFromRootComposer,
+              ),
+        );
+    return f(composer);
+  }
+
+  Expression<bool> attivitaPianificateTableRefs(
+    Expression<bool> Function($$AttivitaPianificateTableTableFilterComposer f)
+    f,
+  ) {
+    final $$AttivitaPianificateTableTableFilterComposer composer =
+        $composerBuilder(
+          composer: this,
+          getCurrentColumn: (t) => t.id,
+          referencedTable: $db.attivitaPianificateTable,
+          getReferencedColumn: (t) => t.idSessioneAllenamento,
+          builder:
+              (
+                joinBuilder, {
+                $addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer,
+              }) => $$AttivitaPianificateTableTableFilterComposer(
+                $db: $db,
+                $table: $db.attivitaPianificateTable,
                 $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
                 joinBuilder: joinBuilder,
                 $removeJoinBuilderFromRootComposer:
@@ -24142,6 +25406,33 @@ class $$SessioniAllenamentoTableTableAnnotationComposer
         );
     return f(composer);
   }
+
+  Expression<T> attivitaPianificateTableRefs<T extends Object>(
+    Expression<T> Function($$AttivitaPianificateTableTableAnnotationComposer a)
+    f,
+  ) {
+    final $$AttivitaPianificateTableTableAnnotationComposer composer =
+        $composerBuilder(
+          composer: this,
+          getCurrentColumn: (t) => t.id,
+          referencedTable: $db.attivitaPianificateTable,
+          getReferencedColumn: (t) => t.idSessioneAllenamento,
+          builder:
+              (
+                joinBuilder, {
+                $addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer,
+              }) => $$AttivitaPianificateTableTableAnnotationComposer(
+                $db: $db,
+                $table: $db.attivitaPianificateTable,
+                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                joinBuilder: joinBuilder,
+                $removeJoinBuilderFromRootComposer:
+                    $removeJoinBuilderFromRootComposer,
+              ),
+        );
+    return f(composer);
+  }
 }
 
 class $$SessioniAllenamentoTableTableTableManager
@@ -24164,6 +25455,7 @@ class $$SessioniAllenamentoTableTableTableManager
             bool idAllenamento,
             bool idProfilo,
             bool sessioniEserciziTableRefs,
+            bool attivitaPianificateTableRefs,
           })
         > {
   $$SessioniAllenamentoTableTableTableManager(
@@ -24273,11 +25565,14 @@ class $$SessioniAllenamentoTableTableTableManager
                 idAllenamento = false,
                 idProfilo = false,
                 sessioniEserciziTableRefs = false,
+                attivitaPianificateTableRefs = false,
               }) {
                 return PrefetchHooks(
                   db: db,
                   explicitlyWatchedTables: [
                     if (sessioniEserciziTableRefs) db.sessioniEserciziTable,
+                    if (attivitaPianificateTableRefs)
+                      db.attivitaPianificateTable,
                   ],
                   addJoins:
                       <
@@ -24352,6 +25647,28 @@ class $$SessioniAllenamentoTableTableTableManager
                               ),
                           typedResults: items,
                         ),
+                      if (attivitaPianificateTableRefs)
+                        await $_getPrefetchedData<
+                          SessioniAllenamentoTableData,
+                          $SessioniAllenamentoTableTable,
+                          AttivitaPianificateTableData
+                        >(
+                          currentTable: table,
+                          referencedTable:
+                              $$SessioniAllenamentoTableTableReferences
+                                  ._attivitaPianificateTableRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$SessioniAllenamentoTableTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).attivitaPianificateTableRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.idSessioneAllenamento == item.id,
+                              ),
+                          typedResults: items,
+                        ),
                     ];
                   },
                 );
@@ -24376,6 +25693,7 @@ typedef $$SessioniAllenamentoTableTableProcessedTableManager =
         bool idAllenamento,
         bool idProfilo,
         bool sessioniEserciziTableRefs,
+        bool attivitaPianificateTableRefs,
       })
     >;
 typedef $$SessioniEserciziTableTableCreateCompanionBuilder =
@@ -25101,6 +26419,796 @@ typedef $$SessioniEserciziTableTableProcessedTableManager =
         bool idEsercizio,
       })
     >;
+typedef $$AttivitaPianificateTableTableCreateCompanionBuilder =
+    AttivitaPianificateTableCompanion Function({
+      Value<int> id,
+      required int idProfilo,
+      required DateTime dataPianificata,
+      required String tipo,
+      Value<int?> idAllenamento,
+      Value<int?> durataPianificataMinuti,
+      Value<String> stato,
+      required String origine,
+      Value<String?> note,
+      required DateTime dataCreazione,
+      required DateTime dataModifica,
+      Value<int?> idSessioneAllenamento,
+      Value<int?> idSessioneCamminata,
+    });
+typedef $$AttivitaPianificateTableTableUpdateCompanionBuilder =
+    AttivitaPianificateTableCompanion Function({
+      Value<int> id,
+      Value<int> idProfilo,
+      Value<DateTime> dataPianificata,
+      Value<String> tipo,
+      Value<int?> idAllenamento,
+      Value<int?> durataPianificataMinuti,
+      Value<String> stato,
+      Value<String> origine,
+      Value<String?> note,
+      Value<DateTime> dataCreazione,
+      Value<DateTime> dataModifica,
+      Value<int?> idSessioneAllenamento,
+      Value<int?> idSessioneCamminata,
+    });
+
+final class $$AttivitaPianificateTableTableReferences
+    extends
+        BaseReferences<
+          _$AppDatabase,
+          $AttivitaPianificateTableTable,
+          AttivitaPianificateTableData
+        > {
+  $$AttivitaPianificateTableTableReferences(
+    super.$_db,
+    super.$_table,
+    super.$_typedResult,
+  );
+
+  static $UserProfilesTableTable _idProfiloTable(_$AppDatabase db) => db
+      .userProfilesTable
+      .createAlias('attivita_pianificate__id_profilo__profili_utente__id');
+
+  $$UserProfilesTableTableProcessedTableManager get idProfilo {
+    final $_column = $_itemColumn<int>('id_profilo')!;
+
+    final manager = $$UserProfilesTableTableTableManager(
+      $_db,
+      $_db.userProfilesTable,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_idProfiloTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+
+  static $AllenamentiTableTable _idAllenamentoTable(_$AppDatabase db) => db
+      .allenamentiTable
+      .createAlias('attivita_pianificate__id_allenamento__allenamenti__id');
+
+  $$AllenamentiTableTableProcessedTableManager? get idAllenamento {
+    final $_column = $_itemColumn<int>('id_allenamento');
+    if ($_column == null) return null;
+    final manager = $$AllenamentiTableTableTableManager(
+      $_db,
+      $_db.allenamentiTable,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_idAllenamentoTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+
+  static $SessioniAllenamentoTableTable _idSessioneAllenamentoTable(
+    _$AppDatabase db,
+  ) => db.sessioniAllenamentoTable.createAlias(
+    'attivita_pianificate__id_sessione_allenamento__sessioni_allenamento__id',
+  );
+
+  $$SessioniAllenamentoTableTableProcessedTableManager?
+  get idSessioneAllenamento {
+    final $_column = $_itemColumn<int>('id_sessione_allenamento');
+    if ($_column == null) return null;
+    final manager = $$SessioniAllenamentoTableTableTableManager(
+      $_db,
+      $_db.sessioniAllenamentoTable,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(
+      _idSessioneAllenamentoTable($_db),
+    );
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+
+  static $CamminateTableTable _idSessioneCamminataTable(_$AppDatabase db) =>
+      db.camminateTable.createAlias(
+        'attivita_pianificate__id_sessione_camminata__camminate__id',
+      );
+
+  $$CamminateTableTableProcessedTableManager? get idSessioneCamminata {
+    final $_column = $_itemColumn<int>('id_sessione_camminata');
+    if ($_column == null) return null;
+    final manager = $$CamminateTableTableTableManager(
+      $_db,
+      $_db.camminateTable,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_idSessioneCamminataTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+}
+
+class $$AttivitaPianificateTableTableFilterComposer
+    extends Composer<_$AppDatabase, $AttivitaPianificateTableTable> {
+  $$AttivitaPianificateTableTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get dataPianificata => $composableBuilder(
+    column: $table.dataPianificata,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get tipo => $composableBuilder(
+    column: $table.tipo,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get durataPianificataMinuti => $composableBuilder(
+    column: $table.durataPianificataMinuti,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get stato => $composableBuilder(
+    column: $table.stato,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get origine => $composableBuilder(
+    column: $table.origine,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get note => $composableBuilder(
+    column: $table.note,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get dataCreazione => $composableBuilder(
+    column: $table.dataCreazione,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get dataModifica => $composableBuilder(
+    column: $table.dataModifica,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$UserProfilesTableTableFilterComposer get idProfilo {
+    final $$UserProfilesTableTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.idProfilo,
+      referencedTable: $db.userProfilesTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$UserProfilesTableTableFilterComposer(
+            $db: $db,
+            $table: $db.userProfilesTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$AllenamentiTableTableFilterComposer get idAllenamento {
+    final $$AllenamentiTableTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.idAllenamento,
+      referencedTable: $db.allenamentiTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$AllenamentiTableTableFilterComposer(
+            $db: $db,
+            $table: $db.allenamentiTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$SessioniAllenamentoTableTableFilterComposer get idSessioneAllenamento {
+    final $$SessioniAllenamentoTableTableFilterComposer composer =
+        $composerBuilder(
+          composer: this,
+          getCurrentColumn: (t) => t.idSessioneAllenamento,
+          referencedTable: $db.sessioniAllenamentoTable,
+          getReferencedColumn: (t) => t.id,
+          builder:
+              (
+                joinBuilder, {
+                $addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer,
+              }) => $$SessioniAllenamentoTableTableFilterComposer(
+                $db: $db,
+                $table: $db.sessioniAllenamentoTable,
+                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                joinBuilder: joinBuilder,
+                $removeJoinBuilderFromRootComposer:
+                    $removeJoinBuilderFromRootComposer,
+              ),
+        );
+    return composer;
+  }
+
+  $$CamminateTableTableFilterComposer get idSessioneCamminata {
+    final $$CamminateTableTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.idSessioneCamminata,
+      referencedTable: $db.camminateTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$CamminateTableTableFilterComposer(
+            $db: $db,
+            $table: $db.camminateTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$AttivitaPianificateTableTableOrderingComposer
+    extends Composer<_$AppDatabase, $AttivitaPianificateTableTable> {
+  $$AttivitaPianificateTableTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get dataPianificata => $composableBuilder(
+    column: $table.dataPianificata,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get tipo => $composableBuilder(
+    column: $table.tipo,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get durataPianificataMinuti => $composableBuilder(
+    column: $table.durataPianificataMinuti,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get stato => $composableBuilder(
+    column: $table.stato,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get origine => $composableBuilder(
+    column: $table.origine,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get note => $composableBuilder(
+    column: $table.note,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get dataCreazione => $composableBuilder(
+    column: $table.dataCreazione,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get dataModifica => $composableBuilder(
+    column: $table.dataModifica,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$UserProfilesTableTableOrderingComposer get idProfilo {
+    final $$UserProfilesTableTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.idProfilo,
+      referencedTable: $db.userProfilesTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$UserProfilesTableTableOrderingComposer(
+            $db: $db,
+            $table: $db.userProfilesTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$AllenamentiTableTableOrderingComposer get idAllenamento {
+    final $$AllenamentiTableTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.idAllenamento,
+      referencedTable: $db.allenamentiTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$AllenamentiTableTableOrderingComposer(
+            $db: $db,
+            $table: $db.allenamentiTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$SessioniAllenamentoTableTableOrderingComposer get idSessioneAllenamento {
+    final $$SessioniAllenamentoTableTableOrderingComposer composer =
+        $composerBuilder(
+          composer: this,
+          getCurrentColumn: (t) => t.idSessioneAllenamento,
+          referencedTable: $db.sessioniAllenamentoTable,
+          getReferencedColumn: (t) => t.id,
+          builder:
+              (
+                joinBuilder, {
+                $addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer,
+              }) => $$SessioniAllenamentoTableTableOrderingComposer(
+                $db: $db,
+                $table: $db.sessioniAllenamentoTable,
+                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                joinBuilder: joinBuilder,
+                $removeJoinBuilderFromRootComposer:
+                    $removeJoinBuilderFromRootComposer,
+              ),
+        );
+    return composer;
+  }
+
+  $$CamminateTableTableOrderingComposer get idSessioneCamminata {
+    final $$CamminateTableTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.idSessioneCamminata,
+      referencedTable: $db.camminateTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$CamminateTableTableOrderingComposer(
+            $db: $db,
+            $table: $db.camminateTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$AttivitaPianificateTableTableAnnotationComposer
+    extends Composer<_$AppDatabase, $AttivitaPianificateTableTable> {
+  $$AttivitaPianificateTableTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get dataPianificata => $composableBuilder(
+    column: $table.dataPianificata,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get tipo =>
+      $composableBuilder(column: $table.tipo, builder: (column) => column);
+
+  GeneratedColumn<int> get durataPianificataMinuti => $composableBuilder(
+    column: $table.durataPianificataMinuti,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get stato =>
+      $composableBuilder(column: $table.stato, builder: (column) => column);
+
+  GeneratedColumn<String> get origine =>
+      $composableBuilder(column: $table.origine, builder: (column) => column);
+
+  GeneratedColumn<String> get note =>
+      $composableBuilder(column: $table.note, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get dataCreazione => $composableBuilder(
+    column: $table.dataCreazione,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get dataModifica => $composableBuilder(
+    column: $table.dataModifica,
+    builder: (column) => column,
+  );
+
+  $$UserProfilesTableTableAnnotationComposer get idProfilo {
+    final $$UserProfilesTableTableAnnotationComposer composer =
+        $composerBuilder(
+          composer: this,
+          getCurrentColumn: (t) => t.idProfilo,
+          referencedTable: $db.userProfilesTable,
+          getReferencedColumn: (t) => t.id,
+          builder:
+              (
+                joinBuilder, {
+                $addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer,
+              }) => $$UserProfilesTableTableAnnotationComposer(
+                $db: $db,
+                $table: $db.userProfilesTable,
+                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                joinBuilder: joinBuilder,
+                $removeJoinBuilderFromRootComposer:
+                    $removeJoinBuilderFromRootComposer,
+              ),
+        );
+    return composer;
+  }
+
+  $$AllenamentiTableTableAnnotationComposer get idAllenamento {
+    final $$AllenamentiTableTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.idAllenamento,
+      referencedTable: $db.allenamentiTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$AllenamentiTableTableAnnotationComposer(
+            $db: $db,
+            $table: $db.allenamentiTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$SessioniAllenamentoTableTableAnnotationComposer get idSessioneAllenamento {
+    final $$SessioniAllenamentoTableTableAnnotationComposer composer =
+        $composerBuilder(
+          composer: this,
+          getCurrentColumn: (t) => t.idSessioneAllenamento,
+          referencedTable: $db.sessioniAllenamentoTable,
+          getReferencedColumn: (t) => t.id,
+          builder:
+              (
+                joinBuilder, {
+                $addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer,
+              }) => $$SessioniAllenamentoTableTableAnnotationComposer(
+                $db: $db,
+                $table: $db.sessioniAllenamentoTable,
+                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                joinBuilder: joinBuilder,
+                $removeJoinBuilderFromRootComposer:
+                    $removeJoinBuilderFromRootComposer,
+              ),
+        );
+    return composer;
+  }
+
+  $$CamminateTableTableAnnotationComposer get idSessioneCamminata {
+    final $$CamminateTableTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.idSessioneCamminata,
+      referencedTable: $db.camminateTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$CamminateTableTableAnnotationComposer(
+            $db: $db,
+            $table: $db.camminateTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$AttivitaPianificateTableTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $AttivitaPianificateTableTable,
+          AttivitaPianificateTableData,
+          $$AttivitaPianificateTableTableFilterComposer,
+          $$AttivitaPianificateTableTableOrderingComposer,
+          $$AttivitaPianificateTableTableAnnotationComposer,
+          $$AttivitaPianificateTableTableCreateCompanionBuilder,
+          $$AttivitaPianificateTableTableUpdateCompanionBuilder,
+          (
+            AttivitaPianificateTableData,
+            $$AttivitaPianificateTableTableReferences,
+          ),
+          AttivitaPianificateTableData,
+          PrefetchHooks Function({
+            bool idProfilo,
+            bool idAllenamento,
+            bool idSessioneAllenamento,
+            bool idSessioneCamminata,
+          })
+        > {
+  $$AttivitaPianificateTableTableTableManager(
+    _$AppDatabase db,
+    $AttivitaPianificateTableTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$AttivitaPianificateTableTableFilterComposer(
+                $db: db,
+                $table: table,
+              ),
+          createOrderingComposer: () =>
+              $$AttivitaPianificateTableTableOrderingComposer(
+                $db: db,
+                $table: table,
+              ),
+          createComputedFieldComposer: () =>
+              $$AttivitaPianificateTableTableAnnotationComposer(
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<int> idProfilo = const Value.absent(),
+                Value<DateTime> dataPianificata = const Value.absent(),
+                Value<String> tipo = const Value.absent(),
+                Value<int?> idAllenamento = const Value.absent(),
+                Value<int?> durataPianificataMinuti = const Value.absent(),
+                Value<String> stato = const Value.absent(),
+                Value<String> origine = const Value.absent(),
+                Value<String?> note = const Value.absent(),
+                Value<DateTime> dataCreazione = const Value.absent(),
+                Value<DateTime> dataModifica = const Value.absent(),
+                Value<int?> idSessioneAllenamento = const Value.absent(),
+                Value<int?> idSessioneCamminata = const Value.absent(),
+              }) => AttivitaPianificateTableCompanion(
+                id: id,
+                idProfilo: idProfilo,
+                dataPianificata: dataPianificata,
+                tipo: tipo,
+                idAllenamento: idAllenamento,
+                durataPianificataMinuti: durataPianificataMinuti,
+                stato: stato,
+                origine: origine,
+                note: note,
+                dataCreazione: dataCreazione,
+                dataModifica: dataModifica,
+                idSessioneAllenamento: idSessioneAllenamento,
+                idSessioneCamminata: idSessioneCamminata,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required int idProfilo,
+                required DateTime dataPianificata,
+                required String tipo,
+                Value<int?> idAllenamento = const Value.absent(),
+                Value<int?> durataPianificataMinuti = const Value.absent(),
+                Value<String> stato = const Value.absent(),
+                required String origine,
+                Value<String?> note = const Value.absent(),
+                required DateTime dataCreazione,
+                required DateTime dataModifica,
+                Value<int?> idSessioneAllenamento = const Value.absent(),
+                Value<int?> idSessioneCamminata = const Value.absent(),
+              }) => AttivitaPianificateTableCompanion.insert(
+                id: id,
+                idProfilo: idProfilo,
+                dataPianificata: dataPianificata,
+                tipo: tipo,
+                idAllenamento: idAllenamento,
+                durataPianificataMinuti: durataPianificataMinuti,
+                stato: stato,
+                origine: origine,
+                note: note,
+                dataCreazione: dataCreazione,
+                dataModifica: dataModifica,
+                idSessioneAllenamento: idSessioneAllenamento,
+                idSessioneCamminata: idSessioneCamminata,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$AttivitaPianificateTableTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback:
+              ({
+                idProfilo = false,
+                idAllenamento = false,
+                idSessioneAllenamento = false,
+                idSessioneCamminata = false,
+              }) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [],
+                  addJoins:
+                      <
+                        T extends TableManagerState<
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic
+                        >
+                      >(state) {
+                        if (idProfilo) {
+                          state =
+                              state.withJoin(
+                                    currentTable: table,
+                                    currentColumn: table.idProfilo,
+                                    referencedTable:
+                                        $$AttivitaPianificateTableTableReferences
+                                            ._idProfiloTable(db),
+                                    referencedColumn:
+                                        $$AttivitaPianificateTableTableReferences
+                                            ._idProfiloTable(db)
+                                            .id,
+                                  )
+                                  as T;
+                        }
+                        if (idAllenamento) {
+                          state =
+                              state.withJoin(
+                                    currentTable: table,
+                                    currentColumn: table.idAllenamento,
+                                    referencedTable:
+                                        $$AttivitaPianificateTableTableReferences
+                                            ._idAllenamentoTable(db),
+                                    referencedColumn:
+                                        $$AttivitaPianificateTableTableReferences
+                                            ._idAllenamentoTable(db)
+                                            .id,
+                                  )
+                                  as T;
+                        }
+                        if (idSessioneAllenamento) {
+                          state =
+                              state.withJoin(
+                                    currentTable: table,
+                                    currentColumn: table.idSessioneAllenamento,
+                                    referencedTable:
+                                        $$AttivitaPianificateTableTableReferences
+                                            ._idSessioneAllenamentoTable(db),
+                                    referencedColumn:
+                                        $$AttivitaPianificateTableTableReferences
+                                            ._idSessioneAllenamentoTable(db)
+                                            .id,
+                                  )
+                                  as T;
+                        }
+                        if (idSessioneCamminata) {
+                          state =
+                              state.withJoin(
+                                    currentTable: table,
+                                    currentColumn: table.idSessioneCamminata,
+                                    referencedTable:
+                                        $$AttivitaPianificateTableTableReferences
+                                            ._idSessioneCamminataTable(db),
+                                    referencedColumn:
+                                        $$AttivitaPianificateTableTableReferences
+                                            ._idSessioneCamminataTable(db)
+                                            .id,
+                                  )
+                                  as T;
+                        }
+
+                        return state;
+                      },
+                  getPrefetchedDataCallback: (items) async {
+                    return [];
+                  },
+                );
+              },
+        ),
+      );
+}
+
+typedef $$AttivitaPianificateTableTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $AttivitaPianificateTableTable,
+      AttivitaPianificateTableData,
+      $$AttivitaPianificateTableTableFilterComposer,
+      $$AttivitaPianificateTableTableOrderingComposer,
+      $$AttivitaPianificateTableTableAnnotationComposer,
+      $$AttivitaPianificateTableTableCreateCompanionBuilder,
+      $$AttivitaPianificateTableTableUpdateCompanionBuilder,
+      (AttivitaPianificateTableData, $$AttivitaPianificateTableTableReferences),
+      AttivitaPianificateTableData,
+      PrefetchHooks Function({
+        bool idProfilo,
+        bool idAllenamento,
+        bool idSessioneAllenamento,
+        bool idSessioneCamminata,
+      })
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -25170,4 +27278,9 @@ class $AppDatabaseManager {
       );
   $$SessioniEserciziTableTableTableManager get sessioniEserciziTable =>
       $$SessioniEserciziTableTableTableManager(_db, _db.sessioniEserciziTable);
+  $$AttivitaPianificateTableTableTableManager get attivitaPianificateTable =>
+      $$AttivitaPianificateTableTableTableManager(
+        _db,
+        _db.attivitaPianificateTable,
+      );
 }

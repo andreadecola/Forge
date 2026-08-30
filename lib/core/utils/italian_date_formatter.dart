@@ -32,6 +32,31 @@ String formatItalianTime(DateTime time) {
       '${time.minute.toString().padLeft(2, '0')}';
 }
 
+const _italianWeekdaysShort = ['LUN', 'MAR', 'MER', 'GIO', 'VEN', 'SAB', 'DOM'];
+
+/// Es. "LUN" per lunedì (Milestone 8.2, sezione 11): usa solo
+/// `DateTime.weekday` (ISO 8601, 1 = lunedì), mai un nome localizzato di
+/// sistema — la logica del Piano Settimanale non dipende da queste stringhe,
+/// solo la presentazione le usa.
+String italianWeekdayShort(DateTime date) =>
+    _italianWeekdaysShort[date.weekday - 1];
+
+/// Intervallo di una settimana (Milestone 8.2, sezione 57), es.
+/// "24 – 30 agosto 2026" (stesso mese), "31 agosto – 2 settembre 2026"
+/// (mesi diversi, stesso anno), "28 dicembre 2026 – 1 gennaio 2027" (anni
+/// diversi). [end] deve essere uguale o posteriore a [start].
+String formatItalianWeekRange(DateTime start, DateTime end) {
+  if (start.year != end.year) {
+    return '${formatItalianDate(start)} – ${formatItalianDate(end)}';
+  }
+  if (start.month != end.month) {
+    return '${start.day} ${_italianMonths[start.month - 1]} – '
+        '${formatItalianDate(end)}';
+  }
+  return '${start.day} – ${end.day} ${_italianMonths[start.month - 1]} '
+      '${start.year}';
+}
+
 /// Durata totale (`data_fine - data_inizio`, sezione 27/28: include
 /// eventuali pause, non è "tempo attivo"). Es. "42 min", "1h 15min".
 /// `null` se [finishedAt] non è disponibile (sezione 29 — fallback

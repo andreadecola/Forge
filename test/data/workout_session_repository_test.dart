@@ -324,4 +324,42 @@ void main() {
     final a = exercises.firstWhere((e) => e.repetitions == 10);
     expect(a.totalSets, 1, reason: 'lo snapshot dei parametri resta intatto');
   });
+
+  test('completeSession chiamata due volte: nessuna eccezione, ma endedAt '
+      'viene sovrascritto dalla seconda chiamata (caratterizzazione, '
+      'Milestone 8.8 sezione 15) — a differenza di WalkingSession '
+      '(camminate_dao.dart, guardia esplicita sullo stato corrente), '
+      'updateState qui non verifica lo stato attuale prima di scrivere. '
+      'Non è un bug introdotto da M8 (nessun flusso M8 chiama '
+      'completeSession/abortSession più di una volta sulla stessa sessione)'
+      ' e un fix richiederebbe toccare la Milestone 4 — fuori scope per '
+      'questo hardening.', () async {
+    final sessionId = await sessionRepository.createSession(
+      profileId: profileId,
+      details: (await details())!,
+      startedAt: DateTime(2026, 1, 1),
+    );
+    final firstEnd = DateTime(2026, 1, 1, 1);
+    final secondEnd = DateTime(2026, 1, 1, 2);
+
+    await sessionRepository.completeSession(
+      sessionId: sessionId,
+      endedAt: firstEnd,
+    );
+    // Seconda chiamata: nessuna eccezione lanciata.
+    await sessionRepository.completeSession(
+      sessionId: sessionId,
+      endedAt: secondEnd,
+    );
+
+    final session = await sessionRepository.getSessionById(sessionId);
+    expect(session!.status, WorkoutSessionPersistenceStatus.completed);
+    expect(
+      session.endedAt,
+      secondEnd,
+      reason:
+          'comportamento reale osservato: la seconda chiamata sovrascrive '
+          'endedAt, non è un no-op come invece lo è WalkingSession',
+    );
+  });
 }

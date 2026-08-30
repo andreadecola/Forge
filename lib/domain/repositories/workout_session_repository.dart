@@ -19,6 +19,13 @@ abstract class WorkoutSessionRepository {
 
   Future<PersistedWorkoutSession?> getSessionById(int sessionId);
 
+  /// Come [getSessionById], ma reattivo (Milestone 8.7 patch): riemette a
+  /// ogni cambio di stato della sessione (avvio/pausa/ripresa/
+  /// completamento/abbandono) — usato per rendere il Piano Settimanale/
+  /// riepilogo (e i badge "In corso"/"Completata") reattivi senza dover
+  /// ricreare la pagina che li mostra.
+  Stream<PersistedWorkoutSession?> watchSessionById(int sessionId);
+
   /// Righe scheda snapshot della sessione, in ordine (usate dal
   /// ripristino per ricostruire `WorkoutSessionState.exercises`).
   Future<List<PersistedSessionExercise>> getSessionExercises(int sessionId);

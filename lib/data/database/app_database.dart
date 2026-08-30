@@ -6,6 +6,7 @@ import 'daos/allenamenti_dao.dart';
 import 'daos/allenamenti_esercizi_dao.dart';
 import 'daos/alternative_esercizi_dao.dart';
 import 'daos/app_settings_dao.dart';
+import 'daos/attivita_pianificate_dao.dart';
 import 'daos/attrezzature_dao.dart';
 import 'daos/body_measurements_dao.dart';
 import 'daos/camminate_dao.dart';
@@ -23,6 +24,7 @@ import 'tables/allenamenti_esercizi_table.dart';
 import 'tables/allenamenti_table.dart';
 import 'tables/alternative_esercizi_table.dart';
 import 'tables/app_settings_table.dart';
+import 'tables/attivita_pianificate_table.dart';
 import 'tables/attrezzature_esercizi_table.dart';
 import 'tables/attrezzature_table.dart';
 import 'tables/body_measurements_table.dart';
@@ -67,6 +69,24 @@ part 'app_database.g.dart';
 /// - Milestone 7.2 (schema 8): `weight_kg` in `misurazioni_corporee` diventa
 ///   nullable, per permettere misurazioni "solo girovita" (vedi
 ///   Docs/M7_2_Weight_Waist.md). Nessuna nuova tabella.
+/// - Milestone 8.1 (schema 9): `attivita_pianificate` — fondamenta del
+///   Piano Settimanale (vedi Docs/M8_1_Weekly_Plan_Foundations.md). Nessuna
+///   modifica alle tabelle esistenti: il piano referenzia `allenamenti` via
+///   FK nullable (`ON DELETE SET NULL`), senza toccare `sessioni_allenamento`
+///   né `camminate`.
+/// - Milestone 8.5 (schema 10): `attivita_pianificate` guadagna
+///   `id_sessione_allenamento`/`id_sessione_camminata`, nullable, `ON
+///   DELETE SET NULL` verso `sessioni_allenamento`/`camminate` — il
+///   collegamento esplicito piano -> sessione reale (vedi
+///   Docs/M8_5_Real_Session_Linking.md). Nessuna modifica a
+///   `sessioni_allenamento`/`camminate` stesse.
+/// - Milestone 8.6 (schema 11): `stato` di `attivita_pianificate` ammette
+///   anche `SKIPPED`/`POSTPONED` (CHECK ricreato tramite
+///   `Migrator.alterTable`, l'unico modo per allargare un CHECK esistente
+///   in SQLite) — spostare/saltare/rinviare un'attività senza perdere il
+///   piano (vedi Docs/M8_6_Rescheduling_Skipped_Postponed.md). Nessun
+///   nuovo campo, nessun valore `MOVED` (uno spostamento è solo un cambio
+///   di `data_pianificata`).
 @DriftDatabase(
   tables: [
     AppSettingsTable,
@@ -89,6 +109,7 @@ part 'app_database.g.dart';
     AllenamentiEserciziTable,
     SessioniAllenamentoTable,
     SessioniEserciziTable,
+    AttivitaPianificateTable,
   ],
   daos: [
     AppSettingsDao,
@@ -108,13 +129,14 @@ part 'app_database.g.dart';
     AllenamentiEserciziDao,
     SessioniAllenamentoDao,
     SessioniEserciziDao,
+    AttivitaPianificateDao,
   ],
 )
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor]) : super(executor ?? _openConnection());
 
   @override
-  int get schemaVersion => 8;
+  int get schemaVersion => 11;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -249,6 +271,57 @@ class AppDatabase extends _$AppDatabase {
           'idx_misurazioni_corporee_profilo_data ON misurazioni_corporee '
           '(profile_id, measured_at)',
         );
+      }
+      if (from < 9) {
+        // Tabella nuova (Milestone 8.1, fondamenta del Piano Settimanale —
+        // vedi Docs/M8_1_Weekly_Plan_Foundations.md): a differenza degli
+        // indici su `misurazioni_corporee`/`misurazioni_pressione` nei rami
+        // precedenti, qui non c'è alcun rischio di collisione con test di
+        // migrazione più vecchi che ricostruiscono schemi storici — questa
+        // tabella non esisteva concettualmente prima di schema 9, quindi
+        // nessuno di quei test la include mai. `createIndex()` normale
+        // (non `IF NOT EXISTS`) è quindi sicuro qui.
+        await m.createTable(attivitaPianificateTable);
+        await m.createIndex(idxAttivitaPianificateProfiloData);
+      }
+      if (from >= 9 && from < 10) {
+        // Colonne nuove su `attivita_pianificate` (Milestone 8.5,
+        // collegamento esplicito piano -> sessione reale). Guardia `from >=
+        // 9` (stesso principio già usato per le colonne pausa di
+        // `camminate`, ramo schema 5->6 sopra): per un dispositivo che
+        // arriva da uno schema precedente a 9, il ramo `from < 9` appena
+        // sopra crea `attivita_pianificate` con `m.createTable()`, che
+        // riflette sempre la definizione Dart CORRENTE della tabella —
+        // quindi le include già entrambe. Senza questa guardia, un
+        // `addColumn` su una colonna già appena creata fallirebbe con
+        // "duplicate column name" (bug reale, trovato da un test di
+        // migrazione storica e corretto qui).
+        await m.addColumn(
+          attivitaPianificateTable,
+          attivitaPianificateTable.idSessioneAllenamento,
+        );
+        await m.addColumn(
+          attivitaPianificateTable,
+          attivitaPianificateTable.idSessioneCamminata,
+        );
+      }
+      if (from >= 9 && from < 11) {
+        // Il CHECK su `stato` passa da un solo valore (`PLANNED`) a tre
+        // (Milestone 8.6: `SKIPPED`/`POSTPONED` aggiunti) — SQLite non
+        // supporta un `ALTER TABLE` diretto su un CHECK esistente, quindi
+        // si usa la procedura standard di ricreazione tabella (Drift la
+        // implementa in `Migrator.alterTable`/`TableMigration`): crea una
+        // tabella temporanea con la definizione Dart CORRENTE (CHECK
+        // esteso, comprese le colonne sessione di Milestone 8.5), copia
+        // tutte le righe esistenti, droppa la vecchia, rinomina — nessuna
+        // perdita di dati, indici/FK ricreati automaticamente. Guardia `from
+        // >= 9` (stesso principio già usato sopra, schema 9->10): un
+        // dispositivo con `from < 9` ha già ricevuto la tabella nella sua
+        // forma finale dal `createTable()` sopra (che riflette sempre la
+        // classe Dart corrente), quindi non deve rieseguire questa
+        // ricreazione. `from < 11` copre sia chi arriva da schema 9 (dopo
+        // l'addColumn appena sopra) sia da schema 10.
+        await m.alterTable(TableMigration(attivitaPianificateTable));
       }
     },
     beforeOpen: (details) async {

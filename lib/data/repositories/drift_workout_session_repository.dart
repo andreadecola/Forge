@@ -29,6 +29,13 @@ class DriftWorkoutSessionRepository implements WorkoutSessionRepository {
   }
 
   @override
+  Stream<PersistedWorkoutSession?> watchSessionById(int sessionId) {
+    return db.sessioniAllenamentoDao
+        .watchById(sessionId)
+        .map((row) => row == null ? null : WorkoutSessionMappers.session(row));
+  }
+
+  @override
   Future<List<PersistedSessionExercise>> getSessionExercises(
     int sessionId,
   ) async {

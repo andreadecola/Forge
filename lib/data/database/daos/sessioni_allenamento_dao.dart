@@ -30,6 +30,15 @@ class SessioniAllenamentoDao extends DatabaseAccessor<AppDatabase>
     sessioniAllenamentoTable,
   )..where((t) => t.id.equals(id))).getSingleOrNull();
 
+  /// Come [getById], ma reattivo (Milestone 8.7 patch): riemette ogni
+  /// volta che la riga cambia (avvio/pausa/ripresa/completamento/
+  /// abbandono) — usato per rendere il Piano Settimanale/riepilogo
+  /// reattivi ai cambi di stato di una sessione collegata, senza dover
+  /// ricreare l'intera pagina.
+  Stream<SessioniAllenamentoTableData?> watchById(int id) => (select(
+    sessioniAllenamentoTable,
+  )..where((t) => t.id.equals(id))).watchSingleOrNull();
+
   /// Sessioni concluse (COMPLETED/ABORTED) del profilo, più recenti prima
   /// (Milestone 4.5.1): storico. Le sessioni IN_PROGRESS/PAUSED non sono
   /// incluse (sezione 8), sono già gestite come sessione attiva.

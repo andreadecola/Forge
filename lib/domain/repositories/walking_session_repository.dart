@@ -5,6 +5,13 @@ abstract class WalkingSessionRepository {
 
   Future<WalkingSession?> getWalkingSession(int id);
 
+  /// Come [getWalkingSession], ma reattivo (Milestone 8.7 patch): riemette
+  /// a ogni cambio di stato della camminata (pausa/ripresa/completamento/
+  /// abbandono) — usato per rendere il Piano Settimanale/riepilogo (e i
+  /// badge "In corso"/"Completata") reattivi senza dover ricreare la
+  /// pagina che li mostra.
+  Stream<WalkingSession?> watchWalkingSessionById(int id);
+
   Future<List<WalkingSession>> getWalkingSessions({required int profileId});
 
   Future<List<WalkingSession>> getWalkingHistory({

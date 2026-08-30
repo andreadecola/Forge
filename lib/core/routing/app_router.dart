@@ -25,6 +25,7 @@ import '../../features/training_plan/presentation/pages/workout_list_page.dart';
 import '../../features/training_plan/presentation/pages/workout_session_page.dart';
 import '../../features/training_plan/presentation/pages/workout_statistics_page.dart';
 import '../../features/walking/presentation/pages/walking_session_page.dart';
+import '../../features/weekly_plan/presentation/pages/weekly_plan_page.dart';
 import '../../features/walking/presentation/pages/walking_history_detail_page.dart';
 import '../../features/walking/presentation/pages/walking_history_page.dart';
 import '../../features/walking/presentation/pages/walking_statistics_page.dart';
@@ -168,6 +169,13 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.forgePreview,
         builder: (context, state) => const ForgeWorkoutPreviewPage(),
+      ),
+      // Piano Settimanale (Milestone 8.2): rotta piatta come le altre rotte
+      // scheda, fuori dalla bottom navigation — nessuna quinta destinazione,
+      // raggiungibile da un'azione dedicata in Home (sezione 6/7).
+      GoRoute(
+        path: AppRoutes.weeklyPlan,
+        builder: (context, state) => const WeeklyPlanPage(),
       ),
       // Sessione walking fuori dalla bottom navigation, come la sessione
       // allenamento: è una modalità runtime, non una sezione principale.

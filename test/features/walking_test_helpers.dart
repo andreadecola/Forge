@@ -83,6 +83,10 @@ class FakeWalkingSessionRepository implements WalkingSessionRepository {
   Future<WalkingSession?> getWalkingSession(int id) async => sessions[id];
 
   @override
+  Stream<WalkingSession?> watchWalkingSessionById(int id) =>
+      Stream.value(sessions[id]);
+
+  @override
   Future<List<WalkingSession>> getWalkingSessions({required int profileId}) =>
       Future.value(
         sessions.values

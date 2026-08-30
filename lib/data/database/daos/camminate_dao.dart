@@ -16,6 +16,14 @@ class CamminateDao extends DatabaseAccessor<AppDatabase>
   Future<CamminateTableData?> getById(int id) =>
       (select(camminateTable)..where((t) => t.id.equals(id))).getSingleOrNull();
 
+  /// Come [getById], ma reattivo (Milestone 8.7 patch): riemette ogni
+  /// volta che la riga cambia (pausa/ripresa/completamento/abbandono) —
+  /// usato per rendere il Piano Settimanale/riepilogo reattivi ai cambi
+  /// di stato di una camminata collegata, senza ricreare l'intera pagina.
+  Stream<CamminateTableData?> watchById(int id) => (select(
+    camminateTable,
+  )..where((t) => t.id.equals(id))).watchSingleOrNull();
+
   Future<List<CamminateTableData>> getByProfile(int profileId) =>
       (select(camminateTable)
             ..where((t) => t.idProfilo.equals(profileId))

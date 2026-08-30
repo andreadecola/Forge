@@ -14,6 +14,7 @@ import '../../../pressure/application/pressure_providers.dart';
 import '../../../training_plan/presentation/widgets/active_session_banner.dart';
 import '../../../walking/presentation/widgets/walking_entry_card.dart';
 import '../../../weight/application/weight_providers.dart';
+import '../widgets/today_planned_activities_card.dart';
 
 class DashboardPage extends ConsumerWidget {
   const DashboardPage({super.key});
@@ -91,6 +92,8 @@ class _DashboardBody extends ConsumerWidget {
         const ActiveSessionBanner(),
         const SizedBox(height: 16),
         WalkingEntryCard(profileId: profile.id!),
+        const SizedBox(height: 16),
+        TodayPlannedActivitiesCard(profileId: profile.id!),
         const SizedBox(height: 16),
         Card(
           child: Padding(
@@ -210,6 +213,12 @@ class _DashboardBody extends ConsumerWidget {
               Icons.fitness_center_outlined,
               'Attrezzatura',
               AppRoutes.equipment,
+            ),
+            _quickAction(
+              context,
+              Icons.calendar_month_outlined,
+              'Piano settimanale',
+              AppRoutes.weeklyPlan,
             ),
           ],
         ),

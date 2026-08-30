@@ -11,11 +11,16 @@ final walkingSessionRepositoryProvider = Provider<WalkingSessionRepository>((
   return DriftWalkingSessionRepository(ref.watch(databaseProvider));
 });
 
-final walkingSessionProvider = FutureProvider.family<WalkingSession?, int>((
+/// `StreamProvider` (non `FutureProvider`, Milestone 8.7 patch): riemette
+/// automaticamente quando la camminata cambia stato — vedi il commento
+/// analogo su `persistedWorkoutSessionProvider`.
+final walkingSessionProvider = StreamProvider.family<WalkingSession?, int>((
   ref,
   id,
 ) {
-  return ref.watch(walkingSessionRepositoryProvider).getWalkingSession(id);
+  return ref
+      .watch(walkingSessionRepositoryProvider)
+      .watchWalkingSessionById(id);
 });
 
 final walkingSessionsProvider =

@@ -56,3 +56,14 @@ final workoutDetailsProvider = FutureProvider.family<WorkoutDetails?, int>((
 ) {
   return ref.watch(workoutRepositoryProvider).getWorkoutDetails(workoutId);
 });
+
+/// Scheda leggera per id (Milestone 8.2): usata dal Piano Settimanale per
+/// mostrare il nome di un `Workout` referenziato da una `PlannedActivity`,
+/// senza risolvere anche gli esercizi (a differenza di
+/// [workoutDetailsProvider]) — qui serve solo il nome.
+final workoutByIdProvider = FutureProvider.family<Workout?, int>((
+  ref,
+  workoutId,
+) {
+  return ref.watch(workoutRepositoryProvider).getWorkoutById(workoutId);
+});

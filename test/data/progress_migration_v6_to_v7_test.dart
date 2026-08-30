@@ -155,7 +155,7 @@ void main() {
     final database = AppDatabase(NativeDatabase.opened(rawDb));
     addTearDown(database.close);
 
-    expect(database.schemaVersion, 8);
+    expect(database.schemaVersion, 11);
 
     // Dati legacy preservati.
     final legacyBody = await database.bodyMeasurementsDao.getById(1);

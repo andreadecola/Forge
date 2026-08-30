@@ -20,6 +20,7 @@ abstract final class AppRoutes {
   static const String workoutSession = '/workouts/:id/session';
   static const String forgeGenerator = '/forge';
   static const String forgePreview = '/forge/preview';
+  static const String weeklyPlan = '/plan';
   static const String walkingSession = '/walking/session';
   static const String walkingHistory = '/walking/history';
   static const String walkingHistoryDetail =

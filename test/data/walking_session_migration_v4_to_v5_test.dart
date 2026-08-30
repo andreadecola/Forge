@@ -95,7 +95,7 @@ void main() {
       final database = AppDatabase(NativeDatabase.opened(rawDb));
       addTearDown(database.close);
 
-      expect(database.schemaVersion, 8);
+      expect(database.schemaVersion, 11);
       expect((await database.userProfileDao.getCurrentProfile())!.name, 'Alex');
       expect(await database.sessioniAllenamentoDao.getById(1), isNotNull);
       expect(await database.select(database.camminateTable).get(), isEmpty);
