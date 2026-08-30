@@ -461,6 +461,12 @@ class BackupRestoreService {
     await repo.setOnboardingCompleted(appSettings.onboardingCompleted);
     await repo.setThemeMode(appSettings.themeMode);
     await repo.setNotificationsEnabled(appSettings.notificationsEnabled);
+    await repo.setPlannedActivityReminderTimeMinutes(
+      appSettings.plannedActivityReminderTimeMinutes,
+    );
+    await repo.setPlannedActivityRemindersEnabled(
+      appSettings.plannedActivityRemindersEnabled,
+    );
   }
 
   /// Verifica post-restore (sezione 50-53, 102-103): confronto
@@ -595,6 +601,20 @@ class BackupRestoreService {
         source.appSettings.notificationsEnabled) {
       issues.add(
         'appSettings.notificationsEnabled non coerente dopo il restore.',
+      );
+    }
+    if (restored.appSettings.plannedActivityRemindersEnabled !=
+        source.appSettings.plannedActivityRemindersEnabled) {
+      issues.add(
+        'appSettings.plannedActivityRemindersEnabled non coerente dopo '
+        'il restore.',
+      );
+    }
+    if (restored.appSettings.plannedActivityReminderTimeMinutes !=
+        source.appSettings.plannedActivityReminderTimeMinutes) {
+      issues.add(
+        'appSettings.plannedActivityReminderTimeMinutes non coerente dopo '
+        'il restore.',
       );
     }
 

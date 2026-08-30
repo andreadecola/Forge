@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app.dart';
 import 'data/repositories/catalog_providers.dart';
+import 'features/notifications/application/notification_providers.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,6 +13,10 @@ void main() {
   // Un unico container condiviso con l'app, così il seed del catalogo usa la
   // stessa istanza di database della UI.
   final container = ProviderContainer();
+
+  // Prepara plugin, timezone e channel senza richiedere permessi né
+  // schedulare reminder. Un errore non blocca l'avvio di Forge.
+  unawaited(container.read(notificationBootstrapProvider.future));
 
   // Bootstrap del catalogo: idempotente e asincrono. Non blocca la UI (che
   // parte subito); gli errori vengono gestiti esplicitamente (log), non

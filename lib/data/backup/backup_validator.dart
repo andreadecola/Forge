@@ -6,6 +6,7 @@ import '../../domain/entities/planned_activity_enums.dart';
 import '../../domain/entities/walking_session_status.dart';
 import '../../domain/entities/workout_enums.dart';
 import '../../domain/entities/workout_session_persistence_status.dart';
+import '../../domain/entities/notification_settings.dart';
 import 'backup_format_version.dart';
 import 'backup_validation_issue.dart';
 import 'models/backup_planned_activity.dart';
@@ -38,6 +39,7 @@ class BackupValidator {
     _validateCrossProfileConsistency(backup, issues);
     _validateEnumValues(backup, issues);
     _validatePlannedActivityInvariants(backup, issues);
+    _validateNotificationSettings(backup, issues);
     _validateRequiredTimestamps(backup, issues);
     await _validateExerciseCodes(backup, issues);
     return issues;
@@ -524,6 +526,33 @@ class BackupValidator {
           ),
         );
       }
+    }
+  }
+
+  void _validateNotificationSettings(
+    ForgeBackupV1 backup,
+    List<BackupValidationIssue> issues,
+  ) {
+    final settings = backup.data.appSettings;
+    final time = settings.plannedActivityReminderTimeMinutes;
+    if (time != null &&
+        !NotificationSettings.isValidReminderTimeMinutes(time)) {
+      issues.add(
+        const BackupValidationIssue(
+          code: BackupValidationIssueCode.domainInvariantViolation,
+          path: r'$.data.appSettings.plannedActivityReminderTimeMinutes',
+          message: 'Orario promemoria fuori dall\'intervallo 0..1439.',
+        ),
+      );
+    }
+    if (settings.plannedActivityRemindersEnabled && time == null) {
+      issues.add(
+        const BackupValidationIssue(
+          code: BackupValidationIssueCode.domainInvariantViolation,
+          path: r'$.data.appSettings.plannedActivityReminderTimeMinutes',
+          message: 'Promemoria attività attivi senza un orario valido.',
+        ),
+      );
     }
   }
 

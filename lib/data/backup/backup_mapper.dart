@@ -206,6 +206,10 @@ class BackupMapper {
       onboardingCompleted: await settingsRepository.isOnboardingCompleted(),
       themeMode: await settingsRepository.getThemeMode(),
       notificationsEnabled: await settingsRepository.getNotificationsEnabled(),
+      plannedActivityRemindersEnabled: await settingsRepository
+          .getPlannedActivityRemindersEnabled(),
+      plannedActivityReminderTimeMinutes: await settingsRepository
+          .getPlannedActivityReminderTimeMinutes(),
     );
   }
 

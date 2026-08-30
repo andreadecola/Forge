@@ -9,10 +9,12 @@ import 'package:forge/core/constants/activity_level.dart';
 import 'package:forge/data/backup/backup_file_reader.dart';
 import 'package:forge/data/backup/backup_providers.dart';
 import 'package:forge/data/backup/backup_read_result.dart';
+import 'package:forge/data/database/app_database.dart';
 import 'package:forge/data/database/database_provider.dart';
 import 'package:forge/data/repositories/body_metrics_repository_impl.dart';
 import 'package:forge/data/repositories/forge_providers.dart';
 import 'package:forge/data/repositories/repository_providers.dart';
+import 'package:forge/data/repositories/settings_repository_impl.dart';
 import 'package:forge/domain/entities/biological_sex.dart';
 import 'package:forge/domain/entities/body_measurement.dart';
 import 'package:forge/domain/entities/user_profile.dart';
@@ -50,12 +52,19 @@ void main() {
     WidgetTester tester, {
     required UserProfile initialProfile,
     required _FakeProfileRepository repository,
+    AppDatabase? database,
     MediaQueryData? mediaQuery,
     List<Override> extraOverrides = const [],
   }) async {
+    final editorDatabase = database ?? memoryDatabase();
+    if (database == null) addTearDown(editorDatabase.close);
     final app = MaterialApp(home: const ProfilePage());
     final scoped = ProviderScope(
       overrides: [
+        databaseProvider.overrideWithValue(editorDatabase),
+        settingsRepositoryProvider.overrideWithValue(
+          SettingsRepositoryImpl(editorDatabase.appSettingsDao),
+        ),
         currentProfileProvider.overrideWith(
           (ref) => Stream.value(initialProfile),
         ),
@@ -368,8 +377,8 @@ void main() {
       tester,
       initialProfile: initial,
       repository: _FakeProfileRepository(initial),
+      database: database,
       extraOverrides: [
-        databaseProvider.overrideWithValue(database),
         backupFileReaderProvider.overrideWithValue(
           _NeverCalledBackupFileReader(),
         ),
@@ -401,8 +410,8 @@ void main() {
         tester,
         initialProfile: initial,
         repository: _FakeProfileRepository(initial),
+        database: database,
         extraOverrides: [
-          databaseProvider.overrideWithValue(database),
           backupFileReaderProvider.overrideWithValue(
             _CancellingBackupFileReader(),
           ),

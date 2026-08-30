@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:drift/drift.dart' hide isNull, isNotNull;
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -676,6 +678,8 @@ void main() {
       await settingsRepository.setOnboardingCompleted(true);
       await settingsRepository.setThemeMode('light');
       await settingsRepository.setNotificationsEnabled(true);
+      await settingsRepository.setPlannedActivityReminderTimeMinutes(510);
+      await settingsRepository.setPlannedActivityRemindersEnabled(true);
       final sourceExport = await sourceWiring.exportService.export();
       await sourceDb.close();
 
@@ -690,14 +694,54 @@ void main() {
       expect(await targetSettings.isOnboardingCompleted(), isTrue);
       expect(await targetSettings.getThemeMode(), 'light');
       expect(await targetSettings.getNotificationsEnabled(), isTrue);
+      expect(await targetSettings.getPlannedActivityRemindersEnabled(), isTrue);
+      expect(await targetSettings.getPlannedActivityReminderTimeMinutes(), 510);
 
       final rawSettingsRows = await targetDb
           .select(targetDb.appSettingsTable)
           .get();
-      expect(rawSettingsRows, hasLength(3));
+      expect(rawSettingsRows, hasLength(5));
 
       await targetDb.close();
     });
+
+    test(
+      'backup v1 precedente senza le nuove preferenze usa i default',
+      () async {
+        final sourceDb = AppDatabase(NativeDatabase.memory());
+        final sourceWiring = _buildWiring(sourceDb);
+        await insertProfilo(sourceDb);
+        final sourceExport = await sourceWiring.exportService.export();
+        final root = jsonDecode(sourceExport.json!) as Map<String, dynamic>;
+        final data = root['data'] as Map<String, dynamic>;
+        final settings =
+            Map<String, dynamic>.from(
+                data['appSettings'] as Map<String, dynamic>,
+              )
+              ..remove('plannedActivityRemindersEnabled')
+              ..remove('plannedActivityReminderTimeMinutes');
+        data['appSettings'] = settings;
+        await sourceDb.close();
+
+        final targetDb = AppDatabase(NativeDatabase.memory());
+        final targetWiring = _buildWiring(targetDb);
+        final result = await targetWiring.restoreService.restore(
+          jsonEncode(root),
+        );
+
+        expect(result.isSuccess, isTrue, reason: result.errorMessage);
+        final targetSettings = SettingsRepositoryImpl(targetDb.appSettingsDao);
+        expect(
+          await targetSettings.getPlannedActivityRemindersEnabled(),
+          isFalse,
+        );
+        expect(
+          await targetSettings.getPlannedActivityReminderTimeMinutes(),
+          isNull,
+        );
+        await targetDb.close();
+      },
+    );
   });
 
   group('Validazione pre-write (reject, nessuna scrittura)', () {

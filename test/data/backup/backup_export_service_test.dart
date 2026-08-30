@@ -499,11 +499,35 @@ void main() {
     expect(data.appSettings.onboardingCompleted, isTrue);
     expect(data.appSettings.themeMode, 'dark');
     expect(data.appSettings.notificationsEnabled, isFalse);
+    expect(data.appSettings.plannedActivityRemindersEnabled, isFalse);
+    expect(data.appSettings.plannedActivityReminderTimeMinutes, isNull);
 
     // Round-trip JSON completo: nessuna perdita di dati.
     final reparsed = BackupJsonCodec.decode(result.json!);
     expect(reparsed.data.workouts, hasLength(3));
     expect(reparsed.data.plannedActivities, hasLength(5));
+  });
+
+  test('export include le preferenze promemoria in formato v1', () async {
+    await settingsRepository.setNotificationsEnabled(true);
+    await settingsRepository.setPlannedActivityReminderTimeMinutes(1080);
+    await settingsRepository.setPlannedActivityRemindersEnabled(true);
+
+    final result = await BackupExportService(
+      mapper: buildMapper(),
+      exerciseRepository: exerciseRepository,
+    ).export();
+
+    expect(result.isSuccess, isTrue, reason: '${result.errors}');
+    expect(result.backup!.data.appSettings.notificationsEnabled, isTrue);
+    expect(
+      result.backup!.data.appSettings.plannedActivityRemindersEnabled,
+      isTrue,
+    );
+    expect(
+      result.backup!.data.appSettings.plannedActivityReminderTimeMinutes,
+      1080,
+    );
   });
 
   test('due export consecutivi con lo stesso clock producono JSON '

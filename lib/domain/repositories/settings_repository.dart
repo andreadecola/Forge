@@ -1,3 +1,5 @@
+import '../entities/notification_settings.dart';
+
 abstract class SettingsRepository {
   Future<bool> isOnboardingCompleted();
 
@@ -12,4 +14,14 @@ abstract class SettingsRepository {
   Future<bool> getNotificationsEnabled();
 
   Future<void> setNotificationsEnabled(bool value);
+
+  Future<bool> getPlannedActivityRemindersEnabled();
+
+  Future<void> setPlannedActivityRemindersEnabled(bool value);
+
+  Future<int?> getPlannedActivityReminderTimeMinutes();
+
+  Future<void> setPlannedActivityReminderTimeMinutes(int? value);
+
+  Future<NotificationSettings> getNotificationSettings();
 }

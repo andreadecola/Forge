@@ -48,6 +48,13 @@ bool requireBool(Map<String, dynamic> json, String key, String path) {
   throw BackupFormatException(path, _typeError(key, 'bool', value));
 }
 
+bool? optionalBool(Map<String, dynamic> json, String key, String path) {
+  final value = json[key];
+  if (value == null) return null;
+  if (value is bool) return value;
+  throw BackupFormatException(path, _typeError(key, 'bool?', value));
+}
+
 /// Lista obbligatoria (può essere vuota, ma la chiave deve esistere ed
 /// essere una lista JSON) di oggetti `Map<String, dynamic>`.
 List<Map<String, dynamic>> requireObjectList(

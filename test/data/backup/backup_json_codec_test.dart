@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forge/data/backup/backup_format_exception.dart';
 import 'package:forge/data/backup/backup_json_codec.dart';
@@ -153,6 +155,32 @@ void main() {
         '"metadata": {\n    "futureField": "qualcosa",',
       );
       expect(() => BackupJsonCodec.decode(withExtra), returnsNormally);
+    });
+
+    test('backup precedente senza le nuove preferenze resta compatibile', () {
+      final root =
+          jsonDecode(BackupJsonCodec.encode(_sampleBackup()))
+              as Map<String, dynamic>;
+      final appSettings =
+          Map<String, dynamic>.from(
+              (root['data'] as Map<String, dynamic>)['appSettings']
+                  as Map<String, dynamic>,
+            )
+            ..remove('plannedActivityRemindersEnabled')
+            ..remove('plannedActivityReminderTimeMinutes');
+      root['data'] = {
+        ...root['data'] as Map<String, dynamic>,
+        'appSettings': appSettings,
+      };
+      final reparsed = BackupJsonCodec.decode(jsonEncode(root));
+      expect(
+        reparsed.data.appSettings.plannedActivityRemindersEnabled,
+        isFalse,
+      );
+      expect(
+        reparsed.data.appSettings.plannedActivityReminderTimeMinutes,
+        isNull,
+      );
     });
   });
 

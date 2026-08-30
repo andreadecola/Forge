@@ -13,6 +13,7 @@ import '../../../../data/repositories/repository_providers.dart';
 import '../../../../domain/entities/biological_sex.dart';
 import '../../../../domain/entities/user_profile.dart';
 import '../../../../domain/use_cases/save_profile.dart';
+import '../../../notifications/presentation/widgets/notification_settings_section.dart';
 
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
@@ -270,6 +271,8 @@ class _ProfileEditorState extends ConsumerState<_ProfileEditor> {
                         parseDecimalInput(value ?? ''),
                       ),
                 ),
+                const SizedBox(height: 24),
+                const NotificationSettingsSection(),
                 const SizedBox(height: 24),
                 SizedBox(
                   width: double.infinity,

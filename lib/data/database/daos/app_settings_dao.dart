@@ -28,4 +28,8 @@ class AppSettingsDao extends DatabaseAccessor<AppDatabase>
       AppSettingsTableCompanion.insert(key: key, value: value),
     );
   }
+
+  Future<void> deleteValue(String key) {
+    return (delete(appSettingsTable)..where((t) => t.key.equals(key))).go();
+  }
 }
