@@ -51,6 +51,19 @@ class AttivitaPianificateDao extends DatabaseAccessor<AppDatabase>
         .watch();
   }
 
+  /// Tutte le attività pianificate del profilo, senza vincolo di
+  /// settimana (Backup.2): stesso ordinamento deterministico di
+  /// [getForWeek], solo senza il filtro sull'intervallo di date.
+  Future<List<AttivitaPianificateTableData>> getAllByProfile(int profileId) {
+    return (select(attivitaPianificateTable)
+          ..where((t) => t.idProfilo.equals(profileId))
+          ..orderBy([
+            (t) => OrderingTerm.asc(t.dataPianificata),
+            (t) => OrderingTerm.asc(t.id),
+          ]))
+        .get();
+  }
+
   Future<AttivitaPianificateTableData?> getById(int id) => (select(
     attivitaPianificateTable,
   )..where((t) => t.id.equals(id))).getSingleOrNull();

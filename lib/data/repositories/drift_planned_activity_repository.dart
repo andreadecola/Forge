@@ -46,6 +46,14 @@ class DriftPlannedActivityRepository implements PlannedActivityRepository {
   }
 
   @override
+  Future<List<PlannedActivity>> getAllForProfile({
+    required int profileId,
+  }) async {
+    final rows = await _dao.getAllByProfile(profileId);
+    return rows.map(PlannedActivityMappers.plannedActivity).toList();
+  }
+
+  @override
   Future<int> addPlannedActivity(PlannedActivity activity) {
     return _dao.create(PlannedActivityMappers.toCompanion(activity));
   }

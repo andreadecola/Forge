@@ -87,6 +87,11 @@ class _FakeWorkoutSessionRepository implements WorkoutSessionRepository {
   ) async => const [];
 
   @override
+  Future<List<PersistedWorkoutSession>> getAllSessions({
+    required int profileId,
+  }) async => const [];
+
+  @override
   Future<void> updateProgress({
     required int sessionId,
     int? currentExerciseIndex,

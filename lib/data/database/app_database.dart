@@ -335,6 +335,25 @@ class AppDatabase extends _$AppDatabase {
     },
   );
 
+  /// Versione corrente di ciascun catalogo seedato (`tipoCatalogo` →
+  /// `versione` massima mai importata), letta da `versioni_catalogo`
+  /// (Backup.2, sezione 6): usata solo come metadata diagnostica del
+  /// backup, mai per decidere se un backup è importabile (Backup.1,
+  /// sezione 7.2). Nessun DAO dedicato: `versioni_catalogo` non ha altri
+  /// consumatori applicativi oltre al seeder stesso, che vi scrive
+  /// direttamente.
+  Future<Map<String, int>> currentCatalogVersions() async {
+    final rows = await select(versioniCatalogoTable).get();
+    final result = <String, int>{};
+    for (final row in rows) {
+      final current = result[row.tipoCatalogo];
+      if (current == null || row.versione > current) {
+        result[row.tipoCatalogo] = row.versione;
+      }
+    }
+    return result;
+  }
+
   static QueryExecutor _openConnection() {
     return driftDatabase(name: AppConstants.databaseName);
   }

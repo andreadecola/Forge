@@ -26,6 +26,12 @@ class ProfileRepositoryImpl implements ProfileRepository {
   }
 
   @override
+  Future<List<UserProfile>> getAllProfiles() async {
+    final rows = await _dao.getAllProfiles();
+    return rows.map(_toEntity).toList();
+  }
+
+  @override
   Future<int> saveProfile(UserProfile profile) async {
     final now = DateTime.now();
     if (profile.id == null) {

@@ -1184,6 +1184,10 @@ class _FailingLinkWorkoutRepository implements PlannedActivityRepository {
   );
 
   @override
+  Future<List<PlannedActivity>> getAllForProfile({required int profileId}) =>
+      _delegate.getAllForProfile(profileId: profileId);
+
+  @override
   Future<int> addPlannedActivity(PlannedActivity activity) =>
       _delegate.addPlannedActivity(activity);
 

@@ -126,6 +126,15 @@ abstract class WorkoutSessionRepository {
   /// catalogo, parametri dallo snapshot). `null` se la sessione non
   /// esiste.
   Future<WorkoutSessionHistoryDetails?> getSessionHistoryDetails(int sessionId);
+
+  /// Tutte le sessioni scalari del profilo, in ogni stato (Backup.2):
+  /// a differenza di [getSessionHistory] (solo COMPLETED/ABORTED, e
+  /// aggregato in [WorkoutSessionHistoryItem]), ritorna l'entità completa
+  /// [PersistedWorkoutSession] anche per una sessione ancora IN_PROGRESS/
+  /// PAUSED.
+  Future<List<PersistedWorkoutSession>> getAllSessions({
+    required int profileId,
+  });
 }
 
 /// Lanciata da [WorkoutSessionRepository.createSession] se il profilo ha

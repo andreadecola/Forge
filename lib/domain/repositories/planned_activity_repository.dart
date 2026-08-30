@@ -18,6 +18,11 @@ abstract class PlannedActivityRepository {
     required DateTime weekEnd,
   });
 
+  /// Tutte le attività pianificate del profilo, senza vincolo di
+  /// settimana (Backup.2): copre l'intero Piano Settimanale storico,
+  /// presente e futuro in un'unica lettura.
+  Future<List<PlannedActivity>> getAllForProfile({required int profileId});
+
   Future<int> addPlannedActivity(PlannedActivity activity);
 
   Future<void> updatePlannedActivity(PlannedActivity activity);

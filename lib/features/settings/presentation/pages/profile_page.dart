@@ -5,6 +5,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/constants/activity_level.dart';
 import '../../../../core/utils/decimal_parser.dart';
 import '../../../../core/validation/onboarding_validators.dart';
+import '../../../../data/backup/backup_providers.dart';
+import '../../../../data/backup/backup_restore_result.dart';
+import '../../../../data/backup/backup_save_result.dart';
 import '../../../../data/repositories/forge_providers.dart';
 import '../../../../data/repositories/repository_providers.dart';
 import '../../../../domain/entities/biological_sex.dart';
@@ -80,6 +83,8 @@ class _ProfileEditorState extends ConsumerState<_ProfileEditor> {
   late BiologicalSexForFormula? _biologicalSex;
   late ActivityLevel _activityLevel;
   bool _isSaving = false;
+  bool _isExportingBackup = false;
+  bool _isImportingBackup = false;
   bool _isDirty = false;
 
   @override
@@ -282,6 +287,32 @@ class _ProfileEditorState extends ConsumerState<_ProfileEditor> {
                 ),
                 const SizedBox(height: 16),
                 OutlinedButton.icon(
+                  key: const ValueKey('profile-export-backup'),
+                  onPressed: _isExportingBackup ? null : _exportBackup,
+                  icon: _isExportingBackup
+                      ? const SizedBox(
+                          height: 16,
+                          width: 16,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : const Icon(Icons.save_alt_outlined),
+                  label: const Text('Esporta backup'),
+                ),
+                const SizedBox(height: 16),
+                OutlinedButton.icon(
+                  key: const ValueKey('profile-import-backup'),
+                  onPressed: _isImportingBackup ? null : _importBackup,
+                  icon: _isImportingBackup
+                      ? const SizedBox(
+                          height: 16,
+                          width: 16,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : const Icon(Icons.file_open_outlined),
+                  label: const Text('Importa backup'),
+                ),
+                const SizedBox(height: 16),
+                OutlinedButton.icon(
                   onPressed: _confirmExit,
                   icon: const Icon(Icons.logout),
                   label: const Text('Esci'),
@@ -414,6 +445,74 @@ class _ProfileEditorState extends ConsumerState<_ProfileEditor> {
   void _showError(String message) {
     if (!mounted) return;
     setState(() => _isSaving = false);
+    ScaffoldMessenger.of(context)
+      ..clearSnackBars()
+      ..showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  /// Esporta un backup logico versionato su una destinazione scelta
+  /// dall'utente (Backup.3): nessun percorso reale viene mostrato (mai
+  /// assunto, sezione 19/20/28), solo un esito neutro. L'annullamento
+  /// del picker non è un errore (sezione 29).
+  Future<void> _exportBackup() async {
+    if (_isExportingBackup) return;
+
+    setState(() => _isExportingBackup = true);
+    final result = await ref.read(createExternalBackupProvider).call();
+    if (!mounted) return;
+    setState(() => _isExportingBackup = false);
+
+    final message = switch (result.outcome) {
+      BackupSaveOutcome.success => 'Backup salvato correttamente.',
+      BackupSaveOutcome.cancelled => 'Salvataggio annullato.',
+      BackupSaveOutcome.failure => 'Impossibile salvare il backup.',
+    };
+    ScaffoldMessenger.of(context)
+      ..clearSnackBars()
+      ..showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  /// Importa e ripristina un backup scelto dall'utente (Backup.4):
+  /// REPLACE atomico, mai un merge — la conferma esplicita è
+  /// obbligatoria prima di qualunque sostituzione (sezione 67), lo
+  /// stesso principio già seguito da [_confirmExit]. Nessun dettaglio
+  /// tecnico né percorso esposto in caso di errore (sezione 28/65).
+  Future<void> _importBackup() async {
+    if (_isImportingBackup) return;
+
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Importa backup'),
+        content: const Text(
+          'L\'importazione sostituirà i dati attuali di Forge con quelli '
+          'del backup selezionato. L\'operazione non può essere annullata '
+          'una volta completata. Continuare?',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Annulla'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('Importa'),
+          ),
+        ],
+      ),
+    );
+    if (!mounted || !(confirmed ?? false)) return;
+
+    setState(() => _isImportingBackup = true);
+    final result = await ref.read(importExternalBackupProvider).call();
+    if (!mounted) return;
+    setState(() => _isImportingBackup = false);
+
+    final message = switch (result.outcome) {
+      BackupRestoreOutcome.success => 'Backup importato correttamente.',
+      BackupRestoreOutcome.cancelled => 'Importazione annullata.',
+      BackupRestoreOutcome.failure => 'Impossibile importare il backup.',
+    };
     ScaffoldMessenger.of(context)
       ..clearSnackBars()
       ..showSnackBar(SnackBar(content: Text(message)));

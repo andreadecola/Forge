@@ -38,4 +38,14 @@ class UserProfileDao extends DatabaseAccessor<AppDatabase>
           ..limit(1))
         .watchSingleOrNull();
   }
+
+  /// Tutti i profili presenti, in ordine di creazione (`id` crescente):
+  /// il prodotto non presenta ancora multi-profilo in UI, ma il backup
+  /// (Backup.2) non deve presumere un singleton se il database ne
+  /// contenesse comunque più di uno.
+  Future<List<UserProfilesTableData>> getAllProfiles() {
+    return (select(
+      userProfilesTable,
+    )..orderBy([(t) => OrderingTerm.asc(t.id)])).get();
+  }
 }

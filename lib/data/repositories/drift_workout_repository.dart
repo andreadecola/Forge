@@ -32,6 +32,14 @@ class DriftWorkoutRepository implements WorkoutRepository {
   }
 
   @override
+  Future<List<Workout>> getAllWorkouts({required int profileId}) async {
+    final rows = await db.allenamentiDao.getAllIncludingArchivedByProfile(
+      profileId,
+    );
+    return rows.map(WorkoutMappers.workout).toList();
+  }
+
+  @override
   Stream<List<Workout>> watchArchivedWorkouts({required int profileId}) {
     return db.allenamentiDao
         .watchArchivedByProfile(profileId)

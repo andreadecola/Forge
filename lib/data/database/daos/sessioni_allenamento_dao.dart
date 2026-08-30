@@ -77,6 +77,15 @@ class SessioniAllenamentoDao extends DatabaseAccessor<AppDatabase>
     return predicate;
   }
 
+  /// Tutte le sessioni del profilo, in ogni stato incluse IN_PROGRESS/
+  /// PAUSED (Backup.2): a differenza di [getHistoryByProfile] (solo
+  /// COMPLETED/ABORTED), copre l'intero storico scalare senza filtri.
+  Future<List<SessioniAllenamentoTableData>> getAllByProfile(int profileId) =>
+      (select(sessioniAllenamentoTable)
+            ..where((t) => t.idProfilo.equals(profileId))
+            ..orderBy([(t) => OrderingTerm.desc(t.dataInizio)]))
+          .get();
+
   Future<int> create(SessioniAllenamentoTableCompanion session) =>
       into(sessioniAllenamentoTable).insert(session);
 

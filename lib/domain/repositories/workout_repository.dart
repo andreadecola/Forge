@@ -19,6 +19,11 @@ abstract class WorkoutRepository {
 
   Stream<List<Workout>> watchWorkouts({required int profileId});
 
+  /// Tutte le schede del profilo, attive e archiviate insieme (Backup.2):
+  /// a differenza di [getWorkouts] (solo attive) e [watchArchivedWorkouts]
+  /// (solo archiviate), copre l'intero storico delle definizioni scheda.
+  Future<List<Workout>> getAllWorkouts({required int profileId});
+
   /// Schede archiviate del profilo (complementare a [watchWorkouts], che
   /// le esclude): unico modo per l'utente di rivederle dopo
   /// [archiveWorkout].

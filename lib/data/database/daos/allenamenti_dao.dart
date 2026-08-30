@@ -38,6 +38,17 @@ class AllenamentiDao extends DatabaseAccessor<AppDatabase>
             ..orderBy([(t) => OrderingTerm.desc(t.dataModifica)]))
           .watch();
 
+  /// Tutte le schede del profilo, attive e archiviate insieme (Backup.2):
+  /// complementare a [getAllByProfile]/[watchArchivedByProfile], che le
+  /// separano per la UI corrente.
+  Future<List<AllenamentiTableData>> getAllIncludingArchivedByProfile(
+    int profileId,
+  ) =>
+      (select(allenamentiTable)
+            ..where((t) => t.idProfilo.equals(profileId))
+            ..orderBy([(t) => OrderingTerm.desc(t.dataModifica)]))
+          .get();
+
   Future<AllenamentiTableData?> getById(int id) => (select(
     allenamentiTable,
   )..where((t) => t.id.equals(id))).getSingleOrNull();

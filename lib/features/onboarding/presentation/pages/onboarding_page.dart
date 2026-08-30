@@ -4,6 +4,10 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/routing/app_routes.dart';
 import '../../../../core/validation/onboarding_validators.dart';
+import '../../../../data/backup/backup_providers.dart';
+import '../../../../data/backup/backup_restore_result.dart';
+import '../../../../data/repositories/catalog_providers.dart';
+import '../../../../data/repositories/repository_providers.dart';
 import '../../../../domain/entities/equipment_item.dart';
 import '../../application/onboarding_controller.dart';
 import '../../application/onboarding_state.dart';
@@ -23,6 +27,9 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
 
   int _step = 0;
   bool _isSaving = false;
+  bool _showSetupForm = false;
+  bool _isRestoringBackup = false;
+  String? _restoreError;
 
   final _nameController = TextEditingController();
   final _heightController = TextEditingController();
@@ -126,34 +133,178 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
     }
   }
 
+  Future<void> _restoreFromBackup() async {
+    if (_isRestoringBackup) return;
+
+    setState(() {
+      _isRestoringBackup = true;
+      _restoreError = null;
+    });
+
+    final BackupRestoreResult result;
+    try {
+      result = await ref.read(importExternalBackupProvider).call();
+    } catch (_) {
+      if (!mounted) return;
+      setState(() {
+        _isRestoringBackup = false;
+        _restoreError = 'Impossibile ripristinare il backup.';
+      });
+      return;
+    }
+    if (!mounted) return;
+
+    switch (result.outcome) {
+      case BackupRestoreOutcome.cancelled:
+        setState(() => _isRestoringBackup = false);
+      case BackupRestoreOutcome.failure:
+        setState(() {
+          _isRestoringBackup = false;
+          _restoreError = _restoreFailureMessage(result);
+        });
+      case BackupRestoreOutcome.success:
+        // Il restore aggiorna la stessa istanza Drift osservata dai provider.
+        // La navigazione forza il redirect esistente a rivalutare
+        // onboardingCompleted senza riavviare l'app.
+        ref.invalidate(onboardingCompletedProvider);
+        ref.invalidate(currentProfileProvider);
+        context.go(AppRoutes.dashboard);
+    }
+  }
+
+  String _restoreFailureMessage(BackupRestoreResult result) {
+    return switch (result.failureReason) {
+      BackupRestoreFailureReason.incompatibleVersion =>
+        'Il backup non è compatibile con questa versione di Forge.',
+      BackupRestoreFailureReason.catalogMismatch =>
+        'Il backup contiene esercizi non disponibili in questa installazione.',
+      BackupRestoreFailureReason.invalidBackup ||
+      BackupRestoreFailureReason.readFailure ||
+      BackupRestoreFailureReason.restoreFailure ||
+      BackupRestoreFailureReason.verificationFailure ||
+      null => 'Impossibile ripristinare il backup.',
+    };
+  }
+
+  Widget _initialChoice(AsyncValue<Object?> catalogState) {
+    final catalogReady = catalogState.hasValue;
+    final catalogError = catalogState.hasError;
+
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(24),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 520),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const SizedBox(height: 48),
+              Icon(
+                Icons.fitness_center,
+                size: 56,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              const SizedBox(height: 24),
+              Text(
+                'Costruisci il tuo percorso.',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+              const SizedBox(height: 12),
+              Text(
+                'Inizia configurando Forge oppure ripristina i tuoi dati da un backup.',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              const SizedBox(height: 32),
+              FilledButton(
+                key: const ValueKey('onboarding-configure-forge'),
+                onPressed: _isRestoringBackup
+                    ? null
+                    : () => setState(() {
+                        _showSetupForm = true;
+                        _restoreError = null;
+                      }),
+                child: const Text('Configura Forge'),
+              ),
+              const SizedBox(height: 12),
+              OutlinedButton(
+                key: const ValueKey('onboarding-restore-backup'),
+                onPressed: !catalogReady || _isRestoringBackup
+                    ? null
+                    : _restoreFromBackup,
+                child: _isRestoringBackup
+                    ? const SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : const Text('Ripristina da backup'),
+              ),
+              if (catalogState.isLoading) ...[
+                const SizedBox(height: 16),
+                const Text(
+                  'Preparazione del catalogo in corso prima del ripristino...',
+                  textAlign: TextAlign.center,
+                ),
+              ],
+              if (catalogError) ...[
+                const SizedBox(height: 16),
+                Text(
+                  'Il catalogo non è disponibile: il ripristino non può iniziare.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Theme.of(context).colorScheme.error),
+                ),
+              ],
+              if (_restoreError != null) ...[
+                const SizedBox(height: 24),
+                Text(
+                  _restoreError!,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Theme.of(context).colorScheme.error),
+                ),
+              ],
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final catalogState = ref.watch(catalogBootstrapProvider);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Configurazione ${_step + 1}/$_totalSteps'),
+        title: Text(
+          _showSetupForm ? 'Configurazione ${_step + 1}/$_totalSteps' : 'Forge',
+        ),
         automaticallyImplyLeading: false,
       ),
-      body: Column(
-        children: [
-          LinearProgressIndicator(value: (_step + 1) / _totalSteps),
-          Expanded(
-            child: PageView(
-              controller: _pageController,
-              physics: const NeverScrollableScrollPhysics(),
+      body: _showSetupForm
+          ? Column(
               children: [
-                _identityStep(),
-                _bodyDataStep(),
-                _sexChoiceStep(),
-                _walkStep(),
-                _equipmentStep(),
-                _budgetStep(),
-                _summaryStep(),
+                LinearProgressIndicator(value: (_step + 1) / _totalSteps),
+                Expanded(
+                  child: PageView(
+                    controller: _pageController,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: [
+                      _identityStep(),
+                      _bodyDataStep(),
+                      _sexChoiceStep(),
+                      _walkStep(),
+                      _equipmentStep(),
+                      _budgetStep(),
+                      _summaryStep(),
+                    ],
+                  ),
+                ),
+                _buildNavigationBar(),
               ],
-            ),
-          ),
-          _buildNavigationBar(),
-        ],
-      ),
+            )
+          : _initialChoice(catalogState),
     );
   }
 

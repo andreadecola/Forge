@@ -9,6 +9,13 @@ abstract class EquipmentRepository {
 
   Future<List<UserEquipmentState>> getOwnedEquipment(int profileId);
 
+  /// Solo le righe realmente persistite in `attrezzature_utente` per il
+  /// profilo (Backup.2): a differenza di [getAllEquipmentStates], non
+  /// sintetizza una riga owned=false per ogni voce del catalogo enum
+  /// [EquipmentItem] non ancora scritta in DB — un backup deve riflettere
+  /// solo record reali, mai righe fantasma che il restore ricreerebbe.
+  Future<List<UserEquipmentState>> getPersistedEquipmentRecords(int profileId);
+
   Future<void> updateEquipment({
     required int profileId,
     required EquipmentItem item,

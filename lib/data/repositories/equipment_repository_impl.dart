@@ -28,6 +28,25 @@ class EquipmentRepositoryImpl implements EquipmentRepository {
   }
 
   @override
+  Future<List<UserEquipmentState>> getPersistedEquipmentRecords(
+    int profileId,
+  ) async {
+    final rows = await _dao.getEquipmentByProfile(profileId);
+    return rows
+        .map(
+          (row) => UserEquipmentState(
+            id: row.id,
+            profileId: profileId,
+            item: EquipmentItem.byCode(row.equipmentCode),
+            owned: row.owned,
+            acquiredAt: row.acquiredAt,
+            notes: row.notes,
+          ),
+        )
+        .toList();
+  }
+
+  @override
   Future<void> updateEquipment({
     required int profileId,
     required EquipmentItem item,

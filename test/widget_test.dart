@@ -51,7 +51,8 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.textContaining('Configurazione'), findsOneWidget);
+    expect(find.text('Configura Forge'), findsOneWidget);
+    expect(find.text('Ripristina da backup'), findsOneWidget);
     expect(find.byType(NavigationBar), findsNothing);
   });
 

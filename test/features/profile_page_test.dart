@@ -6,6 +6,9 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forge/app.dart';
 import 'package:forge/core/constants/activity_level.dart';
+import 'package:forge/data/backup/backup_file_reader.dart';
+import 'package:forge/data/backup/backup_providers.dart';
+import 'package:forge/data/backup/backup_read_result.dart';
 import 'package:forge/data/database/database_provider.dart';
 import 'package:forge/data/repositories/body_metrics_repository_impl.dart';
 import 'package:forge/data/repositories/forge_providers.dart';
@@ -48,6 +51,7 @@ void main() {
     required UserProfile initialProfile,
     required _FakeProfileRepository repository,
     MediaQueryData? mediaQuery,
+    List<Override> extraOverrides = const [],
   }) async {
     final app = MaterialApp(home: const ProfilePage());
     final scoped = ProviderScope(
@@ -57,6 +61,7 @@ void main() {
         ),
         profileRepositoryProvider.overrideWithValue(repository),
         clockProvider.overrideWithValue(_FixedClock(fixedNow)),
+        ...extraOverrides,
       ],
       child: app,
     );
@@ -353,6 +358,85 @@ void main() {
     expect(tester.widget<ElevatedButton>(save).onPressed, isNotNull);
     expect(tester.takeException(), isNull);
   });
+
+  testWidgets('Importa backup: annullare la conferma non avvia alcun import '
+      '(Backup.4, sezione 68)', (tester) async {
+    final database = memoryDatabase();
+    addTearDown(database.close);
+    final initial = profile();
+    await pumpEditor(
+      tester,
+      initialProfile: initial,
+      repository: _FakeProfileRepository(initial),
+      extraOverrides: [
+        databaseProvider.overrideWithValue(database),
+        backupFileReaderProvider.overrideWithValue(
+          _NeverCalledBackupFileReader(),
+        ),
+      ],
+    );
+
+    final importButton = find.byKey(const ValueKey('profile-import-backup'));
+    await show(tester, importButton);
+    await tester.tap(importButton);
+    await tester.pumpAndSettle();
+
+    expect(find.byType(AlertDialog), findsOneWidget);
+    await tester.tap(find.text('Annulla'));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(AlertDialog), findsNothing);
+    expect(find.text('Importazione annullata.'), findsNothing);
+    expect(find.text('Impossibile importare il backup.'), findsNothing);
+  });
+
+  testWidgets(
+    'Importa backup: confermato, ma il picker viene annullato dall\'utente '
+    'produce un feedback neutro, mai un errore (Backup.4, sezione 12/29)',
+    (tester) async {
+      final database = memoryDatabase();
+      addTearDown(database.close);
+      final initial = profile();
+      await pumpEditor(
+        tester,
+        initialProfile: initial,
+        repository: _FakeProfileRepository(initial),
+        extraOverrides: [
+          databaseProvider.overrideWithValue(database),
+          backupFileReaderProvider.overrideWithValue(
+            _CancellingBackupFileReader(),
+          ),
+        ],
+      );
+
+      final importButton = find.byKey(const ValueKey('profile-import-backup'));
+      await show(tester, importButton);
+      await tester.tap(importButton);
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Importa'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Importazione annullata.'), findsOneWidget);
+    },
+  );
+}
+
+/// Fa fallire il test se chiamato: usato per il caso "annullamento della
+/// conferma", dove nessun accesso a file/storage deve mai avvenire.
+class _NeverCalledBackupFileReader implements BackupFileReader {
+  @override
+  Future<BackupReadResult> pickAndReadBackup() {
+    fail(
+      'BackupFileReader non deve essere invocato se la conferma è annullata.',
+    );
+  }
+}
+
+/// Simula l'utente che chiude il picker senza scegliere un file.
+class _CancellingBackupFileReader implements BackupFileReader {
+  @override
+  Future<BackupReadResult> pickAndReadBackup() async =>
+      BackupReadResult.cancelled();
 }
 
 class _FixedClock implements Clock {
@@ -378,6 +462,10 @@ class _FakeProfileRepository implements ProfileRepository {
 
   @override
   Stream<UserProfile?> watchCurrentProfile() => Stream.value(profile);
+
+  @override
+  Future<List<UserProfile>> getAllProfiles() async =>
+      profile == null ? const [] : [profile!];
 
   @override
   Future<int> saveProfile(UserProfile profile) async {
