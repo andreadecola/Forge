@@ -26,37 +26,4 @@ locale e non viene incluso nel backup. Al primo avvio è possibile configurare
 Forge oppure ripristinare direttamente un backup senza creare un profilo
 temporaneo.
 
-## Backup e ripristino
 
-**BACKUP/RESTORE COMPLETATO E COLLAUDATO END-TO-END** (Backup.1-6).
-Il ciclo reale export su file esterno → disinstallazione → reinstallazione
-→ ripristino dalla prima configurazione è stato verificato con successo.
-
-Il backup protegge il profilo, le impostazioni, l'attrezzatura, le
-misurazioni, la pressione, workout e sessioni, camminate e Piano Settimanale.
-Il ripristino è atomico, validato e con rollback in caso di errore. Quando
-l'app è già configurata, l'import richiede una conferma esplicita prima di
-sostituire i dati attuali.
-
-## Baseline tecnica
-
-- `schemaVersion`: **11**;
-- `flutter analyze`: **0 issue**;
-- `flutter test`: **1009/1009 passati**;
-- Flutter, Dart, Riverpod, Drift, SQLite e go_router;
-- grafici con `fl_chart`;
-- storage backup Android tramite Storage Access Framework e `file_picker`;
-- nessun permesso storage legacy richiesto;
-- nessun server necessario per il funzionamento locale.
-
-## Sviluppo
-
-```bash
-flutter pub get
-flutter run
-flutter analyze
-flutter test
-```
-
-La documentazione tecnica delle milestone e delle aree funzionali è nella
-cartella `Docs`.
