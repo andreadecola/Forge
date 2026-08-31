@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -8,7 +10,9 @@ import '../../../../domain/entities/notification_settings.dart';
 import '../../domain/notification_permission_status.dart';
 
 class NotificationSettingsSection extends ConsumerStatefulWidget {
-  const NotificationSettingsSection({super.key});
+  const NotificationSettingsSection({super.key, this.profileId});
+
+  final int? profileId;
 
   @override
   ConsumerState<NotificationSettingsSection> createState() =>
@@ -36,6 +40,14 @@ class _NotificationSettingsSectionState
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
       ref.invalidate(notificationPermissionStatusProvider);
+      final profileId = widget.profileId;
+      if (profileId != null) {
+        unawaited(
+          ref
+              .read(notificationSettingsControllerProvider)
+              .syncProfile(profileId),
+        );
+      }
     }
   }
 
@@ -226,6 +238,11 @@ class _NotificationSettingsSectionState
     setState(() => _isBusy = true);
     try {
       await action();
+      if (widget.profileId != null) {
+        await ref
+            .read(notificationSettingsControllerProvider)
+            .syncProfile(widget.profileId!);
+      }
       ref.invalidate(notificationSettingsProvider);
     } on StateError catch (error) {
       _showMessage(error.message);

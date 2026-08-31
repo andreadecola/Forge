@@ -272,7 +272,7 @@ class _ProfileEditorState extends ConsumerState<_ProfileEditor> {
                       ),
                 ),
                 const SizedBox(height: 24),
-                const NotificationSettingsSection(),
+                NotificationSettingsSection(profileId: widget.profile.id!),
                 const SizedBox(height: 24),
                 SizedBox(
                   width: double.infinity,

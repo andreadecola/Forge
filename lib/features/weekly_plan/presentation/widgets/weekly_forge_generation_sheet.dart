@@ -11,6 +11,7 @@ import '../../../../domain/services/forge_workout_naming_policy.dart';
 import '../../../../domain/services/weekly_planning_date_service.dart';
 import '../../../training_plan/presentation/forge_labels.dart';
 import '../../../training_plan/presentation/workout_labels.dart';
+import '../../../notifications/application/notification_providers.dart';
 import '../../application/planned_activity_providers.dart';
 
 const List<int> _durationOptions = [20, 30, 40, 50, 60];
@@ -96,6 +97,15 @@ class _WeeklyForgeGenerationSheetState
         profileId: widget.profileId,
         proposal: _result!.proposal!,
       );
+      // The DB transaction is complete before projecting the newly created
+      // activities to local notifications.
+      try {
+        await ref
+            .read(plannedActivityReminderSyncServiceProvider)
+            .syncAllPlannedActivityReminders(profileId: widget.profileId);
+      } on Object {
+        // Notification failures do not invalidate a committed plan.
+      }
       if (!mounted) return;
       Navigator.of(context).pop();
       ScaffoldMessenger.of(context)

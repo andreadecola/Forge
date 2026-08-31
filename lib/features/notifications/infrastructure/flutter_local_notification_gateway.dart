@@ -6,10 +6,13 @@ import '../application/notification_operation.dart';
 import '../domain/local_notification_gateway.dart';
 import '../domain/notification_payload.dart';
 import '../domain/notification_tap_event.dart';
+import '../domain/pending_local_notification.dart';
+import '../domain/pending_local_notification_reader.dart';
 import '../domain/scheduled_local_notification.dart';
 import 'notification_timezone_service.dart';
 
-class FlutterLocalNotificationGateway implements LocalNotificationGateway {
+class FlutterLocalNotificationGateway
+    implements LocalNotificationGateway, PendingLocalNotificationReader {
   static const androidScheduleMode = AndroidScheduleMode.inexactAllowWhileIdle;
 
   static const notificationDetails = NotificationDetails(
@@ -102,6 +105,19 @@ class FlutterLocalNotificationGateway implements LocalNotificationGateway {
 
   @override
   Future<void> cancel(int id) => plugin.cancel(id: id);
+
+  @override
+  Future<List<PendingLocalNotification>> pending() async {
+    final requests = await plugin.pendingNotificationRequests();
+    return requests
+        .map(
+          (request) => PendingLocalNotification(
+            id: request.id,
+            payload: request.payload,
+          ),
+        )
+        .toList(growable: false);
+  }
 
   @override
   Future<void> cancelAll() => plugin.cancelAll();

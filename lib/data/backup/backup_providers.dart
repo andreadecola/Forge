@@ -7,6 +7,7 @@ import '../repositories/walking_session_providers.dart';
 import '../repositories/workout_providers.dart';
 import '../repositories/workout_session_providers.dart';
 import '../database/database_provider.dart';
+import '../../features/notifications/application/notification_providers.dart';
 import 'backup_export_service.dart';
 import 'backup_file_reader.dart';
 import 'backup_file_storage.dart';
@@ -73,6 +74,8 @@ final backupRestoreServiceProvider = Provider<BackupRestoreService>((ref) {
     database: ref.watch(databaseProvider),
     exerciseRepository: ref.watch(exerciseRepositoryProvider),
     exportService: ref.watch(backupExportServiceProvider),
+    onRestoreCommitted: () =>
+        ref.read(notificationLifecycleCoordinatorProvider).afterRestore(),
   );
 });
 

@@ -16,7 +16,9 @@ void main() {
 
   // Prepara plugin, timezone e channel senza richiedere permessi né
   // schedulare reminder. Un errore non blocca l'avvio di Forge.
+  container.read(notificationTapCoordinatorProvider).start();
   unawaited(container.read(notificationBootstrapProvider.future));
+  unawaited(container.read(notificationLifecycleCoordinatorProvider).startup());
 
   // Bootstrap del catalogo: idempotente e asincrono. Non blocca la UI (che
   // parte subito); gli errori vengono gestiti esplicitamente (log), non

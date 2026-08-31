@@ -7,7 +7,12 @@ abstract interface class NotificationTimezoneInitializer {
   Future<bool> initialize();
 }
 
-class NotificationTimezoneService implements NotificationTimezoneInitializer {
+abstract interface class NotificationTimezoneRefresher {
+  Future<bool> refreshIfChanged();
+}
+
+class NotificationTimezoneService
+    implements NotificationTimezoneInitializer, NotificationTimezoneRefresher {
   NotificationTimezoneService({required this.resolver});
 
   final DeviceTimezoneResolver resolver;
@@ -37,6 +42,31 @@ class NotificationTimezoneService implements NotificationTimezoneInitializer {
       // UTC is a safe deterministic fallback, but scheduling is rejected by
       // the adapter while this flag is set: a wrong wall-clock reminder is
       // preferable neither to a crash nor to a silently shifted reminder.
+      tz.setLocalLocation(tz.UTC);
+      _usingFallback = true;
+      _initialized = true;
+      return false;
+    }
+  }
+
+  /// Re-reads the device timezone without persisting it. A changed
+  /// identifier makes the next reconciliation rebuild every future request
+  /// with the same configured wall-clock time in the new location.
+  @override
+  Future<bool> refreshIfChanged() async {
+    if (!_initialized) return initialize();
+
+    try {
+      final identifier = await resolver.resolveIdentifier();
+      if (!_usingFallback && identifier == _identifier) return true;
+
+      final location = tz.getLocation(identifier);
+      tz.setLocalLocation(location);
+      _identifier = identifier;
+      _usingFallback = false;
+      _initialized = true;
+      return true;
+    } on Object {
       tz.setLocalLocation(tz.UTC);
       _usingFallback = true;
       _initialized = true;

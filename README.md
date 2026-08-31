@@ -14,6 +14,8 @@ L'app permette di:
 - generare proposte di allenamento tramite Forge Engine;
 - registrare camminate con timer, pause, fatica e dolore;
 - pianificare workout, camminate e recuperi in una vista settimanale;
+- configurare reminder locali per workout e camminate pianificati;
+- ricostruire i reminder dopo startup, restore, resume e cambio timezone;
 - vedere le attività previste per oggi e collegarle alle sessioni realmente
   eseguite;
 - monitorare peso, girovita e pressione arteriosa con storico, riepiloghi e

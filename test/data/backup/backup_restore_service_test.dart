@@ -62,7 +62,10 @@ class _Wiring {
   final BackupRestoreService restoreService;
 }
 
-_Wiring _buildWiring(AppDatabase db) {
+_Wiring _buildWiring(
+  AppDatabase db, {
+  Future<void> Function()? onRestoreCommitted,
+}) {
   final exerciseRepository = DriftExerciseRepository(db);
   final mapper = BackupMapper(
     profileRepository: ProfileRepositoryImpl(db.userProfileDao),
@@ -88,6 +91,7 @@ _Wiring _buildWiring(AppDatabase db) {
     database: db,
     exerciseRepository: exerciseRepository,
     exportService: exportService,
+    onRestoreCommitted: onRestoreCommitted,
   );
   return _Wiring(db, exerciseRepository, exportService, restoreService);
 }
@@ -263,7 +267,16 @@ void main() {
         codice: 'EX-B',
         idCategoria: targetCategoriaId,
       );
-      final targetWiring = _buildWiring(targetDb);
+      var callbackCalled = false;
+      var committedDataVisible = false;
+      final targetWiring = _buildWiring(
+        targetDb,
+        onRestoreCommitted: () async {
+          callbackCalled = true;
+          committedDataVisible =
+              await targetDb.userProfileDao.getCurrentProfile() != null;
+        },
+      );
 
       final result = await targetWiring.restoreService.restore(
         sourceExport.json!,
@@ -271,6 +284,8 @@ void main() {
 
       expect(result.isSuccess, isTrue, reason: result.errorMessage);
       expect(result.safetyBackupMetadata, isNotNull);
+      expect(callbackCalled, isTrue);
+      expect(committedDataVisible, isTrue);
 
       final afterRestore = await targetWiring.exportService.export();
       expect(afterRestore.isSuccess, isTrue);

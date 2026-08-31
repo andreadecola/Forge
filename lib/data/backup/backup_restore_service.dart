@@ -60,6 +60,7 @@ class BackupRestoreService {
     required this.database,
     required this.exerciseRepository,
     required this.exportService,
+    this.onRestoreCommitted,
   });
 
   final AppDatabase database;
@@ -70,6 +71,11 @@ class BackupRestoreService {
   /// [AppDatabase] dell'app, mai un'istanza separata — nessuna
   /// duplicazione della logica di export (sezione 6).
   final BackupExportService exportService;
+
+  /// Runs only after the Drift transaction and verification have committed.
+  /// Notification failures are deliberately non-core and never turn a
+  /// successful data restore into a failed restore.
+  final Future<void> Function()? onRestoreCommitted;
 
   Future<BackupRestoreResult> restore(String backupJson) async {
     final ForgeBackupV1 backup;
@@ -180,6 +186,13 @@ class BackupRestoreService {
         BackupRestoreFailureReason.restoreFailure,
         'Restore fallito, nessuna modifica applicata: $e',
       );
+    }
+
+    try {
+      await onRestoreCommitted?.call();
+    } on Object {
+      // The restored database remains authoritative; a later app resume can
+      // retry notification projection.
     }
 
     return BackupRestoreResult.success(

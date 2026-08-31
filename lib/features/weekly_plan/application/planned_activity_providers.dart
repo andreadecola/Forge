@@ -16,6 +16,7 @@ import '../../../domain/use_cases/postpone_planned_activity.dart';
 import '../../../domain/use_cases/restore_planned_activity.dart';
 import '../../../domain/use_cases/skip_planned_activity.dart';
 import '../../../domain/use_cases/update_planned_activity.dart';
+import '../../notifications/application/notification_providers.dart';
 import 'weekly_plan_generation_service.dart';
 import 'weekly_plan_summary_builder.dart';
 
@@ -123,26 +124,32 @@ class PlannedActivityController {
 
   final Ref _ref;
 
-  Future<int> addPlannedActivity(PlannedActivity activity) {
-    return AddPlannedActivity(_ref.read(plannedActivityRepositoryProvider))(
-      activity,
-    );
+  Future<int> addPlannedActivity(PlannedActivity activity) async {
+    final id = await AddPlannedActivity(
+      _ref.read(plannedActivityRepositoryProvider),
+    )(activity);
+    await _syncActivity(id);
+    return id;
   }
 
-  Future<void> updatePlannedActivity(PlannedActivity activity) {
-    return UpdatePlannedActivity(_ref.read(plannedActivityRepositoryProvider))(
+  Future<void> updatePlannedActivity(PlannedActivity activity) async {
+    await UpdatePlannedActivity(_ref.read(plannedActivityRepositoryProvider))(
       activity,
     );
+    if (activity.id != null) await _syncActivity(activity.id!);
   }
 
   /// Sezione 28 (Milestone 8.5): rifiuta l'eliminazione se la sessione
   /// collegata è ancora attiva — vedi `DeletePlannedActivity`.
-  Future<void> deletePlannedActivity(int id) {
-    return DeletePlannedActivity(
+  Future<void> deletePlannedActivity(int id) async {
+    await DeletePlannedActivity(
       _ref.read(plannedActivityRepositoryProvider),
       _ref.read(workoutSessionRepositoryProvider),
       _ref.read(walkingSessionRepositoryProvider),
     )(id);
+    await _ref
+        .read(plannedActivityReminderSyncServiceProvider)
+        .cancelByActivityId(id);
   }
 
   /// Collega la `WorkoutSession` appena avviata a [activity] (Milestone
@@ -152,49 +159,65 @@ class PlannedActivityController {
   Future<void> linkWorkoutSession({
     required PlannedActivity activity,
     required int workoutSessionId,
-  }) {
-    return LinkWorkoutSession(
+  }) async {
+    await LinkWorkoutSession(
       _ref.read(plannedActivityRepositoryProvider),
       _ref.read(workoutSessionRepositoryProvider),
     )(activity: activity, workoutSessionId: workoutSessionId);
+    await _syncActivity(activity.id!);
   }
 
   /// Stesso principio per `WalkingSessionController.start`.
   Future<void> linkWalkingSession({
     required PlannedActivity activity,
     required int walkingSessionId,
-  }) {
-    return LinkWalkingSession(
+  }) async {
+    await LinkWalkingSession(
       _ref.read(plannedActivityRepositoryProvider),
       _ref.read(walkingSessionRepositoryProvider),
     )(activity: activity, walkingSessionId: walkingSessionId);
+    await _syncActivity(activity.id!);
   }
 
   /// Azione esplicita "Salta" (Milestone 8.6): vedi `SkipPlannedActivity`.
-  Future<void> skipPlannedActivity(int id) {
-    return SkipPlannedActivity(
+  Future<void> skipPlannedActivity(int id) async {
+    await SkipPlannedActivity(
       _ref.read(plannedActivityRepositoryProvider),
       _ref.read(workoutSessionRepositoryProvider),
       _ref.read(walkingSessionRepositoryProvider),
     )(id);
+    await _syncActivity(id);
   }
 
   /// Azione esplicita "Rinvia" (Milestone 8.6): vedi
   /// `PostponePlannedActivity`.
-  Future<void> postponePlannedActivity(int id) {
-    return PostponePlannedActivity(
+  Future<void> postponePlannedActivity(int id) async {
+    await PostponePlannedActivity(
       _ref.read(plannedActivityRepositoryProvider),
       _ref.read(workoutSessionRepositoryProvider),
       _ref.read(walkingSessionRepositoryProvider),
     )(id);
+    await _syncActivity(id);
   }
 
   /// Azione esplicita "Ripristina nel piano" (Milestone 8.6): vedi
   /// `RestorePlannedActivity`.
-  Future<void> restorePlannedActivity(int id) {
-    return RestorePlannedActivity(_ref.read(plannedActivityRepositoryProvider))(
+  Future<void> restorePlannedActivity(int id) async {
+    await RestorePlannedActivity(_ref.read(plannedActivityRepositoryProvider))(
       id,
     );
+    await _syncActivity(id);
+  }
+
+  Future<void> _syncActivity(int id) async {
+    try {
+      await _ref
+          .read(plannedActivityReminderSyncServiceProvider)
+          .syncActivity(id);
+    } on Object {
+      // Notifications are a non-core projection. The M8 write has already
+      // committed and must remain successful if the side effect fails.
+    }
   }
 
   /// Azione esplicita "Sposta" (Milestone 8.6, sezione 16/31): riusa

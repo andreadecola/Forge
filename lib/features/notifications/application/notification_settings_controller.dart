@@ -14,20 +14,26 @@ class NotificationSettingsController {
     return _ref.read(settingsRepositoryProvider).getNotificationSettings();
   }
 
-  Future<void> setMasterEnabled(bool value) {
-    return _ref.read(settingsRepositoryProvider).setNotificationsEnabled(value);
+  Future<void> setMasterEnabled(bool value, {int? profileId}) async {
+    await _ref.read(settingsRepositoryProvider).setNotificationsEnabled(value);
+    if (profileId != null) await syncProfile(profileId);
   }
 
-  Future<void> setPlannedActivityRemindersEnabled(bool value) {
-    return _ref
+  Future<void> setPlannedActivityRemindersEnabled(
+    bool value, {
+    int? profileId,
+  }) async {
+    await _ref
         .read(settingsRepositoryProvider)
         .setPlannedActivityRemindersEnabled(value);
+    if (profileId != null) await syncProfile(profileId);
   }
 
-  Future<void> setReminderTimeMinutes(int? value) {
-    return _ref
+  Future<void> setReminderTimeMinutes(int? value, {int? profileId}) async {
+    await _ref
         .read(settingsRepositoryProvider)
         .setPlannedActivityReminderTimeMinutes(value);
+    if (profileId != null) await syncProfile(profileId);
   }
 
   Future<NotificationPermissionStatus> permissionStatus() {
@@ -36,7 +42,25 @@ class NotificationSettingsController {
         .getPermissionStatus();
   }
 
-  Future<NotificationPermissionStatus> requestPermission() {
-    return _ref.read(notificationPermissionGatewayProvider).requestPermission();
+  Future<NotificationPermissionStatus> requestPermission({
+    int? profileId,
+  }) async {
+    final status = await _ref
+        .read(notificationPermissionGatewayProvider)
+        .requestPermission();
+    if (profileId != null) await syncProfile(profileId);
+    return status;
+  }
+
+  Future<void> syncProfile(int profileId) async {
+    try {
+      // Notification projection failures must not roll back or hide a
+      // successfully persisted settings change.
+      await _ref
+          .read(plannedActivityReminderSyncServiceProvider)
+          .syncAllPlannedActivityReminders(profileId: profileId);
+    } on Object {
+      // A later settings/permission change can retry reconciliation.
+    }
   }
 }

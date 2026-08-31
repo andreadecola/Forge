@@ -7,4 +7,8 @@ class NotificationChannelConfig {
   static const importance = NotificationChannelImportance.defaultImportance;
 }
 
+abstract final class NotificationPayloadTypes {
+  static const plannedActivity = 'planned_activity';
+}
+
 enum NotificationChannelImportance { defaultImportance }

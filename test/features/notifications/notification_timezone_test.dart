@@ -12,6 +12,15 @@ class _FakeTimezoneResolver implements DeviceTimezoneResolver {
   Future<String> resolveIdentifier() async => identifier;
 }
 
+class _MutableTimezoneResolver implements DeviceTimezoneResolver {
+  _MutableTimezoneResolver(this.identifier);
+
+  String identifier;
+
+  @override
+  Future<String> resolveIdentifier() async => identifier;
+}
+
 void main() {
   test('risolve Europe/Rome e conserva la parete locale', () async {
     final service = NotificationTimezoneService(
@@ -66,6 +75,20 @@ void main() {
         throwsStateError,
       );
       expect(tz.local, tz.UTC);
+    },
+  );
+
+  test(
+    'refresh rileva cambio timezone senza persistere uno snapshot DB',
+    () async {
+      final resolver = _MutableTimezoneResolver('Europe/Rome');
+      final service = NotificationTimezoneService(resolver: resolver);
+
+      expect(await service.initialize(), isTrue);
+      resolver.identifier = 'America/New_York';
+      expect(await service.refreshIfChanged(), isTrue);
+      expect(service.identifier, 'America/New_York');
+      expect(service.toLocalWallClock(DateTime(2026, 1, 15, 8, 30)).hour, 8);
     },
   );
 }
