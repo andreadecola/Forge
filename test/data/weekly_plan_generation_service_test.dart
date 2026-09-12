@@ -88,7 +88,9 @@ void main() {
       plannedActivityRepository,
       generateAdapted,
       EquipmentRepositoryImpl(db.userEquipmentDao),
-      const SystemClock(),
+      // La settimana di riferimento è futura rispetto a questa data fissa;
+      // il test non deve dipendere dal calendario reale di esecuzione.
+      _FixedClock(DateTime(2026, 9, 1, 9)),
     );
   }
 

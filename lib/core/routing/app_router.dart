@@ -173,10 +173,6 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       // Piano Settimanale (Milestone 8.2): rotta piatta come le altre rotte
       // scheda, fuori dalla bottom navigation — nessuna quinta destinazione,
       // raggiungibile da un'azione dedicata in Home (sezione 6/7).
-      GoRoute(
-        path: AppRoutes.weeklyPlan,
-        builder: (context, state) => const WeeklyPlanPage(),
-      ),
       // Sessione walking fuori dalla bottom navigation, come la sessione
       // allenamento: è una modalità runtime, non una sezione principale.
       GoRoute(
@@ -218,6 +214,13 @@ final appRouterProvider = Provider<GoRouter>((ref) {
               GoRoute(
                 path: AppRoutes.program,
                 builder: (context, state) => const ProgramPage(),
+              ),
+              // Il Piano e una destinazione della sezione principale
+              // Programma: tenerlo nello stesso branch preserva AppShell e
+              // NavigationBar anche quando si arriva da una notifica.
+              GoRoute(
+                path: AppRoutes.weeklyPlan,
+                builder: (context, state) => const WeeklyPlanPage(),
               ),
             ],
           ),

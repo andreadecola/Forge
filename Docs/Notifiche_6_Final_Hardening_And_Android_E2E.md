@@ -13,6 +13,23 @@ inattivita restano fuori dal MVP.
 
 ## Audit e hardening
 
+### Bug E2E: tap fuori dalla shell
+
+Durante il collaudo Android e stato riprodotto il bug:
+
+> Notification tap opened weekly plan outside the main navigation shell.
+
+La causa era strutturale: `/plan` era registrata come `GoRoute` top-level,
+mentre la `NavigationBar` appartiene al `StatefulShellRoute.indexedStack`.
+Il tap arrivava quindi alla `WeeklyPlanPage` corretta, ma fuori da `AppShell`.
+
+La route `/plan` e stata spostata nel branch `Programma` della stessa shell,
+senza creare pagine o scaffold duplicati e senza cambiare il path pubblico.
+Il tap valido, da cold-start, background o foreground, entra ora nella
+struttura principale con Home, Programma, Progressi e Profilo disponibili.
+Il fallback per payload invalido, attivita eliminata o profilo diverso resta
+la Home.
+
 Il percorso verificato e:
 
 `PlannedActivity -> eligibility -> settings -> permission -> schedule -> pending -> reconciliation -> tap -> /plan`.
