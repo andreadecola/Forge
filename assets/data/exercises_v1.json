@@ -284,14 +284,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_001/start.webp",
+          "path": "assets/images/img_allenamenti/mob_001/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_001/end.webp",
+          "path": "assets/images/img_allenamenti/mob_001/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -343,14 +343,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_002/start.webp",
+          "path": "assets/images/img_allenamenti/mob_002/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_002/end.webp",
+          "path": "assets/images/img_allenamenti/mob_002/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -394,14 +394,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_003/start.webp",
+          "path": "assets/images/img_allenamenti/mob_003/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_003/end.webp",
+          "path": "assets/images/img_allenamenti/mob_003/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -445,14 +445,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_004/start.webp",
+          "path": "assets/images/img_allenamenti/mob_004/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_004/end.webp",
+          "path": "assets/images/img_allenamenti/mob_004/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -496,14 +496,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_005/start.webp",
+          "path": "assets/images/img_allenamenti/mob_005/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_005/end.webp",
+          "path": "assets/images/img_allenamenti/mob_005/end.webp",
           "caption": null,
           "order": 2
         }
@@ -549,14 +549,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_006/start.webp",
+          "path": "assets/images/img_allenamenti/mob_006/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_006/end.webp",
+          "path": "assets/images/img_allenamenti/mob_006/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -604,14 +604,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_007/start.webp",
+          "path": "assets/images/img_allenamenti/mob_007/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_007/end.webp",
+          "path": "assets/images/img_allenamenti/mob_007/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -657,14 +657,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_008/start.webp",
+          "path": "assets/images/img_allenamenti/mob_008/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_008/end.webp",
+          "path": "assets/images/img_allenamenti/mob_008/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -708,14 +708,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_009/start.webp",
+          "path": "assets/images/img_allenamenti/mob_009/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_009/end.webp",
+          "path": "assets/images/img_allenamenti/mob_009/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -759,14 +759,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_010/start.webp",
+          "path": "assets/images/img_allenamenti/mob_010/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_010/end.webp",
+          "path": "assets/images/img_allenamenti/mob_010/end.webp",
           "caption": null,
           "order": 2
         }
@@ -814,14 +814,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_011/start.webp",
+          "path": "assets/images/img_allenamenti/mob_011/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_011/end.webp",
+          "path": "assets/images/img_allenamenti/mob_011/end.webp",
           "caption": null,
           "order": 2
         }
@@ -867,14 +867,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_012/start.webp",
+          "path": "assets/images/img_allenamenti/mob_012/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_012/end.webp",
+          "path": "assets/images/img_allenamenti/mob_012/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -920,14 +920,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_013/start.webp",
+          "path": "assets/images/img_allenamenti/mob_013/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_013/end.webp",
+          "path": "assets/images/img_allenamenti/mob_013/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -977,14 +977,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_014/start.webp",
+          "path": "assets/images/img_allenamenti/mob_014/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_014/end.webp",
+          "path": "assets/images/img_allenamenti/mob_014/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -1034,14 +1034,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_015/start.webp",
+          "path": "assets/images/img_allenamenti/mob_015/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/mob_015/end.webp",
+          "path": "assets/images/img_allenamenti/mob_015/end.webp",
           "caption": null,
           "order": 2
         }
@@ -1086,14 +1086,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_001/start.webp",
+          "path": "assets/images/img_allenamenti/leg_001/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_001/end.webp",
+          "path": "assets/images/img_allenamenti/leg_001/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -1137,14 +1137,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_002/start.webp",
+          "path": "assets/images/img_allenamenti/leg_002/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_002/end.webp",
+          "path": "assets/images/img_allenamenti/leg_002/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -1189,14 +1189,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_003/start.webp",
+          "path": "assets/images/img_allenamenti/leg_003/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_003/end.webp",
+          "path": "assets/images/img_allenamenti/leg_003/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -1257,14 +1257,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_004/start.webp",
+          "path": "assets/images/img_allenamenti/leg_004/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_004/end.webp",
+          "path": "assets/images/img_allenamenti/leg_004/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -1309,14 +1309,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_005/start.webp",
+          "path": "assets/images/img_allenamenti/leg_005/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_005/end.webp",
+          "path": "assets/images/img_allenamenti/leg_005/end.webp",
           "caption": null,
           "order": 2
         }
@@ -1361,14 +1361,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_006/start.webp",
+          "path": "assets/images/img_allenamenti/leg_006/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_006/end.webp",
+          "path": "assets/images/img_allenamenti/leg_006/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -1413,14 +1413,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_007/start.webp",
+          "path": "assets/images/img_allenamenti/leg_007/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_007/end.webp",
+          "path": "assets/images/img_allenamenti/leg_007/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -1465,14 +1465,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_008/start.webp",
+          "path": "assets/images/img_allenamenti/leg_008/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_008/end.webp",
+          "path": "assets/images/img_allenamenti/leg_008/end.webp",
           "caption": null,
           "order": 2
         }
@@ -1523,14 +1523,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_009/start.webp",
+          "path": "assets/images/img_allenamenti/leg_009/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_009/end.webp",
+          "path": "assets/images/img_allenamenti/leg_009/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -1577,14 +1577,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_010/start.webp",
+          "path": "assets/images/img_allenamenti/leg_010/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_010/end.webp",
+          "path": "assets/images/img_allenamenti/leg_010/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -1631,14 +1631,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_011/start.webp",
+          "path": "assets/images/img_allenamenti/leg_011/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_011/end.webp",
+          "path": "assets/images/img_allenamenti/leg_011/end.webp",
           "caption": null,
           "order": 2
         }
@@ -1686,14 +1686,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_012/start.webp",
+          "path": "assets/images/img_allenamenti/leg_012/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_012/end.webp",
+          "path": "assets/images/img_allenamenti/leg_012/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -1737,14 +1737,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_013/start.webp",
+          "path": "assets/images/img_allenamenti/leg_013/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_013/end.webp",
+          "path": "assets/images/img_allenamenti/leg_013/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -1788,14 +1788,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_014/start.webp",
+          "path": "assets/images/img_allenamenti/leg_014/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_014/end.webp",
+          "path": "assets/images/img_allenamenti/leg_014/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -1839,14 +1839,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_015/start.webp",
+          "path": "assets/images/img_allenamenti/leg_015/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_015/end.webp",
+          "path": "assets/images/img_allenamenti/leg_015/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -1892,14 +1892,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_016/start.webp",
+          "path": "assets/images/img_allenamenti/leg_016/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_016/end.webp",
+          "path": "assets/images/img_allenamenti/leg_016/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -1945,14 +1945,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_017/start.webp",
+          "path": "assets/images/img_allenamenti/leg_017/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_017/end.webp",
+          "path": "assets/images/img_allenamenti/leg_017/end.webp",
           "caption": null,
           "order": 2
         }
@@ -2001,14 +2001,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_018/start.webp",
+          "path": "assets/images/img_allenamenti/leg_018/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_018/end.webp",
+          "path": "assets/images/img_allenamenti/leg_018/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -2053,14 +2053,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_019/start.webp",
+          "path": "assets/images/img_allenamenti/leg_019/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_019/end.webp",
+          "path": "assets/images/img_allenamenti/leg_019/end.webp",
           "caption": null,
           "order": 2
         }
@@ -2109,14 +2109,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_020/start.webp",
+          "path": "assets/images/img_allenamenti/leg_020/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/leg_020/end.webp",
+          "path": "assets/images/img_allenamenti/leg_020/end.webp",
           "caption": null,
           "order": 2
         }
@@ -2163,14 +2163,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/push_001/start.webp",
+          "path": "assets/images/img_allenamenti/push_001/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/push_001/end.webp",
+          "path": "assets/images/img_allenamenti/push_001/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -2217,14 +2217,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/push_002/start.webp",
+          "path": "assets/images/img_allenamenti/push_002/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/push_002/end.webp",
+          "path": "assets/images/img_allenamenti/push_002/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -2271,14 +2271,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/push_003/start.webp",
+          "path": "assets/images/img_allenamenti/push_003/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/push_003/end.webp",
+          "path": "assets/images/img_allenamenti/push_003/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -2325,14 +2325,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/push_004/start.webp",
+          "path": "assets/images/img_allenamenti/push_004/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/push_004/end.webp",
+          "path": "assets/images/img_allenamenti/push_004/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -2383,14 +2383,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/push_005/start.webp",
+          "path": "assets/images/img_allenamenti/push_005/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/push_005/end.webp",
+          "path": "assets/images/img_allenamenti/push_005/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -2437,14 +2437,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/push_006/start.webp",
+          "path": "assets/images/img_allenamenti/push_006/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/push_006/end.webp",
+          "path": "assets/images/img_allenamenti/push_006/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -2506,14 +2506,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/push_007/start.webp",
+          "path": "assets/images/img_allenamenti/push_007/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/push_007/end.webp",
+          "path": "assets/images/img_allenamenti/push_007/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -2559,14 +2559,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/push_008/start.webp",
+          "path": "assets/images/img_allenamenti/push_008/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/push_008/end.webp",
+          "path": "assets/images/img_allenamenti/push_008/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -2610,14 +2610,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/push_009/start.webp",
+          "path": "assets/images/img_allenamenti/push_009/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/push_009/end.webp",
+          "path": "assets/images/img_allenamenti/push_009/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -2663,14 +2663,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/push_010/start.webp",
+          "path": "assets/images/img_allenamenti/push_010/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/push_010/end.webp",
+          "path": "assets/images/img_allenamenti/push_010/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -2717,14 +2717,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/back_001/start.webp",
+          "path": "assets/images/img_allenamenti/back_001/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/back_001/end.webp",
+          "path": "assets/images/img_allenamenti/back_001/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -2775,14 +2775,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/back_002/start.webp",
+          "path": "assets/images/img_allenamenti/back_002/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/back_002/end.webp",
+          "path": "assets/images/img_allenamenti/back_002/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -2829,14 +2829,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/back_003/start.webp",
+          "path": "assets/images/img_allenamenti/back_003/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/back_003/end.webp",
+          "path": "assets/images/img_allenamenti/back_003/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -2886,14 +2886,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/back_004/start.webp",
+          "path": "assets/images/img_allenamenti/back_004/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/back_004/end.webp",
+          "path": "assets/images/img_allenamenti/back_004/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -2939,14 +2939,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/back_005/start.webp",
+          "path": "assets/images/img_allenamenti/back_005/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/back_005/end.webp",
+          "path": "assets/images/img_allenamenti/back_005/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -2993,14 +2993,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/back_006/start.webp",
+          "path": "assets/images/img_allenamenti/back_006/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/back_006/end.webp",
+          "path": "assets/images/img_allenamenti/back_006/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -3047,14 +3047,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/back_007/start.webp",
+          "path": "assets/images/img_allenamenti/back_007/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/back_007/end.webp",
+          "path": "assets/images/img_allenamenti/back_007/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -3100,14 +3100,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/back_008/start.webp",
+          "path": "assets/images/img_allenamenti/back_008/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/back_008/end.webp",
+          "path": "assets/images/img_allenamenti/back_008/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -3153,14 +3153,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/back_009/start.webp",
+          "path": "assets/images/img_allenamenti/back_009/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/back_009/end.webp",
+          "path": "assets/images/img_allenamenti/back_009/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -3210,14 +3210,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/back_010/start.webp",
+          "path": "assets/images/img_allenamenti/back_010/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/back_010/end.webp",
+          "path": "assets/images/img_allenamenti/back_010/end.webp",
           "caption": null,
           "order": 2
         }
@@ -3263,14 +3263,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/sho_001/start.webp",
+          "path": "assets/images/img_allenamenti/sho_001/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/sho_001/end.webp",
+          "path": "assets/images/img_allenamenti/sho_001/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -3316,14 +3316,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/sho_002/start.webp",
+          "path": "assets/images/img_allenamenti/sho_002/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/sho_002/end.webp",
+          "path": "assets/images/img_allenamenti/sho_002/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -3369,14 +3369,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/sho_003/start.webp",
+          "path": "assets/images/img_allenamenti/sho_003/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/sho_003/end.webp",
+          "path": "assets/images/img_allenamenti/sho_003/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -3424,14 +3424,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/sho_004/start.webp",
+          "path": "assets/images/img_allenamenti/sho_004/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/sho_004/end.webp",
+          "path": "assets/images/img_allenamenti/sho_004/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -3475,14 +3475,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/sho_005/start.webp",
+          "path": "assets/images/img_allenamenti/sho_005/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/sho_005/end.webp",
+          "path": "assets/images/img_allenamenti/sho_005/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -3526,14 +3526,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/sho_006/start.webp",
+          "path": "assets/images/img_allenamenti/sho_006/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/sho_006/end.webp",
+          "path": "assets/images/img_allenamenti/sho_006/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -3577,14 +3577,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/sho_007/start.webp",
+          "path": "assets/images/img_allenamenti/sho_007/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/sho_007/end.webp",
+          "path": "assets/images/img_allenamenti/sho_007/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -3628,14 +3628,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/sho_008/start.webp",
+          "path": "assets/images/img_allenamenti/sho_008/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/sho_008/end.webp",
+          "path": "assets/images/img_allenamenti/sho_008/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -3681,14 +3681,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/sho_009/start.webp",
+          "path": "assets/images/img_allenamenti/sho_009/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/sho_009/end.webp",
+          "path": "assets/images/img_allenamenti/sho_009/end.webp",
           "caption": null,
           "order": 2
         }
@@ -3734,14 +3734,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/sho_010/start.webp",
+          "path": "assets/images/img_allenamenti/sho_010/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/sho_010/end.webp",
+          "path": "assets/images/img_allenamenti/sho_010/end.webp",
           "caption": null,
           "order": 2
         }
@@ -3789,14 +3789,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/arm_001/start.webp",
+          "path": "assets/images/img_allenamenti/arm_001/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/arm_001/end.webp",
+          "path": "assets/images/img_allenamenti/arm_001/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -3840,14 +3840,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/arm_002/start.webp",
+          "path": "assets/images/img_allenamenti/arm_002/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/arm_002/end.webp",
+          "path": "assets/images/img_allenamenti/arm_002/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -3891,14 +3891,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/arm_003/start.webp",
+          "path": "assets/images/img_allenamenti/arm_003/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/arm_003/end.webp",
+          "path": "assets/images/img_allenamenti/arm_003/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -3944,14 +3944,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/arm_004/start.webp",
+          "path": "assets/images/img_allenamenti/arm_004/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/arm_004/end.webp",
+          "path": "assets/images/img_allenamenti/arm_004/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -3995,14 +3995,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/arm_005/start.webp",
+          "path": "assets/images/img_allenamenti/arm_005/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/arm_005/end.webp",
+          "path": "assets/images/img_allenamenti/arm_005/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -4050,14 +4050,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/arm_006/start.webp",
+          "path": "assets/images/img_allenamenti/arm_006/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/arm_006/end.webp",
+          "path": "assets/images/img_allenamenti/arm_006/end.webp",
           "caption": null,
           "order": 2
         }
@@ -4101,14 +4101,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/arm_007/start.webp",
+          "path": "assets/images/img_allenamenti/arm_007/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/arm_007/end.webp",
+          "path": "assets/images/img_allenamenti/arm_007/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -4152,14 +4152,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/arm_008/start.webp",
+          "path": "assets/images/img_allenamenti/arm_008/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/arm_008/end.webp",
+          "path": "assets/images/img_allenamenti/arm_008/end.webp",
           "caption": null,
           "order": 2
         }
@@ -4205,14 +4205,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/core_001/start.webp",
+          "path": "assets/images/img_allenamenti/core_001/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/core_001/end.webp",
+          "path": "assets/images/img_allenamenti/core_001/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -4258,14 +4258,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/core_002/start.webp",
+          "path": "assets/images/img_allenamenti/core_002/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/core_002/end.webp",
+          "path": "assets/images/img_allenamenti/core_002/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -4315,14 +4315,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/core_003/start.webp",
+          "path": "assets/images/img_allenamenti/core_003/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/core_003/end.webp",
+          "path": "assets/images/img_allenamenti/core_003/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -4368,14 +4368,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/core_004/start.webp",
+          "path": "assets/images/img_allenamenti/core_004/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/core_004/end.webp",
+          "path": "assets/images/img_allenamenti/core_004/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -4421,14 +4421,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/core_005/start.webp",
+          "path": "assets/images/img_allenamenti/core_005/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/core_005/end.webp",
+          "path": "assets/images/img_allenamenti/core_005/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -4474,14 +4474,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/core_006/start.webp",
+          "path": "assets/images/img_allenamenti/core_006/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/core_006/end.webp",
+          "path": "assets/images/img_allenamenti/core_006/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -4527,14 +4527,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/core_007/start.webp",
+          "path": "assets/images/img_allenamenti/core_007/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/core_007/end.webp",
+          "path": "assets/images/img_allenamenti/core_007/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -4580,14 +4580,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/core_008/start.webp",
+          "path": "assets/images/img_allenamenti/core_008/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/core_008/end.webp",
+          "path": "assets/images/img_allenamenti/core_008/end.webp",
           "caption": null,
           "order": 2
         }
@@ -4634,14 +4634,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/core_009/start.webp",
+          "path": "assets/images/img_allenamenti/core_009/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/core_009/end.webp",
+          "path": "assets/images/img_allenamenti/core_009/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -4688,14 +4688,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/core_010/start.webp",
+          "path": "assets/images/img_allenamenti/core_010/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/core_010/end.webp",
+          "path": "assets/images/img_allenamenti/core_010/end.webp",
           "caption": null,
           "order": 2
         }
@@ -4742,14 +4742,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/core_011/start.webp",
+          "path": "assets/images/img_allenamenti/core_011/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/core_011/end.webp",
+          "path": "assets/images/img_allenamenti/core_011/end.webp",
           "caption": null,
           "order": 2
         }
@@ -4796,14 +4796,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/core_012/start.webp",
+          "path": "assets/images/img_allenamenti/core_012/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/core_012/end.webp",
+          "path": "assets/images/img_allenamenti/core_012/end.webp",
           "caption": null,
           "order": 2
         }
@@ -4849,14 +4849,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/bal_001/start.webp",
+          "path": "assets/images/img_allenamenti/bal_001/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/bal_001/end.webp",
+          "path": "assets/images/img_allenamenti/bal_001/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -4902,14 +4902,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/bal_002/start.webp",
+          "path": "assets/images/img_allenamenti/bal_002/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/bal_002/end.webp",
+          "path": "assets/images/img_allenamenti/bal_002/end.webp",
           "caption": null,
           "order": 2
         }
@@ -4955,14 +4955,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/bal_003/start.webp",
+          "path": "assets/images/img_allenamenti/bal_003/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/bal_003/end.webp",
+          "path": "assets/images/img_allenamenti/bal_003/end.webp",
           "caption": null,
           "order": 2
         }
@@ -5012,14 +5012,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/bal_004/start.webp",
+          "path": "assets/images/img_allenamenti/bal_004/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/bal_004/end.webp",
+          "path": "assets/images/img_allenamenti/bal_004/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -5065,14 +5065,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/bal_005/start.webp",
+          "path": "assets/images/img_allenamenti/bal_005/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/bal_005/end.webp",
+          "path": "assets/images/img_allenamenti/bal_005/end.webp",
           "caption": null,
           "order": 2
         }
@@ -5118,14 +5118,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/bal_006/start.webp",
+          "path": "assets/images/img_allenamenti/bal_006/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/bal_006/end.webp",
+          "path": "assets/images/img_allenamenti/bal_006/end.webp",
           "caption": null,
           "order": 2
         }
@@ -5175,14 +5175,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/bal_007/start.webp",
+          "path": "assets/images/img_allenamenti/bal_007/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/bal_007/end.webp",
+          "path": "assets/images/img_allenamenti/bal_007/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -5228,14 +5228,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/bal_008/start.webp",
+          "path": "assets/images/img_allenamenti/bal_008/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/bal_008/end.webp",
+          "path": "assets/images/img_allenamenti/bal_008/end.webp",
           "caption": null,
           "order": 2
         }
@@ -5279,14 +5279,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/card_001/start.webp",
+          "path": "assets/images/img_allenamenti/card_001/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/card_001/end.webp",
+          "path": "assets/images/img_allenamenti/card_001/end.webp",
           "caption": null,
           "order": 2
         }
@@ -5336,14 +5336,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/card_002/start.webp",
+          "path": "assets/images/img_allenamenti/card_002/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/card_002/end.webp",
+          "path": "assets/images/img_allenamenti/card_002/end.webp",
           "caption": null,
           "order": 2
         }
@@ -5387,14 +5387,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/card_003/start.webp",
+          "path": "assets/images/img_allenamenti/card_003/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/card_003/end.webp",
+          "path": "assets/images/img_allenamenti/card_003/end.webp",
           "caption": null,
           "order": 2
         }
@@ -5438,14 +5438,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/card_004/start.webp",
+          "path": "assets/images/img_allenamenti/card_004/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/card_004/end.webp",
+          "path": "assets/images/img_allenamenti/card_004/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -5489,14 +5489,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/card_005/start.webp",
+          "path": "assets/images/img_allenamenti/card_005/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/card_005/end.webp",
+          "path": "assets/images/img_allenamenti/card_005/end.webp",
           "caption": null,
           "order": 2
         }
@@ -5540,14 +5540,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/card_006/start.webp",
+          "path": "assets/images/img_allenamenti/card_006/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/card_006/end.webp",
+          "path": "assets/images/img_allenamenti/card_006/end.webp",
           "caption": null,
           "order": 2
         }
@@ -5591,14 +5591,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/card_007/start.webp",
+          "path": "assets/images/img_allenamenti/card_007/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/card_007/end.webp",
+          "path": "assets/images/img_allenamenti/card_007/end.webp",
           "caption": null,
           "order": 2
         }
@@ -5642,14 +5642,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/card_008/start.webp",
+          "path": "assets/images/img_allenamenti/card_008/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/card_008/end.webp",
+          "path": "assets/images/img_allenamenti/card_008/end.webp",
           "caption": null,
           "order": 2
         }
@@ -5696,14 +5696,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/card_009/start.webp",
+          "path": "assets/images/img_allenamenti/card_009/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/card_009/end.webp",
+          "path": "assets/images/img_allenamenti/card_009/end.webp",
           "caption": null,
           "order": 2
         }
@@ -5747,14 +5747,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/card_010/start.webp",
+          "path": "assets/images/img_allenamenti/card_010/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/card_010/end.webp",
+          "path": "assets/images/img_allenamenti/card_010/end.webp",
           "caption": null,
           "order": 2
         }
@@ -5798,14 +5798,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_001/start.webp",
+          "path": "assets/images/img_allenamenti/str_001/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_001/end.webp",
+          "path": "assets/images/img_allenamenti/str_001/end.webp",
           "caption": null,
           "order": 2
         }
@@ -5849,14 +5849,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_002/start.webp",
+          "path": "assets/images/img_allenamenti/str_002/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_002/end.webp",
+          "path": "assets/images/img_allenamenti/str_002/end.webp",
           "caption": null,
           "order": 2
         }
@@ -5900,14 +5900,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_003/start.webp",
+          "path": "assets/images/img_allenamenti/str_003/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_003/end.webp",
+          "path": "assets/images/img_allenamenti/str_003/end.webp",
           "caption": null,
           "order": 2
         }
@@ -5951,14 +5951,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_004/start.webp",
+          "path": "assets/images/img_allenamenti/str_004/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_004/end.webp",
+          "path": "assets/images/img_allenamenti/str_004/end.webp",
           "caption": null,
           "order": 2
         }
@@ -6002,14 +6002,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_005/start.webp",
+          "path": "assets/images/img_allenamenti/str_005/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_005/end.webp",
+          "path": "assets/images/img_allenamenti/str_005/end.webp",
           "caption": null,
           "order": 2
         }
@@ -6053,14 +6053,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_006/start.webp",
+          "path": "assets/images/img_allenamenti/str_006/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_006/end.webp",
+          "path": "assets/images/img_allenamenti/str_006/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -6104,14 +6104,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_007/start.webp",
+          "path": "assets/images/img_allenamenti/str_007/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_007/end.webp",
+          "path": "assets/images/img_allenamenti/str_007/end.webp",
           "caption": null,
           "order": 2
         }
@@ -6155,14 +6155,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_008/start.webp",
+          "path": "assets/images/img_allenamenti/str_008/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_008/end.webp",
+          "path": "assets/images/img_allenamenti/str_008/end.webp",
           "caption": null,
           "order": 2
         }
@@ -6206,14 +6206,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_009/start.webp",
+          "path": "assets/images/img_allenamenti/str_009/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_009/end.webp",
+          "path": "assets/images/img_allenamenti/str_009/end.webp",
           "caption": null,
           "order": 2
         }
@@ -6259,14 +6259,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_010/start.webp",
+          "path": "assets/images/img_allenamenti/str_010/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_010/end.webp",
+          "path": "assets/images/img_allenamenti/str_010/end.webp",
           "caption": null,
           "order": 2
         }
@@ -6312,14 +6312,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_011/start.webp",
+          "path": "assets/images/img_allenamenti/str_011/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_011/end.webp",
+          "path": "assets/images/img_allenamenti/str_011/end.webp",
           "caption": null,
           "order": 2
         }
@@ -6365,14 +6365,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_012/start.webp",
+          "path": "assets/images/img_allenamenti/str_012/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_012/end.webp",
+          "path": "assets/images/img_allenamenti/str_012/end.webp",
           "caption": null,
           "order": 2
         }
@@ -6418,14 +6418,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_013/start.webp",
+          "path": "assets/images/img_allenamenti/str_013/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_013/end.webp",
+          "path": "assets/images/img_allenamenti/str_013/end.webp",
           "caption": null,
           "order": 2
         }
@@ -6473,14 +6473,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_014/start.webp",
+          "path": "assets/images/img_allenamenti/str_014/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_014/end.webp",
+          "path": "assets/images/img_allenamenti/str_014/end.webp",
           "caption": null,
           "order": 2
         }
@@ -6528,14 +6528,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_015/start.webp",
+          "path": "assets/images/img_allenamenti/str_015/start.webp",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/exercises/str_015/end.webp",
+          "path": "assets/images/img_allenamenti/str_015/end.webp",
           "caption": null,
           "order": 2
         }

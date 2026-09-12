@@ -78,6 +78,77 @@ flutter:
   assets:
     - assets/data/
     - assets/images/exercises/
+    - assets/images/img_allenamenti/arm_002/
+    - assets/images/img_allenamenti/arm_001/
+    - assets/images/img_allenamenti/arm_003/
+    - assets/images/img_allenamenti/arm_004/
+    - assets/images/img_allenamenti/arm_005/
+    - assets/images/img_allenamenti/arm_007/
+    - assets/images/img_allenamenti/back_001/
+    - assets/images/img_allenamenti/back_002/
+    - assets/images/img_allenamenti/back_003/
+    - assets/images/img_allenamenti/back_004/
+    - assets/images/img_allenamenti/back_005/
+    - assets/images/img_allenamenti/back_006/
+    - assets/images/img_allenamenti/back_007/
+    - assets/images/img_allenamenti/back_008/
+    - assets/images/img_allenamenti/back_009/
+    - assets/images/img_allenamenti/bal_001/
+    - assets/images/img_allenamenti/bal_007/
+    - assets/images/img_allenamenti/bal_004/
+    - assets/images/img_allenamenti/card_004/
+    - assets/images/img_allenamenti/core_001/
+    - assets/images/img_allenamenti/core_002/
+    - assets/images/img_allenamenti/core_003/
+    - assets/images/img_allenamenti/core_004/
+    - assets/images/img_allenamenti/core_005/
+    - assets/images/img_allenamenti/core_006/
+    - assets/images/img_allenamenti/core_007/
+    - assets/images/img_allenamenti/core_009/
+    - assets/images/img_allenamenti/leg_003/
+    - assets/images/img_allenamenti/leg_004/
+    - assets/images/img_allenamenti/leg_006/
+    - assets/images/img_allenamenti/leg_009/
+    - assets/images/img_allenamenti/leg_010/
+    - assets/images/img_allenamenti/leg_013/
+    - assets/images/img_allenamenti/leg_014/
+    - assets/images/img_allenamenti/leg_015/
+    - assets/images/img_allenamenti/leg_016/
+    - assets/images/img_allenamenti/leg_002/
+    - assets/images/img_allenamenti/leg_007/
+    - assets/images/img_allenamenti/leg_001/
+    - assets/images/img_allenamenti/leg_018/
+    - assets/images/img_allenamenti/leg_012/
+    - assets/images/img_allenamenti/mob_001/
+    - assets/images/img_allenamenti/mob_002/
+    - assets/images/img_allenamenti/mob_003/
+    - assets/images/img_allenamenti/mob_004/
+    - assets/images/img_allenamenti/mob_006/
+    - assets/images/img_allenamenti/mob_007/
+    - assets/images/img_allenamenti/mob_008/
+    - assets/images/img_allenamenti/mob_009/
+    - assets/images/img_allenamenti/mob_012/
+    - assets/images/img_allenamenti/mob_013/
+    - assets/images/img_allenamenti/mob_014/
+    - assets/images/img_allenamenti/push_002/
+    - assets/images/img_allenamenti/push_003/
+    - assets/images/img_allenamenti/push_004/
+    - assets/images/img_allenamenti/push_006/
+    - assets/images/img_allenamenti/push_007/
+    - assets/images/img_allenamenti/push_008/
+    - assets/images/img_allenamenti/push_010/
+    - assets/images/img_allenamenti/push_001/
+    - assets/images/img_allenamenti/push_005/
+    - assets/images/img_allenamenti/push_009/
+    - assets/images/img_allenamenti/sho_001/
+    - assets/images/img_allenamenti/sho_002/
+    - assets/images/img_allenamenti/sho_003/
+    - assets/images/img_allenamenti/sho_004/
+    - assets/images/img_allenamenti/sho_005/
+    - assets/images/img_allenamenti/sho_006/
+    - assets/images/img_allenamenti/sho_007/
+    - assets/images/img_allenamenti/sho_008/
+    - assets/images/img_allenamenti/str_006/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
