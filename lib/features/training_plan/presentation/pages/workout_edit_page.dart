@@ -5,7 +5,9 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/routing/app_routes.dart';
 import '../../../../domain/entities/workout_details.dart';
 import '../../application/workout_editor_controller.dart';
+import '../../application/workout_session_launcher.dart';
 import '../workout_labels.dart';
+import '../widgets/active_workout_dialog.dart';
 import '../widgets/workout_exercise_config_sheet.dart';
 import '../widgets/workout_exercise_tile.dart';
 import '../widgets/workout_metadata_form.dart';
@@ -41,6 +43,7 @@ class WorkoutEditPage extends ConsumerWidget {
             initialDescription: details.workout.description,
             initialType: details.workout.type,
             initialLevel: details.workout.level,
+            initialSelectedLevels: details.workout.effectiveSelectedLevels,
             initialEstimatedDurationMinutes:
                 details.workout.estimatedDurationMinutes,
             submitLabel: 'Salva',
@@ -53,6 +56,7 @@ class WorkoutEditPage extends ConsumerWidget {
                     description: result.description,
                     type: result.type,
                     level: result.level,
+                    selectedLevels: result.selectedLevels,
                     estimatedDurationMinutes: result.estimatedDurationMinutes,
                   );
             },
@@ -179,6 +183,49 @@ class WorkoutEditPage extends ConsumerWidget {
     if (!context.mounted) return;
     if (result.isValid) {
       _showFeedback(context, 'Allenamento segnato come pronto');
+      final action = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Scheda pronta'),
+          content: const Text('Vuoi iniziare subito questo allenamento?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const Text('Torna alle schede'),
+            ),
+            FilledButton.icon(
+              onPressed: () => Navigator.of(context).pop(true),
+              icon: const Icon(Icons.play_arrow),
+              label: const Text('Inizia allenamento'),
+            ),
+          ],
+        ),
+      );
+      if (!context.mounted || action == null) return;
+      if (!action) {
+        context.go(AppRoutes.workouts);
+        return;
+      }
+
+      final details = ref
+          .read(workoutEditorControllerProvider(workoutId))
+          .valueOrNull;
+      if (details == null) return;
+      final launchResult = await launchWorkoutSession(ref, details);
+      if (!context.mounted) return;
+      switch (launchResult.status) {
+        case WorkoutSessionLaunchStatus.started:
+          context.push(AppRoutes.workoutSessionPath(workoutId));
+        case WorkoutSessionLaunchStatus.alreadyActive:
+          await showActiveWorkoutSessionDialog(context, ref);
+        case WorkoutSessionLaunchStatus.notReady:
+          _showFeedback(context, 'Solo una scheda pronta può essere avviata');
+        case WorkoutSessionLaunchStatus.empty:
+          _showFeedback(
+            context,
+            'Aggiungi almeno un esercizio prima di iniziare',
+          );
+      }
       return;
     }
     await showDialog<void>(
@@ -303,7 +350,7 @@ class _EditorBody extends StatelessWidget {
     final workout = details.workout;
     final subtitleParts = <String>[
       WorkoutLabels.type(workout.type),
-      'Livello ${workout.level}',
+      WorkoutLabels.levels(workout.effectiveSelectedLevels),
       if (workout.estimatedDurationMinutes != null)
         '${workout.estimatedDurationMinutes} min',
     ];

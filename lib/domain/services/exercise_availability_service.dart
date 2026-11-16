@@ -25,10 +25,17 @@ class ExerciseAvailabilityService {
   ExerciseAvailabilityStatus evaluate({
     required Exercise exercise,
     required int userLevel,
+    Set<int>? selectedLevels,
     required Set<String> ownedEquipmentCodes,
     required Iterable<String> requiredEquipmentCodes,
   }) {
-    if (!ExerciseLevelPolicy.isExerciseCompatible(exercise, userLevel)) {
+    final levelCompatible = selectedLevels == null
+        ? ExerciseLevelPolicy.isExerciseCompatible(exercise, userLevel)
+        : ExerciseLevelPolicy.isExerciseCompatibleWithAnyLevel(
+            exercise,
+            selectedLevels,
+          );
+    if (!levelCompatible) {
       return ExerciseAvailabilityStatus.lockedLevel;
     }
 

@@ -16,6 +16,7 @@ import 'package:forge/data/seed/exercise_catalog_seeder.dart';
 import 'package:forge/domain/entities/equipment_item.dart';
 import 'package:forge/domain/entities/persisted_session_exercise.dart';
 import 'package:forge/domain/entities/workout_enums.dart';
+import 'package:forge/features/exercises/presentation/widgets/exercise_image_thumbnail.dart';
 
 import '../data/workout_test_helpers.dart';
 import 'exercise_test_fixtures.dart' show disposeCleanly;
@@ -92,6 +93,7 @@ void main() {
       expect(find.text('Allenamento creato con Forge'), findsOneWidget);
       expect(find.text('Dettaglio scheda'), findsOneWidget);
       expect(find.text('Forge Full Body'), findsOneWidget);
+      expect(find.byType(ExerciseImageThumbnail), findsWidgets);
 
       final workoutRepository = DriftWorkoutRepository(db);
       final workouts = await workoutRepository.getWorkouts(profileId: 1);
@@ -102,6 +104,38 @@ void main() {
         workouts.single.id!,
       );
       expect(details!.exercises, isNotEmpty);
+
+      // Una scheda realmente generata usa lo stesso picker dell'editor:
+      // un esercizio già salvato non compare fra quelli aggiungibili.
+      ScaffoldMessenger.of(
+        tester.element(find.text('Dettaglio scheda')),
+      ).removeCurrentSnackBar();
+      await tester.pumpAndSettle();
+      await tester.tap(find.widgetWithText(FilledButton, 'Modifica'));
+      await tester.pumpAndSettle();
+      await tester.tap(
+        find.widgetWithText(OutlinedButton, 'Aggiungi esercizio'),
+      );
+      await tester.pumpAndSettle();
+      await tester.enterText(
+        find.byType(TextField),
+        details.exercises.first.exercise.name,
+      );
+      await tester.pump(const Duration(milliseconds: 400));
+      await tester.pumpAndSettle();
+      expect(
+        find.widgetWithText(Card, details.exercises.first.exercise.name),
+        findsNothing,
+      );
+      expect(find.text('Scheda completata'), findsOneWidget);
+      await tester.tap(find.text('Scheda completata'));
+      await tester.pumpAndSettle();
+      expect(
+        (await workoutRepository.getWorkoutDetails(
+          workouts.single.id!,
+        ))!.exercises,
+        hasLength(details.exercises.length),
+      );
 
       await disposeCleanly(tester);
       await db.close();

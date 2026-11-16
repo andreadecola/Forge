@@ -8,6 +8,7 @@ import '../../../../domain/entities/forge_generation_error.dart';
 import '../../application/forge_generator_controller.dart';
 import '../forge_labels.dart';
 import '../workout_labels.dart';
+import '../widgets/multi_level_choice_chips.dart';
 
 /// Pagina di configurazione della generazione Forge (Milestone 5.5): solo
 /// raccolta input, nessuna logica del motore qui (STOP 1/4). Il profilo e
@@ -116,17 +117,9 @@ class _GeneratorForm extends ConsumerWidget {
               const SizedBox(height: 24),
               Text('Livello', style: Theme.of(context).textTheme.titleMedium),
               const SizedBox(height: 8),
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: [
-                  for (var level = 1; level <= 5; level++)
-                    ChoiceChip(
-                      label: Text('$level'),
-                      selected: state.userLevel == level,
-                      onSelected: (_) => controller.setUserLevel(level),
-                    ),
-                ],
+              MultiLevelChoiceChips(
+                selectedLevels: state.selectedLevels,
+                onChanged: controller.setSelectedLevels,
               ),
             ],
           ),

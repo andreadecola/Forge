@@ -56,6 +56,7 @@ class ForgeEngine {
       final eligibility = eligibilityService.evaluate(
         candidate: candidate,
         userLevel: normalizedRequest.userLevel,
+        selectedLevels: normalizedRequest.effectiveSelectedLevels,
         availableEquipmentCodes: normalizedRequest.availableEquipmentCodes,
         config: config,
       );
@@ -82,6 +83,7 @@ class ForgeEngine {
         candidate: candidate,
         workoutType: normalizedRequest.workoutType,
         userLevel: normalizedRequest.userLevel,
+        selectedLevels: normalizedRequest.effectiveSelectedLevels,
         estimatedDurationSeconds: estimatedDurationSeconds,
         targetDurationMinutes: normalizedRequest.targetDurationMinutes,
         config: config,

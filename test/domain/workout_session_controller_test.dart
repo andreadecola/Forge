@@ -322,7 +322,75 @@ void main() {
     expect(repository.createSessionCalls, 1);
   });
 
-  runTest('il tempo trascorso della sessione si aggiorna ogni secondo', (async) {
+  runTest(
+    'due richieste concorrenti attraversano il repository una sola volta',
+    (async) {
+      setUpContainer();
+      final details = _details(
+        exercises: [_repsEntry(workoutExerciseId: 10, exerciseId: 1)],
+      );
+      final results = <bool>[];
+      controller().startSession(details).then(results.add);
+      controller().startSession(details).then(results.add);
+      async.flushMicrotasks();
+      expect(results, containsAll([true, false]));
+      expect(repository.createSessionCalls, 1);
+      expect(state()!.sessionId, 1);
+    },
+  );
+
+  runTest('3 serie da 15 sec e recuperi 30 sec, pausa, tap ripetuti e fine', (
+    async,
+  ) {
+    setUpContainer();
+    start(
+      async,
+      _details(
+        exercises: [
+          _timedEntry(
+            workoutExerciseId: 10,
+            exerciseId: 1,
+            sets: 3,
+            durationSeconds: 15,
+            restSeconds: 30,
+          ),
+          _repsEntry(workoutExerciseId: 11, exerciseId: 2, sets: 1),
+        ],
+      ),
+    );
+    for (var series = 0; series < 3; series++) {
+      controller().startTimedSet();
+      final timer = state()!.exerciseTimer;
+      controller().startTimedSet();
+      expect(identical(state()!.exerciseTimer, timer), isTrue);
+      async.elapse(const Duration(seconds: 5));
+      expect(state()!.exerciseTimer!.remainingSeconds(_clock), 10);
+      controller().pause();
+      async.elapse(const Duration(minutes: 2));
+      expect(state()!.exerciseTimer!.remainingSeconds(_clock), 10);
+      controller().resume();
+      async.elapse(const Duration(seconds: 10));
+      expect(state()!.completedSetsByWorkoutExerciseId[10], series + 1);
+      if (series < 2) {
+        expect(state()!.restTimer!.remainingSeconds(_clock), 30);
+        controller().startTimedSet();
+        expect(state()!.exerciseTimer, isNull);
+        async.elapse(const Duration(seconds: 30));
+        expect(state()!.phase, WorkoutSessionPhase.readySet);
+      }
+    }
+    expect(state()!.currentExerciseIndex, 1);
+    expect(state()!.restTimer, isNull);
+    expect(state()!.exerciseTimer, isNull);
+    controller().completeCurrentSet();
+    expect(state()!.isCompleted, isTrue);
+    async.flushMicrotasks();
+    expect(repository.completeSessionCalls, 1);
+  });
+
+  runTest('il tempo trascorso della sessione si aggiorna ogni secondo', (
+    async,
+  ) {
     setUpContainer();
 
     final entry = _repsEntry(workoutExerciseId: 10, exerciseId: 1);

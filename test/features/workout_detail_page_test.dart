@@ -10,6 +10,7 @@ import 'package:forge/data/repositories/profile_repository_impl.dart';
 import 'package:forge/domain/entities/workout.dart';
 import 'package:forge/domain/entities/workout_enums.dart';
 import 'package:forge/domain/entities/workout_exercise.dart';
+import 'package:forge/features/exercises/presentation/widgets/exercise_image_thumbnail.dart';
 
 import 'exercise_test_fixtures.dart';
 
@@ -26,6 +27,9 @@ void main() {
   testWidgets(
     'il dettaglio mostra nome, tipo, livello, stato ed esercizi in ordine',
     (tester) async {
+      await tester.binding.setSurfaceSize(const Size(320, 480));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+
       final repo = DriftWorkoutRepository(database);
       final profile = await ProfileRepositoryImpl(
         database.userProfileDao,
@@ -102,6 +106,24 @@ void main() {
       expect(find.byIcon(Icons.delete_outline), findsNothing);
       expect(find.byIcon(Icons.drag_handle), findsNothing);
       expect(find.widgetWithText(FilledButton, 'Modifica'), findsOneWidget);
+      expect(find.byType(ExerciseImageThumbnail), findsNWidgets(2));
+
+      // Simula una riapertura dell'app: la scheda viene riletta dal DB e le
+      // miniature vengono risolte nuovamente dal solo exerciseId.
+      await tester.pumpWidget(const SizedBox.shrink());
+      await tester.pump(const Duration(milliseconds: 1));
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [databaseProvider.overrideWithValue(database)],
+          child: const ForgeApp(),
+        ),
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Programma'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Scheda gambe'));
+      await tester.pumpAndSettle();
+      expect(find.byType(ExerciseImageThumbnail), findsNWidgets(2));
 
       await disposeCleanly(tester);
     },

@@ -132,11 +132,13 @@ part 'app_database.g.dart';
     AttivitaPianificateDao,
   ],
 )
+/// Schema 12 aggiunge `allenamenti.livelli` per conservare il set dei livelli
+/// manuali/Forge; NULL nelle righe precedenti equivale a `{livello}`.
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor]) : super(executor ?? _openConnection());
 
   @override
-  int get schemaVersion => 11;
+  int get schemaVersion => 12;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -322,6 +324,11 @@ class AppDatabase extends _$AppDatabase {
         // ricreazione. `from < 11` copre sia chi arriva da schema 9 (dopo
         // l'addColumn appena sopra) sia da schema 10.
         await m.alterTable(TableMigration(attivitaPianificateTable));
+      }
+      if (from >= 3 && from < 12) {
+        // Le schede esistenti conservano il loro livello numerico; il nuovo
+        // campo resta NULL e il mapper lo interpreta come {livello}.
+        await m.addColumn(allenamentiTable, allenamentiTable.livelli);
       }
     },
     beforeOpen: (details) async {

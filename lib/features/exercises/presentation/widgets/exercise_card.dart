@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/theme/forge_colors.dart';
 import '../../../../domain/entities/exercise_availability_status.dart';
 import '../../application/exercise_catalog_providers.dart';
 import 'availability_badge.dart';
-import 'exercise_image_placeholder.dart';
+import 'exercise_image_thumbnail.dart';
 
 /// Card di un esercizio nella lista del catalogo. Mostra solo la cover
 /// image (mai la gallery completa) e non carica il dettaglio completo.
@@ -80,7 +79,7 @@ class ExerciseCard extends StatelessWidget {
   }
 }
 
-class _Thumbnail extends ConsumerWidget {
+class _Thumbnail extends StatelessWidget {
   const _Thumbnail({
     required this.exerciseId,
     required this.categoryCode,
@@ -92,38 +91,17 @@ class _Thumbnail extends ConsumerWidget {
   final bool locked;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final imagesAsync = ref.watch(exerciseImagesProvider(exerciseId));
-
+  Widget build(BuildContext context) {
     return SizedBox(
       width: 64,
       height: 64,
       child: Stack(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: SizedBox(
-              width: 64,
-              height: 64,
-              child: imagesAsync.when(
-                data: (images) {
-                  final path = images.isEmpty ? null : images.first.path;
-                  if (path == null) {
-                    return ExerciseImagePlaceholder(categoryCode: categoryCode);
-                  }
-                  return Image.asset(
-                    path,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) =>
-                        ExerciseImagePlaceholder(categoryCode: categoryCode),
-                  );
-                },
-                loading: () =>
-                    Container(color: ForgeColors.anthraciteSurfaceHigh),
-                error: (error, stackTrace) =>
-                    ExerciseImagePlaceholder(categoryCode: categoryCode),
-              ),
-            ),
+          ExerciseImageThumbnail(
+            exerciseId: exerciseId,
+            size: 64,
+            categoryCode: categoryCode,
+            borderRadius: 10,
           ),
           if (locked)
             Positioned(

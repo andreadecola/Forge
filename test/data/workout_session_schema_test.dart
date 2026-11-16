@@ -115,8 +115,8 @@ void main() {
     return rows.map((r) => r.read<String>('name')).toSet();
   }
 
-  test('schemaVersion è 11', () {
-    expect(database.schemaVersion, 11);
+  test('schemaVersion è 12', () {
+    expect(database.schemaVersion, 12);
   });
 
   test('le tabelle sessioni_allenamento e sessioni_esercizi esistono e sono '

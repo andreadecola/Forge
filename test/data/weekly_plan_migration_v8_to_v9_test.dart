@@ -104,12 +104,14 @@ void main() {
            VALUES (1, 1, 'Scheda gambe', 'LOWER_BODY', 1, 'READY', 'USER', 1, ?, ?)''',
       [now, now],
     );
+    // La fixture riusa la Table corrente: livelli non esisteva nello schema storico.
+    rawDb.execute('ALTER TABLE allenamenti DROP COLUMN livelli');
     rawDb.execute('PRAGMA user_version = 8');
 
     final database = AppDatabase(NativeDatabase.opened(rawDb));
     addTearDown(database.close);
 
-    expect(database.schemaVersion, 11);
+    expect(database.schemaVersion, 12);
 
     // Dati M7/M4 preservati, nessuna tabella preesistente toccata.
     final legacyBody = await database.bodyMeasurementsDao.getById(1);

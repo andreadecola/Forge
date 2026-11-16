@@ -124,7 +124,7 @@ class _ArchivedWorkoutCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final subtitleParts = <String>[
       WorkoutLabels.type(workout.type),
-      'Livello ${workout.level}',
+      WorkoutLabels.levels(workout.effectiveSelectedLevels),
     ];
 
     return Card(

@@ -315,6 +315,7 @@ class BackupRestoreService {
         description: w.description,
         type: WorkoutType.fromCode(w.type),
         level: w.level,
+        selectedLevels: w.effectiveSelectedLevels.toSet(),
         estimatedDurationMinutes: w.estimatedDurationMinutes,
         status: WorkoutDefinitionStatus.fromCode(w.status),
         origin: WorkoutOrigin.fromCode(w.origin),
@@ -600,6 +601,18 @@ class BackupRestoreService {
       mapping.walkingSessionIds.values,
       restored.walkingSessions.map((w) => w.localId),
     );
+
+    for (final workout in source.workouts) {
+      final restoredWorkout = restored.workouts.singleWhere(
+        (candidate) => candidate.localId == mapping.workoutIds[workout.localId],
+      );
+      final expectedLevels = workout.effectiveSelectedLevels.toSet();
+      final actualLevels = restoredWorkout.effectiveSelectedLevels.toSet();
+      if (expectedLevels.length != actualLevels.length ||
+          !expectedLevels.containsAll(actualLevels)) {
+        issues.add('workouts: livelli non coerenti dopo il restore.');
+      }
+    }
 
     if (restored.appSettings.onboardingCompleted !=
         source.appSettings.onboardingCompleted) {

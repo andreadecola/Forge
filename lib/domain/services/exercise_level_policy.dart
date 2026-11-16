@@ -21,4 +21,23 @@ abstract final class ExerciseLevelPolicy {
       userLevel: userLevel,
     );
   }
+
+  /// Compatibilità multilivello: un esercizio è compatibile se rispetta la
+  /// stessa regola completa (minimo e massimo) per almeno uno dei livelli
+  /// scelti. Non viene mai assegnato un esercizio per quota obbligatoria di
+  /// ciascun livello.
+  static bool isExerciseCompatibleWithAnyLevel(
+    Exercise exercise,
+    Set<int> levels,
+  ) {
+    return levels.any((level) => isExerciseCompatible(exercise, level));
+  }
+
+  static List<int> compatibleLevels(Exercise exercise, Set<int> levels) {
+    final sorted = levels.toList()..sort();
+    return [
+      for (final level in sorted)
+        if (isExerciseCompatible(exercise, level)) level,
+    ];
+  }
 }

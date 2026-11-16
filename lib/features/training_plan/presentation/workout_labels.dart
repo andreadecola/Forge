@@ -7,6 +7,12 @@ import '../../../domain/entities/workout_enums.dart';
 /// I messaggi di [WorkoutValidationService] sono già frasi italiane pronte
 /// per la UI: non serve un mapper aggiuntivo per quelli.
 abstract final class WorkoutLabels {
+  static String levels(Iterable<int> levels) {
+    final sorted = levels.toList()..sort();
+    if (sorted.length == 1) return 'Livello ${sorted.single}';
+    return 'Livelli ${sorted.join(', ')}';
+  }
+
   static String type(WorkoutType type) {
     switch (type) {
       case WorkoutType.fullBody:

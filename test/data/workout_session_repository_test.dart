@@ -81,6 +81,39 @@ void main() {
   Future<WorkoutDetails?> details() =>
       workoutRepository.getWorkoutDetails(workoutId);
 
+  test(
+    'richieste concorrenti creano una sola sessione; dopo completamento si riparte',
+    () async {
+      final snapshot = (await details())!;
+      Future<int?> attempt() async {
+        try {
+          return await sessionRepository.createSession(
+            profileId: profileId,
+            details: snapshot,
+            startedAt: DateTime.now(),
+          );
+        } on ActiveSessionAlreadyExistsException {
+          return null;
+        }
+      }
+
+      final ids = await Future.wait([attempt(), attempt()]);
+      expect(ids.whereType<int>(), hasLength(1));
+      final id = ids.whereType<int>().single;
+      expect(
+        (await sessionRepository.getAllSessions(profileId: profileId)),
+        hasLength(1),
+      );
+      await sessionRepository.completeSession(
+        sessionId: id,
+        endedAt: DateTime.now(),
+      );
+      final next = await attempt();
+      expect(next, isNotNull);
+      expect(next, isNot(id));
+    },
+  );
+
   test('createSession crea la sessione e lo snapshot di ogni riga, con '
       'sets null -> 1 serie', () async {
     final startedAt = DateTime(2026, 1, 1, 10);

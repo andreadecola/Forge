@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../domain/entities/workout_enums.dart';
 import '../workout_labels.dart';
+import 'multi_level_choice_chips.dart';
 
 /// Valori raccolti dal form, già pronti per costruire/aggiornare un
 /// [Workout] (il chiamante decide se creare o aggiornare).
@@ -11,6 +12,7 @@ class WorkoutMetadataFormResult {
     required this.description,
     required this.type,
     required this.level,
+    required this.selectedLevels,
     required this.estimatedDurationMinutes,
   });
 
@@ -18,6 +20,7 @@ class WorkoutMetadataFormResult {
   final String? description;
   final WorkoutType type;
   final int level;
+  final Set<int> selectedLevels;
   final int? estimatedDurationMinutes;
 }
 
@@ -32,6 +35,7 @@ class WorkoutMetadataForm extends StatefulWidget {
     this.initialDescription,
     this.initialType = WorkoutType.fullBody,
     this.initialLevel = 1,
+    this.initialSelectedLevels,
     this.initialEstimatedDurationMinutes,
     required this.submitLabel,
     required this.onSubmit,
@@ -41,6 +45,7 @@ class WorkoutMetadataForm extends StatefulWidget {
   final String? initialDescription;
   final WorkoutType initialType;
   final int initialLevel;
+  final Set<int>? initialSelectedLevels;
   final int? initialEstimatedDurationMinutes;
   final String submitLabel;
   final ValueChanged<WorkoutMetadataFormResult> onSubmit;
@@ -55,7 +60,7 @@ class _WorkoutMetadataFormState extends State<WorkoutMetadataForm> {
   late final TextEditingController _descriptionController;
   late final TextEditingController _durationController;
   late WorkoutType _type;
-  late int _level;
+  late Set<int> _selectedLevels;
 
   @override
   void initState() {
@@ -68,7 +73,12 @@ class _WorkoutMetadataFormState extends State<WorkoutMetadataForm> {
       text: widget.initialEstimatedDurationMinutes?.toString() ?? '',
     );
     _type = widget.initialType;
-    _level = widget.initialLevel;
+    _selectedLevels = {
+      ...(widget.initialSelectedLevels ?? {widget.initialLevel}),
+    };
+    if (_selectedLevels.isEmpty) {
+      _selectedLevels = {widget.initialLevel};
+    }
   }
 
   @override
@@ -88,7 +98,8 @@ class _WorkoutMetadataFormState extends State<WorkoutMetadataForm> {
         name: _nameController.text.trim(),
         description: description.isEmpty ? null : description,
         type: _type,
-        level: _level,
+        level: _selectedLevels.reduce((a, b) => a > b ? a : b),
+        selectedLevels: Set.unmodifiable(_selectedLevels),
         estimatedDurationMinutes: duration,
       ),
     );
@@ -138,16 +149,9 @@ class _WorkoutMetadataFormState extends State<WorkoutMetadataForm> {
           const SizedBox(height: 16),
           Text('Livello', style: Theme.of(context).textTheme.bodyLarge),
           const SizedBox(height: 8),
-          Wrap(
-            spacing: 8,
-            children: [
-              for (var level = 1; level <= 5; level++)
-                ChoiceChip(
-                  label: Text('$level'),
-                  selected: _level == level,
-                  onSelected: (_) => setState(() => _level = level),
-                ),
-            ],
+          MultiLevelChoiceChips(
+            selectedLevels: _selectedLevels,
+            onChanged: (levels) => setState(() => _selectedLevels = levels),
           ),
           const SizedBox(height: 16),
           TextFormField(

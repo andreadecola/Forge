@@ -28,4 +28,24 @@ locale e non viene incluso nel backup. Al primo avvio è possibile configurare
 Forge oppure ripristinare direttamente un backup senza creare un profilo
 temporaneo.
 
+La generazione Forge consente di selezionare uno o più livelli tra 1 e 5.
+L'eleggibilità mantiene i vincoli di livello minimo/massimo, attrezzatura,
+stato attivo e adattamento; la selezione multipla non forza un esercizio per
+livello e non aumenta automaticamente durata o volume. La specifica tecnica è
+in `Docs/FORGE_ENGINE_Multilevel.md`.
+
+Ogni schermata che mostra esercizi individuali risolve la miniatura fotografica
+START tramite il componente condiviso `ExerciseImageThumbnail` e il catalogo
+locale SQLite; il fallback compare solo se l'asset manca o non è caricabile.
+
+Gli allenamenti manuali e quelli generati possono conservare più livelli
+selezionati. `Workout.level` resta il massimo numerico legacy, mentre il set
+completo è persistito in `allenamenti.livelli` dalla schemaVersion 12; le
+schede precedenti vengono lette come monolivello senza perdita di dati.
+
+Il backup JSON conserva l'intera selezione multilivello e legge i backup
+precedenti tramite il livello legacy. La protezione degli avvii concorrenti e
+il ripristino dei timer sono documentati in
+[Hardening backup e sessioni](Docs/HARDENING_Backup_And_Sessions.md).
+
 

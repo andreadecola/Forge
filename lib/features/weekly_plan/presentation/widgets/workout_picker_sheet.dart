@@ -54,7 +54,7 @@ class _WorkoutPickerSheet extends ConsumerWidget {
                       final workout = workouts[index];
                       final subtitleParts = <String>[
                         WorkoutLabels.type(workout.type),
-                        'Livello ${workout.level}',
+                        WorkoutLabels.levels(workout.effectiveSelectedLevels),
                         if (workout.estimatedDurationMinutes != null)
                           '${workout.estimatedDurationMinutes} min',
                       ];

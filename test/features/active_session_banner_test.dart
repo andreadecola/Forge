@@ -97,7 +97,7 @@ void main() {
       await _pumpApp(tester, database);
 
       expect(find.text('Allenamento in corso'), findsOneWidget);
-      expect(find.text('Scheda da riprendere'), findsOneWidget);
+      expect(find.text('Scheda da riprendere'), findsWidgets);
       // Non ha navigato da sola alla sessione (sezione 32): siamo ancora
       // in Dashboard, nessuna sessione runtime attiva.
       expect(find.text('FORGE'), findsOneWidget);

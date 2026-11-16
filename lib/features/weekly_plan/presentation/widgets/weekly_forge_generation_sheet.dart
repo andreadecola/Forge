@@ -11,6 +11,7 @@ import '../../../../domain/services/forge_workout_naming_policy.dart';
 import '../../../../domain/services/weekly_planning_date_service.dart';
 import '../../../training_plan/presentation/forge_labels.dart';
 import '../../../training_plan/presentation/workout_labels.dart';
+import '../../../training_plan/presentation/widgets/multi_level_choice_chips.dart';
 import '../../../notifications/application/notification_providers.dart';
 import '../../application/planned_activity_providers.dart';
 
@@ -58,7 +59,7 @@ class _WeeklyForgeGenerationSheetState
     extends ConsumerState<_WeeklyForgeGenerationSheet> {
   WorkoutType _type = WorkoutType.fullBody;
   int _duration = _durationOptions[2];
-  int _level = 1;
+  Set<int> _selectedLevels = const {1};
   int _count = _countOptions[2];
 
   bool _isGenerating = false;
@@ -74,7 +75,8 @@ class _WeeklyForgeGenerationSheetState
       weekReference: widget.weekReference,
       workoutType: _type,
       targetDurationMinutes: _duration,
-      userLevel: _level,
+      userLevel: _selectedLevels.reduce((a, b) => a > b ? a : b),
+      selectedLevels: _selectedLevels,
       requestedCount: _count,
     );
     if (!mounted) return;
@@ -195,17 +197,9 @@ class _WeeklyForgeGenerationSheetState
         const SizedBox(height: 16),
         Text('Livello', style: Theme.of(context).textTheme.titleMedium),
         const SizedBox(height: 8),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: [
-            for (var level = 1; level <= 5; level++)
-              ChoiceChip(
-                label: Text('$level'),
-                selected: _level == level,
-                onSelected: (_) => setState(() => _level = level),
-              ),
-          ],
+        MultiLevelChoiceChips(
+          selectedLevels: _selectedLevels,
+          onChanged: (levels) => setState(() => _selectedLevels = levels),
         ),
         const SizedBox(height: 16),
         Text(

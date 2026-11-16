@@ -138,13 +138,15 @@ void main() {
 
     // Segna il database come "già a schema 3": scatena onUpgrade(3, 4)
     // all'apertura, esattamente come su un dispositivo reale.
+    // La fixture riusa la Table corrente: livelli non esisteva nello schema storico.
+    rawDb.execute('ALTER TABLE allenamenti DROP COLUMN livelli');
     rawDb.execute('PRAGMA user_version = 3;');
 
     final database = AppDatabase(NativeDatabase.opened(rawDb));
     addTearDown(database.close);
 
     // 1. Dati precedenti preservati.
-    expect(database.schemaVersion, 11);
+    expect(database.schemaVersion, 12);
     final profile = await database.userProfileDao.getCurrentProfile();
     expect(profile, isNotNull);
     expect(profile!.name, 'Alex');

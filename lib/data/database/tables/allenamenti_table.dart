@@ -24,6 +24,11 @@ class AllenamentiTable extends Table {
 
   IntColumn get livello => integer().withDefault(const Constant(1))();
 
+  /// JSON ordinato dei livelli selezionati. Nullable per compatibilità con
+  /// le schede create prima del multilivello: il mapper usa [livello] come
+  /// fallback per quelle righe.
+  TextColumn get livelli => text().nullable()();
+
   IntColumn get durataStimataMinuti => integer().nullable()();
 
   /// Codice stabile di `WorkoutDefinitionStatus`.

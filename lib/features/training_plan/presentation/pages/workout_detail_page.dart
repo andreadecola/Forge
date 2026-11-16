@@ -8,8 +8,10 @@ import '../../../../data/repositories/workout_providers.dart';
 import '../../../../domain/entities/workout_details.dart';
 import '../../../../domain/entities/workout_enums.dart';
 import '../../../../domain/entities/workout_exercise_details.dart';
-import '../../application/workout_session_controller.dart';
+import '../../../exercises/presentation/widgets/exercise_image_thumbnail.dart';
+import '../../application/workout_session_launcher.dart';
 import '../workout_labels.dart';
+import '../widgets/active_workout_dialog.dart';
 import '../widgets/workout_status_badge.dart';
 
 /// Vista di sola lettura di una scheda (Milestone 4.3, sezione 29): nessuna
@@ -27,66 +29,26 @@ class WorkoutDetailPage extends ConsumerWidget {
     ).showSnackBar(SnackBar(content: Text(message)));
   }
 
-  /// Forge permette una sola sessione runtime attiva alla volta: se ce n'è
-  /// già una (per questa scheda o per un'altra) non viene sostituita in
-  /// silenzio, si informa l'utente con un dialog e si offre di riprendere
-  /// quella già in corso.
-  Future<void> _showActiveSessionDialog(
-    BuildContext context,
-    WidgetRef ref,
-  ) async {
-    final activeWorkoutId = ref
-        .read(workoutSessionControllerProvider)!
-        .workoutId;
-    final goToActive = await showDialog<bool>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Allenamento già in corso'),
-        content: const Text(
-          'Hai già un allenamento in corso. Terminalo o abbandonalo prima '
-          'di iniziarne un altro.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('Chiudi'),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('Vai alla sessione attiva'),
-          ),
-        ],
-      ),
-    );
-    if ((goToActive ?? false) && context.mounted) {
-      context.push(AppRoutes.workoutSessionPath(activeWorkoutId));
-    }
-  }
-
   Future<void> _startWorkout(
     BuildContext context,
     WidgetRef ref,
     WorkoutDetails details,
   ) async {
-    if (details.workout.status != WorkoutDefinitionStatus.ready) {
-      _showMessage(context, 'Solo una scheda pronta può essere avviata.');
-      return;
-    }
-    if (details.exercises.isEmpty) {
-      _showMessage(context, 'Aggiungi almeno un esercizio prima di iniziare.');
-      return;
-    }
-
-    final started = await ref
-        .read(workoutSessionControllerProvider.notifier)
-        .startSession(details);
+    final result = await launchWorkoutSession(ref, details);
     if (!context.mounted) return;
-    if (!started) {
-      await _showActiveSessionDialog(context, ref);
-      return;
+    switch (result.status) {
+      case WorkoutSessionLaunchStatus.started:
+        context.push(AppRoutes.workoutSessionPath(workoutId));
+      case WorkoutSessionLaunchStatus.alreadyActive:
+        await showActiveWorkoutSessionDialog(context, ref);
+      case WorkoutSessionLaunchStatus.notReady:
+        _showMessage(context, 'Solo una scheda pronta può essere avviata.');
+      case WorkoutSessionLaunchStatus.empty:
+        _showMessage(
+          context,
+          'Aggiungi almeno un esercizio prima di iniziare.',
+        );
     }
-    if (!context.mounted) return;
-    context.push(AppRoutes.workoutSessionPath(workoutId));
   }
 
   @override
@@ -103,7 +65,7 @@ class WorkoutDetailPage extends ConsumerWidget {
           final workout = details.workout;
           final subtitleParts = <String>[
             WorkoutLabels.type(workout.type),
-            'Livello ${workout.level}',
+            WorkoutLabels.levels(workout.effectiveSelectedLevels),
             if (workout.estimatedDurationMinutes != null)
               '${workout.estimatedDurationMinutes} min',
           ];
@@ -205,9 +167,7 @@ class _ReadOnlyExerciseRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final workoutExercise = entry.workoutExercise;
-    final usesDuration =
-        workoutExercise.durationSeconds != null &&
-        workoutExercise.repetitions == null;
+    final usesDuration = workoutExercise.durationSeconds != null;
     final primaryLine = usesDuration
         ? '${workoutExercise.sets ?? '-'} × ${workoutExercise.durationSeconds} sec'
         : '${workoutExercise.sets ?? '-'} × ${workoutExercise.repetitions ?? '-'} rip.';
@@ -218,9 +178,28 @@ class _ReadOnlyExerciseRow extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.only(bottom: 10),
       child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: ForgeColors.anthraciteSurfaceHigh,
-          child: Text('$index'),
+        leading: SizedBox(
+          width: 58,
+          height: 58,
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              ExerciseImageThumbnail(
+                exerciseId: workoutExercise.exerciseId,
+                size: 58,
+                borderRadius: 10,
+              ),
+              Positioned(
+                left: -4,
+                top: -4,
+                child: CircleAvatar(
+                  radius: 11,
+                  backgroundColor: ForgeColors.anthraciteSurfaceHigh,
+                  child: Text('$index', style: const TextStyle(fontSize: 11)),
+                ),
+              ),
+            ],
+          ),
         ),
         title: Text(
           entry.exercise.name,

@@ -38,6 +38,7 @@ import 'workout_session_state.dart';
 /// tempo residuo, che resta sempre ricalcolato da [SessionClock].
 class WorkoutSessionController extends Notifier<WorkoutSessionState?> {
   Timer? _ticker;
+  bool _starting = false;
   late final SessionClock _clock;
   late final WorkoutSessionRepository _repository;
 
@@ -58,30 +59,35 @@ class WorkoutSessionController extends Notifier<WorkoutSessionState?> {
   /// precedente): Forge non sostituisce mai una sessione in corso
   /// silenziosamente.
   Future<bool> startSession(WorkoutDetails details) async {
-    if (state != null) return false;
-    _stopTicker();
-
-    final startedAt = _clock.now();
-    int sessionId;
+    if (state != null || _starting) return false;
+    _starting = true;
     try {
-      sessionId = await _repository.createSession(
-        profileId: details.workout.profileId,
-        details: details,
+      _stopTicker();
+
+      final startedAt = _clock.now();
+      int sessionId;
+      try {
+        sessionId = await _repository.createSession(
+          profileId: details.workout.profileId,
+          details: details,
+          startedAt: startedAt,
+        );
+      } on ActiveSessionAlreadyExistsException {
+        return false;
+      }
+
+      state = WorkoutSessionState(
+        sessionId: sessionId,
+        workoutId: details.workout.id!,
+        workoutName: details.workout.name,
+        exercises: details.exercises,
         startedAt: startedAt,
       );
-    } on ActiveSessionAlreadyExistsException {
-      return false;
+      _startTicker();
+      return true;
+    } finally {
+      _starting = false;
     }
-
-    state = WorkoutSessionState(
-      sessionId: sessionId,
-      workoutId: details.workout.id!,
-      workoutName: details.workout.name,
-      exercises: details.exercises,
-      startedAt: startedAt,
-    );
-    _startTicker();
-    return true;
   }
 
   /// Adotta una sessione già ricostruita da un

@@ -86,10 +86,15 @@ class _PreviewBody extends ConsumerWidget {
       for (final category in categoriesAsync.valueOrNull ?? const [])
         category.id: category.name,
     };
+    final selectedLevels = plan.request.effectiveSelectedLevels.toList()
+      ..sort();
+    final levelLabel = selectedLevels.length == 1
+        ? 'Livello ${selectedLevels.single}'
+        : 'Livelli ${selectedLevels.join(', ')}';
 
     final subtitleParts = <String>[
       WorkoutLabels.type(plan.workoutType),
-      'Livello ${plan.request.userLevel}',
+      levelLabel,
       'Target ${plan.targetDurationMinutes} min',
       'Stimata ${plan.estimatedDurationMinutes} min',
       plan.exercises.length == 1

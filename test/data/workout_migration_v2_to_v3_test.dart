@@ -188,7 +188,7 @@ void main() {
     // e vuote (nessun seed allenamenti in questa milestone). La versione
     // finale è quella corrente (11, Milestone 8.6): un dispositivo reale
     // a schema 2 arriva sempre all'ultimo schema, non si ferma a metà.
-    expect(database.schemaVersion, 11);
+    expect(database.schemaVersion, 12);
     expect(await database.select(database.allenamentiTable).get(), isEmpty);
     expect(
       await database.select(database.allenamentiEserciziTable).get(),

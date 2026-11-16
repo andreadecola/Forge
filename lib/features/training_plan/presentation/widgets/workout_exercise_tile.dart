@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/theme/forge_colors.dart';
 import '../../../../domain/entities/workout_exercise_details.dart';
-import '../../../exercises/application/exercise_catalog_providers.dart';
-import '../../../exercises/presentation/widgets/exercise_image_placeholder.dart';
+import '../../../exercises/presentation/widgets/exercise_image_thumbnail.dart';
 
 /// Riga di un esercizio nella composizione scheda (Milestone 4.3, sezione
 /// 17-18): mostra ordine, nome, thumbnail (riusa il sistema immagini del
@@ -31,11 +29,8 @@ class WorkoutExerciseTile extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final workoutExercise = entry.workoutExercise;
     final exercise = entry.exercise;
-    final imagesAsync = ref.watch(exerciseImagesProvider(exercise.id));
 
-    final usesDuration =
-        workoutExercise.durationSeconds != null &&
-        workoutExercise.repetitions == null;
+    final usesDuration = workoutExercise.durationSeconds != null;
     final primaryLine = usesDuration
         ? '${workoutExercise.sets ?? '-'} × ${workoutExercise.durationSeconds} sec'
         : '${workoutExercise.sets ?? '-'} × ${workoutExercise.repetitions ?? '-'} rip.';
@@ -59,29 +54,7 @@ class WorkoutExerciseTile extends ConsumerWidget {
               ),
             ),
             const SizedBox(width: 8),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: SizedBox(
-                width: 44,
-                height: 44,
-                child: imagesAsync.when(
-                  data: (images) {
-                    final path = images.isEmpty ? null : images.first.path;
-                    if (path == null) return const ExerciseImagePlaceholder();
-                    return Image.asset(
-                      path,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) =>
-                          const ExerciseImagePlaceholder(),
-                    );
-                  },
-                  loading: () =>
-                      Container(color: ForgeColors.anthraciteSurfaceHigh),
-                  error: (error, stackTrace) =>
-                      const ExerciseImagePlaceholder(),
-                ),
-              ),
-            ),
+            ExerciseImageThumbnail(exerciseId: exercise.id, size: 44),
           ],
         ),
         title: Text(

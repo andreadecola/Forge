@@ -271,6 +271,7 @@ void main() {
     // Esercizio A risolto: avanti al B, a tempo.
     expect(find.text('Esercizio 2 di 2'), findsOneWidget);
     expect(find.text('Serie 1 di 2'), findsOneWidget);
+    expect(find.text('Durata serie: 10 sec'), findsOneWidget);
     expect(find.text('00:10'), findsOneWidget); // anteprima statica
     expect(find.widgetWithText(FilledButton, 'Avvia serie'), findsOneWidget);
 

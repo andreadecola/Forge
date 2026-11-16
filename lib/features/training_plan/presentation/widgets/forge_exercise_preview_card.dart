@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/theme/forge_colors.dart';
 import '../../../../domain/entities/generated_workout_exercise.dart';
+import '../../../exercises/presentation/widgets/exercise_image_thumbnail.dart';
 
 /// Card di anteprima di un esercizio del piano generato (Milestone 5.5,
 /// sezione 17). Mostra solo dati leggibili dall'utente: nessun
 /// `exercise.code`, nessun ID di database, nessun enum tecnico — l'ordine e
 /// i parametri arrivano tutti dal `WorkoutExercise` già deciso dal domain.
-class ForgeExercisePreviewCard extends StatelessWidget {
+class ForgeExercisePreviewCard extends ConsumerWidget {
   const ForgeExercisePreviewCard({
     super.key,
     required this.order,
@@ -25,11 +27,9 @@ class ForgeExercisePreviewCard extends StatelessWidget {
   final String? adaptationDetail;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final workoutExercise = entry.workoutExercise;
-    final usesDuration =
-        workoutExercise.durationSeconds != null &&
-        workoutExercise.repetitions == null;
+    final usesDuration = workoutExercise.durationSeconds != null;
     final primaryLine = usesDuration
         ? '${workoutExercise.sets ?? '-'} × ${workoutExercise.durationSeconds} sec'
         : '${workoutExercise.sets ?? '-'} × ${workoutExercise.repetitions ?? '-'} rip.';
@@ -40,9 +40,35 @@ class ForgeExercisePreviewCard extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.only(bottom: 10),
       child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: ForgeColors.anthraciteSurfaceHigh,
-          child: Text('$order'),
+        leading: SizedBox(
+          width: 52,
+          height: 52,
+          child: Stack(
+            children: [
+              ExerciseImageThumbnail(exerciseId: entry.exercise.id, size: 52),
+              Positioned(
+                right: 0,
+                bottom: 0,
+                child: Container(
+                  width: 20,
+                  height: 20,
+                  alignment: Alignment.center,
+                  decoration: const BoxDecoration(
+                    color: Colors.black87,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Text(
+                    '$order',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 11,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
         title: Text(
           entry.exercise.name,

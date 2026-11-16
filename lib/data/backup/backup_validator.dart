@@ -38,11 +38,35 @@ class BackupValidator {
     _validateInternalReferences(backup, issues);
     _validateCrossProfileConsistency(backup, issues);
     _validateEnumValues(backup, issues);
+    _validateWorkoutLevels(backup, issues);
     _validatePlannedActivityInvariants(backup, issues);
     _validateNotificationSettings(backup, issues);
     _validateRequiredTimestamps(backup, issues);
     await _validateExerciseCodes(backup, issues);
     return issues;
+  }
+
+  void _validateWorkoutLevels(
+    ForgeBackupV1 backup,
+    List<BackupValidationIssue> issues,
+  ) {
+    for (var i = 0; i < backup.data.workouts.length; i++) {
+      final workout = backup.data.workouts[i];
+      final levels = workout.effectiveSelectedLevels;
+      if (levels.isEmpty ||
+          levels.any((level) => level < 1 || level > 5) ||
+          levels.toSet().length != levels.length ||
+          levels.reduce((a, b) => a > b ? a : b) != workout.level) {
+        issues.add(
+          BackupValidationIssue(
+            code: BackupValidationIssueCode.domainInvariantViolation,
+            path: 'data.workouts[$i].selectedLevels',
+            message:
+                'Selezionare livelli univoci tra 1 e 5; level deve coincidere con il massimo.',
+          ),
+        );
+      }
+    }
   }
 
   void _validateFormatVersion(

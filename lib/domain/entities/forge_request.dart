@@ -13,10 +13,22 @@ class ForgeRequest {
     required this.availableEquipmentCodes,
     required this.targetDurationMinutes,
     required this.workoutType,
+    this.selectedLevels,
   });
 
   final int profileId;
   final int userLevel;
+
+  /// Livelli richiesti dall'utente per questa generazione.
+  ///
+  /// `null` mantiene la forma della richiesta precedente: in quel caso il
+  /// motore usa `{userLevel}`. Il campo resta opzionale per non invalidare
+  /// chiamanti, backup transienti e test che costruiscono ancora richieste
+  /// monolivello.
+  final Set<int>? selectedLevels;
+
+  /// Set effettivamente usato dal motore dopo la compatibilità retroattiva.
+  Set<int> get effectiveSelectedLevels => selectedLevels ?? {userLevel};
 
   /// Codici attrezzatura **master** (già risolti da `UserEquipmentResolver`
   /// a monte, a cura del chiamante — sezione 8): il motore non traduce

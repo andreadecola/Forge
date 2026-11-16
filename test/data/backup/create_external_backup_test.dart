@@ -27,8 +27,14 @@ import 'package:forge/domain/entities/workout.dart';
 import 'package:forge/domain/entities/workout_enums.dart';
 import 'package:forge/domain/entities/workout_exercise.dart';
 import 'package:forge/domain/repositories/exercise_repository.dart';
+import 'package:forge/domain/services/clock.dart';
 
 import '../workout_test_helpers.dart';
+
+class _FixedClock implements Clock {
+  @override
+  DateTime now() => DateTime.utc(2026, 11, 16, 12);
+}
 
 /// Cattura ogni invocazione: usata per verificare che l'orchestratore
 /// passi filename/contenuto invariati, senza duplicarli o modificarli
@@ -181,6 +187,7 @@ void main() {
     exportService = BackupExportService(
       mapper: mapper,
       exerciseRepository: exerciseRepository,
+      clock: _FixedClock(),
     );
     fakeStorage = _FakeBackupFileStorage();
   });

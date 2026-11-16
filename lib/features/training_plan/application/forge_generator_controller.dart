@@ -28,7 +28,33 @@ class ForgeGeneratorController extends Notifier<ForgeGeneratorState> {
   }
 
   void setUserLevel(int level) {
-    state = state.copyWith(userLevel: level);
+    // API compatibile per i chiamanti esistenti: la vecchia operazione
+    // monolivello diventa una selezione composta da un solo elemento.
+    state = state.copyWith(userLevel: level, selectedLevels: {level});
+  }
+
+  void toggleUserLevel(int level) {
+    final levels = {...state.selectedLevels};
+    if (levels.contains(level)) {
+      if (levels.length == 1) return;
+      levels.remove(level);
+    } else {
+      levels.add(level);
+    }
+    final representativeLevel = levels.reduce((a, b) => a > b ? a : b);
+    state = state.copyWith(
+      userLevel: representativeLevel,
+      selectedLevels: levels,
+    );
+  }
+
+  void setSelectedLevels(Set<int> levels) {
+    if (levels.isEmpty) return;
+    final sorted = levels.toList()..sort();
+    state = state.copyWith(
+      userLevel: sorted.last,
+      selectedLevels: Set.unmodifiable(levels),
+    );
   }
 
   /// Torna alla configurazione: pulisce l'esito precedente (successo,
@@ -73,6 +99,7 @@ class ForgeGeneratorController extends Notifier<ForgeGeneratorState> {
       final request = ForgeRequest(
         profileId: profileId,
         userLevel: state.userLevel,
+        selectedLevels: state.selectedLevels,
         availableEquipmentCodes: equipmentCodes,
         targetDurationMinutes: state.targetDurationMinutes,
         workoutType: state.selectedWorkoutType,

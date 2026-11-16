@@ -178,7 +178,7 @@ class _SessionBody extends ConsumerWidget {
               const SizedBox(height: 6),
               ClipRRect(
                 borderRadius: BorderRadius.circular(4),
-              child: LinearProgressIndicator(
+                child: LinearProgressIndicator(
                   value: session.currentExerciseIndex / session.totalExercises,
                   minHeight: 6,
                 ),
@@ -351,13 +351,20 @@ class _SetContent extends StatelessWidget {
       final remaining = isRunning
           ? session.exerciseTimer!.remainingSeconds(clock)
           : we.durationSeconds!;
-      return Center(
-        child: Text(
-          formatSessionCountdown(remaining),
-          style: Theme.of(
-            context,
-          ).textTheme.displayMedium?.copyWith(fontWeight: FontWeight.bold),
-        ),
+      return Column(
+        children: [
+          Text(
+            'Durata serie: ${we.durationSeconds} sec',
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            formatSessionCountdown(remaining),
+            style: Theme.of(
+              context,
+            ).textTheme.displayMedium?.copyWith(fontWeight: FontWeight.bold),
+          ),
+        ],
       );
     }
 

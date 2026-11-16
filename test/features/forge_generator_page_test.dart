@@ -90,25 +90,39 @@ void main() {
     },
   );
 
-  testWidgets('selezionare tipo/durata/livello aggiorna la selezione', (
-    tester,
-  ) async {
-    await _pumpAppOnForgeGenerator(tester, database);
+  testWidgets(
+    'selezionare tipo/durata/livelli aggiorna la selezione multipla',
+    (tester) async {
+      await _pumpAppOnForgeGenerator(tester, database);
 
-    await tester.tap(find.text('Cardio'));
-    await tester.tap(find.text('60 min'));
-    await tester.tap(find.text('3'));
-    await tester.pump();
+      await tester.tap(find.text('Cardio'));
+      await tester.tap(find.text('60 min'));
+      await tester.tap(find.text('3'));
+      await tester.pump();
 
-    expect(_isChipSelected(tester, 'Cardio'), isTrue);
-    expect(_isChipSelected(tester, 'Total body'), isFalse);
-    expect(_isChipSelected(tester, '60 min'), isTrue);
-    expect(_isChipSelected(tester, '30 min'), isFalse);
-    expect(_isChipSelected(tester, '3'), isTrue);
-    expect(_isChipSelected(tester, '1'), isFalse);
+      expect(_isChipSelected(tester, 'Cardio'), isTrue);
+      expect(_isChipSelected(tester, 'Total body'), isFalse);
+      expect(_isChipSelected(tester, '60 min'), isTrue);
+      expect(_isChipSelected(tester, '30 min'), isFalse);
+      expect(_isChipSelected(tester, '3'), isTrue);
+      expect(_isChipSelected(tester, '1'), isTrue);
 
-    await disposeCleanly(tester);
-  });
+      // L'ultimo livello selezionato non può essere rimosso.
+      final levelOneChip = find.widgetWithText(ChoiceChip, '1');
+      await tester.ensureVisible(levelOneChip);
+      await tester.tap(levelOneChip);
+      await tester.pump();
+      expect(_isChipSelected(tester, '3'), isTrue);
+      expect(_isChipSelected(tester, '1'), isFalse);
+      final levelThreeChip = find.widgetWithText(ChoiceChip, '3');
+      await tester.ensureVisible(levelThreeChip);
+      await tester.tap(levelThreeChip);
+      await tester.pump();
+      expect(_isChipSelected(tester, '3'), isTrue);
+
+      await disposeCleanly(tester);
+    },
+  );
 
   testWidgets(
     'generazione non riuscita: nessun crash, nessuna navigazione, messaggio comprensibile',

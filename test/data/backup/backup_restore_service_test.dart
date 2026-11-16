@@ -228,6 +228,167 @@ Future<void> _populateDataset(
 }
 
 void main() {
+  group('Multilivello round-trip e validazione pre-write', () {
+    Future<(_Wiring, int)> seed() async {
+      final db = AppDatabase(NativeDatabase.memory());
+      final profileId = await insertProfilo(db);
+      final categoryId = await insertCategoria(db);
+      final exerciseId = await insertEsercizio(
+        db,
+        codice: 'MULTI',
+        idCategoria: categoryId,
+      );
+      final id = await DriftWorkoutRepository(db).createWorkoutWithExercises(
+        workout: Workout(
+          profileId: profileId,
+          name: 'Multilivello',
+          description: 'Descrizione',
+          type: WorkoutType.fullBody,
+          level: 5,
+          selectedLevels: {1, 3, 5},
+          estimatedDurationMinutes: 25,
+          status: WorkoutDefinitionStatus.ready,
+          origin: WorkoutOrigin.user,
+        ),
+        exercises: [
+          WorkoutExercise(
+            workoutId: 0,
+            exerciseId: exerciseId,
+            order: 1,
+            sets: 3,
+            repetitions: 10,
+            restSeconds: 45,
+            notes: 'Ripetizioni',
+          ),
+          WorkoutExercise(
+            workoutId: 0,
+            exerciseId: exerciseId,
+            order: 2,
+            sets: 3,
+            durationSeconds: 15,
+            restSeconds: 30,
+            notes: 'Isometria',
+          ),
+        ],
+      );
+      return (_buildWiring(db), id);
+    }
+
+    for (final levels in [
+      <int>{1},
+      {1, 2},
+      {1, 3, 5},
+      {1, 2, 3, 4, 5},
+    ]) {
+      for (final origin in [WorkoutOrigin.user, WorkoutOrigin.forgeEngine]) {
+        test(
+          'DB → JSON → DB: $levels ${origin.code}, tutti i dati conservati',
+          () async {
+            final (source, id) = await seed();
+            final repository = DriftWorkoutRepository(source.db);
+            final workout = (await repository.getWorkoutById(id))!;
+            await repository.updateWorkout(
+              workout.copyWith(
+                level: levels.reduce((a, b) => a > b ? a : b),
+                selectedLevels: levels,
+                origin: origin,
+              ),
+            );
+            final before = await source.exportService.export();
+            expect(before.isSuccess, isTrue, reason: '${before.errors}');
+            expect(
+              before.backup!.data.workouts.single.selectedLevels!.toSet(),
+              levels,
+            );
+            await source.db.close();
+            final targetDb = AppDatabase(NativeDatabase.memory());
+            addTearDown(targetDb.close);
+            final categoryId = await insertCategoria(targetDb);
+            await insertEsercizio(
+              targetDb,
+              codice: 'MULTI',
+              idCategoria: categoryId,
+            );
+            final target = _buildWiring(targetDb);
+            final restored = await target.restoreService.restore(before.json!);
+            expect(restored.isSuccess, isTrue, reason: restored.errorMessage);
+            final after = await target.exportService.export();
+            expect(after.isSuccess, isTrue, reason: '${after.errors}');
+            expect(after.backup!.data.toJson(), before.backup!.data.toJson());
+            final row =
+                (await targetDb.select(targetDb.allenamentiTable).get()).single;
+            expect(
+              (await DriftWorkoutRepository(
+                targetDb,
+              ).getWorkoutById(row.id))!.effectiveSelectedLevels,
+              levels,
+            );
+          },
+        );
+      }
+    }
+
+    for (final version in [11, 12]) {
+      for (final nullField in [false, true]) {
+        test(
+          'backup DB $version selectedLevels ${nullField ? 'null' : 'assente'} usa level',
+          () async {
+            final (wiring, _) = await seed();
+            addTearDown(wiring.db.close);
+            final exported = await wiring.exportService.export();
+            final json = jsonDecode(exported.json!) as Map<String, dynamic>;
+            json['metadata']['databaseVersion'] = version;
+            final row = json['data']['workouts'][0] as Map<String, dynamic>;
+            if (nullField) {
+              row['selectedLevels'] = null;
+            } else {
+              row.remove('selectedLevels');
+            }
+            final restored = await wiring.restoreService.restore(
+              jsonEncode(json),
+            );
+            expect(restored.isSuccess, isTrue, reason: restored.errorMessage);
+            final after = await wiring.exportService.export();
+            expect(after.backup!.data.workouts.single.selectedLevels, [5]);
+          },
+        );
+      }
+    }
+
+    for (final invalid in <Object>[
+      [],
+      [0],
+      [6],
+      [-1],
+      [1, 1, 5],
+      [1, 2],
+      ['1', 5],
+      [1.0, 5],
+      [true],
+      [null],
+      '1,3,5',
+    ]) {
+      test(
+        'selectedLevels invalido $invalid: nessuna modifica ai dati locali',
+        () async {
+          final (wiring, _) = await seed();
+          addTearDown(wiring.db.close);
+          final before = await wiring.exportService.export();
+          final json = jsonDecode(before.json!) as Map<String, dynamic>;
+          json['data']['workouts'][0]['selectedLevels'] = invalid;
+          final result = await wiring.restoreService.restore(jsonEncode(json));
+          expect(result.isSuccess, isFalse);
+          expect(
+            result.failureReason,
+            BackupRestoreFailureReason.invalidBackup,
+          );
+          final after = await wiring.exportService.export();
+          expect(after.json, before.json);
+        },
+      );
+    }
+  });
+
   group('Golden round-trip e REPLACE', () {
     test('DB fresco (solo catalogo seedato): restore di un backup completo '
         'ha successo (fresh DB restore)', () async {

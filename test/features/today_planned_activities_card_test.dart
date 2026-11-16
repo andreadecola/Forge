@@ -130,6 +130,14 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
+    // La sezione di avvio rapido precede Oggi nella Home: portiamo in vista
+    // la card da collaudare anche quando ListView non l'ha ancora costruita.
+    await tester.scrollUntilVisible(
+      find.textContaining('Oggi — '),
+      180,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.pumpAndSettle();
   }
 
   /// Simula un riavvio reale dell'app: `pumpWidget` da solo aggiorna
@@ -151,6 +159,11 @@ void main() {
   /// Ogni test che la usa ha esattamente un'attività con pulsante "Avvia"
   /// visibile: nessuna ambiguità nel trovarlo senza ulteriore scoping.
   Future<void> tapAvvia(WidgetTester tester) async {
+    await tester.scrollUntilVisible(
+      find.widgetWithText(OutlinedButton, 'Avvia'),
+      160,
+      scrollable: find.byType(Scrollable).first,
+    );
     tester
         .widget<OutlinedButton>(find.widgetWithText(OutlinedButton, 'Avvia'))
         .onPressed!();
@@ -820,6 +833,11 @@ void main() {
           ),
         );
         await tester.pumpAndSettle();
+        await tester.scrollUntilVisible(
+          find.textContaining('Oggi — '),
+          160,
+          scrollable: find.byType(Scrollable).first,
+        );
 
         expect(
           find.descendant(

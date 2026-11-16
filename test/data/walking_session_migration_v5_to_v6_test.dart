@@ -120,12 +120,14 @@ void main() {
          VALUES (1, 1, ?, ?, 3500, 4200, 'COMPLETED', 'legacy', ?, ?)''',
       [now, now + 1800, now, now],
     );
+    // La fixture riusa la Table corrente: livelli non esisteva nello schema storico.
+    rawDb.execute('ALTER TABLE allenamenti DROP COLUMN livelli');
     rawDb.execute('PRAGMA user_version = 5');
 
     final database = AppDatabase(NativeDatabase.opened(rawDb));
     addTearDown(database.close);
 
-    expect(database.schemaVersion, 11);
+    expect(database.schemaVersion, 12);
     final legacy = await database.camminateDao.getById(1);
     expect(legacy, isNotNull);
     expect(legacy!.distanzaMetri, 3500);

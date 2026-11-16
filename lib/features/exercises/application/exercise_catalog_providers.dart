@@ -51,6 +51,16 @@ class ExerciseCatalogItem {
   final Set<String> requiredEquipmentCodes;
   final List<String> requiredEquipmentNames;
   final ExerciseAvailabilityStatus status;
+
+  ExerciseCatalogItem copyWith({ExerciseAvailabilityStatus? status}) {
+    return ExerciseCatalogItem(
+      exercise: exercise,
+      category: category,
+      requiredEquipmentCodes: requiredEquipmentCodes,
+      requiredEquipmentNames: requiredEquipmentNames,
+      status: status ?? this.status,
+    );
+  }
 }
 
 /// Tutti gli esercizi con categoria, attrezzatura richiesta e disponibilità

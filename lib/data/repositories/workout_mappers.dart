@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:drift/drift.dart';
 
 import '../../domain/entities/workout.dart';
@@ -17,6 +19,7 @@ abstract final class WorkoutMappers {
       description: row.descrizione,
       type: WorkoutType.fromCode(row.tipoAllenamento),
       level: row.livello,
+      selectedLevels: _decodeLevels(row.livelli, fallback: row.livello),
       estimatedDurationMinutes: row.durataStimataMinuti,
       status: WorkoutDefinitionStatus.fromCode(row.stato),
       origin: WorkoutOrigin.fromCode(row.origine),
@@ -58,6 +61,7 @@ abstract final class WorkoutMappers {
       descrizione: Value(workout.description),
       tipoAllenamento: Value(workout.type.code),
       livello: Value(workout.level),
+      livelli: Value(_encodeLevels(workout.effectiveSelectedLevels)),
       durataStimataMinuti: Value(workout.estimatedDurationMinutes),
       stato: Value(workout.status.code),
       origine: Value(workout.origin.code),
@@ -65,6 +69,25 @@ abstract final class WorkoutMappers {
       dataCreazione: Value(workout.createdAt ?? timestamp),
       dataModifica: Value(timestamp),
     );
+  }
+
+  static Set<int> _decodeLevels(String? raw, {required int fallback}) {
+    if (raw == null || raw.trim().isEmpty) return {fallback};
+    try {
+      final decoded = jsonDecode(raw);
+      if (decoded is List) {
+        final levels = decoded.whereType<num>().map((e) => e.toInt()).toSet();
+        if (levels.isNotEmpty) return levels;
+      }
+    } on FormatException {
+      // Le righe legacy non hanno JSON: il fallback mantiene il livello noto.
+    }
+    return {fallback};
+  }
+
+  static String _encodeLevels(Set<int> levels) {
+    final sorted = levels.toList()..sort();
+    return jsonEncode(sorted);
   }
 
   static AllenamentiEserciziTableCompanion workoutExerciseToCompanion(

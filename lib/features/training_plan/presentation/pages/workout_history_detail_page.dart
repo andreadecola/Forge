@@ -5,6 +5,7 @@ import '../../../../core/theme/forge_colors.dart';
 import '../../../../core/utils/italian_date_formatter.dart';
 import '../../../../domain/entities/workout_session_exercise_history_item.dart';
 import '../../../../domain/entities/workout_session_history_details.dart';
+import '../../../exercises/presentation/widgets/exercise_image_thumbnail.dart';
 import '../../application/workout_history_providers.dart';
 import '../workout_session_history_labels.dart';
 
@@ -155,9 +156,31 @@ class _ExerciseHistoryRow extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.only(bottom: 10),
       child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: ForgeColors.anthraciteSurfaceHigh,
-          child: Text('${exercise.order}'),
+        leading: SizedBox(
+          width: 58,
+          height: 58,
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              ExerciseImageThumbnail(
+                exerciseId: exercise.exerciseId,
+                size: 58,
+                borderRadius: 10,
+              ),
+              Positioned(
+                left: -4,
+                top: -4,
+                child: CircleAvatar(
+                  radius: 11,
+                  backgroundColor: ForgeColors.anthraciteSurfaceHigh,
+                  child: Text(
+                    '${exercise.order}',
+                    style: const TextStyle(fontSize: 11),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
         title: Text(
           exercise.exerciseName,

@@ -25,11 +25,13 @@ class ForgeEligibilityService {
   ForgeEligibilityResult evaluate({
     required ForgeCandidate candidate,
     required int userLevel,
+    Set<int>? selectedLevels,
     required Set<String> availableEquipmentCodes,
     required ForgeEngineConfig config,
   }) {
     final reasons = <ForgeExclusionReason>[];
     final exercise = candidate.exercise;
+    final levels = selectedLevels ?? {userLevel};
 
     if (!exercise.isActive) {
       reasons.add(ForgeExclusionReason.inactive);
@@ -40,9 +42,15 @@ class ForgeEligibilityService {
     // distinzione *quale* delle due direzioni ha fallito, per un motivo
     // di esclusione più preciso — un'informazione che la sola risposta
     // booleana della policy condivisa non porta.
-    if (!ExerciseLevelPolicy.isExerciseCompatible(exercise, userLevel)) {
+    if (!ExerciseLevelPolicy.isExerciseCompatibleWithAnyLevel(
+      exercise,
+      levels,
+    )) {
+      final highestSelectedLevel = levels.isEmpty
+          ? userLevel
+          : levels.reduce((a, b) => a > b ? a : b);
       reasons.add(
-        exercise.minimumLevel > userLevel
+        exercise.minimumLevel > highestSelectedLevel
             ? ForgeExclusionReason.levelTooHigh
             : ForgeExclusionReason.levelTooLow,
       );

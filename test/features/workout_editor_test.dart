@@ -6,11 +6,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forge/app.dart';
 import 'package:forge/data/database/app_database.dart';
 import 'package:forge/data/database/database_provider.dart';
+import 'package:forge/data/repositories/catalog_mappers.dart';
 import 'package:forge/data/repositories/drift_workout_repository.dart';
 import 'package:forge/data/repositories/profile_repository_impl.dart';
 import 'package:forge/domain/entities/workout.dart';
 import 'package:forge/domain/entities/workout_enums.dart';
 import 'package:forge/domain/entities/workout_exercise.dart';
+import 'package:forge/features/exercises/presentation/widgets/exercise_image_thumbnail.dart';
+import 'package:forge/features/training_plan/application/workout_editor_controller.dart';
 
 import 'exercise_test_fixtures.dart';
 
@@ -26,6 +29,11 @@ Future<void> _pumpAppOnEditor(WidgetTester tester, AppDatabase database) async {
   await tester.tap(find.text('Programma'));
   await tester.pumpAndSettle();
   await tester.tap(find.widgetWithText(TextButton, 'Modifica'));
+  await tester.pumpAndSettle();
+}
+
+Future<void> _completeSelection(WidgetTester tester) async {
+  await tester.tap(find.widgetWithText(FilledButton, 'Scheda completata'));
   await tester.pumpAndSettle();
 }
 
@@ -55,9 +63,7 @@ Future<int> _availableExerciseId(AppDatabase database) async {
 
 /// Trova il pulsante "+" della tessera picker corrispondente a
 /// [exerciseName]. Nel picker ogni esercizio del catalogo appare una sola
-/// volta (a differenza dell'editor, dove lo stesso esercizio può ripetersi
-/// come righe scheda distinte), quindi il nome identifica la tessera senza
-/// ambiguità.
+/// volta, quindi il nome identifica la tessera senza ambiguità.
 Finder _addButtonFor(String exerciseName) {
   return find.descendant(
     of: find
@@ -91,6 +97,45 @@ void main() {
 
   tearDown(() => database.close());
 
+  test('il controller verifica il DB e blocca aggiunte concorrenti', () async {
+    final workoutId = await _seedWorkout(database);
+    final container = ProviderContainer(
+      overrides: [databaseProvider.overrideWithValue(database)],
+    );
+    addTearDown(container.dispose);
+    final provider = workoutEditorControllerProvider(workoutId);
+    await container.read(provider.future);
+    final exercise = CatalogMappers.exercise(
+      (await database.eserciziDao.getByCode('EX-AVAILABLE'))!,
+    );
+    final repo = DriftWorkoutRepository(database);
+    final rowId = await repo.addExercise(
+      workoutId: workoutId,
+      exercise: WorkoutExercise(
+        workoutId: workoutId,
+        exerciseId: exercise.id,
+        order: 1,
+        repetitions: 10,
+      ),
+    );
+    final controller = container.read(provider.notifier);
+    expect(
+      await controller.addExerciseFromCatalog(
+        exercise: exercise,
+        repetitions: 12,
+      ),
+      isFalse,
+    );
+    expect((await repo.getWorkoutDetails(workoutId))!.exercises, hasLength(1));
+    await repo.removeExercise(rowId);
+    final results = await Future.wait([
+      controller.addExerciseFromCatalog(exercise: exercise, repetitions: 12),
+      controller.addExerciseFromCatalog(exercise: exercise, repetitions: 12),
+    ]);
+    expect(results, [true, false]);
+    expect((await repo.getWorkoutDetails(workoutId))!.exercises, hasLength(1));
+  });
+
   testWidgets(
     'aggiunta di un esercizio disponibile carica i default dal catalogo',
     (tester) async {
@@ -105,6 +150,7 @@ void main() {
       expect(find.text('Esercizio disponibile'), findsOneWidget);
       expect(find.text('Esercizio livello avanzato'), findsOneWidget);
       expect(find.text('Esercizio con elastico'), findsOneWidget);
+      expect(find.byType(ExerciseImageThumbnail), findsNWidgets(3));
 
       await tester.tap(_addButtonFor('Esercizio disponibile'));
       await tester.pumpAndSettle();
@@ -116,6 +162,9 @@ void main() {
       // I default del catalogo (2 serie, 10 ripetizioni, recupero 45s) sono
       // stati caricati (via WorkoutExerciseFactory) e persistiti senza
       // modifiche.
+      expect(find.text('Aggiungi esercizio'), findsOneWidget);
+      expect(find.text('Esercizio disponibile'), findsNothing);
+      await _completeSelection(tester);
       expect(find.text('Esercizio disponibile'), findsOneWidget);
       expect(find.text('2 × 10 rip. · Recupero 45 sec'), findsOneWidget);
 
@@ -149,12 +198,13 @@ void main() {
       );
       await tester.pumpAndSettle();
 
+      await _completeSelection(tester);
       await tester.tap(find.widgetWithText(FilledButton, 'Segna come pronta'));
       await tester.pumpAndSettle();
-      await _letSnackBarPass(tester);
-
-      await tester.tap(find.byTooltip('Indietro'));
+      expect(find.text('Scheda pronta'), findsOneWidget);
+      await tester.tap(find.widgetWithText(TextButton, 'Torna alle schede'));
       await tester.pumpAndSettle();
+      await _letSnackBarPass(tester);
 
       expect(find.text('1 esercizio'), findsOneWidget);
 
@@ -285,6 +335,7 @@ void main() {
         );
         await tester.pumpAndSettle();
 
+        await _completeSelection(tester);
         expect(find.text('Esercizio livello avanzato'), findsOneWidget);
         final details = await DriftWorkoutRepository(
           database,
@@ -330,6 +381,7 @@ void main() {
       );
       await tester.pumpAndSettle();
 
+      await _completeSelection(tester);
       details = await DriftWorkoutRepository(
         database,
       ).getWorkoutDetails(workoutId);
@@ -340,44 +392,120 @@ void main() {
   });
 
   testWidgets(
-    'lo stesso esercizio può essere aggiunto più volte alla stessa scheda',
+    'lo stesso esercizio non può essere aggiunto due volte alla stessa scheda',
     (tester) async {
       final workoutId = await _seedWorkout(database);
       await _pumpAppOnEditor(tester, database);
 
-      for (var i = 0; i < 2; i++) {
-        await tester.tap(
-          find.widgetWithText(OutlinedButton, 'Aggiungi esercizio'),
-        );
-        await tester.pumpAndSettle();
-        await tester.tap(_addButtonFor('Esercizio disponibile'));
-        await tester.pumpAndSettle();
-        await tester.tap(
-          find.widgetWithText(FilledButton, 'Aggiungi alla scheda'),
-        );
-        await tester.pumpAndSettle();
-      }
+      await tester.tap(
+        find.widgetWithText(OutlinedButton, 'Aggiungi esercizio'),
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(_addButtonFor('Esercizio disponibile'));
+      await tester.pumpAndSettle();
+      await tester.tap(
+        find.widgetWithText(FilledButton, 'Aggiungi alla scheda'),
+      );
+      await tester.pumpAndSettle();
 
-      // 2 tessere distinte con lo stesso nome nell'editor.
-      expect(find.text('Esercizio disponibile'), findsNWidgets(2));
+      await _completeSelection(tester);
+      await tester.tap(
+        find.widgetWithText(OutlinedButton, 'Aggiungi esercizio'),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('Esercizio disponibile'), findsNothing);
+      expect(find.text('Aggiungi esercizio'), findsOneWidget);
 
       final details = await DriftWorkoutRepository(
         database,
       ).getWorkoutDetails(workoutId);
-      expect(details!.exercises, hasLength(2));
-      expect(
-        details.exercises.map((e) => e.workoutExercise.exerciseId).toSet(),
-        hasLength(1),
-      );
-      expect(
-        details.exercises.map((e) => e.workoutExercise.id).toSet(),
-        hasLength(2),
-      );
-      expect(details.exercises.map((e) => e.workoutExercise.order), [1, 2]);
+      expect(details!.exercises, hasLength(1));
 
       await disposeCleanly(tester);
     },
   );
+
+  for (final origin in [WorkoutOrigin.user, WorkoutOrigin.forgeEngine]) {
+    testWidgets('aggiunte multiple senza chiudere il picker (${origin.code})', (
+      tester,
+    ) async {
+      await tester.binding.setSurfaceSize(const Size(360, 720));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+      final repo = DriftWorkoutRepository(database);
+      final workoutId = await _seedWorkout(database);
+      final workout = (await repo.getWorkoutById(workoutId))!;
+      await repo.updateWorkout(workout.copyWith(origin: origin));
+      await _pumpAppOnEditor(tester, database);
+      await tester.tap(
+        find.widgetWithText(OutlinedButton, 'Aggiungi esercizio'),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.tap(_addButtonFor('Esercizio disponibile'));
+      await tester.pumpAndSettle();
+      await tester.enterText(
+        find
+            .descendant(
+              of: find.byType(BottomSheet),
+              matching: find.byType(TextField),
+            )
+            .at(1),
+        '14',
+      );
+      await tester.ensureVisible(find.text('Aggiungi alla scheda'));
+      await tester.tap(find.text('Aggiungi alla scheda'));
+      await tester.pumpAndSettle();
+      expect(find.text('Aggiungi esercizio'), findsOneWidget);
+      expect(find.text('Esercizio disponibile'), findsNothing);
+      expect(find.text('1 esercizio nella scheda'), findsOneWidget);
+
+      await tester.tap(_addButtonFor('Esercizio livello avanzato'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Aggiungi comunque'));
+      await tester.pumpAndSettle();
+      await tester.enterText(
+        find
+            .descendant(
+              of: find.byType(BottomSheet),
+              matching: find.byType(TextField),
+            )
+            .at(1),
+        '8',
+      );
+      await tester.ensureVisible(find.text('Aggiungi alla scheda'));
+      await tester.tap(find.text('Aggiungi alla scheda'));
+      await tester.pumpAndSettle();
+      expect(find.text('Esercizio livello avanzato'), findsNothing);
+      expect(find.text('2 esercizi nella scheda'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+      await _completeSelection(tester);
+      expect(find.text('2 × 14 rip. · Recupero 45 sec'), findsOneWidget);
+      final saved = (await repo.getWorkoutDetails(workoutId))!;
+      expect(saved.exercises.map((e) => e.workoutExercise.repetitions), [
+        14,
+        8,
+      ]);
+
+      await tester.tap(
+        find.widgetWithText(OutlinedButton, 'Aggiungi esercizio'),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Esercizio disponibile'), findsNothing);
+      expect(find.text('Esercizio livello avanzato'), findsNothing);
+      await _completeSelection(tester);
+      await tester.tap(find.byTooltip('Rimuovi').first);
+      await tester.pumpAndSettle();
+      await tester.tap(find.widgetWithText(FilledButton, 'Rimuovi'));
+      await tester.pumpAndSettle();
+      await tester.tap(
+        find.widgetWithText(OutlinedButton, 'Aggiungi esercizio'),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Esercizio disponibile'), findsOneWidget);
+      await disposeCleanly(tester);
+    });
+  }
 
   testWidgets(
     'la modifica dei parametri di un esercizio esistente viene persistita',
@@ -624,6 +752,7 @@ void main() {
       );
       await tester.pumpAndSettle();
 
+      await _completeSelection(tester);
       await tester.tap(find.widgetWithText(FilledButton, 'Segna come pronta'));
       await tester.pumpAndSettle();
       expect(find.text('Pronta'), findsOneWidget);

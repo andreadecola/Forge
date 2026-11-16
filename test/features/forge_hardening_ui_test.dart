@@ -16,8 +16,11 @@ import 'package:forge/domain/entities/exercise_catalog_enums.dart';
 import 'package:forge/domain/entities/exercise.dart';
 import 'package:forge/domain/entities/forge_score.dart';
 import 'package:forge/domain/entities/generated_workout_exercise.dart';
+import 'package:forge/domain/entities/exercise_image.dart';
 import 'package:forge/domain/entities/workout_exercise.dart';
+import 'package:forge/features/exercises/application/exercise_catalog_providers.dart';
 import 'package:forge/features/training_plan/presentation/widgets/forge_exercise_preview_card.dart';
+import 'package:forge/features/exercises/presentation/widgets/exercise_image_thumbnail.dart';
 
 import '../data/workout_test_helpers.dart';
 
@@ -45,6 +48,31 @@ Future<void> _openForgeGenerator(WidgetTester tester) async {
 /// salvataggio, testo grande (accessibilità), nome esercizio molto lungo,
 /// piano al massimo numero di esercizi su schermo piccolo.
 void main() {
+  testWidgets('anteprima Forge mostra le miniature START del catalogo reale', (
+    tester,
+  ) async {
+    final db = await _seedRealCatalogApp();
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [databaseProvider.overrideWithValue(db)],
+        child: const ForgeApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+    await _openForgeGenerator(tester);
+    await tester.tap(find.text('Genera allenamento'));
+    await tester.pumpAndSettle();
+    await tester.pump(const Duration(seconds: 1));
+
+    final thumbnailFinder = find.byType(ExerciseImageThumbnail);
+    expect(thumbnailFinder, findsWidgets);
+
+    await tester.pumpWidget(const SizedBox.shrink());
+    await tester.pump(const Duration(milliseconds: 1));
+    await db.close();
+  });
+
   testWidgets('back dalla preview senza salvare: nessun Workout persistito, si '
       'torna alla configurazione (sezione 52)', (tester) async {
     final db = await _seedRealCatalogApp();
@@ -175,14 +203,31 @@ void main() {
       );
 
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: SizedBox(
-              width: 320,
-              child: ForgeExercisePreviewCard(
-                order: 1,
-                entry: entry,
-                categoryName: 'Categoria',
+        ProviderScope(
+          overrides: [
+            exerciseImagesProvider(1).overrideWith(
+              (ref) async => [
+                const ExerciseImage(
+                  id: 1,
+                  exerciseId: 1,
+                  sourceType: ExerciseImageSourceType.asset,
+                  assetPath: 'assets/images/img_allenamenti/mob_001/start.jpg',
+                  imageType: ExerciseImageType.posizioneIniziale,
+                  displayOrder: 1,
+                  active: true,
+                ),
+              ],
+            ),
+          ],
+          child: MaterialApp(
+            home: Scaffold(
+              body: SizedBox(
+                width: 320,
+                child: ForgeExercisePreviewCard(
+                  order: 1,
+                  entry: entry,
+                  categoryName: 'Categoria',
+                ),
               ),
             ),
           ),
@@ -191,6 +236,12 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(tester.takeException(), isNull);
+      final image = tester.widget<Image>(find.byType(Image));
+      expect(image.image, isA<AssetImage>());
+      expect(
+        (image.image as AssetImage).assetName.endsWith('/start.jpg'),
+        isTrue,
+      );
       final titleFinder = find.text(longName);
       expect(titleFinder, findsOneWidget);
       final titleWidget = tester.widget<Text>(titleFinder);

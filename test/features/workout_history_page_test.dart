@@ -12,6 +12,7 @@ import 'package:forge/domain/entities/persisted_session_exercise.dart';
 import 'package:forge/domain/entities/workout.dart';
 import 'package:forge/domain/entities/workout_enums.dart';
 import 'package:forge/domain/entities/workout_exercise.dart';
+import 'package:forge/features/exercises/presentation/widgets/exercise_image_thumbnail.dart';
 
 import 'exercise_test_fixtures.dart';
 
@@ -179,6 +180,7 @@ void main() {
       expect(find.text('Dettaglio allenamento'), findsOneWidget);
       expect(find.text('Total Body Base'), findsWidgets);
       expect(find.text('42 min'), findsOneWidget);
+      expect(find.byType(ExerciseImageThumbnail), findsOneWidget);
 
       await tester.tap(find.byTooltip('Indietro'));
       await tester.pumpAndSettle();

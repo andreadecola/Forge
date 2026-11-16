@@ -278,6 +278,7 @@ class BackupMapper {
     description: w.description,
     type: w.type.code,
     level: w.level,
+    selectedLevels: w.effectiveSelectedLevels.toList()..sort(),
     estimatedDurationMinutes: w.estimatedDurationMinutes,
     status: w.status.code,
     origin: w.origin.code,

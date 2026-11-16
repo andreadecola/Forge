@@ -11,6 +11,7 @@ class Workout {
     this.description,
     required this.type,
     this.level = 1,
+    this.selectedLevels,
     this.estimatedDurationMinutes,
     required this.status,
     required this.origin,
@@ -25,6 +26,13 @@ class Workout {
   final String? description;
   final WorkoutType type;
   final int level;
+
+  /// Livelli selezionati per la scheda. Le schede storiche prive del nuovo
+  /// campo vengono ricostruite dal mapper come insieme contenente [level].
+  final Set<int>? selectedLevels;
+
+  /// Compatibilità per le schede create prima del campo multilivello.
+  Set<int> get effectiveSelectedLevels => selectedLevels ?? {level};
   final int? estimatedDurationMinutes;
   final WorkoutDefinitionStatus status;
   final WorkoutOrigin origin;
@@ -39,6 +47,7 @@ class Workout {
     String? Function()? description,
     WorkoutType? type,
     int? level,
+    Set<int>? selectedLevels,
     int? Function()? estimatedDurationMinutes,
     WorkoutDefinitionStatus? status,
     WorkoutOrigin? origin,
@@ -53,6 +62,7 @@ class Workout {
       description: description != null ? description() : this.description,
       type: type ?? this.type,
       level: level ?? this.level,
+      selectedLevels: selectedLevels ?? this.selectedLevels,
       estimatedDurationMinutes: estimatedDurationMinutes != null
           ? estimatedDurationMinutes()
           : this.estimatedDurationMinutes,

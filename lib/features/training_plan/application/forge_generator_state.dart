@@ -11,6 +11,7 @@ class ForgeGeneratorState {
     this.selectedWorkoutType = WorkoutType.fullBody,
     this.targetDurationMinutes = 30,
     this.userLevel = 1,
+    this.selectedLevels = const {1},
     this.isGenerating = false,
     this.generationResult,
     this.error,
@@ -22,6 +23,10 @@ class ForgeGeneratorState {
   final WorkoutType selectedWorkoutType;
   final int targetDurationMinutes;
   final int userLevel;
+
+  /// Livelli selezionati nella configurazione. Il set non è mai vuoto nella
+  /// UI: il controller ignora la rimozione dell'ultimo livello.
+  final Set<int> selectedLevels;
 
   final bool isGenerating;
 
@@ -45,6 +50,7 @@ class ForgeGeneratorState {
     WorkoutType? selectedWorkoutType,
     int? targetDurationMinutes,
     int? userLevel,
+    Set<int>? selectedLevels,
     bool? isGenerating,
     ForgeAdaptedGenerationResult? generationResult,
     bool clearGenerationResult = false,
@@ -61,6 +67,7 @@ class ForgeGeneratorState {
       targetDurationMinutes:
           targetDurationMinutes ?? this.targetDurationMinutes,
       userLevel: userLevel ?? this.userLevel,
+      selectedLevels: selectedLevels ?? this.selectedLevels,
       isGenerating: isGenerating ?? this.isGenerating,
       generationResult: clearGenerationResult
           ? null

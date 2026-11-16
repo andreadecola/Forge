@@ -6,6 +6,7 @@ import '../entities/forge_engine_config.dart';
 import '../entities/forge_score.dart';
 import '../entities/forge_score_component.dart';
 import '../entities/workout_enums.dart';
+import 'exercise_level_policy.dart';
 import 'forge_workout_type_policy.dart';
 
 /// Assegna un punteggio a un candidato già eleggibile (Milestone 5.1,
@@ -19,12 +20,17 @@ class ForgeScoringService {
     required ForgeCandidate candidate,
     required WorkoutType workoutType,
     required int userLevel,
+    Set<int>? selectedLevels,
     required int estimatedDurationSeconds,
     required int targetDurationMinutes,
     required ForgeEngineConfig config,
   }) {
     final workoutTypeMatch = _workoutTypeMatch(candidate, workoutType);
-    final levelFit = _levelFit(candidate, userLevel);
+    final levelFit = _levelFit(
+      candidate,
+      userLevel,
+      selectedLevels: selectedLevels,
+    );
     final equipmentSimplicity = _equipmentSimplicity(candidate);
     final durationFit = _durationFit(
       estimatedDurationSeconds,
@@ -99,9 +105,21 @@ class ForgeScoringService {
   /// decresce verso 0 senza mai escludere il candidato.
   ({ForgeScoreComponent component, ForgeDecisionReason reason}) _levelFit(
     ForgeCandidate candidate,
-    int userLevel,
-  ) {
-    final gap = userLevel - candidate.exercise.minimumLevel;
+    int userLevel, {
+    Set<int>? selectedLevels,
+  }) {
+    final levels = selectedLevels ?? {userLevel};
+    final compatibleLevels = ExerciseLevelPolicy.compatibleLevels(
+      candidate.exercise,
+      levels,
+    );
+    // Il livello compatibile più basso mantiene la preferenza per la minima
+    // capacità sufficiente. Con un solo livello il calcolo è identico alla
+    // formula storica.
+    final scoringLevel = compatibleLevels.isEmpty
+        ? userLevel
+        : compatibleLevels.first;
+    final gap = scoringLevel - candidate.exercise.minimumLevel;
     final value = 1 / (1 + gap);
     return (
       component: ForgeScoreComponent(

@@ -18,6 +18,7 @@ import '../../../domain/entities/workout_validation_result.dart';
 /// 07_Training_Engine.md (sezione "Modifiche e salvataggio").
 class WorkoutEditorController
     extends FamilyAsyncNotifier<WorkoutDetails?, int> {
+  bool _addingExercise = false;
   @override
   Future<WorkoutDetails?> build(int workoutId) {
     return ref.watch(workoutRepositoryProvider).getWorkoutDetails(workoutId);
@@ -65,6 +66,7 @@ class WorkoutEditorController
     required String? description,
     required WorkoutType type,
     required int level,
+    required Set<int> selectedLevels,
     required int? estimatedDurationMinutes,
   }) async {
     final current = state.valueOrNull;
@@ -77,6 +79,7 @@ class WorkoutEditorController
             description: () => description,
             type: type,
             level: level,
+            selectedLevels: selectedLevels,
             estimatedDurationMinutes: () => estimatedDurationMinutes,
           ),
         );
@@ -91,7 +94,7 @@ class WorkoutEditorController
   /// del catalogo tramite [WorkoutExerciseFactory.fromExercise] prima di
   /// arrivare qui (Milestone 4.3, sezione 14): il controller non inventa
   /// altri valori.
-  Future<void> addExerciseFromCatalog({
+  Future<bool> addExerciseFromCatalog({
     required Exercise exercise,
     int? sets,
     int? repetitions,
@@ -99,22 +102,39 @@ class WorkoutEditorController
     int? restSeconds,
     String? notes,
   }) async {
-    final order = (state.valueOrNull?.exercises.length ?? 0) + 1;
-    final workoutExercise = WorkoutExercise(
-      workoutId: arg,
-      exerciseId: exercise.id,
-      order: order,
-      sets: sets,
-      repetitions: repetitions,
-      durationSeconds: durationSeconds,
-      restSeconds: restSeconds,
-      notes: notes,
-    );
-    await ref
-        .read(workoutRepositoryProvider)
-        .addExercise(workoutId: arg, exercise: workoutExercise);
-    _invalidateSharedDetails();
-    await _reload();
+    if (_addingExercise) return false;
+    _addingExercise = true;
+    try {
+      final details = await ref
+          .read(workoutRepositoryProvider)
+          .getWorkoutDetails(arg);
+      if (details == null) throw StateError('Scheda non disponibile');
+      if (details.exercises.any(
+        (entry) => entry.workoutExercise.exerciseId == exercise.id,
+      )) {
+        await _reload();
+        return false;
+      }
+      final order = details.exercises.length + 1;
+      final workoutExercise = WorkoutExercise(
+        workoutId: arg,
+        exerciseId: exercise.id,
+        order: order,
+        sets: sets,
+        repetitions: repetitions,
+        durationSeconds: durationSeconds,
+        restSeconds: restSeconds,
+        notes: notes,
+      );
+      await ref
+          .read(workoutRepositoryProvider)
+          .addExercise(workoutId: arg, exercise: workoutExercise);
+      _invalidateSharedDetails();
+      await _reload();
+      return true;
+    } finally {
+      _addingExercise = false;
+    }
   }
 
   Future<void> updateExercise(WorkoutExercise exercise) async {

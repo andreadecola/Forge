@@ -84,6 +84,7 @@ class PersistGeneratedWorkout {
       // Livello dal request originale del motore (sezione 11): mai un
       // livello diverso inventato qui.
       level: plan.request.userLevel,
+      selectedLevels: plan.request.selectedLevels ?? {plan.request.userLevel},
       // Arrotondamento per eccesso (sezione 12): un piano di 8m30s conta
       // come 9 minuti stimati, mai troncato a 8 (sottostimerebbe il tempo
       // reale servito all'utente).

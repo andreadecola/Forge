@@ -12,6 +12,14 @@ abstract final class ForgeRequestValidator {
     if (request.userLevel <= 0) {
       errors.add('Il livello utente deve essere maggiore di zero.');
     }
+    final selectedLevels = request.selectedLevels;
+    if (selectedLevels != null && selectedLevels.isEmpty) {
+      errors.add('Seleziona almeno un livello.');
+    }
+    if (selectedLevels != null &&
+        selectedLevels.any((level) => level < 1 || level > 5)) {
+      errors.add('I livelli selezionabili devono essere compresi tra 1 e 5.');
+    }
     if (request.targetDurationMinutes <= 0) {
       errors.add('La durata target deve essere maggiore di zero minuti.');
     }

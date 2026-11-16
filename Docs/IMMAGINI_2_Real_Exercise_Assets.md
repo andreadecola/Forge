@@ -8,8 +8,8 @@ Android completa resta una fase separata successiva.
 
 | Voce | Valore |
 |---|---:|
-| HEAD di riferimento | `0729127` (working tree non committato) |
-| `schemaVersion` | 11 |
+| HEAD di riferimento | `ea6b77d` (working tree non committato) |
+| `schemaVersion` | 12 |
 | `catalogVersion` | 2 |
 | esercizi | 118 |
 | riferimenti immagine | 236 |
@@ -20,8 +20,10 @@ Android completa resta una fase separata successiva.
 Copertura corrente: 118/118 esercizi con immagini reali, 236/236 riferimenti
 locali risolti, pari al 100% del catalogo.
 
-Non sono state introdotte migration, nuove architetture immagini o modifiche a
-notifiche, Forge Engine, sessioni, walking o progressi.
+IMMAGINI.4 non ha introdotto migration né nuove architetture immagini. La
+successiva evolutiva degli allenamenti manuali ha portato lo schema applicativo
+a 12 per conservare i livelli multipli; catalogo e asset restano invariati.
+Non sono state modificate notifiche, sessioni, walking o progressi.
 
 ## Esercizi del batch
 
@@ -314,7 +316,7 @@ Controlli eseguiti dopo la verifica Android:
 | Directory dichiarate in `pubspec.yaml` | 118/118 |
 | Riferimenti `.webp` nel seed | 0 |
 | Registry asset locale | 236/236 coerenti, senza duplicati |
-| `schemaVersion` / `catalogVersion` | 11 / 2 |
+| `schemaVersion` / `catalogVersion` | 12 / 2 |
 
 Il test mirato
 `test/data/weekly_plan_generation_service_test.dart` è stato corretto rendendo
@@ -341,5 +343,22 @@ al completamento o all'abbandono. Non richiede modifiche al database, a
 Miglioramento visivo aperto: la fotografia START di `LEG-008 — Goblet squat
 progressivo` ha la testa parzialmente tagliata. È non bloccante, non è stata
 rigenerata in questo checkpoint e va valutata in una successiva revisione
-asset. Lo zoom Android è stato verificato dall'utente sull'emulatore Pixel 7
-API 36 durante l'apertura della gallery.
+asset. Lo zoom Android è stato verificato dall’utente sull’emulatore Pixel 7
+API 36 durante l’apertura della gallery.
+
+## Regola globale di visualizzazione nelle schermate esercizi
+
+Ogni schermata che mostra un esercizio individuale usa la fotografia START
+locale quando disponibile. La miniatura condivisa è
+`ExerciseImageThumbnail`: riceve l’`exerciseId`, attende il bootstrap del
+catalogo, risolve `immagini_esercizi` dal repository SQLite e usa il primo
+asset attivo di tipo `POSIZIONE_INIZIALE`. Se il riferimento manca o l’asset
+non è caricabile, mostra il fallback grafico esistente.
+
+La regola è applicata a catalogo, selezione manuale, anteprima Forge, dettaglio
+scheda, modifica scheda, storico e sessione attiva. Le pagine di dettaglio
+esercizio e sessione attiva mantengono la gallery START/END; le schermate con
+sole statistiche aggregate non aggiungono miniature. Workout e sessioni
+persistono soltanto gli ID degli esercizi: chiusura, riapertura e modifica
+risolvono nuovamente gli asset locali senza duplicare percorsi immagine nei
+record utente.

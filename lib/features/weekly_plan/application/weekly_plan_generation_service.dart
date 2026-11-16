@@ -49,6 +49,7 @@ class WeeklyPlanGenerationService {
     required WorkoutType workoutType,
     required int targetDurationMinutes,
     required int userLevel,
+    Set<int>? selectedLevels,
     required int requestedCount,
   }) async {
     if (requestedCount <= 0) {
@@ -118,6 +119,7 @@ class WeeklyPlanGenerationService {
     final request = ForgeRequest(
       profileId: profileId,
       userLevel: userLevel,
+      selectedLevels: selectedLevels ?? {userLevel},
       availableEquipmentCodes: equipmentCodes,
       targetDurationMinutes: targetDurationMinutes,
       workoutType: workoutType,

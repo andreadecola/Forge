@@ -55,12 +55,14 @@ class AvailabilityBadge extends StatelessWidget {
         children: [
           Icon(_icon, size: 13, color: color),
           const SizedBox(width: 4),
-          Text(
-            ExerciseLabels.availabilityStatus(status),
-            style: TextStyle(
-              color: color,
-              fontSize: 11,
-              fontWeight: FontWeight.w600,
+          Flexible(
+            child: Text(
+              ExerciseLabels.availabilityStatus(status),
+              style: TextStyle(
+                color: color,
+                fontSize: 11,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
         ],

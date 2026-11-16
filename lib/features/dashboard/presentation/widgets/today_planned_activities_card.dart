@@ -12,6 +12,7 @@ import '../../../../domain/entities/workout_enums.dart';
 import '../../../../domain/services/weekly_planning_date_service.dart';
 import '../../../training_plan/application/workout_session_controller.dart';
 import '../../../training_plan/application/workout_session_restore_providers.dart';
+import '../../../training_plan/presentation/widgets/active_workout_dialog.dart';
 import '../../../walking/application/walking_session_controller.dart';
 import '../../../weekly_plan/application/planned_activity_providers.dart';
 import '../../../weekly_plan/presentation/planned_activity_presentation.dart';
@@ -114,32 +115,7 @@ class _TodayActivityTileState extends ConsumerState<_TodayActivityTile> {
   /// qui si replica solo la reazione UI, come ogni altra pagina di Forge fa
   /// per i propri dialog di conferma.
   Future<void> _showActiveWorkoutSessionDialog() async {
-    final activeWorkoutId = ref
-        .read(workoutSessionControllerProvider)!
-        .workoutId;
-    final goToActive = await showDialog<bool>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Allenamento già in corso'),
-        content: const Text(
-          'Hai già un allenamento in corso. Terminalo o abbandonalo prima '
-          'di iniziarne un altro.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('Chiudi'),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('Vai alla sessione attiva'),
-          ),
-        ],
-      ),
-    );
-    if ((goToActive ?? false) && mounted && context.mounted) {
-      context.push(AppRoutes.workoutSessionPath(activeWorkoutId));
-    }
+    await showActiveWorkoutSessionDialog(context, ref);
   }
 
   Future<void> _startWorkout() async {

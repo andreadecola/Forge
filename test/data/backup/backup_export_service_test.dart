@@ -406,7 +406,7 @@ void main() {
     // Nessuna tabella catalogo seedata in questo test (nessun
     // ExerciseCatalogSeeder eseguito): la mappa è vuota, non assente.
     expect(result.backup!.metadata.catalogVersion, isEmpty);
-    expect(result.backup!.metadata.databaseVersion, 11);
+    expect(result.backup!.metadata.databaseVersion, db.schemaVersion);
     expect(result.backup!.metadata.backupFormatVersion, 1);
   });
 

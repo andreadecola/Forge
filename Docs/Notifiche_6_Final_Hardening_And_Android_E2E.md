@@ -134,8 +134,10 @@ E2E completo.
 
 ## Vincoli e stato finale della fase
 
-`schemaVersion` resta 11 e `backupFormatVersion` resta 1. Non sono state
-aggiunte tabelle, migration o dipendenze. I pending OS non fanno parte del
+Al checkpoint NOTIFICHE.6 `schemaVersion` era 11 e `backupFormatVersion` 1.
+Successivamente l'evolutiva degli allenamenti manuali ha portato lo schema a
+12; `backupFormatVersion` resta 1. NOTIFICHE.6 non ha aggiunto tabelle,
+migration o dipendenze. I pending OS non fanno parte del
 backup e vengono ricostruiti dopo restore.
 
 I documenti Notifiche.1-3 e i master document richiesti non sono presenti nel

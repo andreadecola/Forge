@@ -32,9 +32,8 @@ bool isTimedExercise(WorkoutExercise exercise) =>
 ///
 /// Tutte le voci indicizzate per esercizio ([completedWorkoutExerciseIds],
 /// [skippedWorkoutExerciseIds], [completedSetsByWorkoutExerciseId]) usano
-/// **[WorkoutExercise.id]**, mai `exerciseId`: lo stesso esercizio del
-/// catalogo può comparire più volte nella stessa scheda con righe
-/// distinte, e le loro serie sono indipendenti.
+/// **[WorkoutExercise.id]**, mai `exerciseId`: il picker manuale impedisce i
+/// duplicati, ma la riga scheda resta comunque l'identità runtime corretta.
 class WorkoutSessionState {
   const WorkoutSessionState({
     required this.sessionId,

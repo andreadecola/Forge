@@ -12,13 +12,25 @@ abstract final class ForgeRequestNormalizer {
     // evita che l'iterazione dipenda dall'ordine di inserimento originale
     // in punti del motore che iterano questo campo.
     final sortedEquipment = request.availableEquipmentCodes.toList()..sort();
+    final normalizedLevels = request.selectedLevels == null
+        ? null
+        : (List<int>.of(request.selectedLevels!)..sort()).toSet();
+    // Il DB delle schede conserva ancora un solo livello. Per una richiesta
+    // multilivello il rappresentante compatibile e conservativo è il massimo
+    // selezionato; l'eleggibilità continua comunque a valutare ogni livello
+    // del set e non usa questo valore per saltare i limiti dell'esercizio.
+    final normalizedUserLevel =
+        normalizedLevels == null || normalizedLevels.isEmpty
+        ? request.userLevel
+        : normalizedLevels.last;
 
     return ForgeRequest(
       profileId: request.profileId,
-      userLevel: request.userLevel,
+      userLevel: normalizedUserLevel,
       availableEquipmentCodes: sortedEquipment.toSet(),
       targetDurationMinutes: request.targetDurationMinutes,
       workoutType: request.workoutType,
+      selectedLevels: normalizedLevels,
     );
   }
 }

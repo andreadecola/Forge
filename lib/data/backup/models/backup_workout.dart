@@ -1,5 +1,6 @@
 import '../backup_date_codec.dart';
 import '../backup_json_helpers.dart';
+import '../backup_format_exception.dart';
 
 /// Riga di `allenamenti` (Backup.1, sezione 1). [origin] preserva la
 /// stringa `.code` reale (`"USER"`/`"FORGE_ENGINE"`/`"SYSTEM"`, mai
@@ -15,6 +16,7 @@ class BackupWorkout {
     required this.description,
     required this.type,
     required this.level,
+    this.selectedLevels,
     required this.estimatedDurationMinutes,
     required this.status,
     required this.origin,
@@ -29,6 +31,9 @@ class BackupWorkout {
   final String? description;
   final String type;
   final int level;
+  final List<int>? selectedLevels;
+
+  List<int> get effectiveSelectedLevels => selectedLevels ?? [level];
   final int? estimatedDurationMinutes;
   final String status;
   final String origin;
@@ -43,6 +48,7 @@ class BackupWorkout {
     'description': description,
     'type': type,
     'level': level,
+    if (selectedLevels != null) 'selectedLevels': selectedLevels,
     'estimatedDurationMinutes': estimatedDurationMinutes,
     'status': status,
     'origin': origin,
@@ -59,6 +65,7 @@ class BackupWorkout {
       description: optionalString(json, 'description', path),
       type: requireString(json, 'type', path),
       level: requireInt(json, 'level', path),
+      selectedLevels: _parseSelectedLevels(json['selectedLevels'], path),
       estimatedDurationMinutes: optionalInt(
         json,
         'estimatedDurationMinutes',
@@ -74,5 +81,16 @@ class BackupWorkout {
         optionalString(json, 'updatedAt', path),
       ),
     );
+  }
+
+  static List<int>? _parseSelectedLevels(Object? value, String path) {
+    if (value == null) return null;
+    if (value is! List || value.any((item) => item is! int)) {
+      throw BackupFormatException(
+        '$path.selectedLevels',
+        'Attesa una lista di interi.',
+      );
+    }
+    return List<int>.unmodifiable(value.cast<int>());
   }
 }

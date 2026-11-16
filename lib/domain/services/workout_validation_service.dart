@@ -23,6 +23,13 @@ class WorkoutValidationService {
     if (workout.level <= 0) {
       errors.add('Il livello deve essere maggiore di zero.');
     }
+    final selectedLevels = workout.selectedLevels;
+    if (selectedLevels != null && selectedLevels.isEmpty) {
+      errors.add('Seleziona almeno un livello.');
+    } else if (selectedLevels != null &&
+        selectedLevels.any((level) => level < 1 || level > 5)) {
+      errors.add('I livelli selezionati devono essere compresi tra 1 e 5.');
+    }
     final duration = workout.estimatedDurationMinutes;
     if (duration != null && duration <= 0) {
       errors.add(
