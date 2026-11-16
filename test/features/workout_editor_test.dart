@@ -131,6 +131,45 @@ void main() {
     },
   );
 
+  testWidgets(
+    'dopo aggiunta e approvazione la lista aggiorna il conteggio e il dettaglio '
+    'mostra avvio allenamento',
+    (tester) async {
+      await _seedWorkout(database);
+      await _pumpAppOnEditor(tester, database);
+
+      await tester.tap(
+        find.widgetWithText(OutlinedButton, 'Aggiungi esercizio'),
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(_addButtonFor('Esercizio disponibile'));
+      await tester.pumpAndSettle();
+      await tester.tap(
+        find.widgetWithText(FilledButton, 'Aggiungi alla scheda'),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.widgetWithText(FilledButton, 'Segna come pronta'));
+      await tester.pumpAndSettle();
+      await _letSnackBarPass(tester);
+
+      await tester.tap(find.byTooltip('Indietro'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('1 esercizio'), findsOneWidget);
+
+      await tester.tap(find.text('Scheda test'));
+      await tester.pumpAndSettle();
+      expect(find.text('Esercizio disponibile'), findsOneWidget);
+      expect(
+        find.widgetWithText(FilledButton, 'Inizia allenamento'),
+        findsOneWidget,
+      );
+
+      await disposeCleanly(tester);
+    },
+  );
+
   group('esercizi non consigliati (LOCKED_LEVEL / LOCKED_EQUIPMENT)', () {
     testWidgets('restano visibili con il pulsante "+" sempre disponibile', (
       tester,

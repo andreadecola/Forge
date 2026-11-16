@@ -1,6 +1,7 @@
 import '../../../domain/entities/workout_exercise.dart';
 import '../../../domain/entities/workout_exercise_details.dart';
 import 'session_timer.dart';
+import 'workout_session_clock.dart';
 import 'workout_session_phase.dart';
 
 /// Numero di serie da eseguire per [exercise] a runtime. `sets == null`
@@ -94,6 +95,13 @@ class WorkoutSessionState {
   /// l'indice della prossima serie da fare).
   int get currentCompletedSets =>
       completedSetsByWorkoutExerciseId[currentWorkoutExerciseId] ?? 0;
+
+  /// Tempo trascorso dall'avvio della sessione, derivato dall'orologio
+  /// condiviso invece che accumulato a ogni tick.
+  int elapsedSeconds(SessionClock clock) {
+    final elapsed = clock.now().difference(startedAt).inSeconds;
+    return elapsed < 0 ? 0 : elapsed;
+  }
 
   bool get currentExerciseIsTimed =>
       isTimedExercise(currentExercise.workoutExercise);

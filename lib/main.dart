@@ -35,7 +35,9 @@ Future<void> _bootstrapCatalog(ProviderContainer container) async {
     final result = await container.read(catalogBootstrapProvider.future);
     debugPrint(
       result.alreadyImported
-          ? 'Catalogo già importato: nessuna modifica.'
+          ? result.images == 0
+                ? 'Catalogo già importato: nessuna modifica.'
+                : 'Catalogo già importato: aggiornati ${result.images} riferimenti immagine.'
           : 'Catalogo importato: ${result.exercises} esercizi.',
     );
   } catch (error, stackTrace) {

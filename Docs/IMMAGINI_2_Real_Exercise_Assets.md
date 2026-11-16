@@ -1,24 +1,24 @@
-# IMMAGINI.2 / IMMAGINI.3 - Asset didattici locali
+# IMMAGINI.2 / IMMAGINI.3 / IMMAGINI.4 - Asset didattici locali
 
 ## Stato verificato
 
 Questo documento e il riferimento ufficiale per gli asset didattici Forge.
-IMMAGINI.3 ha aggiunto un batch unico di 47 esercizi per raggiungere la soglia
-del 60%; la review Android completa resta una fase separata successiva.
+IMMAGINI.4 ha completato in un unico batch i 47 esercizi rimasti. La review
+Android completa resta una fase separata successiva.
 
 | Voce | Valore |
 |---|---:|
-| HEAD di riferimento | `669223d8111f9b6efe7eeb02f182fc335590d35a` |
+| HEAD di riferimento | `0729127` (working tree non committato) |
 | `schemaVersion` | 11 |
 | `catalogVersion` | 2 |
 | esercizi | 118 |
 | riferimenti immagine | 236 |
-| esercizi con asset reali | 71 |
-| file immagine reali | 142 |
+| esercizi con asset reali | 118 |
+| file immagine reali | 236 |
 | directory asset locali | `assets/images/img_allenamenti/` |
 
-Copertura corrente: 71/118 esercizi con immagini reali, 47/118 ancora in
-fallback, pari al 60,17% del catalogo.
+Copertura corrente: 118/118 esercizi con immagini reali, 236/236 riferimenti
+locali risolti, pari al 100% del catalogo.
 
 Non sono state introdotte migration, nuove architetture immagini o modifiche a
 notifiche, Forge Engine, sessioni, walking o progressi.
@@ -184,15 +184,17 @@ con START come riferimento, ispezionare visivamente la coppia, convertire in
 
 I file finali sono JPEG 1024x1024, quality 88. Il primo batch IMMAGINI.2 pesa
 1,733,010 byte. IMMAGINI.3 batch 1 aggiunge 3,834,089 byte e il batch target
-60% aggiunge 13,382,228 byte; il totale corrente e 18,949,327 byte per 142
-file. Tutti i file sono locali; non esiste download runtime.
+60% aggiunge 13,382,228 byte; IMMAGINI.4 aggiunge 10,997,182 byte; il totale
+corrente e 29,970,101 byte per 236 file. Tutti i file sono locali; non esiste
+download runtime.
 
 | Batch | File | Peso |
 |---|---:|---:|
 | IMMAGINI.2 | 16 | 1,733,010 byte |
 | IMMAGINI.3 batch 1 | 32 | 3,834,089 byte |
 | IMMAGINI.3 batch target 60% | 94 | 13,382,228 byte |
-| Totale corrente | 142 | 18,949,327 byte |
+| IMMAGINI.4 batch 100% | 94 | 10,997,182 byte |
+| Totale corrente | 236 | 29,970,101 byte |
 
 | Codice | START bytes | END bytes | Totale |
 |---|---:|---:|---:|
@@ -205,6 +207,36 @@ file. Tutti i file sono locali; non esiste download runtime.
 | `MOB-012` | 92,079 | 86,554 | 178,633 |
 | `PUSH-001` | 94,937 | 85,408 | 180,345 |
 | **Totale batch** | **885,957** | **848,053** | **1,733,010** |
+
+## IMMAGINI.4 - Produzione 100%
+
+Il batch ha aggiunto 47 esercizi non precedentemente coperti e 94 immagini
+JPEG locali. Ogni variante è stata letta nel catalogo prima della generazione;
+END è stato prodotto usando START come riferimento visivo e la coppia è stata
+controllata con una review a contatto per soggetto, scena, attrezzatura,
+inquadratura, semantica e artefatti evidenti.
+
+Codici aggiunti:
+
+`MOB-005`, `MOB-010`, `MOB-011`, `MOB-015`, `LEG-005`, `LEG-008`, `LEG-011`,
+`LEG-017`, `LEG-019`, `LEG-020`, `BACK-010`, `SHO-009`, `SHO-010`, `ARM-006`,
+`ARM-008`, `CORE-008`, `CORE-010`, `CORE-011`, `CORE-012`, `BAL-002`,
+`BAL-003`, `BAL-005`, `BAL-006`, `BAL-008`, `CARD-001`, `CARD-002`,
+`CARD-003`, `CARD-005`, `CARD-006`, `CARD-007`, `CARD-008`, `CARD-009`,
+`CARD-010`, `STR-001`, `STR-002`, `STR-003`, `STR-004`, `STR-005`, `STR-007`,
+`STR-008`, `STR-009`, `STR-010`, `STR-011`, `STR-012`, `STR-013`, `STR-014`,
+`STR-015`.
+
+Formato effettivo: 1024x1024 JPEG quality 88, path deterministico
+`assets/images/img_allenamenti/<codice_normalizzato>/{start,end}.jpg`.
+Il nuovo batch pesa 10.997.182 byte; il totale asset locale è 29.970.101
+byte. Le coppie `LEG-008`, `CARD-007` e `STR-003` sono state rigenerate dopo
+la review visiva per correggere rispettivamente l'attrezzatura, la leggibilità
+dello step touch e la posa a un solo braccio.
+
+Il registry contiene 94 righe `ORIGINAL_FORGE`/`APPROVED` per il batch e
+`pubspec.yaml` dichiara esplicitamente tutte le 118 directory annidate.
+Nessuna fotografia web è stata incorporata.
 
 ## Mapping, fallback e test
 
@@ -219,24 +251,95 @@ assets/data/exercises_v1.json
   -> Image.asset + ExerciseImageViewerPage (zoom)
 ```
 
-Il seed mantiene START come ordine 1 e END come ordine 2. Gli altri 47
-esercizi mantengono i riferimenti originari senza file reali e usano il
-placeholder tramite il fallback della gallery.
+Il seed mantiene START come ordine 1 e END come ordine 2. Non restano esercizi
+del catalogo senza asset locale; il fallback della gallery resta disponibile
+come comportamento difensivo.
+
+### Riconciliazione su installazioni esistenti
+
+Il widget della miniatura nella scheda allenamento legge il percorso dal
+database SQLite tramite `exerciseImagesProvider` e non rilegge il JSON a ogni
+render. Per questo, quando `catalogVersion` è già `2`, il bootstrap esegue
+comunque una riconciliazione mirata delle righe `immagini_esercizi`: aggiorna
+solo source type, percorso, tipo, didascalia e ordine quando differiscono dal
+seed corrente. Non modifica `schemaVersion`, `catalogVersion`, esercizi,
+schede, sessioni, misurazioni, storico o altri dati utente. Le righe immagine
+riconoscibili conservano il proprio ID; solo una cardinalità/ordine incoerente
+richiede la ricostruzione delle immagini di quello specifico esercizio.
+
+Questo ripara anche installazioni che conservano vecchi riferimenti `.webp`
+dopo il passaggio agli asset JPG IMMAGINI.4.
 
 `test/data/exercise_image_asset_batch_test.dart` verifica baseline del
-catalogo, esistenza dei path, ordine START/END, mapping seed/DB/repository e
-fallback per un esercizio senza asset reale.
+catalogo, esistenza dei path, ordine START/END, mapping seed/DB/repository,
+registry e bundle Flutter per tutti i 118 esercizi. I test mirati immagini,
+catalogo, seeder e aggiornamento contenuti includono anche la regressione per
+la riconciliazione di vecchi path `.webp` a `start.jpg/end.jpg`; l'ultima
+esecuzione completa precedente a questa regressione aveva 28 test passati.
 
-## Review Android richiesta
+Verifiche finali del working tree: `flutter analyze` verde, `git diff --check`
+verde. La suite completa e stata eseguita nel checkpoint tecnico finale
+riportato sotto.
+
+## Review Android (parzialmente completata)
 
 1. Avviare Forge offline.
 2. Aprire il catalogo e scegliere ciascun esercizio del batch.
 3. Aprire il dettaglio e verificare START, END e ordine.
 4. Provare zoom/pan e controllare nitidezza e orientamento.
 5. Confrontare ogni posa con descrizione, esecuzione, attrezzatura e sicurezza.
-6. Aprire un esercizio senza asset e verificare il fallback.
+6. Verificare il fallback difensivo con un path non disponibile, senza
+   modificare il catalogo reale.
 
-La produzione degli altri 47 esercizi resta bloccata fino alla review Android.
-In questa fase non sono stati eseguiti test, analyze o build, come richiesto
-per la produzione rapida del batch. Nessun commit e nessun push vengono
-eseguiti.
+La verifica Android delle miniature e della coppia START/END di `LEG-008` è
+stata completata dall'utente con esito positivo. La fotografia START di
+`LEG-008` ha la testa parzialmente tagliata: miglioramento visivo non bloccante
+da valutare in una successiva revisione asset. Lo zoom Android è stato
+verificato dall'utente sull'emulatore Pixel 7 API 36.
+Nessun commit e nessun push vengono eseguiti.
+
+## IMMAGINI.4 - Checkpoint tecnico finale
+
+Controlli eseguiti dopo la verifica Android:
+
+| Controllo | Risultato |
+|---|---|
+| `flutter test` | 1.075 test eseguiti: 1.075 passati, 0 falliti |
+| `flutter analyze` | VERDE — nessun problema |
+| `git diff --check` | VERDE |
+| Esercizi nel catalogo | 118 |
+| Riferimenti immagine nel seed | 236 |
+| JPEG locali validi 1024x1024 | 236 |
+| Coppie START/END complete | 118/118 |
+| Directory dichiarate in `pubspec.yaml` | 118/118 |
+| Riferimenti `.webp` nel seed | 0 |
+| Registry asset locale | 236/236 coerenti, senza duplicati |
+| `schemaVersion` / `catalogVersion` | 11 / 2 |
+
+Il test mirato
+`test/data/weekly_plan_generation_service_test.dart` è stato corretto rendendo
+deterministico il clock del caso "nessun candidato eleggibile (catalogo
+minimo)". Prima usava `SystemClock()` con una settimana fissata al 7 settembre
+2026; dopo il 16 novembre 2026 il servizio usciva correttamente con
+`weekEntirelyInPast` prima di invocare Forge, rendendo errata l'aspettativa su
+`forgeErrors`. Il test ora passa isolato e nella suite completa.
+
+È stata inoltre corretta una cache UI non invalidata nell'editor delle schede:
+dopo aver aggiunto un esercizio e segnato la scheda come pronta, la lista poteva
+mostrare ancora `0 esercizi` e il dettaglio poteva usare dati precedenti. Le
+mutazioni dell'editor invalidano ora `workoutDetailsProvider`; la correzione
+non modifica né cancella dati e il test di regressione verifica conteggio,
+dettaglio e CTA `Inizia allenamento`.
+
+È stato inoltre aggiunto nella sessione attiva il contatore visibile
+`Tempo trascorso HH:MM:SS`. Il valore deriva da `startedAt`, si aggiorna ogni
+secondo mentre la sessione è attiva; durante la pausa la UI resta ferma e al
+resume il valore riflette il tempo totale trascorso da `startedAt`. Si arresta
+al completamento o all'abbandono. Non richiede modifiche al database, a
+`schemaVersion` o a `catalogVersion`.
+
+Miglioramento visivo aperto: la fotografia START di `LEG-008 — Goblet squat
+progressivo` ha la testa parzialmente tagliata. È non bloccante, non è stata
+rigenerata in questo checkpoint e va valutata in una successiva revisione
+asset. Lo zoom Android è stato verificato dall'utente sull'emulatore Pixel 7
+API 36 durante l'apertura della gallery.

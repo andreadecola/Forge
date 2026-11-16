@@ -322,6 +322,17 @@ void main() {
     expect(repository.createSessionCalls, 1);
   });
 
+  runTest('il tempo trascorso della sessione si aggiorna ogni secondo', (async) {
+    setUpContainer();
+
+    final entry = _repsEntry(workoutExerciseId: 10, exerciseId: 1);
+    start(async, _details(exercises: [entry]));
+
+    expect(state()!.elapsedSeconds(_clock), 0);
+    async.elapse(const Duration(seconds: 7));
+    expect(state()!.elapsedSeconds(_clock), 7);
+  });
+
   group('test 34 — esercizio a ripetizioni', () {
     runTest('set 1/3 -> completa -> set 2 -> completa -> set 3 -> completa -> '
         'esercizio completato', (async) {
@@ -529,12 +540,15 @@ void main() {
       expect(s.exerciseTimer, isNull);
       expect(s.phase, WorkoutSessionPhase.readySet);
 
-      // Il vecchio timer non deve più produrre alcun effetto: far
-      // avanzare il tempo non deve cambiare nulla (nessun Timer
-      // rimasto vivo dopo skip, sezione 29).
+      // Il vecchio countdown non deve più produrre alcun effetto: il timer
+      // totale della sessione invece resta attivo e continua a mostrare il
+      // tempo trascorso dopo "Salta".
       final before = state();
+      final beforeElapsed = before!.elapsedSeconds(_clock);
       async.elapse(const Duration(seconds: 60));
-      expect(state(), same(before));
+      expect(state()!.currentExerciseIndex, 1);
+      expect(state()!.exerciseTimer, isNull);
+      expect(state()!.elapsedSeconds(_clock), beforeElapsed + 60);
     });
   });
 

@@ -148,6 +148,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Esercizio 1 di 3'), findsOneWidget);
+      expect(find.textContaining('Tempo trascorso 00:00:00'), findsOneWidget);
 
       // Completa A -> avanza a B.
       await tester.tap(find.widgetWithText(FilledButton, 'Completa serie'));
@@ -414,6 +415,7 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('Scheda B'), findsWidgets);
 
+      container.read(workoutSessionControllerProvider.notifier).abort();
       await disposeCleanly(tester);
     },
   );

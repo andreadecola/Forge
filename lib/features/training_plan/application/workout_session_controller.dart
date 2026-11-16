@@ -80,6 +80,7 @@ class WorkoutSessionController extends Notifier<WorkoutSessionState?> {
       exercises: details.exercises,
       startedAt: startedAt,
     );
+    _startTicker();
     return true;
   }
 
@@ -93,8 +94,7 @@ class WorkoutSessionController extends Notifier<WorkoutSessionState?> {
     if (state != null) return;
     _stopTicker();
     state = restored;
-    if (!restored.isPaused &&
-        (restored.exerciseTimer != null || restored.restTimer != null)) {
+    if (!restored.isPaused && !restored.isCompleted) {
       _startTicker();
     }
   }
@@ -112,7 +112,6 @@ class WorkoutSessionController extends Notifier<WorkoutSessionState?> {
       return;
     }
 
-    _stopTicker();
     _finishSet(current);
   }
 
@@ -147,7 +146,6 @@ class WorkoutSessionController extends Notifier<WorkoutSessionState?> {
     if (current == null || current.isPaused || current.restTimer == null) {
       return;
     }
-    _stopTicker();
     final next = current.copyWith(restTimer: () => null);
     state = next;
     _persist(next);
@@ -166,7 +164,6 @@ class WorkoutSessionController extends Notifier<WorkoutSessionState?> {
     final exerciseTimer = current.exerciseTimer;
     if (exerciseTimer != null) {
       if (exerciseTimer.isFinished(_clock)) {
-        _stopTicker();
         // La serie a tempo si completa da sola al termine del countdown
         // (sezione 9): stessa logica "dopo la serie" di completeCurrentSet.
         _finishSet(current.copyWith(exerciseTimer: () => null));
@@ -184,14 +181,18 @@ class WorkoutSessionController extends Notifier<WorkoutSessionState?> {
     final restTimer = current.restTimer;
     if (restTimer != null) {
       if (restTimer.isFinished(_clock)) {
-        _stopTicker();
         final next = current.copyWith(restTimer: () => null);
         state = next;
         _persist(next);
       } else {
         state = current.copyWith();
       }
+      return;
     }
+
+    // Anche senza un countdown attivo il ticker aggiorna la UI del tempo
+    // totale trascorso dalla sessione.
+    state = current.copyWith();
   }
 
   /// Registra la serie corrente come completata e decide cosa succede
@@ -259,6 +260,11 @@ class WorkoutSessionController extends Notifier<WorkoutSessionState?> {
             currentExerciseIndex: cleared.currentExerciseIndex + 1,
           );
     state = next;
+    if (next.isCompleted) {
+      _stopTicker();
+    } else {
+      _startTicker();
+    }
     _persist(next);
   }
 
@@ -269,7 +275,6 @@ class WorkoutSessionController extends Notifier<WorkoutSessionState?> {
   void skipCurrentExercise() {
     final current = state;
     if (current == null || current.isPaused || current.isCompleted) return;
-    _stopTicker();
 
     if (_isAlreadyResolved(current)) {
       _advanceToNextExercise(current);
@@ -300,7 +305,6 @@ class WorkoutSessionController extends Notifier<WorkoutSessionState?> {
         current.currentExerciseIndex == 0) {
       return;
     }
-    _stopTicker();
     final next = current.copyWith(
       currentExerciseIndex: current.currentExerciseIndex - 1,
       exerciseTimer: () => null,
@@ -350,12 +354,11 @@ class WorkoutSessionController extends Notifier<WorkoutSessionState?> {
     final restTimer = current.restTimer;
     if (exerciseTimer != null) {
       next = next.copyWith(exerciseTimer: () => exerciseTimer.resumed(_clock));
-      _startTicker();
     } else if (restTimer != null) {
       next = next.copyWith(restTimer: () => restTimer.resumed(_clock));
-      _startTicker();
     }
     state = next;
+    if (!next.isCompleted) _startTicker();
 
     _guardedRepositoryCall(
       () => _repository.resumeSession(

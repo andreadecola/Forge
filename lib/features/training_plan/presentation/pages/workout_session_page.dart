@@ -178,9 +178,19 @@ class _SessionBody extends ConsumerWidget {
               const SizedBox(height: 6),
               ClipRRect(
                 borderRadius: BorderRadius.circular(4),
-                child: LinearProgressIndicator(
+              child: LinearProgressIndicator(
                   value: session.currentExerciseIndex / session.totalExercises,
                   minHeight: 6,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  'Tempo trascorso ${formatSessionElapsed(session.elapsedSeconds(clock))}',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: ForgeColors.textSecondary,
+                  ),
                 ),
               ),
             ],
@@ -438,6 +448,17 @@ String formatSessionCountdown(int totalSeconds) {
   final minutes = safeSeconds ~/ 60;
   final seconds = safeSeconds % 60;
   return '${minutes.toString().padLeft(2, '0')}:'
+      '${seconds.toString().padLeft(2, '0')}';
+}
+
+/// Formato del tempo totale della sessione: sempre `HH:MM:SS`.
+String formatSessionElapsed(int totalSeconds) {
+  final safeSeconds = totalSeconds < 0 ? 0 : totalSeconds;
+  final hours = safeSeconds ~/ 3600;
+  final minutes = (safeSeconds % 3600) ~/ 60;
+  final seconds = safeSeconds % 60;
+  return '${hours.toString().padLeft(2, '0')}:'
+      '${minutes.toString().padLeft(2, '0')}:'
       '${seconds.toString().padLeft(2, '0')}';
 }
 

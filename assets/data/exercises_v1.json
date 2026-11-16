@@ -496,14 +496,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/mob_005/start.webp",
+          "path": "assets/images/img_allenamenti/mob_005/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/mob_005/end.webp",
+          "path": "assets/images/img_allenamenti/mob_005/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -759,14 +759,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/mob_010/start.webp",
+          "path": "assets/images/img_allenamenti/mob_010/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/mob_010/end.webp",
+          "path": "assets/images/img_allenamenti/mob_010/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -814,14 +814,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/mob_011/start.webp",
+          "path": "assets/images/img_allenamenti/mob_011/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/mob_011/end.webp",
+          "path": "assets/images/img_allenamenti/mob_011/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -1034,14 +1034,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/mob_015/start.webp",
+          "path": "assets/images/img_allenamenti/mob_015/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/mob_015/end.webp",
+          "path": "assets/images/img_allenamenti/mob_015/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -1309,14 +1309,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/leg_005/start.webp",
+          "path": "assets/images/img_allenamenti/leg_005/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/leg_005/end.webp",
+          "path": "assets/images/img_allenamenti/leg_005/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -1465,14 +1465,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/leg_008/start.webp",
+          "path": "assets/images/img_allenamenti/leg_008/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/leg_008/end.webp",
+          "path": "assets/images/img_allenamenti/leg_008/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -1631,14 +1631,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/leg_011/start.webp",
+          "path": "assets/images/img_allenamenti/leg_011/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/leg_011/end.webp",
+          "path": "assets/images/img_allenamenti/leg_011/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -1945,14 +1945,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/leg_017/start.webp",
+          "path": "assets/images/img_allenamenti/leg_017/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/leg_017/end.webp",
+          "path": "assets/images/img_allenamenti/leg_017/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -2053,14 +2053,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/leg_019/start.webp",
+          "path": "assets/images/img_allenamenti/leg_019/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/leg_019/end.webp",
+          "path": "assets/images/img_allenamenti/leg_019/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -2109,14 +2109,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/leg_020/start.webp",
+          "path": "assets/images/img_allenamenti/leg_020/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/leg_020/end.webp",
+          "path": "assets/images/img_allenamenti/leg_020/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -3210,14 +3210,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/back_010/start.webp",
+          "path": "assets/images/img_allenamenti/back_010/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/back_010/end.webp",
+          "path": "assets/images/img_allenamenti/back_010/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -3681,14 +3681,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/sho_009/start.webp",
+          "path": "assets/images/img_allenamenti/sho_009/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/sho_009/end.webp",
+          "path": "assets/images/img_allenamenti/sho_009/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -3734,14 +3734,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/sho_010/start.webp",
+          "path": "assets/images/img_allenamenti/sho_010/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/sho_010/end.webp",
+          "path": "assets/images/img_allenamenti/sho_010/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -4050,14 +4050,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/arm_006/start.webp",
+          "path": "assets/images/img_allenamenti/arm_006/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/arm_006/end.webp",
+          "path": "assets/images/img_allenamenti/arm_006/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -4152,14 +4152,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/arm_008/start.webp",
+          "path": "assets/images/img_allenamenti/arm_008/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/arm_008/end.webp",
+          "path": "assets/images/img_allenamenti/arm_008/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -4580,14 +4580,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/core_008/start.webp",
+          "path": "assets/images/img_allenamenti/core_008/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/core_008/end.webp",
+          "path": "assets/images/img_allenamenti/core_008/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -4688,14 +4688,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/core_010/start.webp",
+          "path": "assets/images/img_allenamenti/core_010/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/core_010/end.webp",
+          "path": "assets/images/img_allenamenti/core_010/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -4742,14 +4742,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/core_011/start.webp",
+          "path": "assets/images/img_allenamenti/core_011/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/core_011/end.webp",
+          "path": "assets/images/img_allenamenti/core_011/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -4796,14 +4796,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/core_012/start.webp",
+          "path": "assets/images/img_allenamenti/core_012/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/core_012/end.webp",
+          "path": "assets/images/img_allenamenti/core_012/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -4902,14 +4902,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/bal_002/start.webp",
+          "path": "assets/images/img_allenamenti/bal_002/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/bal_002/end.webp",
+          "path": "assets/images/img_allenamenti/bal_002/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -4955,14 +4955,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/bal_003/start.webp",
+          "path": "assets/images/img_allenamenti/bal_003/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/bal_003/end.webp",
+          "path": "assets/images/img_allenamenti/bal_003/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -5065,14 +5065,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/bal_005/start.webp",
+          "path": "assets/images/img_allenamenti/bal_005/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/bal_005/end.webp",
+          "path": "assets/images/img_allenamenti/bal_005/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -5118,14 +5118,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/bal_006/start.webp",
+          "path": "assets/images/img_allenamenti/bal_006/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/bal_006/end.webp",
+          "path": "assets/images/img_allenamenti/bal_006/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -5228,14 +5228,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/bal_008/start.webp",
+          "path": "assets/images/img_allenamenti/bal_008/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/bal_008/end.webp",
+          "path": "assets/images/img_allenamenti/bal_008/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -5279,14 +5279,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/card_001/start.webp",
+          "path": "assets/images/img_allenamenti/card_001/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/card_001/end.webp",
+          "path": "assets/images/img_allenamenti/card_001/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -5336,14 +5336,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/card_002/start.webp",
+          "path": "assets/images/img_allenamenti/card_002/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/card_002/end.webp",
+          "path": "assets/images/img_allenamenti/card_002/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -5387,14 +5387,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/card_003/start.webp",
+          "path": "assets/images/img_allenamenti/card_003/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/card_003/end.webp",
+          "path": "assets/images/img_allenamenti/card_003/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -5489,14 +5489,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/card_005/start.webp",
+          "path": "assets/images/img_allenamenti/card_005/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/card_005/end.webp",
+          "path": "assets/images/img_allenamenti/card_005/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -5540,14 +5540,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/card_006/start.webp",
+          "path": "assets/images/img_allenamenti/card_006/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/card_006/end.webp",
+          "path": "assets/images/img_allenamenti/card_006/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -5591,14 +5591,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/card_007/start.webp",
+          "path": "assets/images/img_allenamenti/card_007/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/card_007/end.webp",
+          "path": "assets/images/img_allenamenti/card_007/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -5642,14 +5642,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/card_008/start.webp",
+          "path": "assets/images/img_allenamenti/card_008/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/card_008/end.webp",
+          "path": "assets/images/img_allenamenti/card_008/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -5696,14 +5696,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/card_009/start.webp",
+          "path": "assets/images/img_allenamenti/card_009/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/card_009/end.webp",
+          "path": "assets/images/img_allenamenti/card_009/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -5747,14 +5747,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/card_010/start.webp",
+          "path": "assets/images/img_allenamenti/card_010/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/card_010/end.webp",
+          "path": "assets/images/img_allenamenti/card_010/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -5798,14 +5798,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_001/start.webp",
+          "path": "assets/images/img_allenamenti/str_001/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_001/end.webp",
+          "path": "assets/images/img_allenamenti/str_001/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -5849,14 +5849,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_002/start.webp",
+          "path": "assets/images/img_allenamenti/str_002/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_002/end.webp",
+          "path": "assets/images/img_allenamenti/str_002/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -5900,14 +5900,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_003/start.webp",
+          "path": "assets/images/img_allenamenti/str_003/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_003/end.webp",
+          "path": "assets/images/img_allenamenti/str_003/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -5951,14 +5951,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_004/start.webp",
+          "path": "assets/images/img_allenamenti/str_004/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_004/end.webp",
+          "path": "assets/images/img_allenamenti/str_004/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -6002,14 +6002,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_005/start.webp",
+          "path": "assets/images/img_allenamenti/str_005/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_005/end.webp",
+          "path": "assets/images/img_allenamenti/str_005/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -6104,14 +6104,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_007/start.webp",
+          "path": "assets/images/img_allenamenti/str_007/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_007/end.webp",
+          "path": "assets/images/img_allenamenti/str_007/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -6155,14 +6155,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_008/start.webp",
+          "path": "assets/images/img_allenamenti/str_008/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_008/end.webp",
+          "path": "assets/images/img_allenamenti/str_008/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -6206,14 +6206,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_009/start.webp",
+          "path": "assets/images/img_allenamenti/str_009/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_009/end.webp",
+          "path": "assets/images/img_allenamenti/str_009/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -6259,14 +6259,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_010/start.webp",
+          "path": "assets/images/img_allenamenti/str_010/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_010/end.webp",
+          "path": "assets/images/img_allenamenti/str_010/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -6312,14 +6312,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_011/start.webp",
+          "path": "assets/images/img_allenamenti/str_011/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_011/end.webp",
+          "path": "assets/images/img_allenamenti/str_011/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -6365,14 +6365,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_012/start.webp",
+          "path": "assets/images/img_allenamenti/str_012/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_012/end.webp",
+          "path": "assets/images/img_allenamenti/str_012/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -6418,14 +6418,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_013/start.webp",
+          "path": "assets/images/img_allenamenti/str_013/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_013/end.webp",
+          "path": "assets/images/img_allenamenti/str_013/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -6473,14 +6473,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_014/start.webp",
+          "path": "assets/images/img_allenamenti/str_014/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_014/end.webp",
+          "path": "assets/images/img_allenamenti/str_014/end.jpg",
           "caption": null,
           "order": 2
         }
@@ -6528,14 +6528,14 @@
         {
           "type": "POSIZIONE_INIZIALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_015/start.webp",
+          "path": "assets/images/img_allenamenti/str_015/start.jpg",
           "caption": null,
           "order": 1
         },
         {
           "type": "POSIZIONE_FINALE",
           "sourceType": "ASSET",
-          "path": "assets/images/img_allenamenti/str_015/end.webp",
+          "path": "assets/images/img_allenamenti/str_015/end.jpg",
           "caption": null,
           "order": 2
         }

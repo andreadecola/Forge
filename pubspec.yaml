@@ -149,6 +149,53 @@ flutter:
     - assets/images/img_allenamenti/sho_007/
     - assets/images/img_allenamenti/sho_008/
     - assets/images/img_allenamenti/str_006/
+    - assets/images/img_allenamenti/mob_005/
+    - assets/images/img_allenamenti/mob_010/
+    - assets/images/img_allenamenti/mob_011/
+    - assets/images/img_allenamenti/mob_015/
+    - assets/images/img_allenamenti/leg_005/
+    - assets/images/img_allenamenti/leg_008/
+    - assets/images/img_allenamenti/leg_011/
+    - assets/images/img_allenamenti/leg_017/
+    - assets/images/img_allenamenti/leg_019/
+    - assets/images/img_allenamenti/leg_020/
+    - assets/images/img_allenamenti/back_010/
+    - assets/images/img_allenamenti/sho_009/
+    - assets/images/img_allenamenti/sho_010/
+    - assets/images/img_allenamenti/arm_006/
+    - assets/images/img_allenamenti/arm_008/
+    - assets/images/img_allenamenti/core_008/
+    - assets/images/img_allenamenti/core_010/
+    - assets/images/img_allenamenti/core_011/
+    - assets/images/img_allenamenti/core_012/
+    - assets/images/img_allenamenti/bal_002/
+    - assets/images/img_allenamenti/bal_003/
+    - assets/images/img_allenamenti/bal_005/
+    - assets/images/img_allenamenti/bal_006/
+    - assets/images/img_allenamenti/bal_008/
+    - assets/images/img_allenamenti/card_001/
+    - assets/images/img_allenamenti/card_002/
+    - assets/images/img_allenamenti/card_003/
+    - assets/images/img_allenamenti/card_005/
+    - assets/images/img_allenamenti/card_006/
+    - assets/images/img_allenamenti/card_007/
+    - assets/images/img_allenamenti/card_008/
+    - assets/images/img_allenamenti/card_009/
+    - assets/images/img_allenamenti/card_010/
+    - assets/images/img_allenamenti/str_001/
+    - assets/images/img_allenamenti/str_002/
+    - assets/images/img_allenamenti/str_003/
+    - assets/images/img_allenamenti/str_004/
+    - assets/images/img_allenamenti/str_005/
+    - assets/images/img_allenamenti/str_007/
+    - assets/images/img_allenamenti/str_008/
+    - assets/images/img_allenamenti/str_009/
+    - assets/images/img_allenamenti/str_010/
+    - assets/images/img_allenamenti/str_011/
+    - assets/images/img_allenamenti/str_012/
+    - assets/images/img_allenamenti/str_013/
+    - assets/images/img_allenamenti/str_014/
+    - assets/images/img_allenamenti/str_015/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

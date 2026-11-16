@@ -29,6 +29,15 @@ class WorkoutEditorController
     );
   }
 
+  /// Le schermate lista/dettaglio leggono i dettagli tramite il provider
+  /// condiviso, mentre l'editor mantiene il proprio stato AsyncNotifier.
+  /// Dopo una mutazione bisogna invalidare esplicitamente quel provider:
+  /// altrimenti la UI può conservare un conteggio esercizi precedente (per
+  /// esempio `0`) anche se la riga è stata salvata correttamente nel DB.
+  void _invalidateSharedDetails() {
+    ref.invalidate(workoutDetailsProvider(arg));
+  }
+
   /// Se la scheda è attualmente PRONTA e la modifica appena applicata la
   /// rende non più valida, la riporta automaticamente in BOZZA: una scheda
   /// "pronta" deve restare sempre realmente eseguibile (decisione
@@ -71,6 +80,7 @@ class WorkoutEditorController
             estimatedDurationMinutes: () => estimatedDurationMinutes,
           ),
         );
+    _invalidateSharedDetails();
     await _downgradeIfNoLongerReady();
     await _reload();
   }
@@ -103,17 +113,20 @@ class WorkoutEditorController
     await ref
         .read(workoutRepositoryProvider)
         .addExercise(workoutId: arg, exercise: workoutExercise);
+    _invalidateSharedDetails();
     await _reload();
   }
 
   Future<void> updateExercise(WorkoutExercise exercise) async {
     await ref.read(workoutRepositoryProvider).updateExercise(exercise);
+    _invalidateSharedDetails();
     await _downgradeIfNoLongerReady();
     await _reload();
   }
 
   Future<void> removeExercise(int workoutExerciseId) async {
     await ref.read(workoutRepositoryProvider).removeExercise(workoutExerciseId);
+    _invalidateSharedDetails();
     await _downgradeIfNoLongerReady();
     await _reload();
   }
@@ -125,6 +138,7 @@ class WorkoutEditorController
           workoutId: arg,
           orderedWorkoutExerciseIds: orderedWorkoutExerciseIds,
         );
+    _invalidateSharedDetails();
     await _reload();
   }
 
@@ -138,6 +152,7 @@ class WorkoutEditorController
         .updateWorkout(
           current.workout.copyWith(status: WorkoutDefinitionStatus.draft),
         );
+    _invalidateSharedDetails();
     await _reload();
   }
 
@@ -161,12 +176,14 @@ class WorkoutEditorController
         .updateWorkout(
           current.workout.copyWith(status: WorkoutDefinitionStatus.ready),
         );
+    _invalidateSharedDetails();
     await _reload();
     return result;
   }
 
   Future<void> archive() async {
     await ref.read(workoutRepositoryProvider).archiveWorkout(arg);
+    _invalidateSharedDetails();
     await _reload();
   }
 }

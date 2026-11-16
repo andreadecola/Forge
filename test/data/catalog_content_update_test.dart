@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:drift/drift.dart' hide isNotNull;
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forge/data/database/app_database.dart';
@@ -98,4 +99,50 @@ void main() {
     final allExercises = await db.eserciziDao.getAll();
     expect(allExercises, hasLength(118));
   });
+
+  test(
+    'stessa v2 riconcilia i vecchi path immagini senza perdere le righe',
+    () async {
+      final seeder = ExerciseCatalogSeeder(db);
+      await seeder.seedFromString(realJson);
+
+      final goblet = await db.eserciziDao.getByCode('LEG-008');
+      expect(goblet, isNotNull);
+      final before = await db.immaginiEserciziDao.getForExercise(goblet!.id);
+      final beforeIds = before.map((image) => image.id).toList()..sort();
+
+      // Stato tipico delle installazioni precedenti alla correzione IMMAGINI.4.
+      for (final image in before) {
+        await (db.update(
+          db.immaginiEserciziTable,
+        )..where((t) => t.id.equals(image.id))).write(
+          ImmaginiEserciziTableCompanion(
+            percorsoAsset: Value(
+              'assets/images/img_allenamenti/leg_008/${image.ordineVisualizzazione == 1 ? 'start' : 'end'}.webp',
+            ),
+          ),
+        );
+      }
+
+      final result = await seeder.seedFromString(realJson);
+      expect(result.alreadyImported, isTrue);
+      expect(result.images, 2);
+
+      final after = await db.immaginiEserciziDao.getForExercise(goblet.id);
+      expect(after.map((image) => image.id).toList()..sort(), beforeIds);
+      expect(
+        after.map((image) => image.percorsoAsset),
+        containsAll([
+          'assets/images/img_allenamenti/leg_008/start.jpg',
+          'assets/images/img_allenamenti/leg_008/end.jpg',
+        ]),
+      );
+      expect(
+        (await db.select(db.versioniCatalogoTable).get()).map(
+          (v) => v.versione,
+        ),
+        [2],
+      );
+    },
+  );
 }

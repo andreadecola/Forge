@@ -150,6 +150,58 @@ const _targetBatchCodes = <String>{
   'BAL-004',
 };
 
+const _image4BatchCodes = <String>{
+  'MOB-005',
+  'MOB-010',
+  'MOB-011',
+  'MOB-015',
+  'LEG-005',
+  'LEG-008',
+  'LEG-011',
+  'LEG-017',
+  'LEG-019',
+  'LEG-020',
+  'BACK-010',
+  'SHO-009',
+  'SHO-010',
+  'ARM-006',
+  'ARM-008',
+  'CORE-008',
+  'CORE-010',
+  'CORE-011',
+  'CORE-012',
+  'BAL-002',
+  'BAL-003',
+  'BAL-005',
+  'BAL-006',
+  'BAL-008',
+  'CARD-001',
+  'CARD-002',
+  'CARD-003',
+  'CARD-005',
+  'CARD-006',
+  'CARD-007',
+  'CARD-008',
+  'CARD-009',
+  'CARD-010',
+  'STR-001',
+  'STR-002',
+  'STR-003',
+  'STR-004',
+  'STR-005',
+  'STR-007',
+  'STR-008',
+  'STR-009',
+  'STR-010',
+  'STR-011',
+  'STR-012',
+  'STR-013',
+  'STR-014',
+  'STR-015',
+};
+
+const _allBatchCodes = <String>{..._batchCodes, ..._image4BatchCodes};
+
 String _normalizedCode(String code) => code.toLowerCase().replaceAll('-', '_');
 
 String _filesystemPath(String assetPath) =>
@@ -175,7 +227,7 @@ void main() {
     expect(catalog['catalogVersion'], 2);
     expect(exercises, hasLength(118));
     expect(imageReferences, 236);
-    expect(_batchCodes, hasLength(71));
+    expect(_allBatchCodes, hasLength(118));
   });
 
   test('ogni asset del batch esiste ed e ordinato START/END', () {
@@ -191,7 +243,7 @@ void main() {
           (image) => image['path'] as String,
         ),
       );
-      if (!_batchCodes.contains(code)) continue;
+      if (!_allBatchCodes.contains(code)) continue;
 
       expect(images, hasLength(2), reason: code);
       expect(
@@ -229,22 +281,19 @@ void main() {
     expect(allPaths.toSet(), hasLength(allPaths.length));
   });
 
-  test(
-    'un esercizio fuori dal batch conserva il fallback senza asset locale',
-    () {
-      final exercises = catalog['exercises'] as List<dynamic>;
-      final unworked = exercises.cast<Map<String, dynamic>>().firstWhere(
-          (exercise) => exercise['code'] == 'MOB-005',
-      );
-      final images = unworked['images'] as List<dynamic>;
+  test('il catalogo finale non conserva fallback per MOB-005', () {
+    final exercises = catalog['exercises'] as List<dynamic>;
+    final worked = exercises.cast<Map<String, dynamic>>().firstWhere(
+      (exercise) => exercise['code'] == 'MOB-005',
+    );
+    final images = worked['images'] as List<dynamic>;
 
-      expect(images, hasLength(2));
-      for (final image in images.cast<Map<String, dynamic>>()) {
-        final path = image['path'] as String;
-        expect(File(_filesystemPath(path)).existsSync(), isFalse, reason: path);
-      }
-    },
-  );
+    expect(images, hasLength(2));
+    for (final image in images.cast<Map<String, dynamic>>()) {
+      final path = image['path'] as String;
+      expect(File(_filesystemPath(path)).existsSync(), isTrue, reason: path);
+    }
+  });
 
   test('il registry dichiara tutti gli asset del batch come ORIGINAL_FORGE', () {
     final registry = File(
@@ -286,6 +335,30 @@ void main() {
         rows.every(
           (row) => row.endsWith(
             ',APPROVED,"Asset originale fotorealistico; batch IMMAGINI.3 target 60%; 1024x1024 JPEG quality 88."',
+          ),
+        ),
+        isTrue,
+        reason: code,
+      );
+    }
+  });
+
+  test('il registry dichiara il batch IMMAGINI.4 come ORIGINAL_FORGE', () {
+    final registry = File(
+      'assets/images/exercises/asset_registry.csv',
+    ).readAsLinesSync();
+    for (final code in _image4BatchCodes) {
+      final rows = registry
+          .where(
+            (row) =>
+                row.startsWith('$code,') && row.contains(',ORIGINAL_FORGE,'),
+          )
+          .toList();
+      expect(rows, hasLength(2), reason: code);
+      expect(
+        rows.every(
+          (row) => row.endsWith(
+            ',APPROVED,"Asset originale fotorealistico; batch IMMAGINI.4; 1024x1024 JPEG quality 88."',
           ),
         ),
         isTrue,

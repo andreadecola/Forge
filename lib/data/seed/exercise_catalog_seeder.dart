@@ -18,7 +18,8 @@ class CatalogSeedException implements Exception {
 }
 
 /// Esito di un import del catalogo. Se [alreadyImported] è true la versione
-/// era già presente e non è stato modificato nulla.
+/// era già presente; può comunque essere stata eseguita una riconciliazione
+/// dei riferimenti agli asset immagine.
 class CatalogSeedResult {
   const CatalogSeedResult({
     required this.alreadyImported,
@@ -51,9 +52,9 @@ class CatalogSeedResult {
 /// - **atomicità**: tutto avviene in un'unica transazione; un catalogo
 ///   invalido non lascia record parziali;
 /// - **idempotenza**: se la versione del catalogo è già registrata in
-///   `versioni_catalogo`, l'import è un no-op; i master vengono comunque
-///   riconciliati per codice (upsert) e le relazioni ricreate, così che una
-///   ri-esecuzione non generi duplicati.
+///   `versioni_catalogo`, i dati restano invariati, salvo la riconciliazione
+///   mirata dei percorsi immagine necessari per aggiornare installazioni già
+///   esistenti senza cambiare la versione del catalogo.
 class ExerciseCatalogSeeder {
   ExerciseCatalogSeeder(this.db);
 
@@ -110,7 +111,14 @@ class ExerciseCatalogSeeder {
               ))
               .getSingleOrNull();
       if (existing != null) {
-        return const CatalogSeedResult(alreadyImported: true);
+        // La versione del catalogo resta invariata quando cambia solo il
+        // mapping degli asset. Le installazioni che hanno già importato la
+        // v2 possono quindi avere ancora i vecchi riferimenti .webp nel DB,
+        // anche se il bundle corrente contiene i JPG. Riconcilia solo le
+        // righe delle immagini: schede, sessioni, profilo e storico non
+        // vengono toccati.
+        final images = await _reconcileImageAssets(catalog);
+        return CatalogSeedResult(alreadyImported: true, images: images);
       }
 
       final now = DateTime.now();
@@ -474,6 +482,81 @@ class ExerciseCatalogSeeder {
       count++;
     }
     return count;
+  }
+
+  /// Aggiorna i riferimenti alle immagini sulle installazioni che hanno già
+  /// registrato la stessa versione del catalogo.
+  ///
+  /// Si interviene solo quando il valore desiderato differisce da quello
+  /// persistito e si conserva l'id della riga quando la coppia esistente è
+  /// riconoscibile per [ordineVisualizzazione]. Se la cardinalità o l'ordine
+  /// non sono coerenti, si ricostruiscono esclusivamente le immagini di quel
+  /// singolo esercizio.
+  Future<int> _reconcileImageAssets(ExerciseCatalogSeedModel catalog) async {
+    final now = DateTime.now();
+    var changed = 0;
+
+    for (final exercise in catalog.exercises) {
+      final exerciseRow = await (db.select(
+        db.eserciziTable,
+      )..where((t) => t.codice.equals(exercise.code))).getSingleOrNull();
+      if (exerciseRow == null) continue;
+
+      final current = await (db.select(
+        db.immaginiEserciziTable,
+      )..where((t) => t.idEsercizio.equals(exerciseRow.id))).get();
+      final desiredOrders = exercise.images.map((image) => image.order).toSet();
+      final currentOrders = current
+          .map((image) => image.ordineVisualizzazione)
+          .toSet();
+
+      if (current.length != exercise.images.length ||
+          currentOrders.length != current.length ||
+          currentOrders.length != desiredOrders.length ||
+          !currentOrders.containsAll(desiredOrders)) {
+        await _replaceImages(exercise, exerciseRow.id, now);
+        changed += exercise.images.length;
+        continue;
+      }
+
+      final currentByOrder = {
+        for (final image in current) image.ordineVisualizzazione: image,
+      };
+      for (final desired in exercise.images) {
+        final row = currentByOrder[desired.order]!;
+        final desiredAssetPath = desired.sourceType == 'ASSET'
+            ? desired.path
+            : null;
+        final desiredLocalPath = desired.sourceType == 'FILE_LOCALE'
+            ? desired.path
+            : null;
+        final needsUpdate =
+            row.tipoSorgente != desired.sourceType ||
+            row.percorsoAsset != desiredAssetPath ||
+            row.percorsoFileLocale != desiredLocalPath ||
+            row.tipoImmagine != desired.type ||
+            row.didascalia != desired.caption ||
+            row.ordineVisualizzazione != desired.order;
+        if (!needsUpdate) continue;
+
+        await (db.update(
+          db.immaginiEserciziTable,
+        )..where((t) => t.id.equals(row.id))).write(
+          ImmaginiEserciziTableCompanion(
+            tipoSorgente: Value(desired.sourceType),
+            percorsoAsset: Value(desiredAssetPath),
+            percorsoFileLocale: Value(desiredLocalPath),
+            tipoImmagine: Value(desired.type),
+            didascalia: Value(desired.caption),
+            ordineVisualizzazione: Value(desired.order),
+            dataModifica: Value(now),
+          ),
+        );
+        changed++;
+      }
+    }
+
+    return changed;
   }
 
   Future<int> _replaceProgression(

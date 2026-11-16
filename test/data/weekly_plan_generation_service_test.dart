@@ -330,7 +330,7 @@ void main() {
       DriftPlannedActivityRepository(miniDb.attivitaPianificateDao),
       generateAdapted,
       EquipmentRepositoryImpl(miniDb.userEquipmentDao),
-      const SystemClock(),
+      _FixedClock(DateTime(2026, 9, 1, 9)),
     );
 
     final result = await service.buildProposal(

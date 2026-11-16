@@ -446,6 +446,7 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('Scheda B'), findsWidgets);
 
+      container.read(workoutSessionControllerProvider.notifier).abort();
       await disposeCleanly(tester);
     },
   );
@@ -835,6 +836,7 @@ void main() {
           findsOneWidget,
         );
 
+        container.read(workoutSessionControllerProvider.notifier).abort();
         await disposeCleanly(tester);
       },
     );

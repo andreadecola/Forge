@@ -204,6 +204,10 @@ final exerciseDetailsProvider = FutureProvider.family<ExerciseDetails?, int>((
 final exerciseImagesProvider = FutureProvider.family<List<ExerciseImage>, int>((
   ref,
   exerciseId,
-) {
+) async {
+  // Il bootstrap può riconciliare i path immagine di un DB già esistente
+  // mentre la UI sta avviando. Attendere la stessa Future condivisa evita di
+  // cache-are nella miniatura un vecchio riferimento (.webp) prima dell'update.
+  await ref.watch(catalogBootstrapProvider.future);
   return ref.watch(exerciseRepositoryProvider).getImages(exerciseId);
 });
