@@ -1,9 +1,12 @@
+import 'dart:convert';
 import 'package:drift/drift.dart';
+import '../../domain/entities/set_performance.dart';
 
 import '../../domain/entities/persisted_session_exercise.dart';
 import '../../domain/entities/persisted_session_timer.dart';
 import '../../domain/entities/persisted_session_timer_kind.dart';
 import '../../domain/entities/persisted_workout_session.dart';
+import '../../domain/entities/workout_walking_block.dart';
 import '../../domain/entities/workout_session_exercise_history_item.dart';
 import '../../domain/entities/workout_session_history_item.dart';
 import '../../domain/entities/workout_session_persistence_status.dart';
@@ -19,6 +22,8 @@ abstract final class WorkoutSessionMappers {
       workoutId: row.idAllenamento,
       profileId: row.idProfilo,
       workoutNameSnapshot: row.nomeAllenamentoSnapshot,
+      walkingBlock: WorkoutWalkingBlock.fromStorage(row.camminataSnapshot),
+      walkingSessionId: row.idCamminata,
       status: WorkoutSessionPersistenceStatus.fromCode(row.stato),
       currentExerciseIndex: row.indiceEsercizioCorrente,
       startedAt: row.dataInizio,
@@ -48,6 +53,10 @@ abstract final class WorkoutSessionMappers {
       exerciseId: row.idEsercizio,
       order: row.ordine,
       totalSets: row.serieTotali,
+      performedSets: SetPerformance.decodeList(
+        jsonDecode(row.prestazioni),
+        totalSets: row.serieTotali,
+      ),
       completedSets: row.serieCompletate,
       repetitions: row.ripetizioni,
       durationSeconds: row.durataSecondi,
@@ -67,11 +76,13 @@ abstract final class WorkoutSessionMappers {
     required int profileId,
     required String workoutNameSnapshot,
     required DateTime startedAt,
+    WorkoutWalkingBlock? walkingBlock,
   }) {
     return SessioniAllenamentoTableCompanion.insert(
       idAllenamento: Value(workoutId),
       idProfilo: profileId,
       nomeAllenamentoSnapshot: workoutNameSnapshot,
+      camminataSnapshot: Value(walkingBlock?.encode()),
       stato: WorkoutSessionPersistenceStatus.inProgress.code,
       dataInizio: startedAt,
       dataCreazione: startedAt,
@@ -170,6 +181,8 @@ abstract final class WorkoutSessionMappers {
       workoutId: row.idAllenamento,
       profileId: row.idProfilo,
       workoutName: row.nomeAllenamentoSnapshot,
+      walkingBlock: WorkoutWalkingBlock.fromStorage(row.camminataSnapshot),
+      walkingSessionId: row.idCamminata,
       status: WorkoutSessionPersistenceStatus.fromCode(row.stato),
       startedAt: row.dataInizio,
       finishedAt: row.dataFine,

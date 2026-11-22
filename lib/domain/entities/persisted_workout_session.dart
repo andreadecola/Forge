@@ -1,5 +1,6 @@
 import 'persisted_session_timer.dart';
 import 'workout_session_persistence_status.dart';
+import 'workout_walking_block.dart';
 
 /// Riga persistita di `sessioni_allenamento` (Milestone 4.4.3): dati
 /// scalari della sessione. Il progresso per esercizio è aggregato
@@ -20,6 +21,8 @@ class PersistedWorkoutSession {
     this.timer,
     this.createdAt,
     this.updatedAt,
+    this.walkingBlock,
+    this.walkingSessionId,
   });
 
   final int? id;
@@ -41,4 +44,6 @@ class PersistedWorkoutSession {
   final PersistedSessionTimer? timer;
   final DateTime? createdAt;
   final DateTime? updatedAt;
+  final WorkoutWalkingBlock? walkingBlock;
+  final int? walkingSessionId;
 }

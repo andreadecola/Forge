@@ -101,9 +101,9 @@ void main() {
         isTrue,
       );
 
-      // Nessuna azione di modifica/rimozione/riordino nella vista di sola
-      // lettura, solo la CTA "Modifica".
-      expect(find.byIcon(Icons.delete_outline), findsNothing);
+      // EVO-002: eliminazione della scheda con conferma; nessuna rimozione
+      // diretta dei singoli esercizi o riordino nel dettaglio.
+      expect(find.byTooltip('Elimina definitivamente'), findsOneWidget);
       expect(find.byIcon(Icons.drag_handle), findsNothing);
       expect(find.widgetWithText(FilledButton, 'Modifica'), findsOneWidget);
       expect(find.byType(ExerciseImageThumbnail), findsNWidgets(2));

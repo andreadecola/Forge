@@ -5,6 +5,32 @@ import 'package:forge/domain/services/weekly_planning_date_service.dart';
 /// — verifica la semantica Lunedì → Domenica e la sua tenuta ai boundary
 /// (cross-month, cross-year, bisestile) e al determinismo.
 void main() {
+  group('settimana iniziale di pianificazione', () {
+    test('domenica propone il lunedì successivo', () {
+      expect(
+        WeeklyPlanningDateService.initialPlanningWeek(
+          DateTime(2026, 11, 22, 19),
+        ),
+        DateTime(2026, 11, 23),
+      );
+    });
+    test('gestisce il passaggio di anno', () {
+      expect(
+        WeeklyPlanningDateService.initialPlanningWeek(DateTime(2023, 12, 31)),
+        DateTime(2024, 1, 1),
+      );
+    });
+    test('negli altri giorni conserva la settimana corrente', () {
+      for (var day = 16; day <= 21; day++) {
+        expect(
+          WeeklyPlanningDateService.initialPlanningWeek(
+            DateTime(2026, 11, day),
+          ),
+          DateTime(2026, 11, 16),
+        );
+      }
+    });
+  });
   group('weekStart', () {
     test('un mercoledì torna il lunedì della stessa settimana', () {
       // 2026-08-26 è un mercoledì.

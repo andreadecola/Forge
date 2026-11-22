@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/theme/forge_colors.dart';
 import '../../../../data/repositories/workout_providers.dart';
 import '../../../../domain/entities/workout.dart';
 import '../workout_labels.dart';
@@ -74,7 +73,7 @@ class WorkoutCard extends ConsumerWidget {
                     ? '1 esercizio'
                     : '$exerciseCount esercizi',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: ForgeColors.textSecondary,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               const SizedBox(height: 4),

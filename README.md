@@ -18,6 +18,11 @@ L'app permette di:
 - ricostruire i reminder dopo startup, restore, resume e cambio timezone;
 - vedere le attività previste per oggi e collegarle alle sessioni realmente
   eseguite;
+- pianificare settimane con schede e camminate nei giorni scelti, anche
+  manualmente, con anteprima e verifica delle sovrapposizioni;
+- eliminare camminate concluse e schede preservando lo storico degli allenamenti;
+- annotare prestazioni effettive per serie e confrontare attività settimanali
+  e mensili nella pagina Progressi;
 - monitorare peso, girovita e pressione arteriosa con storico, riepiloghi e
   grafici descrittivi;
 - gestire attrezzatura e budget;
@@ -47,5 +52,18 @@ Il backup JSON conserva l'intera selezione multilivello e legge i backup
 precedenti tramite il livello legacy. La protezione degli avvii concorrenti e
 il ripristino dei timer sono documentati in
 [Hardening backup e sessioni](Docs/HARDENING_Backup_And_Sessions.md).
+
+Le evolutive EVO-001–010 autorizzate (escluse 007/008) sono descritte in
+[Evolutive 001–010](Docs/EVOLUTIVE_001_010.md). Lo schema 13 aggiunge diario
+prestazioni e rinvio persistente dei promemoria. Lo schema corrente è 14:
+la camminata può far parte della stessa scheda, prima o dopo gli esercizi,
+con gli stessi giorni pianificati e ripresa persistente. La Home espone
+«Pianifica allenamento» sotto «Inizia allenamento». Il catalogo resta alla versione 2.
+Il collaudo Android complessivo è ancora da effettuare.
+
+Il restyling UX/UI introduce i temi Ambra sportiva e Blu elettrico con scelta
+Chiaro/Scuro/Sistema nel Profilo. La Home mette in primo piano le attività di
+oggi; sessioni, catalogo e Progressi riutilizzano dati e logica esistenti.
+Specifica, evidenze e limiti: [Restyling UX/UI](Docs/UX_UI_Restyling.md).
 
 

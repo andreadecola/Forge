@@ -1,6 +1,7 @@
 import '../backup_date_codec.dart';
 import '../backup_format_exception.dart';
 import '../backup_json_helpers.dart';
+import '../../../domain/entities/workout_walking_block.dart';
 
 /// Timer persistito annidato in una sessione (`sessioni_allenamento.timer_*`,
 /// Backup.1 sezione 10/11). Preservato come istante (`startedAt`) più
@@ -57,6 +58,8 @@ class BackupWorkoutSession {
     required this.timer,
     required this.createdAt,
     required this.updatedAt,
+    this.walkingBlock,
+    this.walkingSessionLocalId,
   });
 
   final int localId;
@@ -72,12 +75,17 @@ class BackupWorkoutSession {
   final BackupSessionTimer? timer;
   final DateTime? createdAt;
   final DateTime? updatedAt;
+  final WorkoutWalkingBlock? walkingBlock;
+  final int? walkingSessionLocalId;
 
   Map<String, dynamic> toJson() => {
     'localId': localId,
     'profileLocalId': profileLocalId,
     'workoutLocalId': workoutLocalId,
     'workoutNameSnapshot': workoutNameSnapshot,
+    if (walkingBlock != null) 'walkingBlock': walkingBlock!.toJson(),
+    if (walkingSessionLocalId != null)
+      'walkingSessionLocalId': walkingSessionLocalId,
     'status': status,
     'currentExerciseIndex': currentExerciseIndex,
     'startedAt': BackupDateCodec.encodeTimestamp(startedAt),
@@ -103,6 +111,8 @@ class BackupWorkoutSession {
       profileLocalId: requireInt(json, 'profileLocalId', path),
       workoutLocalId: optionalInt(json, 'workoutLocalId', path),
       workoutNameSnapshot: requireString(json, 'workoutNameSnapshot', path),
+      walkingBlock: optionalWalkingBlock(json, path),
+      walkingSessionLocalId: optionalInt(json, 'walkingSessionLocalId', path),
       status: requireString(json, 'status', path),
       currentExerciseIndex: requireInt(json, 'currentExerciseIndex', path),
       startedAt: BackupDateCodec.decodeTimestamp(

@@ -36,6 +36,10 @@ void main() {
         [now, now],
       );
       rawDb.execute('PRAGMA user_version = 11');
+      // Tabelle fuori dal focus multilivello, necessarie alla migrazione 13.
+      rawDb.execute('CREATE TABLE sessioni_esercizi (id INTEGER PRIMARY KEY)');
+      rawDb.execute('CREATE TABLE sessioni_allenamento (id INTEGER PRIMARY KEY)');
+      rawDb.execute('CREATE TABLE attivita_pianificate (id INTEGER PRIMARY KEY)');
 
       final database = AppDatabase(NativeDatabase.opened(rawDb));
       addTearDown(database.close);

@@ -1,7 +1,7 @@
+import '../../../../core/theme/forge_typography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/theme/forge_colors.dart';
 import '../../../../core/utils/statistics_formatters.dart';
 import '../../../../data/repositories/repository_providers.dart';
 import '../../../../domain/entities/workout_statistics.dart';
@@ -183,7 +183,7 @@ class _KpiTile extends StatelessWidget {
                 value,
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: ForgeColors.copper,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
               ),
               const SizedBox(height: 4),
@@ -223,7 +223,7 @@ class _SectionCard extends StatelessWidget {
               Text(
                 footnote!,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: ForgeColors.textSecondary,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ],
@@ -275,10 +275,13 @@ class _EmptyState extends StatelessWidget {
           children: [
             const Icon(Icons.bar_chart, size: 48),
             const SizedBox(height: 16),
-            const Text(
+            Text(
               'Nessun allenamento nel periodo selezionato.',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              style: TextStyle(
+                fontSize: ForgeTypography.bodySize,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ],
         ),

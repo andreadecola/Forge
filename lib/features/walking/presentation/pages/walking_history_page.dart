@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../core/widgets/forge_message_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -12,6 +13,7 @@ import '../../../../domain/entities/walking_session_status.dart';
 import '../../application/walking_history_providers.dart';
 import '../walking_metrics.dart';
 import '../walking_session_formatter.dart';
+import '../widgets/delete_walking_button.dart';
 
 class WalkingHistoryPage extends ConsumerWidget {
   const WalkingHistoryPage({super.key});
@@ -86,7 +88,7 @@ class _WalkingHistoryBody extends ConsumerWidget {
                           ? '1 camminata'
                           : '${sessions.length} camminate',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: ForgeColors.textSecondary,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ),
@@ -134,6 +136,12 @@ class _WalkingHistoryCard extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.only(bottom: 10),
       child: ListTile(
+        trailing: session.id == null
+            ? null
+            : DeleteWalkingButton(
+                sessionId: session.id!,
+                profileId: session.profileId,
+              ),
         onTap: session.id == null
             ? null
             : () =>
@@ -159,7 +167,9 @@ class _WalkingHistoryCard extends StatelessWidget {
                       ? Icons.check_circle_outline
                       : Icons.pause_circle_outline,
                   size: 16,
-                  color: completed ? ForgeColors.success : ForgeColors.copper,
+                  color: completed
+                      ? ForgeColors.successFor(context)
+                      : Theme.of(context).colorScheme.primary,
                 ),
                 const SizedBox(width: 4),
                 Text(completed ? 'Completata' : 'Interrotta'),
@@ -174,7 +184,7 @@ class _WalkingHistoryCard extends StatelessWidget {
               Text(
                 metricParts.join(' · '),
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: ForgeColors.textSecondary,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ],
@@ -188,19 +198,17 @@ class _WalkingHistoryCard extends StatelessWidget {
 
 class _HistoryEmpty extends StatelessWidget {
   const _HistoryEmpty();
-
   @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Padding(
-        padding: EdgeInsets.all(24),
-        child: Text(
-          'Nessuna camminata nello storico.',
-          textAlign: TextAlign.center,
-        ),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => ForgeMessageState(
+    title: 'Nessuna camminata nello storico.',
+    message:
+        'Le camminate registrate compariranno qui. Puoi iniziare quando vuoi.',
+    icon: Icons.directions_walk,
+    action: FilledButton(
+      onPressed: () => context.push(AppRoutes.walkingSession),
+      child: const Text('Inizia camminata'),
+    ),
+  );
 }
 
 class _HistoryError extends StatelessWidget {

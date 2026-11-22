@@ -51,6 +51,21 @@ class WeeklyPlanGenerationRepository {
       final addPlannedActivity = AddPlannedActivity(plannedActivityRepository);
 
       final createdActivityIds = <int>[];
+      final existing = await plannedActivityRepository.getForWeek(
+        profileId: profileId,
+        weekStart: proposal.weekStart,
+        weekEnd: proposal.weekEnd,
+      );
+      final proposedDates = [
+        ...proposal.entries.map((e) => e.scheduledDate),
+        ...proposal.additionalActivities.map((a) => a.scheduledDate),
+      ];
+      if (proposedDates.toSet().length != proposedDates.length ||
+          existing.any((a) => proposedDates.contains(a.scheduledDate))) {
+        throw StateError(
+          'Il piano è cambiato: genera una nuova anteprima senza sovrapposizioni.',
+        );
+      }
       for (final entry in proposal.entries) {
         final result = entry.generationResult;
         final generationResult = ForgeGenerationResult(
@@ -68,6 +83,15 @@ class WeeklyPlanGenerationRepository {
         if (!persisted.success) {
           throw WeeklyPlanGenerationPersistException(persisted.errors);
         }
+        if (proposal.updateWorkoutWalkingBlock ||
+            proposal.walkingBlock != null) {
+          final workout = (await workoutRepository.getWorkoutById(
+            persisted.workoutId!,
+          ))!;
+          await workoutRepository.updateWorkout(
+            workout.copyWith(walkingBlock: () => proposal.walkingBlock),
+          );
+        }
         final activityId = await addPlannedActivity(
           PlannedActivity(
             profileId: profileId,
@@ -78,6 +102,33 @@ class WeeklyPlanGenerationRepository {
           ),
         );
         createdActivityIds.add(activityId);
+      }
+      for (final activity in proposal.additionalActivities) {
+        if (activity.profileId != profileId) {
+          throw StateError('Profilo non valido.');
+        }
+        if (activity.type == PlannedActivityType.workout) {
+          final details = await workoutRepository.getWorkoutDetails(
+            activity.workoutId!,
+          );
+          if (details == null ||
+              details.workout.status.code != 'READY' ||
+              details.exercises.isEmpty ||
+              details.workout.profileId != profileId) {
+            throw StateError(
+              'Scegli una scheda pronta con almeno un esercizio.',
+            );
+          }
+          if (proposal.updateWorkoutWalkingBlock ||
+              proposal.walkingBlock != null) {
+            await workoutRepository.updateWorkout(
+              details.workout.copyWith(
+                walkingBlock: () => proposal.walkingBlock,
+              ),
+            );
+          }
+        }
+        createdActivityIds.add(await addPlannedActivity(activity));
       }
       return createdActivityIds;
     });

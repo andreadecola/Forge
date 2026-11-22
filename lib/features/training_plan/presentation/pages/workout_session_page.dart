@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/theme/forge_colors.dart';
+import '../../../../core/routing/app_routes.dart';
 import '../../../../domain/entities/workout_exercise.dart';
 import '../../../exercises/application/exercise_catalog_providers.dart';
 import '../../../exercises/presentation/widgets/exercise_image_gallery.dart';
@@ -11,6 +12,8 @@ import '../../application/workout_session_controller.dart';
 import '../../application/workout_session_phase.dart';
 import '../../application/workout_session_state.dart';
 import '../widgets/exercise_status_chip.dart';
+import '../widgets/exercise_performance_diary.dart';
+import '../widgets/workout_walking_block_view.dart';
 
 /// Esecuzione guidata di una scheda (Milestone 4.4.1; serie e timer
 /// aggiunti in Milestone 4.4.2): mostra un esercizio per volta, con
@@ -34,7 +37,7 @@ class WorkoutSessionPage extends ConsumerWidget {
       builder: (context) => AlertDialog(
         title: const Text('Vuoi uscire dall\'allenamento?'),
         content: const Text(
-          'I progressi della sessione corrente non verranno salvati.',
+          'La sessione verrà interrotta e resterà nello storico. Potrai iniziare un nuovo allenamento quando vorrai.',
         ),
         actions: [
           TextButton(
@@ -104,6 +107,8 @@ class WorkoutSessionPage extends ConsumerWidget {
             ? _SessionCompleteView(session: session)
             : session.isPaused
             ? const _PausedView()
+            : session.isWalkingPhase
+            ? WorkoutWalkingBlockView(session: session)
             : _SessionBody(session: session),
       ),
     );
@@ -189,7 +194,7 @@ class _SessionBody extends ConsumerWidget {
                 child: Text(
                   'Tempo trascorso ${formatSessionElapsed(session.elapsedSeconds(clock))}',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: ForgeColors.textSecondary,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
               ),
@@ -213,6 +218,7 @@ class _SessionBody extends ConsumerWidget {
                     if (status != null) ExerciseStatusChip(status: status),
                   ],
                 ),
+
                 if (status == null && session.currentCompletedSets > 0)
                   Padding(
                     padding: const EdgeInsets.only(top: 4),
@@ -220,7 +226,7 @@ class _SessionBody extends ConsumerWidget {
                       '${session.currentCompletedSets} di '
                       '${session.currentTotalSets} serie completate',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: ForgeColors.textSecondary,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ),
@@ -246,6 +252,23 @@ class _SessionBody extends ConsumerWidget {
                     clock: clock,
                     isRunning: phase == WorkoutSessionPhase.timedSetRunning,
                   ),
+                const SizedBox(height: 16),
+                Text(
+                  session.isLastExercise
+                      ? (session.walkingBlock != null &&
+                                !session.walkingCompleted
+                            ? 'A seguire: camminata'
+                            : 'Questo è l’ultimo esercizio')
+                      : 'Prossimo: ${session.exercises[session.currentExerciseIndex + 1].exercise.name}',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                ExercisePerformanceDiary(
+                  sessionId: session.sessionId,
+                  order: entry.workoutExercise.order,
+                  exerciseId: entry.exercise.id,
+                  totalSets: totalSetsFor(entry.workoutExercise),
+                  timed: session.currentExerciseIsTimed,
+                ),
                 ..._secondaryInfoLines(
                   entry.workoutExercise,
                 ).map((line) => _InfoLine(text: line)),
@@ -394,7 +417,7 @@ class _RestingContent extends StatelessWidget {
           'RECUPERO',
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: ForgeColors.copper,
+            color: Theme.of(context).colorScheme.secondary,
             fontWeight: FontWeight.bold,
             letterSpacing: 1.2,
           ),
@@ -412,9 +435,9 @@ class _RestingContent extends StatelessWidget {
         Text(
           'Recupero prima della serie $nextSet',
           textAlign: TextAlign.center,
-          style: Theme.of(
-            context,
-          ).textTheme.bodyMedium?.copyWith(color: ForgeColors.textSecondary),
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
         ),
       ],
     );
@@ -429,21 +452,25 @@ class _SetDots extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        for (var i = 0; i < total; i++)
-          Padding(
-            padding: const EdgeInsets.only(right: 6),
-            child: Icon(
-              i < completed ? Icons.circle : Icons.circle_outlined,
-              size: 12,
-              color: i < completed
-                  ? ForgeColors.success
-                  : ForgeColors.steelGrayLight,
-            ),
-          ),
-      ],
+    return Semantics(
+      label: '$completed serie completate su $total',
+      child: ExcludeSemantics(
+        child: Wrap(
+          children: [
+            for (var i = 0; i < total; i++)
+              Padding(
+                padding: const EdgeInsets.only(right: 6),
+                child: Icon(
+                  i < completed ? Icons.circle : Icons.circle_outlined,
+                  size: 12,
+                  color: i < completed
+                      ? ForgeColors.successFor(context)
+                      : Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+              ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -516,7 +543,9 @@ class _ExerciseImage extends ConsumerWidget {
         aspectRatio: 4 / 3,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(12),
-          child: Container(color: ForgeColors.anthraciteSurfaceHigh),
+          child: Container(
+            color: Theme.of(context).colorScheme.surfaceContainerHighest,
+          ),
         ),
       ),
       error: (error, stackTrace) => const ExerciseImageGallery(images: []),
@@ -532,15 +561,15 @@ class _SessionCompleteView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Center(
-      child: Padding(
+      child: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(
+            Icon(
               Icons.emoji_events_outlined,
               size: 56,
-              color: ForgeColors.copper,
+              color: Theme.of(context).colorScheme.secondary,
             ),
             const SizedBox(height: 16),
             Text(
@@ -565,6 +594,17 @@ class _SessionCompleteView extends ConsumerWidget {
               value: '${session.skippedWorkoutExerciseIds.length}',
             ),
             const SizedBox(height: 32),
+            if (session.walkingBlock != null)
+              Text(
+                'Camminata completata · ${session.walkingBlock!.minutes} min previsti',
+              ),
+            OutlinedButton.icon(
+              onPressed: () => context.push(
+                AppRoutes.workoutHistoryDetailPath(session.sessionId),
+              ),
+              icon: const Icon(Icons.edit_note),
+              label: const Text('Diario della sessione'),
+            ),
             SizedBox(
               width: double.infinity,
               child: FilledButton(
@@ -593,7 +633,9 @@ class _SummaryRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: Theme.of(context).textTheme.bodyLarge),
+        Expanded(
+          child: Text(label, style: Theme.of(context).textTheme.bodyLarge),
+        ),
         Text(
           value,
           style: Theme.of(

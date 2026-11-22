@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../core/widgets/forge_message_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -49,10 +50,18 @@ class WorkoutListPage extends ConsumerWidget {
           const ActiveSessionBanner(
             padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
           ),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
-            child: _ForgeGeneratorEntryPoint(),
-          ),
+          if (profileAsync.valueOrNull?.id == null ||
+              ref
+                      .watch(
+                        watchWorkoutsProvider(profileAsync.valueOrNull!.id!),
+                      )
+                      .valueOrNull
+                      ?.isNotEmpty ==
+                  true)
+            const Padding(
+              padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
+              child: _ForgeGeneratorEntryPoint(),
+            ),
           Expanded(
             child: profileAsync.when(
               data: (profile) => profile?.id == null
@@ -159,26 +168,19 @@ class _EmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Icon(Icons.fitness_center_outlined, size: 48),
-            const SizedBox(height: 16),
-            const Text(
-              'Non hai ancora creato allenamenti.',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-            ),
-            const SizedBox(height: 16),
-            FilledButton(
-              onPressed: onCreate,
-              child: const Text('Crea il primo allenamento'),
-            ),
-          ],
-        ),
+    return ForgeMessageState(
+      title: 'Non hai ancora creato allenamenti.',
+      message:
+          'Forge può preparare una scheda per te. Puoi anche comporla scegliendo gli esercizi.',
+      icon: Icons.fitness_center_outlined,
+      action: FilledButton.icon(
+        onPressed: () => context.push(AppRoutes.forgeGenerator),
+        icon: const Icon(Icons.auto_awesome),
+        label: const Text('Genera con Forge'),
+      ),
+      secondaryAction: OutlinedButton(
+        onPressed: onCreate,
+        child: const Text('Crea il primo allenamento'),
       ),
     );
   }

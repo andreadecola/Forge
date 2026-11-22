@@ -1,6 +1,6 @@
+import '../../../../core/theme/forge_typography.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/theme/forge_colors.dart';
 import 'exercise_category_illustration.dart';
 
 /// Placeholder Forge mostrato quando un'immagine non è disponibile
@@ -19,7 +19,7 @@ class ExerciseImagePlaceholder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: ForgeColors.anthraciteSurfaceHigh,
+      color: Theme.of(context).colorScheme.surfaceContainerHighest,
       alignment: Alignment.center,
       child: LayoutBuilder(
         builder: (context, constraints) {
@@ -31,7 +31,7 @@ class ExerciseImagePlaceholder extends StatelessWidget {
               ? Icon(
                   Icons.accessibility_new,
                   size: compact ? 20 : 40,
-                  color: ForgeColors.steelGrayLight,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                   semanticLabel: compact
                       ? (message ?? 'Immagine dimostrativa in preparazione')
                       : null,
@@ -53,9 +53,9 @@ class ExerciseImagePlaceholder extends StatelessWidget {
                 Text(
                   message ?? 'Immagine dimostrativa in preparazione',
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: ForgeColors.textSecondary,
-                    fontSize: 12,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    fontSize: ForgeTypography.captionSize,
                   ),
                 ),
               ],

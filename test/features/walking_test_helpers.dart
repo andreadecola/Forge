@@ -18,6 +18,13 @@ class FakeWalkingClock implements Clock {
 }
 
 class FakeWalkingSessionRepository implements WalkingSessionRepository {
+  @override
+  Future<void> deleteWalkingSession(int id) async {
+    if (sessions[id]?.status == WalkingSessionStatus.inProgress) {
+      throw StateError('Termina la camminata prima di eliminarla.');
+    }
+    sessions.remove(id);
+  }
   final Map<int, WalkingSession> sessions = {};
   int _nextId = 1;
 

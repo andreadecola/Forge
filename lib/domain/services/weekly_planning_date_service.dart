@@ -8,6 +8,13 @@
 /// domenica) — la UI futura formatterà il testo, questo servizio non lo
 /// tocca (sezione 65).
 abstract final class WeeklyPlanningDateService {
+  /// Di domenica la nuova pianificazione propone la settimana successiva.
+  /// La navigazione esplicita verso altre settimane resta disponibile.
+  static DateTime initialPlanningWeek(DateTime now) =>
+      now.weekday == DateTime.sunday
+      ? DateTime(now.year, now.month, now.day + 1)
+      : weekStart(now);
+
   /// Il lunedì (mezzanotte locale) della settimana che contiene [reference].
   static DateTime weekStart(DateTime reference) {
     final day = _atMidnight(reference);

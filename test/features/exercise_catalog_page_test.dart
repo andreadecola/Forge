@@ -272,65 +272,62 @@ void main() {
     await disposeCleanly(tester);
   });
 
-  testWidgets(
-    'un titolo lungo nella ExerciseCard va a capo su massimo 2 righe senza '
-    'overflow',
-    (tester) async {
-      const category = ExerciseCategory(
-        id: 1,
-        code: 'TEST',
-        name: 'Categoria di test',
-        displayOrder: 1,
-        active: true,
-      );
-      const exercise = Exercise(
-        id: 999,
-        code: 'EX-LONG',
-        name:
-            'Estensione dei tricipiti in piedi con elastico di resistenza '
-            'medio-alta e controllo del gomito',
-        description: 'Descrizione.',
-        instructions: '1. Passo.',
-        categoryId: 1,
-        minimumLevel: 1,
-        impactLevel: ExerciseImpactLevel.low,
-        balanceRequired: false,
-        floorRequired: false,
-        standingRequired: true,
-        supportAllowed: true,
-        isSystem: true,
-        isActive: true,
-        catalogVersion: 1,
-      );
-      final item = ExerciseCatalogItem(
-        exercise: exercise,
-        category: category,
-        requiredEquipmentCodes: const {},
-        requiredEquipmentNames: const [],
-        status: ExerciseAvailabilityStatus.available,
-      );
+  testWidgets('un titolo lungo nella ExerciseCard resta completo senza '
+      'overflow', (tester) async {
+    const category = ExerciseCategory(
+      id: 1,
+      code: 'TEST',
+      name: 'Categoria di test',
+      displayOrder: 1,
+      active: true,
+    );
+    const exercise = Exercise(
+      id: 999,
+      code: 'EX-LONG',
+      name:
+          'Estensione dei tricipiti in piedi con elastico di resistenza '
+          'medio-alta e controllo del gomito',
+      description: 'Descrizione.',
+      instructions: '1. Passo.',
+      categoryId: 1,
+      minimumLevel: 1,
+      impactLevel: ExerciseImpactLevel.low,
+      balanceRequired: false,
+      floorRequired: false,
+      standingRequired: true,
+      supportAllowed: true,
+      isSystem: true,
+      isActive: true,
+      catalogVersion: 1,
+    );
+    final item = ExerciseCatalogItem(
+      exercise: exercise,
+      category: category,
+      requiredEquipmentCodes: const {},
+      requiredEquipmentNames: const [],
+      status: ExerciseAvailabilityStatus.available,
+    );
 
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [databaseProvider.overrideWithValue(database)],
-          child: MaterialApp(
-            home: Scaffold(
-              body: SizedBox(
-                width: 320,
-                child: ExerciseCard(item: item, onTap: () {}),
-              ),
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [databaseProvider.overrideWithValue(database)],
+        child: MaterialApp(
+          home: Scaffold(
+            body: SizedBox(
+              width: 320,
+              child: ExerciseCard(item: item, onTap: () {}),
             ),
           ),
         ),
-      );
-      await tester.pumpAndSettle();
+      ),
+    );
+    await tester.pumpAndSettle();
 
-      expect(tester.takeException(), isNull);
-      final nameText = tester.widget<Text>(find.text(exercise.name));
-      expect(nameText.maxLines, 2);
-      expect(nameText.overflow, TextOverflow.ellipsis);
+    expect(tester.takeException(), isNull);
+    final nameText = tester.widget<Text>(find.text(exercise.name));
+    expect(nameText.maxLines, isNull);
+    expect(nameText.overflow, isNull);
 
-      await disposeCleanly(tester);
-    },
-  );
+    await disposeCleanly(tester);
+  });
 }

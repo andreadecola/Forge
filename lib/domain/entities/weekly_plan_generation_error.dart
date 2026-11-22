@@ -13,4 +13,5 @@ enum WeeklyPlanGenerationError {
 
   /// Il numero di allenamenti richiesto non è positivo.
   invalidRequestedCount,
+  incompatibleSchedule,
 }

@@ -4,6 +4,10 @@ import '../../../domain/entities/weekly_plan_generation_error.dart';
 import '../../../domain/entities/weekly_plan_generation_proposal.dart';
 import '../../../domain/entities/weekly_plan_generation_result.dart';
 import '../../../domain/entities/workout_enums.dart';
+import '../../../domain/entities/planned_activity.dart';
+import '../../../domain/entities/workout.dart';
+import '../../../domain/entities/workout_walking_block.dart';
+import '../../../domain/services/weekly_schedule_policy.dart';
 import '../../../domain/repositories/equipment_repository.dart';
 import '../../../domain/repositories/planned_activity_repository.dart';
 import '../../../domain/services/clock.dart';
@@ -51,8 +55,35 @@ class WeeklyPlanGenerationService {
     required int userLevel,
     Set<int>? selectedLevels,
     required int requestedCount,
+    int walkCount = 0,
+    int? walkDurationMinutes,
+    Set<int>? workoutDays,
+    Set<int> walkingDays = const {1, 2, 3, 4, 5, 6, 7},
+    Workout? manualWorkout,
+    bool manualMode = false,
+    WorkoutWalkingBlock? walkingBlock,
+    bool updateWorkoutWalkingBlock = false,
   }) async {
-    if (requestedCount <= 0) {
+    try {
+      walkingBlock?.validate();
+    } on FormatException {
+      return const WeeklyPlanGenerationResult(
+        errors: [WeeklyPlanGenerationError.invalidRequestedCount],
+      );
+    }
+    if (walkingBlock != null && (requestedCount <= 0 || walkCount > 0)) {
+      return const WeeklyPlanGenerationResult(
+        errors: [WeeklyPlanGenerationError.invalidRequestedCount],
+      );
+    }
+    if (requestedCount < 0 ||
+        walkCount < 0 ||
+        requestedCount + walkCount == 0 ||
+        (walkCount > 0 &&
+            (walkDurationMinutes == null || walkDurationMinutes <= 0)) ||
+        (manualWorkout != null &&
+            (manualWorkout.profileId != profileId ||
+                manualWorkout.status != WorkoutDefinitionStatus.ready))) {
       return const WeeklyPlanGenerationResult(
         errors: [WeeklyPlanGenerationError.invalidRequestedCount],
       );
@@ -75,9 +106,10 @@ class WeeklyPlanGenerationService {
     // sezione 34/80): una FORGE_ENGINE SKIPPED/POSTPONED conta comunque
     // come "attività Forge presente" — l'utente la elimina esplicitamente
     // (flusso già disponibile) se vuole rigenerare la settimana.
-    if (existingActivities.any(
-      (activity) => activity.origin == PlannedActivityOrigin.forgeEngine,
-    )) {
+    if (!manualMode &&
+        existingActivities.any(
+          (activity) => activity.origin == PlannedActivityOrigin.forgeEngine,
+        )) {
       return const WeeklyPlanGenerationResult(
         errors: [WeeklyPlanGenerationError.weekAlreadyHasForgeActivities],
       );
@@ -104,11 +136,70 @@ class WeeklyPlanGenerationService {
         .where((day) => occupiedDaySet.contains(day))
         .toList();
 
-    final days = ForgeWeekDistributionService.distribute(
+    var days = ForgeWeekDistributionService.distribute(
       freeDays: freeDays,
       occupiedDays: occupiedDays,
       count: requestedCount,
     );
+    var walkDates = <DateTime>[];
+    if (workoutDays != null || walkCount > 0 || manualWorkout != null) {
+      try {
+        final schedule = WeeklySchedulePolicy.distribute(
+          weekReference: weekReference,
+          today: today,
+          workoutDays: workoutDays ?? const {1, 2, 3, 4, 5, 6, 7},
+          walkingDays: walkingDays,
+          workoutCount: requestedCount,
+          walkCount: walkCount,
+          existing: existingActivities,
+        );
+        days = schedule.workouts;
+        walkDates = schedule.walks;
+      } on Object {
+        return const WeeklyPlanGenerationResult(
+          errors: [WeeklyPlanGenerationError.incompatibleSchedule],
+        );
+      }
+    }
+    final additional = <PlannedActivity>[
+      for (final day in walkDates)
+        PlannedActivity(
+          profileId: profileId,
+          scheduledDate: day,
+          type: PlannedActivityType.walk,
+          plannedDurationMinutes: walkDurationMinutes,
+          origin: manualMode
+              ? PlannedActivityOrigin.user
+              : PlannedActivityOrigin.forgeEngine,
+        ),
+    ];
+    if (manualMode || manualWorkout != null) {
+      if (requestedCount > 0 && manualWorkout == null) {
+        return const WeeklyPlanGenerationResult(
+          errors: [WeeklyPlanGenerationError.invalidRequestedCount],
+        );
+      }
+      additional.addAll([
+        for (final day in days)
+          PlannedActivity(
+            profileId: profileId,
+            scheduledDate: day,
+            type: PlannedActivityType.workout,
+            workoutId: manualWorkout!.id,
+            origin: PlannedActivityOrigin.user,
+          ),
+      ]);
+      return WeeklyPlanGenerationResult(
+        proposal: WeeklyPlanGenerationProposal(
+          weekStart: weekStart,
+          weekEnd: weekEnd,
+          entries: const [],
+          additionalActivities: additional,
+          walkingBlock: walkingBlock,
+          updateWorkoutWalkingBlock: updateWorkoutWalkingBlock,
+        ),
+      );
+    }
 
     final ownedEquipment = await _equipmentRepository.getOwnedEquipment(
       profileId,
@@ -152,6 +243,9 @@ class WeeklyPlanGenerationService {
         weekStart: weekStart,
         weekEnd: weekEnd,
         entries: entries,
+        additionalActivities: additional,
+        walkingBlock: walkingBlock,
+        updateWorkoutWalkingBlock: updateWorkoutWalkingBlock,
       ),
     );
   }

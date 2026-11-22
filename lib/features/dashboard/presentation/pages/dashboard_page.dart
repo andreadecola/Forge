@@ -1,10 +1,10 @@
+import '../../../../core/theme/forge_typography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/constants/activity_level.dart';
 import '../../../../core/routing/app_routes.dart';
-import '../../../../core/theme/forge_colors.dart';
 import '../../../../core/utils/age_calculator.dart';
 import '../../../../data/repositories/repository_providers.dart';
 import '../../../../domain/entities/user_profile.dart';
@@ -13,6 +13,7 @@ import '../../../equipment/application/equipment_providers.dart';
 import '../../../pressure/application/pressure_providers.dart';
 import '../../../training_plan/presentation/widgets/active_session_banner.dart';
 import '../widgets/ready_workout_launcher.dart';
+import '../widgets/weekly_movement_summary.dart';
 import '../../../walking/presentation/widgets/walking_entry_card.dart';
 import '../../../weight/application/weight_providers.dart';
 import '../widgets/today_planned_activities_card.dart';
@@ -84,19 +85,31 @@ class _DashboardBody extends ConsumerWidget {
         ),
         const SizedBox(height: 4),
         Text(
-          'Il bisogno di ricominciare.',
+          'Il tuo movimento, un giorno alla volta.',
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: ForgeColors.textSecondary,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
             fontStyle: FontStyle.italic,
           ),
         ),
         const ActiveSessionBanner(),
+        TodayPlannedActivitiesCard(profileId: profile.id!),
+        WeeklyMovementSummary(profileId: profile.id!),
         const SizedBox(height: 16),
-        ReadyWorkoutLauncher(profileId: profile.id!),
+        ReadyWorkoutLauncher(
+          key: const ValueKey('ready-workout-launcher'),
+          profileId: profile.id!,
+        ),
+        const SizedBox(height: 8),
+        OutlinedButton.icon(
+          key: const ValueKey('home-plan-workout'),
+          onPressed: () => context.push(AppRoutes.weeklyPlan),
+          icon: const Icon(Icons.edit_calendar_outlined),
+          label: const Text('Pianifica allenamento'),
+        ),
         const SizedBox(height: 16),
         WalkingEntryCard(profileId: profile.id!),
         const SizedBox(height: 16),
-        TodayPlannedActivitiesCard(profileId: profile.id!),
+
         const SizedBox(height: 16),
         Card(
           child: Padding(
@@ -258,9 +271,9 @@ class _DashboardBody extends ConsumerWidget {
                   Text(
                     unavailableHint,
                     textAlign: TextAlign.end,
-                    style: Theme.of(
-                      context,
-                    ).textTheme.bodyMedium?.copyWith(fontSize: 11),
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: ForgeTypography.secondarySize,
+                    ),
                   ),
               ],
             ),

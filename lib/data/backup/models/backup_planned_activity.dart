@@ -1,5 +1,6 @@
 import '../backup_date_codec.dart';
 import '../backup_json_helpers.dart';
+import '../backup_format_exception.dart';
 
 /// Riga di `attivita_pianificate` (Backup.1, sezione 1/17/30): preserva i
 /// link espliciti Milestone 8.5 (`workoutSessionLocalId`/
@@ -21,6 +22,7 @@ class BackupPlannedActivity {
     required this.walkingSessionLocalId,
     required this.createdAt,
     required this.updatedAt,
+    this.reminderAt,
   });
 
   final int localId;
@@ -36,6 +38,7 @@ class BackupPlannedActivity {
   final int? walkingSessionLocalId;
   final DateTime? createdAt;
   final DateTime? updatedAt;
+  final DateTime? reminderAt;
 
   Map<String, dynamic> toJson() => {
     'localId': localId,
@@ -47,6 +50,7 @@ class BackupPlannedActivity {
     'status': status,
     'origin': origin,
     'notes': notes,
+    'reminderAt': BackupDateCodec.encodeTimestampOrNull(reminderAt),
     'workoutSessionLocalId': workoutSessionLocalId,
     'walkingSessionLocalId': walkingSessionLocalId,
     'createdAt': BackupDateCodec.encodeTimestampOrNull(createdAt),
@@ -57,6 +61,21 @@ class BackupPlannedActivity {
     Map<String, dynamic> json,
     String path,
   ) {
+    final day = BackupDateCodec.decodeDateOnly(
+      requireString(json, 'scheduledDate', path),
+    );
+    final reminder = BackupDateCodec.decodeTimestampOrNull(
+      optionalString(json, 'reminderAt', path),
+    );
+    if (reminder != null &&
+        (reminder.year != day.year ||
+            reminder.month != day.month ||
+            reminder.day != day.day)) {
+      throw BackupFormatException(
+        '$path.reminderAt',
+        'Il promemoria deve appartenere al giorno pianificato.',
+      );
+    }
     return BackupPlannedActivity(
       localId: requireInt(json, 'localId', path),
       profileLocalId: requireInt(json, 'profileLocalId', path),
@@ -69,6 +88,7 @@ class BackupPlannedActivity {
       status: requireString(json, 'status', path),
       origin: requireString(json, 'origin', path),
       notes: optionalString(json, 'notes', path),
+      reminderAt: reminder,
       workoutSessionLocalId: optionalInt(json, 'workoutSessionLocalId', path),
       walkingSessionLocalId: optionalInt(json, 'walkingSessionLocalId', path),
       createdAt: BackupDateCodec.decodeTimestampOrNull(

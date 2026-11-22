@@ -33,7 +33,9 @@ class _WeeklyPlanPageState extends ConsumerState<WeeklyPlanPage> {
     // Stato locale alla pagina, non persistito (sezione 40/61): non serve
     // un provider Riverpod condiviso solo per ricordare quale settimana è
     // visualizzata.
-    _weekReference = ref.read(clockProvider).now();
+    _weekReference = WeeklyPlanningDateService.initialPlanningWeek(
+      ref.read(clockProvider).now(),
+    );
   }
 
   void _goToPreviousWeek() {
@@ -434,6 +436,20 @@ class _WeekList extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
+          if (!weekEnd.isBefore(today))
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton.icon(
+                icon: const Icon(Icons.edit_calendar),
+                label: const Text('Pianifica manualmente'),
+                onPressed: () => showWeeklyForgeGenerationSheet(
+                  context,
+                  profileId: profileId,
+                  weekReference: weekReference,
+                  manualMode: true,
+                ),
+              ),
+            ),
           for (final day in days)
             _DayCard(
               profileId: profileId,
@@ -470,7 +486,7 @@ class _DayCard extends ConsumerWidget {
           ? RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
               side: BorderSide(
-                color: Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).colorScheme.secondary,
                 width: 2,
               ),
             )

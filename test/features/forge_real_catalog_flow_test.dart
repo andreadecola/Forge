@@ -51,6 +51,7 @@ Future<void> _letSnackBarPass(WidgetTester tester) async {
 Future<void> _openForgeGenerator(WidgetTester tester) async {
   await tester.tap(find.text('Programma'));
   await tester.pumpAndSettle();
+  await tester.ensureVisible(find.text('Genera con Forge'));
   await tester.tap(find.text('Genera con Forge'));
   await tester.pumpAndSettle();
 }
@@ -243,6 +244,7 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.byType(BackButton));
       await tester.pumpAndSettle();
+      await tester.ensureVisible(find.text('Genera con Forge'));
       await tester.tap(find.text('Genera con Forge'));
       await tester.pumpAndSettle();
 

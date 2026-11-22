@@ -69,6 +69,8 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(permissionGateway.requestCount, 0);
+    expect(find.byType(SwitchListTile),findsOneWidget);
+    expect(find.byKey(const ValueKey('planned-activity-reminders-switch')),findsNothing);
     await tester.tap(find.byKey(const ValueKey('notifications-master-switch')));
     await tester.pumpAndSettle();
 

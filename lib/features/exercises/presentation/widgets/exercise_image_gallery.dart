@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/theme/forge_colors.dart';
 import '../../../../domain/entities/exercise_catalog_enums.dart';
 import '../../../../domain/entities/exercise_image.dart';
 import '../exercise_labels.dart';
@@ -81,7 +80,7 @@ class _ExerciseImageGalleryState extends State<ExerciseImageGallery> {
               Text(
                 '${_currentPage + 1} / ${images.length}',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: ForgeColors.textSecondary,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ],
@@ -136,7 +135,7 @@ class _GalleryImageState extends State<_GalleryImage> {
       ),
       child: Image.asset(
         widget.image.path!,
-        fit: BoxFit.cover,
+        fit: BoxFit.contain,
         width: double.infinity,
         semanticLabel: ExerciseLabels.imageType(widget.image.imageType),
         errorBuilder: (context, error, stackTrace) {

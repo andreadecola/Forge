@@ -2,6 +2,7 @@ import 'package:drift/drift.dart';
 
 import 'allenamenti_table.dart';
 import 'user_profiles_table.dart';
+import 'camminate_table.dart';
 
 /// Sessione di esecuzione di una scheda (Milestone 4.4.3): persiste ciò che
 /// serve a ripristinare un allenamento in corso dopo la chiusura dell'app.
@@ -46,6 +47,12 @@ class SessioniAllenamentoTable extends Table {
   /// rinominata (o eliminata) dopo, ma lo storico deve restare leggibile
   /// con il nome usato quando la sessione è iniziata (sezione 7).
   TextColumn get nomeAllenamentoSnapshot => text()();
+  TextColumn get camminataSnapshot => text().nullable()();
+  IntColumn get idCamminata => integer().nullable().references(
+    CamminateTable,
+    #id,
+    onDelete: KeyAction.setNull,
+  )();
 
   /// Codice stabile di `WorkoutSessionPersistenceStatus`
   /// (IN_PROGRESS/PAUSED/COMPLETED/ABORTED).

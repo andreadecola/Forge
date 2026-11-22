@@ -10,6 +10,7 @@ import 'package:forge/domain/entities/persisted_session_exercise.dart';
 import 'package:forge/domain/entities/persisted_session_timer.dart';
 import 'package:forge/domain/entities/persisted_workout_session.dart';
 import 'package:forge/domain/entities/workout.dart';
+import 'package:forge/domain/entities/walking_session.dart';
 import 'package:forge/domain/entities/workout_details.dart';
 import 'package:forge/domain/entities/workout_enums.dart';
 import 'package:forge/domain/entities/workout_exercise.dart';
@@ -37,6 +38,13 @@ const _clock = SystemSessionClock();
 /// sul comportamento runtime (sezione 45 — niente attese reali, e niente
 /// I/O reale necessario per verificarlo).
 class _FakeWorkoutSessionRepository implements WorkoutSessionRepository {
+  @override
+  Future<WalkingSession?> getWalkingBlockSession(int sessionId) async => null;
+  @override
+  Future<WalkingSession> startWalkingBlock({
+    required int sessionId,
+    required DateTime startedAt,
+  }) async => throw StateError('Questo fake copre sessioni senza camminata.');
   int _nextId = 1;
   int? _activeSessionId;
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/theme/forge_colors.dart';
 import '../../../../core/utils/statistics_formatters.dart';
 import '../../../../data/repositories/repository_providers.dart';
 import '../../../../domain/entities/walking_statistics.dart';
@@ -189,7 +188,7 @@ class _KpiTile extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: ForgeColors.copper,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
               ),
               const SizedBox(height: 4),
@@ -199,7 +198,7 @@ class _KpiTile extends StatelessWidget {
                   hint!,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: ForgeColors.textSecondary,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
             ],

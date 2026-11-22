@@ -143,6 +143,38 @@ class PlannedActivityReminderSyncService
 
   static const namespace = 'planned_activity';
 
+  /// Rinvio persistente del solo promemoria, entro il giorno pianificato.
+  Future<PlannedActivityReminderSyncResult> snooze(
+    int activityId,
+    DateTime until,
+  ) {
+    return _serialize(() async {
+      final activity = await plannedActivityRepository.getById(activityId);
+      if (activity == null) throw StateError('Attività non più disponibile.');
+      if (!_isSupportedType(activity.type) ||
+          activity.status != PlannedActivityStatus.planned ||
+          await sessionStateResolver.resolve(activity) !=
+              LinkedSessionState.none) {
+        throw StateError(
+          'Puoi rinviare soltanto un’attività ancora da iniziare.',
+        );
+      }
+      final day = activity.scheduledDate;
+      if (!until.isAfter(clock.now()) ||
+          until.year != day.year ||
+          until.month != day.month ||
+          until.day != day.day) {
+        throw ArgumentError(
+          'Scegli un orario futuro nello stesso giorno dell’attività.',
+        );
+      }
+      await plannedActivityRepository.updatePlannedActivity(
+        activity.copyWith(reminderAt: () => until),
+      );
+      return _syncActivity(activityId);
+    });
+  }
+
   Future<PlannedActivityReminderSyncResult> syncActivity(int activityId) {
     return _serialize(() => _syncActivity(activityId));
   }
@@ -385,10 +417,22 @@ class PlannedActivityReminderSyncService
       return const _PlannedActivityEvaluation();
     }
 
-    final scheduledAt = _scheduledAt(
-      activity.scheduledDate,
-      settings.plannedActivityReminderTimeMinutes!,
-    );
+    if (activity.type == PlannedActivityType.workout &&
+        activity.workoutId == null) {
+      return const _PlannedActivityEvaluation();
+    }
+    final scheduledAt =
+        activity.reminderAt ??
+        _scheduledAt(
+          activity.scheduledDate,
+          settings.effectiveReminderTimeMinutes,
+        );
+    if (scheduledAt != null &&
+        (scheduledAt.year != activity.scheduledDate.year ||
+            scheduledAt.month != activity.scheduledDate.month ||
+            scheduledAt.day != activity.scheduledDate.day)) {
+      return const _PlannedActivityEvaluation();
+    }
     if (scheduledAt == null || !scheduledAt.isAfter(clock.now())) {
       return _PlannedActivityEvaluation(skippedPast: scheduledAt != null);
     }

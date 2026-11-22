@@ -9,6 +9,7 @@ import '../../../domain/repositories/workout_session_repository.dart';
 import 'session_timer.dart';
 import 'workout_session_clock.dart';
 import 'workout_session_state.dart';
+import '../../../domain/entities/walking_session_status.dart';
 
 /// Ricostruisce un [WorkoutSessionState] da ciò che è persistito su
 /// `sessioni_allenamento`/`sessioni_esercizi` (Milestone 4.4.3), per
@@ -54,6 +55,18 @@ class WorkoutSessionRestoreService {
     if (exercises.isEmpty) return null;
 
     var state = _buildState(persisted, rows, exercises);
+    if (persisted.walkingBlock != null) {
+      final walking = await sessionRepository.getWalkingBlockSession(sessionId);
+      state = state.copyWith(
+        walkingCompleted: walking?.status == WalkingSessionStatus.completed,
+      );
+      if (state.exercisesResolved &&
+          state.canCompleteSession &&
+          !state.isCompleted) {
+        state = state.copyWith(isCompleted: true, isPaused: false);
+        await _persistCorrection(state);
+      }
+    }
 
     if (!state.isPaused && !state.isCompleted) {
       final transitioned = _applyExpiredTimerTransition(state);
@@ -124,6 +137,8 @@ class WorkoutSessionRestoreService {
       workoutName: persisted.workoutNameSnapshot,
       exercises: exercises,
       startedAt: persisted.startedAt,
+      walkingBlock: persisted.walkingBlock,
+      walkingSessionId: persisted.walkingSessionId,
       currentExerciseIndex: persisted.currentExerciseIndex,
       isPaused: persisted.isPaused,
       isCompleted: persisted.isCompleted,
@@ -210,7 +225,7 @@ class WorkoutSessionRestoreService {
       restTimer: () => null,
     );
     if (cleared.isLastExercise) {
-      return cleared.copyWith(isCompleted: true);
+      return cleared.copyWith(isCompleted: cleared.canCompleteSession);
     }
     return cleared.copyWith(
       currentExerciseIndex: cleared.currentExerciseIndex + 1,

@@ -11,6 +11,7 @@ enum WorkoutSessionPhase {
 
   /// Recupero tra due serie in corso.
   resting,
+  walking,
 
   /// Sessione in pausa (qualunque fosse la fase precedente).
   paused,

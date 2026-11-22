@@ -12,6 +12,10 @@ import '../../../domain/repositories/workout_session_repository.dart';
 import 'session_timer.dart';
 import 'workout_session_clock.dart';
 import 'workout_session_state.dart';
+import '../../walking/application/walking_session_controller.dart';
+import '../../../data/repositories/walking_session_providers.dart';
+import '../../../domain/entities/walking_session_status.dart';
+import '../../../domain/entities/walking_session.dart';
 
 /// Sessione runtime di allenamento (Milestone 4.4.1, estesa con serie e
 /// timer in Milestone 4.4.2, con persistenza in Milestone 4.4.3): provider
@@ -39,6 +43,12 @@ import 'workout_session_state.dart';
 class WorkoutSessionController extends Notifier<WorkoutSessionState?> {
   Timer? _ticker;
   bool _starting = false;
+  bool _startingWalk = false;
+  bool _observingWalk = false;
+  ProviderSubscription<AsyncValue<WalkingSession?>>? _walkingDataSubscription;
+  int? _observedWalkingId;
+  Future<void> _pendingWrites = Future.value();
+  Future<void>? _restoringWalking;
   late final SessionClock _clock;
   late final WorkoutSessionRepository _repository;
 
@@ -47,6 +57,7 @@ class WorkoutSessionController extends Notifier<WorkoutSessionState?> {
     _clock = ref.read(sessionClockProvider);
     _repository = ref.read(workoutSessionRepositoryProvider);
     ref.onDispose(_stopTicker);
+    ref.onDispose(() => _walkingDataSubscription?.close());
     return null;
   }
 
@@ -82,7 +93,9 @@ class WorkoutSessionController extends Notifier<WorkoutSessionState?> {
         workoutName: details.workout.name,
         exercises: details.exercises,
         startedAt: startedAt,
+        walkingBlock: details.workout.walkingBlock,
       );
+      if (state!.walkingBlock != null) _observeWalking();
       _startTicker();
       return true;
     } finally {
@@ -100,6 +113,14 @@ class WorkoutSessionController extends Notifier<WorkoutSessionState?> {
     if (state != null) return;
     _stopTicker();
     state = restored;
+    if (restored.walkingBlock != null) {
+      _observeWalking();
+      if (restored.walkingSessionId != null && !restored.walkingCompleted) {
+        _guardedRepositoryCall(() async {
+          await _ensureWalkingRuntime(restored);
+        });
+      }
+    }
     if (!restored.isPaused && !restored.isCompleted) {
       _startTicker();
     }
@@ -110,6 +131,7 @@ class WorkoutSessionController extends Notifier<WorkoutSessionState?> {
   /// "vai al successivo" senza toccare di nuovo le serie.
   void completeCurrentSet() {
     final current = state;
+    if (current?.isWalkingPhase == true) return;
     if (current == null || current.isPaused || current.isCompleted) return;
     if (current.exerciseTimer != null || current.restTimer != null) return;
 
@@ -125,6 +147,7 @@ class WorkoutSessionController extends Notifier<WorkoutSessionState?> {
   /// `durationSeconds`. Nessun effetto per un esercizio a ripetizioni.
   void startTimedSet() {
     final current = state;
+    if (current?.isWalkingPhase == true) return;
     if (current == null || current.isPaused || current.isCompleted) return;
     if (current.exerciseTimer != null || current.restTimer != null) return;
 
@@ -261,7 +284,7 @@ class WorkoutSessionController extends Notifier<WorkoutSessionState?> {
       restTimer: () => null,
     );
     final next = cleared.isLastExercise
-        ? cleared.copyWith(isCompleted: true)
+        ? cleared.copyWith(isCompleted: cleared.canCompleteSession)
         : cleared.copyWith(
             currentExerciseIndex: cleared.currentExerciseIndex + 1,
           );
@@ -280,6 +303,7 @@ class WorkoutSessionController extends Notifier<WorkoutSessionState?> {
   /// tramite "Indietro"), si comporta come "vai al successivo".
   void skipCurrentExercise() {
     final current = state;
+    if (current?.isWalkingPhase == true) return;
     if (current == null || current.isPaused || current.isCompleted) return;
 
     if (_isAlreadyResolved(current)) {
@@ -306,6 +330,7 @@ class WorkoutSessionController extends Notifier<WorkoutSessionState?> {
   /// resta invece intatto per tutti gli esercizi.
   void previousExercise() {
     final current = state;
+    if (current?.isWalkingPhase == true) return;
     if (current == null ||
         current.isPaused ||
         current.currentExerciseIndex == 0) {
@@ -340,13 +365,17 @@ class WorkoutSessionController extends Notifier<WorkoutSessionState?> {
     next = next.copyWith(isPaused: true);
     state = next;
 
-    _guardedRepositoryCall(
-      () => _repository.pauseSession(
+    _guardedRepositoryCall(() async {
+      if (next.isWalkingPhase && next.walkingSessionId != null) {
+        await _ensureWalkingRuntime(next);
+        await ref.read(walkingSessionControllerProvider.notifier).pause();
+      }
+      await _repository.pauseSession(
         sessionId: next.sessionId,
         frozenTimer: _currentPersistedTimer(next),
         updatedAt: _clock.now(),
-      ),
-    );
+      );
+    });
   }
 
   /// Riprende dal residuo congelato (nessuna deriva): se un timer era in
@@ -366,13 +395,17 @@ class WorkoutSessionController extends Notifier<WorkoutSessionState?> {
     state = next;
     if (!next.isCompleted) _startTicker();
 
-    _guardedRepositoryCall(
-      () => _repository.resumeSession(
+    _guardedRepositoryCall(() async {
+      if (next.isWalkingPhase && next.walkingSessionId != null) {
+        await _ensureWalkingRuntime(next);
+        await ref.read(walkingSessionControllerProvider.notifier).resume();
+      }
+      await _repository.resumeSession(
         sessionId: next.sessionId,
         resumedTimer: _currentPersistedTimer(next),
         updatedAt: _clock.now(),
-      ),
-    );
+      );
+    });
   }
 
   /// Chiusura normale (dal riepilogo finale, dopo "Fine"): pulisce la
@@ -397,6 +430,9 @@ class WorkoutSessionController extends Notifier<WorkoutSessionState?> {
     _stopTicker();
     state = null;
     if (current == null) return;
+    if (current.walkingSessionId != null) {
+      ref.read(walkingSessionControllerProvider.notifier).clear();
+    }
     _guardedRepositoryCall(
       () => _repository.abortSession(
         sessionId: current.sessionId,
@@ -472,11 +508,112 @@ class WorkoutSessionController extends Notifier<WorkoutSessionState?> {
   /// vedi commento di classe): un errore di persistenza viene solo
   /// loggato, non deve mai far crashare la sessione runtime in corso.
   void _guardedRepositoryCall(Future<void> Function() call) {
-    unawaited(
-      call().catchError((Object error, StackTrace stackTrace) {
-        debugPrint('Errore nel persistere la sessione: $error');
-      }),
+    final operation = call().catchError((Object error, StackTrace stackTrace) {
+      debugPrint('Errore nel persistere la sessione: $error');
+    });
+    _pendingWrites = Future.wait([_pendingWrites, operation]).then((_) {});
+    unawaited(operation);
+  }
+
+  void _observeWalking() {
+    final walkingId = state?.walkingSessionId;
+    if (walkingId != null && walkingId != _observedWalkingId) {
+      _walkingDataSubscription?.close();
+      _observedWalkingId = walkingId;
+      _walkingDataSubscription = ref.listen(walkingSessionProvider(walkingId), (
+        _,
+        next,
+      ) {
+        if (next.valueOrNull?.status == WalkingSessionStatus.completed) {
+          _acceptWalkingCompletion(walkingId);
+        }
+      });
+    }
+    if (_observingWalk) return;
+    _observingWalk = true;
+    ref.listen(walkingSessionControllerProvider, (_, next) {
+      if (next != null && next.status == WalkingSessionStatus.completed) {
+        _acceptWalkingCompletion(next.sessionId);
+      }
+    });
+  }
+
+  Future<void> _ensureWalkingRuntime(WorkoutSessionState current) {
+    if (_restoringWalking != null) return _restoringWalking!;
+    final runtime = ref.read(walkingSessionControllerProvider);
+    if (runtime?.sessionId == current.walkingSessionId) return Future.value();
+    final operation = () async {
+      final walk = await _repository.getWalkingBlockSession(current.sessionId);
+      if (walk?.status == WalkingSessionStatus.inProgress) {
+        await ref
+            .read(walkingSessionControllerProvider.notifier)
+            .restoreActive(walk!.profileId);
+      }
+    }();
+    _restoringWalking = operation;
+    return operation.whenComplete(() => _restoringWalking = null);
+  }
+
+  void _acceptWalkingCompletion(int walkingId) {
+    final current = state;
+    if (current == null ||
+        current.walkingSessionId != walkingId ||
+        current.walkingCompleted) {
+      return;
+    }
+    final next = current.copyWith(
+      walkingCompleted: true,
+      isCompleted: current.exercisesResolved,
     );
+    state = next;
+    if (next.isCompleted || next.isPaused) {
+      _stopTicker();
+    } else {
+      _startTicker();
+    }
+    _persist(next);
+  }
+
+  Future<void> startWalkingBlock() async {
+    if (_startingWalk) return;
+    final current = state;
+    if (current == null || !current.isWalkingPhase || current.isPaused) return;
+    _startingWalk = true;
+    try {
+      await _pendingWrites;
+      if (state?.sessionId != current.sessionId || state?.isPaused == true) {
+        return;
+      }
+      final walk = await _repository.startWalkingBlock(
+        sessionId: current.sessionId,
+        startedAt: _clock.now(),
+      );
+      if (state?.sessionId != current.sessionId) return;
+      state = state!.copyWith(walkingSessionId: () => walk.id);
+      _observeWalking();
+      ref.invalidate(activeWalkingSessionProvider(walk.profileId));
+      if (walk.status == WalkingSessionStatus.completed) {
+        _acceptWalkingCompletion(walk.id!);
+      } else {
+        await ref
+            .read(walkingSessionControllerProvider.notifier)
+            .restoreActive(walk.profileId);
+      }
+    } finally {
+      _startingWalk = false;
+    }
+  }
+
+  Future<void> completeWalkingBlock() async {
+    final current = state;
+    if (current == null ||
+        !current.isWalkingPhase ||
+        current.isPaused ||
+        current.walkingSessionId == null) {
+      return;
+    }
+    await ref.read(walkingSessionControllerProvider.notifier).complete();
+    await _pendingWrites;
   }
 
   void _startTicker() {

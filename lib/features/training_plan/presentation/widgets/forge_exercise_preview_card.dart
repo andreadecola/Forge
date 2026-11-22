@@ -1,7 +1,7 @@
+import '../../../../core/theme/forge_typography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/theme/forge_colors.dart';
 import '../../../../domain/entities/generated_workout_exercise.dart';
 import '../../../exercises/presentation/widgets/exercise_image_thumbnail.dart';
 
@@ -59,9 +59,9 @@ class ForgeExercisePreviewCard extends ConsumerWidget {
                   ),
                   child: Text(
                     '$order',
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.white,
-                      fontSize: 11,
+                      fontSize: ForgeTypography.badgeSize,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -86,12 +86,16 @@ class ForgeExercisePreviewCard extends ConsumerWidget {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.trending_up, size: 14, color: ForgeColors.copper),
+                  Icon(
+                    Icons.trending_up,
+                    size: 14,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
                   const SizedBox(width: 4),
                   Text(
                     adaptationDetail!,
                     style: TextStyle(
-                      color: ForgeColors.copper,
+                      color: Theme.of(context).colorScheme.secondary,
                       fontWeight: FontWeight.w600,
                     ),
                   ),

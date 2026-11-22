@@ -173,6 +173,7 @@ void main() {
     expect(saved.equipmentBudgetLimit, 1250.5);
     expect(saved.biologicalSexForFormula, BiologicalSexForFormula.female);
     expect(saved.activityLevel, ActivityLevel.veryActive);
+    await disposeCleanly(tester);
   });
 
   testWidgets('riusa la validazione del peso e dell’altezza', (tester) async {
@@ -202,6 +203,8 @@ void main() {
     await tester.pumpAndSettle();
     expect(repository.saved!.heightCm, 190.5);
     expect(repository.saved!.initialWeightKg, 148.5);
+
+    await disposeCleanly(tester);
   });
 
   testWidgets('il doppio tap durante il salvataggio esegue un solo update', (
@@ -225,6 +228,8 @@ void main() {
     gate.complete();
     await tester.pumpAndSettle();
     expect(repository.calls, 1);
+
+    await disposeCleanly(tester);
   });
 
   testWidgets('errore repository: feedback e valori del form conservati', (
@@ -260,6 +265,8 @@ void main() {
 
     expect(find.text('Dati personali aggiornati'), findsOneWidget);
     expect(repository.saved?.name, 'Valore conservato');
+
+    await disposeCleanly(tester);
   });
 
   testWidgets('profilo reale aggiorna Progressi senza cambiare i punti chart', (
@@ -342,6 +349,8 @@ void main() {
     expect(tester.takeException(), isNull);
     expect(find.text('Dati personali'), findsOneWidget);
     expect(tester.widget<ElevatedButton>(save).onPressed, isNotNull);
+
+    await disposeCleanly(tester);
   });
 
   testWidgets('con la tastiera aperta il bottone Salva resta raggiungibile '
@@ -366,6 +375,8 @@ void main() {
     expect(save, findsOneWidget);
     expect(tester.widget<ElevatedButton>(save).onPressed, isNotNull);
     expect(tester.takeException(), isNull);
+
+    await disposeCleanly(tester);
   });
 
   testWidgets('Importa backup: annullare la conferma non avvia alcun import '
@@ -397,6 +408,8 @@ void main() {
     expect(find.byType(AlertDialog), findsNothing);
     expect(find.text('Importazione annullata.'), findsNothing);
     expect(find.text('Impossibile importare il backup.'), findsNothing);
+
+    await disposeCleanly(tester);
   });
 
   testWidgets(
@@ -426,6 +439,8 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Importazione annullata.'), findsOneWidget);
+
+      await disposeCleanly(tester);
     },
   );
 }

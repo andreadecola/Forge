@@ -1,16 +1,17 @@
+import '../../../../core/theme/forge_typography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/routing/app_routes.dart';
-import '../../../../core/theme/forge_colors.dart';
 import '../../../../data/repositories/repository_providers.dart';
 import '../../../../data/repositories/workout_providers.dart';
 import '../../../../domain/entities/workout.dart';
 import '../workout_labels.dart';
 import '../widgets/workout_status_badge.dart';
+import '../widgets/delete_workout_button.dart';
 
-/// Elenco delle schede archiviate: unico punto in cui l'utente può
+/// Elenco delle schede archiviate: punto in cui l'utente può
 /// rivederle dopo [WorkoutRepository.archiveWorkout], che le esclude da
 /// [WorkoutListPage]. Nessuna modifica/riordino/rimozione esercizi qui
 /// (si apre il dettaglio per quello), ma **eliminazione definitiva**
@@ -40,46 +41,6 @@ class _ArchivedList extends ConsumerWidget {
 
   final int profileId;
 
-  Future<void> _confirmDelete(
-    BuildContext context,
-    WidgetRef ref,
-    Workout workout,
-  ) async {
-    final confirmed = await showDialog<bool>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Elimina definitivamente'),
-        content: Text(
-          'Vuoi eliminare "${workout.name}"? L\'operazione non può essere '
-          'annullata: la scheda e i suoi esercizi verranno persi per '
-          'sempre.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('Annulla'),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('Elimina'),
-          ),
-        ],
-      ),
-    );
-    if (!(confirmed ?? false)) return;
-
-    await ref.read(workoutRepositoryProvider).deleteWorkout(workout.id!);
-    if (!context.mounted) return;
-    final messenger = ScaffoldMessenger.of(context);
-    messenger.hideCurrentSnackBar();
-    messenger.showSnackBar(
-      const SnackBar(
-        content: Text('Allenamento eliminato'),
-        duration: Duration(seconds: 2),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final workoutsAsync = ref.watch(watchArchivedWorkoutsProvider(profileId));
@@ -98,7 +59,6 @@ class _ArchivedList extends ConsumerWidget {
               workout: workout,
               onOpen: () =>
                   context.push(AppRoutes.workoutDetailPath(workout.id!)),
-              onDelete: () => _confirmDelete(context, ref, workout),
             );
           },
         );
@@ -110,15 +70,10 @@ class _ArchivedList extends ConsumerWidget {
 }
 
 class _ArchivedWorkoutCard extends StatelessWidget {
-  const _ArchivedWorkoutCard({
-    required this.workout,
-    required this.onOpen,
-    required this.onDelete,
-  });
+  const _ArchivedWorkoutCard({required this.workout, required this.onOpen});
 
   final Workout workout;
   final VoidCallback onOpen;
-  final VoidCallback onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -157,11 +112,7 @@ class _ArchivedWorkoutCard extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               WorkoutStatusBadge(status: workout.status),
-              IconButton(
-                icon: const Icon(Icons.delete_outline),
-                tooltip: 'Elimina definitivamente',
-                onPressed: onDelete,
-              ),
+              DeleteWorkoutButton(workout: workout),
             ],
           ),
         ),
@@ -175,7 +126,7 @@ class _EmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: Padding(
         padding: EdgeInsets.all(24),
         child: Column(
@@ -186,13 +137,18 @@ class _EmptyState extends StatelessWidget {
             Text(
               'Nessuna scheda archiviata.',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              style: TextStyle(
+                fontSize: ForgeTypography.bodySize,
+                fontWeight: FontWeight.w600,
+              ),
             ),
             SizedBox(height: 8),
             Text(
               'Le schede che archivi da "I tuoi allenamenti" compaiono qui.',
               textAlign: TextAlign.center,
-              style: TextStyle(color: ForgeColors.textSecondary),
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
             ),
           ],
         ),

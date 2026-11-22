@@ -21,6 +21,8 @@ abstract final class AppRoutes {
   static const String forgeGenerator = '/forge';
   static const String forgePreview = '/forge/preview';
   static const String weeklyPlan = '/plan';
+  static const String plannedActivity = '/plan/activity/:id';
+  static String plannedActivityPath(int id) => '/plan/activity/$id';
   static const String walkingSession = '/walking/session';
   static const String walkingHistory = '/walking/history';
   static const String walkingHistoryDetail =

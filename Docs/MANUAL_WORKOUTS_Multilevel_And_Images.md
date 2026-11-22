@@ -2,6 +2,21 @@
 
 ## Stato reale
 
+Restyling UX/UI del 22/11/2026: Home centrata sulle attività di oggi,
+CTA esplicite, diario dopo immagini e timer, indicazione del prossimo esercizio
+e fotografie dettagliate senza ritaglio. Timer, avvio, selezione multilivello
+e camminata prima/dopo riusano la logica esistente. Specifica e limiti del
+collaudo in `Docs/UX_UI_Restyling.md`.
+
+Aggiornamento 22/11/2026: la pianificazione manuale settimanale con scelta
+dei giorni, frequenza e camminate riusa il form e la policy della pianificazione
+Forge (EVO-004/005/006). La scheda esistente conserva i propri livelli e
+prescrizioni. La camminata viene salvata nella scheda, prima o dopo gli esercizi,
+con gli stessi giorni e una sola attività nel piano. La scelta si modifica
+anche dal form della scheda. Lo schema corrente è 14.
+Eliminazione protetta e diario prestazioni sono
+descritti in `Docs/EVOLUTIVE_001_010.md`. Collaudo Android complessivo pending.
+
 La creazione e modifica manuale usa `WorkoutMetadataForm`, condiviso tra
 `CreateWorkoutPage` e `WorkoutEditPage`. Il selettore `MultiLevelChoiceChips`
 consente uno o più livelli tra 1 e 5 e impedisce di rimuovere l'ultimo.

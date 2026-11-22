@@ -2,6 +2,7 @@ import '../entities/persisted_session_exercise.dart';
 import '../entities/persisted_session_timer.dart';
 import '../entities/persisted_workout_session.dart';
 import '../entities/workout_details.dart';
+import '../entities/walking_session.dart';
 import '../entities/workout_session_history_details.dart';
 import '../entities/workout_session_history_item.dart';
 
@@ -13,6 +14,13 @@ import '../entities/workout_session_history_item.dart';
 /// timer avviato/scaduto, pausa/ripresa, fine/abbandono) — mai a ogni tick
 /// del countdown (sezione 14).
 abstract class WorkoutSessionRepository {
+  /// Crea e collega atomicamente la camminata prevista dalla scheda.
+  Future<WalkingSession> startWalkingBlock({
+    required int sessionId,
+    required DateTime startedAt,
+  });
+  Future<WalkingSession?> getWalkingBlockSession(int sessionId);
+
   /// Sessione ancora in corso (IN_PROGRESS o PAUSED) del profilo, se
   /// esiste. Usata al bootstrap per proporre il ripristino (sezione 30).
   Future<PersistedWorkoutSession?> getActiveSession({required int profileId});

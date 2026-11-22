@@ -1,4 +1,16 @@
 import 'backup_format_exception.dart';
+import '../../domain/entities/workout_walking_block.dart';
+
+WorkoutWalkingBlock? optionalWalkingBlock(
+  Map<String, dynamic> json,
+  String path,
+) {
+  try {
+    return WorkoutWalkingBlock.fromJson(json['walkingBlock']);
+  } on FormatException catch (error) {
+    throw BackupFormatException('$path.walkingBlock', error.message);
+  }
+}
 
 /// Lettura tipizzata da un `Map<String, dynamic>` JSON già decodificato,
 /// con errori strutturati (mai un cast/null-check grezzo, Backup.2

@@ -39,6 +39,7 @@ class _CreateWorkoutPageState extends ConsumerState<CreateWorkoutPage> {
               level: result.level,
               selectedLevels: result.selectedLevels,
               estimatedDurationMinutes: result.estimatedDurationMinutes,
+              walkingBlock: result.walkingBlock,
               status: WorkoutDefinitionStatus.draft,
               origin: WorkoutOrigin.user,
             ),

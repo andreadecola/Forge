@@ -2,6 +2,19 @@
 
 ## Formato JSON e compatibilità
 
+Aggiornamento del 22/11/2026: lo schema corrente è **14**.
+La camminata interna alla scheda viene esportata nel campo opzionale
+`walkingBlock` (minuti e posizione prima/dopo), anche nello snapshot di sessione.
+`walkingSessionLocalId` conserva il collegamento alla camminata effettiva e
+viene rimappato al ripristino. Backup precedenti senza questi campi restano
+compatibili. La sessione combinata termina solo dopo esercizi e camminata;
+riusa pausa/ripresa e timer esistenti. Collaudo Android ancora richiesto.
+Il backup v1 conserva anche i campi opzionali `performedSets` (diario per
+serie) e `reminderAt` (rinvio promemoria nello stesso giorno). Backup precedenti
+mantengono diario vuoto e nessun rinvio. I nuovi valori vengono validati prima
+di sostituire i dati. Vedi `Docs/EVOLUTIVE_001_010.md` per specifica e collaudo.
+Il paragrafo seguente descrive la baseline dello hardening su schema 12.
+
 Lo schema SQLite resta 12; catalogVersion resta 2. Il formato backup resta v1:
 `selectedLevels` è un campo opzionale aggiuntivo, come le preferenze opzionali
 già supportate dal formato. Non serve una migration SQLite. Un vecchio backup

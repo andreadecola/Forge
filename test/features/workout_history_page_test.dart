@@ -313,6 +313,8 @@ void main() {
 
       expect(find.text('Completato'), findsOneWidget);
       expect(find.text('Saltato'), findsOneWidget);
+      await tester.scrollUntilVisible(find.text('Parziale'), 200);
+      await tester.pumpAndSettle();
       expect(find.text('Parziale'), findsOneWidget);
       expect(find.text('2 di 3 serie · 3 × 10 rip.'), findsOneWidget);
 

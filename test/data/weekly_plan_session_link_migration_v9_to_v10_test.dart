@@ -152,7 +152,7 @@ void main() {
       final database = AppDatabase(NativeDatabase.opened(rawDb));
       addTearDown(database.close);
 
-      expect(database.schemaVersion, 12);
+    expect(database.schemaVersion, 14);
 
       // L'attività pianificata legacy resta intatta, entrambe le nuove
       // colonne sono NULL (mai valorizzate finché non si collega davvero

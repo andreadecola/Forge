@@ -1,5 +1,7 @@
 import '../backup_date_codec.dart';
 import '../backup_json_helpers.dart';
+import '../../../domain/entities/set_performance.dart';
+import '../backup_format_exception.dart';
 
 /// Riga di `sessioni_esercizi` (Backup.1, sezione 1): snapshot reale dei
 /// parametri al momento dell'avvio, più il progresso raggiunto.
@@ -23,6 +25,7 @@ class BackupSessionExercise {
     required this.isCompleted,
     required this.createdAt,
     required this.updatedAt,
+    this.performedSets = const [],
   });
 
   final int localId;
@@ -39,6 +42,7 @@ class BackupSessionExercise {
   final bool isCompleted;
   final DateTime? createdAt;
   final DateTime? updatedAt;
+  final List<SetPerformance> performedSets;
 
   Map<String, dynamic> toJson() => {
     'localId': localId,
@@ -53,6 +57,7 @@ class BackupSessionExercise {
     'restSeconds': restSeconds,
     'isSkipped': isSkipped,
     'isCompleted': isCompleted,
+    'performedSets': performedSets.map((e) => e.toJson()).toList(),
     'createdAt': BackupDateCodec.encodeTimestampOrNull(createdAt),
     'updatedAt': BackupDateCodec.encodeTimestampOrNull(updatedAt),
   };
@@ -68,6 +73,7 @@ class BackupSessionExercise {
       exerciseCode: requireString(json, 'exerciseCode', path),
       order: requireInt(json, 'order', path),
       totalSets: requireInt(json, 'totalSets', path),
+      performedSets: _decodePerformedSets(json, path),
       completedSets: requireInt(json, 'completedSets', path),
       repetitions: optionalInt(json, 'repetitions', path),
       durationSeconds: optionalInt(json, 'durationSeconds', path),
@@ -81,5 +87,28 @@ class BackupSessionExercise {
         optionalString(json, 'updatedAt', path),
       ),
     );
+  }
+
+  static List<SetPerformance> _decodePerformedSets(
+    Map<String, dynamic> json,
+    String path,
+  ) {
+    try {
+      final values = SetPerformance.decodeList(
+        json['performedSets'],
+        totalSets: requireInt(json, 'totalSets', path),
+      );
+      final timed = optionalInt(json, 'durationSeconds', path) != null;
+      if (values.any(
+        (p) => timed ? p.repetitions != null : p.durationSeconds != null,
+      )) {
+        throw const FormatException(
+          'Prestazione incompatibile con il tipo di esercizio.',
+        );
+      }
+      return values;
+    } on FormatException catch (error) {
+      throw BackupFormatException('$path.performedSets', error.message);
+    }
   }
 }

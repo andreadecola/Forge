@@ -57,6 +57,9 @@ class AttivitaPianificateTable extends Table {
 
   TextColumn get note => text().nullable()();
 
+  /// Rinvio del solo promemoria, senza spostare il giorno dell'attività.
+  DateTimeColumn get promemoriaRinviatoAl => dateTime().nullable()();
+
   DateTimeColumn get dataCreazione => dateTime()();
   DateTimeColumn get dataModifica => dateTime()();
 

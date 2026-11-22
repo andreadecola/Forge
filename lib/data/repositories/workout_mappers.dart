@@ -5,6 +5,7 @@ import 'package:drift/drift.dart';
 import '../../domain/entities/workout.dart';
 import '../../domain/entities/workout_enums.dart';
 import '../../domain/entities/workout_exercise.dart';
+import '../../domain/entities/workout_walking_block.dart';
 import '../database/app_database.dart';
 
 /// Conversioni tra righe Drift e entità di dominio degli allenamenti,
@@ -21,6 +22,7 @@ abstract final class WorkoutMappers {
       level: row.livello,
       selectedLevels: _decodeLevels(row.livelli, fallback: row.livello),
       estimatedDurationMinutes: row.durataStimataMinuti,
+      walkingBlock: WorkoutWalkingBlock.fromStorage(row.camminata),
       status: WorkoutDefinitionStatus.fromCode(row.stato),
       origin: WorkoutOrigin.fromCode(row.origine),
       isActive: row.attivo,
@@ -63,6 +65,7 @@ abstract final class WorkoutMappers {
       livello: Value(workout.level),
       livelli: Value(_encodeLevels(workout.effectiveSelectedLevels)),
       durataStimataMinuti: Value(workout.estimatedDurationMinutes),
+      camminata: Value(workout.walkingBlock?.encode()),
       stato: Value(workout.status.code),
       origine: Value(workout.origin.code),
       attivo: Value(workout.isActive),

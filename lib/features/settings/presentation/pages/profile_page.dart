@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../core/theme/theme_settings_card.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -159,6 +160,8 @@ class _ProfileEditorState extends ConsumerState<_ProfileEditor> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                const ThemeSettingsCard(),
+                const SizedBox(height: 16),
                 Text(
                   'Dati personali',
                   style: Theme.of(context).textTheme.headlineSmall,
@@ -272,6 +275,7 @@ class _ProfileEditorState extends ConsumerState<_ProfileEditor> {
                       ),
                 ),
                 const SizedBox(height: 24),
+
                 NotificationSettingsSection(profileId: widget.profile.id!),
                 const SizedBox(height: 24),
                 SizedBox(

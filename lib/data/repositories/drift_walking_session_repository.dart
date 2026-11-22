@@ -20,6 +20,34 @@ class DriftWalkingSessionRepository implements WalkingSessionRepository {
   final WalkingSessionValidationService _validationService;
 
   @override
+  Future<void> deleteWalkingSession(int id) => db.transaction(() async {
+    final session = await getWalkingSession(id);
+    if (session == null) return;
+    if (session.status == WalkingSessionStatus.inProgress) {
+      throw StateError('Termina la camminata prima di eliminarla.');
+    }
+    final parents =
+        await (db.select(db.sessioniAllenamentoTable)..where(
+              (t) =>
+                  t.idCamminata.equals(id) &
+                  t.stato.isIn(['IN_PROGRESS', 'PAUSED']),
+            ))
+            .get();
+    if (parents.isNotEmpty) {
+      throw StateError(
+        'Questa camminata fa parte di un allenamento ancora attivo. Termina la scheda prima di eliminarla.',
+      );
+    }
+    // Esplicito per notificare anche gli stream del piano (FK SET NULL).
+    await (db.update(
+      db.attivitaPianificateTable,
+    )..where((t) => t.idSessioneCamminata.equals(id))).write(
+      const AttivitaPianificateTableCompanion(idSessioneCamminata: Value(null)),
+    );
+    await (db.delete(db.camminateTable)..where((t) => t.id.equals(id))).go();
+  });
+
+  @override
   Future<int> createWalkingSession(WalkingSession session) async {
     _validate(session);
 
@@ -298,6 +326,37 @@ class DriftWalkingSessionRepository implements WalkingSessionRepository {
           : await db.camminateDao.abort(sessionId, changes);
       if (updated == 0) {
         return;
+      }
+      if (status == WalkingSessionStatus.completed) {
+        final parents =
+            await (db.select(db.sessioniAllenamentoTable)
+                  ..where((s) => s.idCamminata.equals(sessionId))
+                  ..where((s) => s.stato.isIn(['IN_PROGRESS', 'PAUSED'])))
+                .get();
+        for (final parent in parents) {
+          final exercises = await db.sessioniEserciziDao.getBySessionId(
+            parent.id,
+          );
+          if (exercises.isEmpty ||
+              exercises.any((e) => !e.completato && !e.saltato)) {
+            continue;
+          }
+          await (db.update(
+            db.sessioniAllenamentoTable,
+          )..where((s) => s.id.equals(parent.id))).write(
+            SessioniAllenamentoTableCompanion(
+              stato: const Value('COMPLETED'),
+              completata: const Value(true),
+              inPausa: const Value(false),
+              dataFine: Value(endedAt),
+              timerTipo: const Value(null),
+              timerStartedAt: const Value(null),
+              timerTargetSeconds: const Value(null),
+              timerRemainingPaused: const Value(null),
+              dataModifica: Value(_clock.now()),
+            ),
+          );
+        }
       }
     });
   }

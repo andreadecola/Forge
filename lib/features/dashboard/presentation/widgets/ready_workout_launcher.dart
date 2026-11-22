@@ -139,6 +139,14 @@ class _ReadyWorkoutLauncherState extends ConsumerState<ReadyWorkoutLauncher> {
                 const SizedBox(height: 12),
                 SizedBox(
                   width: double.infinity,
+                  child: selected.walkingBlock == null
+                      ? const SizedBox.shrink()
+                      : Text(
+                          'Camminata ${selected.walkingBlock!.minutes} min · ${selected.walkingBlock!.positionLabel}',
+                        ),
+                ),
+                SizedBox(
+                  width: double.infinity,
                   child: FilledButton.icon(
                     onPressed: _starting ? null : () => _start(selected),
                     icon: _starting

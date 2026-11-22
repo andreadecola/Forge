@@ -44,6 +44,7 @@ class WorkoutEditPage extends ConsumerWidget {
             initialType: details.workout.type,
             initialLevel: details.workout.level,
             initialSelectedLevels: details.workout.effectiveSelectedLevels,
+            initialWalkingBlock: details.workout.walkingBlock,
             initialEstimatedDurationMinutes:
                 details.workout.estimatedDurationMinutes,
             submitLabel: 'Salva',
@@ -57,6 +58,7 @@ class WorkoutEditPage extends ConsumerWidget {
                     type: result.type,
                     level: result.level,
                     selectedLevels: result.selectedLevels,
+                    walkingBlock: () => result.walkingBlock,
                     estimatedDurationMinutes: result.estimatedDurationMinutes,
                   );
             },

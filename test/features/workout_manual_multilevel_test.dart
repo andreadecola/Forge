@@ -43,7 +43,7 @@ void main() {
     (tester) async {
       await _openProgram(tester, database);
       await tester.tap(
-        find.widgetWithText(FilledButton, 'Crea il primo allenamento'),
+        find.widgetWithText(OutlinedButton, 'Crea il primo allenamento'),
       );
       await tester.pumpAndSettle();
 
@@ -94,7 +94,7 @@ void main() {
   ) async {
     await _openProgram(tester, database);
     await tester.tap(
-      find.widgetWithText(FilledButton, 'Crea il primo allenamento'),
+      find.widgetWithText(OutlinedButton, 'Crea il primo allenamento'),
     );
     await tester.pumpAndSettle();
 
@@ -111,7 +111,7 @@ void main() {
   ) async {
     await _openProgram(tester, database);
     await tester.tap(
-      find.widgetWithText(FilledButton, 'Crea il primo allenamento'),
+      find.widgetWithText(OutlinedButton, 'Crea il primo allenamento'),
     );
     await tester.pumpAndSettle();
     await tester.enterText(find.byType(TextFormField).first, 'Scheda completa');

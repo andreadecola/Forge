@@ -2,7 +2,6 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import '../../../../core/theme/forge_colors.dart';
 import '../../../../domain/entities/walking_activity_point.dart';
 
 class WalkingActivityChart extends StatelessWidget {
@@ -47,10 +46,9 @@ class WalkingActivityChart extends StatelessWidget {
                                     .clamp(4, _maxBarHeight),
                           decoration: BoxDecoration(
                             color: point.sessionCount == 0
-                                ? ForgeColors.steelGrayLight.withValues(
-                                    alpha: 0.3,
-                                  )
-                                : ForgeColors.copper,
+                                ? Theme.of(context).colorScheme.onSurfaceVariant
+                                      .withValues(alpha: 0.3)
+                                : Theme.of(context).colorScheme.primary,
                             borderRadius: BorderRadius.circular(4),
                           ),
                         ),
@@ -58,7 +56,11 @@ class WalkingActivityChart extends StatelessWidget {
                         Text(
                           '${point.periodStart.day}/${point.periodStart.month}',
                           style: Theme.of(context).textTheme.labelSmall
-                              ?.copyWith(color: ForgeColors.textSecondary),
+                              ?.copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurfaceVariant,
+                              ),
                         ),
                       ],
                     ),

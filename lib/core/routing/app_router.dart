@@ -26,6 +26,7 @@ import '../../features/training_plan/presentation/pages/workout_session_page.dar
 import '../../features/training_plan/presentation/pages/workout_statistics_page.dart';
 import '../../features/walking/presentation/pages/walking_session_page.dart';
 import '../../features/weekly_plan/presentation/pages/weekly_plan_page.dart';
+import '../../features/weekly_plan/presentation/pages/planned_activity_detail_page.dart';
 import '../../features/walking/presentation/pages/walking_history_detail_page.dart';
 import '../../features/walking/presentation/pages/walking_history_page.dart';
 import '../../features/walking/presentation/pages/walking_statistics_page.dart';
@@ -221,6 +222,15 @@ final appRouterProvider = Provider<GoRouter>((ref) {
               GoRoute(
                 path: AppRoutes.weeklyPlan,
                 builder: (context, state) => const WeeklyPlanPage(),
+              ),
+              GoRoute(
+                path: AppRoutes.plannedActivity,
+                builder: (context, state) => PlannedActivityDetailPage(
+                  activityId:
+                      int.tryParse(state.pathParameters['id'] ?? '') ?? 0,
+                  chooseReminder:
+                      state.uri.queryParameters['reminder'] == 'snooze',
+                ),
               ),
             ],
           ),

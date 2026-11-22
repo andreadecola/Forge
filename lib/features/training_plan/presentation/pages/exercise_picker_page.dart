@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/theme/forge_colors.dart';
 import '../../../../data/repositories/workout_providers.dart';
 import '../../../../domain/entities/exercise_availability_status.dart';
 import '../../../../domain/services/exercise_availability_service.dart';
@@ -351,7 +350,9 @@ class _PickerTile extends StatelessWidget {
               tooltip: 'Aggiungi alla scheda',
               icon: Icon(
                 Icons.add_circle_outline,
-                color: onAdd == null ? null : ForgeColors.copper,
+                color: onAdd == null
+                    ? null
+                    : Theme.of(context).colorScheme.primary,
               ),
             ),
           ],

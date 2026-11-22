@@ -30,6 +30,7 @@ class AllenamentiTable extends Table {
   TextColumn get livelli => text().nullable()();
 
   IntColumn get durataStimataMinuti => integer().nullable()();
+  TextColumn get camminata => text().nullable()();
 
   /// Codice stabile di `WorkoutDefinitionStatus`.
   TextColumn get stato => text()();

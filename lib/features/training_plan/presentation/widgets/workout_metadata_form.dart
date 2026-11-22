@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../domain/entities/workout_enums.dart';
 import '../workout_labels.dart';
 import 'multi_level_choice_chips.dart';
+import '../../../../domain/entities/workout_walking_block.dart';
+import 'workout_walking_block_fields.dart';
 
 /// Valori raccolti dal form, già pronti per costruire/aggiornare un
 /// [Workout] (il chiamante decide se creare o aggiornare).
@@ -14,6 +16,7 @@ class WorkoutMetadataFormResult {
     required this.level,
     required this.selectedLevels,
     required this.estimatedDurationMinutes,
+    this.walkingBlock,
   });
 
   final String name;
@@ -22,6 +25,7 @@ class WorkoutMetadataFormResult {
   final int level;
   final Set<int> selectedLevels;
   final int? estimatedDurationMinutes;
+  final WorkoutWalkingBlock? walkingBlock;
 }
 
 /// Form condiviso da `CreateWorkoutPage` e dal dialog "Modifica dettagli"
@@ -37,6 +41,7 @@ class WorkoutMetadataForm extends StatefulWidget {
     this.initialLevel = 1,
     this.initialSelectedLevels,
     this.initialEstimatedDurationMinutes,
+    this.initialWalkingBlock,
     required this.submitLabel,
     required this.onSubmit,
   });
@@ -47,6 +52,7 @@ class WorkoutMetadataForm extends StatefulWidget {
   final int initialLevel;
   final Set<int>? initialSelectedLevels;
   final int? initialEstimatedDurationMinutes;
+  final WorkoutWalkingBlock? initialWalkingBlock;
   final String submitLabel;
   final ValueChanged<WorkoutMetadataFormResult> onSubmit;
 
@@ -61,10 +67,12 @@ class _WorkoutMetadataFormState extends State<WorkoutMetadataForm> {
   late final TextEditingController _durationController;
   late WorkoutType _type;
   late Set<int> _selectedLevels;
+  WorkoutWalkingBlock? _walkingBlock;
 
   @override
   void initState() {
     super.initState();
+    _walkingBlock = widget.initialWalkingBlock;
     _nameController = TextEditingController(text: widget.initialName);
     _descriptionController = TextEditingController(
       text: widget.initialDescription ?? '',
@@ -101,6 +109,7 @@ class _WorkoutMetadataFormState extends State<WorkoutMetadataForm> {
         level: _selectedLevels.reduce((a, b) => a > b ? a : b),
         selectedLevels: Set.unmodifiable(_selectedLevels),
         estimatedDurationMinutes: duration,
+        walkingBlock: _walkingBlock,
       ),
     );
   }
@@ -160,6 +169,11 @@ class _WorkoutMetadataFormState extends State<WorkoutMetadataForm> {
               labelText: 'Durata stimata in minuti (facoltativa)',
             ),
             keyboardType: TextInputType.number,
+          ),
+          const SizedBox(height: 16),
+          WorkoutWalkingBlockFields(
+            value: _walkingBlock,
+            onChanged: (value) => setState(() => _walkingBlock = value),
           ),
           const SizedBox(height: 24),
           SizedBox(

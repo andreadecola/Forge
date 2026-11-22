@@ -17,6 +17,7 @@ import '../../../pressure/application/pressure_providers.dart';
 import '../../../weight/application/weight_providers.dart';
 import '../progress_metrics.dart';
 import '../widgets/progress_charts_section.dart';
+import '../widgets/activity_dashboard_section.dart';
 
 String _formatProgressDateTime(DateTime date) {
   return '${formatItalianDate(date)} · ${formatItalianTime(date)}';
@@ -67,6 +68,8 @@ class _ProgressPageBody extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            ActivityDashboardSection(profileId: profileId),
+            const SizedBox(height: 20),
             Text('Riepilogo', style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 12),
             measurementsAsync.when(
@@ -124,6 +127,7 @@ class _ProgressPageBody extends ConsumerWidget {
               onAddBody: () => _showMeasurementForm(context, ref, profileId),
               onManagePressure: () => context.push(AppRoutes.pressure),
             ),
+            const SizedBox(height: 20),
           ],
         ),
       ),

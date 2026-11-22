@@ -29,6 +29,7 @@ class PlannedActivity {
     this.status = PlannedActivityStatus.planned,
     required this.origin,
     this.notes,
+    this.reminderAt,
     this.workoutSessionId,
     this.walkingSessionId,
     this.createdAt,
@@ -61,6 +62,7 @@ class PlannedActivity {
   final PlannedActivityOrigin origin;
 
   final String? notes;
+  final DateTime? reminderAt;
 
   /// Id di `sessioni_allenamento` (Milestone 8.5): valorizzato solo se
   /// [type] è [PlannedActivityType.workout], `null` altrimenti (stessa
@@ -84,6 +86,7 @@ class PlannedActivity {
     PlannedActivityStatus? status,
     PlannedActivityOrigin? origin,
     String? Function()? notes,
+    DateTime? Function()? reminderAt,
     int? Function()? workoutSessionId,
     int? Function()? walkingSessionId,
     DateTime? createdAt,
@@ -101,6 +104,7 @@ class PlannedActivity {
       status: status ?? this.status,
       origin: origin ?? this.origin,
       notes: notes != null ? notes() : this.notes,
+      reminderAt: reminderAt != null ? reminderAt() : this.reminderAt,
       workoutSessionId: workoutSessionId != null
           ? workoutSessionId()
           : this.workoutSessionId,

@@ -1,3 +1,4 @@
+import '../../../../core/theme/forge_typography.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/forge_colors.dart';
@@ -12,14 +13,14 @@ class WorkoutStatusBadge extends StatelessWidget {
 
   final WorkoutDefinitionStatus status;
 
-  Color get _color {
+  Color _color(BuildContext context) {
     switch (status) {
       case WorkoutDefinitionStatus.draft:
-        return ForgeColors.steelGrayLight;
+        return Theme.of(context).colorScheme.onSurfaceVariant;
       case WorkoutDefinitionStatus.ready:
-        return ForgeColors.success;
+        return ForgeColors.successFor(context);
       case WorkoutDefinitionStatus.archived:
-        return ForgeColors.danger;
+        return Theme.of(context).colorScheme.error;
     }
   }
 
@@ -36,7 +37,7 @@ class WorkoutStatusBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = _color;
+    final color = _color(context);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
@@ -53,7 +54,7 @@ class WorkoutStatusBadge extends StatelessWidget {
             WorkoutLabels.status(status),
             style: TextStyle(
               color: color,
-              fontSize: 11,
+              fontSize: ForgeTypography.badgeSize,
               fontWeight: FontWeight.w600,
             ),
           ),

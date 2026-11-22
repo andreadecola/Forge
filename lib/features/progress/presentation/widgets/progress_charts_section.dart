@@ -2,7 +2,6 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/theme/forge_colors.dart';
 import '../../../../core/utils/italian_date_formatter.dart';
 import '../../../../domain/entities/body_measurement.dart';
 import '../../../../domain/entities/pressure_measurement.dart';
@@ -152,7 +151,7 @@ class _ProgressChartsSectionState extends State<ProgressChartsSection> {
             title: 'Peso',
             unit: 'kg',
             formatValue: (value) => formatWeightKg(value),
-            color: Theme.of(context).colorScheme.primary,
+            color: Theme.of(context).colorScheme.secondary,
           ),
           loading: () => const _ChartLoading(),
           error: (error, _) => _ChartError(error: error),
@@ -168,7 +167,7 @@ class _ProgressChartsSectionState extends State<ProgressChartsSection> {
             title: 'Girovita',
             unit: 'cm',
             formatValue: (value) => formatWaistCm(value),
-            color: Theme.of(context).colorScheme.primary,
+            color: Theme.of(context).colorScheme.secondary,
           ),
           loading: () => const _ChartLoading(),
           error: (error, _) => _ChartError(error: error),
@@ -270,12 +269,15 @@ class _PressureChart extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const _ChartLegend(
+        _ChartLegend(
           entries: [
-            _LegendEntry(label: 'Sistolica', color: ForgeColors.copper),
+            _LegendEntry(
+              label: 'Sistolica',
+              color: Theme.of(context).colorScheme.secondary,
+            ),
             _LegendEntry(
               label: 'Diastolica',
-              color: ForgeColors.steelGrayLight,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ],
         ),
@@ -289,7 +291,7 @@ class _PressureChart extends StatelessWidget {
               _ChartSeries(
                 label: 'Sistolica',
                 unit: 'mmHg',
-                color: ForgeColors.copper,
+                color: Theme.of(context).colorScheme.secondary,
                 points: [
                   for (final point in points)
                     _ChartValue(
@@ -302,7 +304,7 @@ class _PressureChart extends StatelessWidget {
               _ChartSeries(
                 label: 'Diastolica',
                 unit: 'mmHg',
-                color: ForgeColors.steelGrayLight,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
                 points: [
                   for (final point in points)
                     _ChartValue(

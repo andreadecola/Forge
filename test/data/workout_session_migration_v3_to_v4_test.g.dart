@@ -9422,6 +9422,17 @@ class $AllenamentiTableTable extends AllenamentiTable
     type: DriftSqlType.int,
     requiredDuringInsert: false,
   );
+  static const VerificationMeta _camminataMeta = const VerificationMeta(
+    'camminata',
+  );
+  @override
+  late final GeneratedColumn<String> camminata = GeneratedColumn<String>(
+    'camminata',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _statoMeta = const VerificationMeta('stato');
   @override
   late final GeneratedColumn<String> stato = GeneratedColumn<String>(
@@ -9488,6 +9499,7 @@ class $AllenamentiTableTable extends AllenamentiTable
     livello,
     livelli,
     durataStimataMinuti,
+    camminata,
     stato,
     origine,
     attivo,
@@ -9564,6 +9576,12 @@ class $AllenamentiTableTable extends AllenamentiTable
           data['durata_stimata_minuti']!,
           _durataStimataMinutiMeta,
         ),
+      );
+    }
+    if (data.containsKey('camminata')) {
+      context.handle(
+        _camminataMeta,
+        camminata.isAcceptableOrUnknown(data['camminata']!, _camminataMeta),
       );
     }
     if (data.containsKey('stato')) {
@@ -9651,6 +9669,10 @@ class $AllenamentiTableTable extends AllenamentiTable
         DriftSqlType.int,
         data['${effectivePrefix}durata_stimata_minuti'],
       ),
+      camminata: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}camminata'],
+      ),
       stato: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}stato'],
@@ -9696,6 +9718,7 @@ class AllenamentiTableData extends DataClass
   /// fallback per quelle righe.
   final String? livelli;
   final int? durataStimataMinuti;
+  final String? camminata;
 
   /// Codice stabile di `WorkoutDefinitionStatus`.
   final String stato;
@@ -9714,6 +9737,7 @@ class AllenamentiTableData extends DataClass
     required this.livello,
     this.livelli,
     this.durataStimataMinuti,
+    this.camminata,
     required this.stato,
     required this.origine,
     required this.attivo,
@@ -9736,6 +9760,9 @@ class AllenamentiTableData extends DataClass
     }
     if (!nullToAbsent || durataStimataMinuti != null) {
       map['durata_stimata_minuti'] = Variable<int>(durataStimataMinuti);
+    }
+    if (!nullToAbsent || camminata != null) {
+      map['camminata'] = Variable<String>(camminata);
     }
     map['stato'] = Variable<String>(stato);
     map['origine'] = Variable<String>(origine);
@@ -9761,6 +9788,9 @@ class AllenamentiTableData extends DataClass
       durataStimataMinuti: durataStimataMinuti == null && nullToAbsent
           ? const Value.absent()
           : Value(durataStimataMinuti),
+      camminata: camminata == null && nullToAbsent
+          ? const Value.absent()
+          : Value(camminata),
       stato: Value(stato),
       origine: Value(origine),
       attivo: Value(attivo),
@@ -9785,6 +9815,7 @@ class AllenamentiTableData extends DataClass
       durataStimataMinuti: serializer.fromJson<int?>(
         json['durataStimataMinuti'],
       ),
+      camminata: serializer.fromJson<String?>(json['camminata']),
       stato: serializer.fromJson<String>(json['stato']),
       origine: serializer.fromJson<String>(json['origine']),
       attivo: serializer.fromJson<bool>(json['attivo']),
@@ -9804,6 +9835,7 @@ class AllenamentiTableData extends DataClass
       'livello': serializer.toJson<int>(livello),
       'livelli': serializer.toJson<String?>(livelli),
       'durataStimataMinuti': serializer.toJson<int?>(durataStimataMinuti),
+      'camminata': serializer.toJson<String?>(camminata),
       'stato': serializer.toJson<String>(stato),
       'origine': serializer.toJson<String>(origine),
       'attivo': serializer.toJson<bool>(attivo),
@@ -9821,6 +9853,7 @@ class AllenamentiTableData extends DataClass
     int? livello,
     Value<String?> livelli = const Value.absent(),
     Value<int?> durataStimataMinuti = const Value.absent(),
+    Value<String?> camminata = const Value.absent(),
     String? stato,
     String? origine,
     bool? attivo,
@@ -9837,6 +9870,7 @@ class AllenamentiTableData extends DataClass
     durataStimataMinuti: durataStimataMinuti.present
         ? durataStimataMinuti.value
         : this.durataStimataMinuti,
+    camminata: camminata.present ? camminata.value : this.camminata,
     stato: stato ?? this.stato,
     origine: origine ?? this.origine,
     attivo: attivo ?? this.attivo,
@@ -9859,6 +9893,7 @@ class AllenamentiTableData extends DataClass
       durataStimataMinuti: data.durataStimataMinuti.present
           ? data.durataStimataMinuti.value
           : this.durataStimataMinuti,
+      camminata: data.camminata.present ? data.camminata.value : this.camminata,
       stato: data.stato.present ? data.stato.value : this.stato,
       origine: data.origine.present ? data.origine.value : this.origine,
       attivo: data.attivo.present ? data.attivo.value : this.attivo,
@@ -9882,6 +9917,7 @@ class AllenamentiTableData extends DataClass
           ..write('livello: $livello, ')
           ..write('livelli: $livelli, ')
           ..write('durataStimataMinuti: $durataStimataMinuti, ')
+          ..write('camminata: $camminata, ')
           ..write('stato: $stato, ')
           ..write('origine: $origine, ')
           ..write('attivo: $attivo, ')
@@ -9901,6 +9937,7 @@ class AllenamentiTableData extends DataClass
     livello,
     livelli,
     durataStimataMinuti,
+    camminata,
     stato,
     origine,
     attivo,
@@ -9919,6 +9956,7 @@ class AllenamentiTableData extends DataClass
           other.livello == this.livello &&
           other.livelli == this.livelli &&
           other.durataStimataMinuti == this.durataStimataMinuti &&
+          other.camminata == this.camminata &&
           other.stato == this.stato &&
           other.origine == this.origine &&
           other.attivo == this.attivo &&
@@ -9935,6 +9973,7 @@ class AllenamentiTableCompanion extends UpdateCompanion<AllenamentiTableData> {
   final Value<int> livello;
   final Value<String?> livelli;
   final Value<int?> durataStimataMinuti;
+  final Value<String?> camminata;
   final Value<String> stato;
   final Value<String> origine;
   final Value<bool> attivo;
@@ -9949,6 +9988,7 @@ class AllenamentiTableCompanion extends UpdateCompanion<AllenamentiTableData> {
     this.livello = const Value.absent(),
     this.livelli = const Value.absent(),
     this.durataStimataMinuti = const Value.absent(),
+    this.camminata = const Value.absent(),
     this.stato = const Value.absent(),
     this.origine = const Value.absent(),
     this.attivo = const Value.absent(),
@@ -9964,6 +10004,7 @@ class AllenamentiTableCompanion extends UpdateCompanion<AllenamentiTableData> {
     this.livello = const Value.absent(),
     this.livelli = const Value.absent(),
     this.durataStimataMinuti = const Value.absent(),
+    this.camminata = const Value.absent(),
     required String stato,
     required String origine,
     this.attivo = const Value.absent(),
@@ -9985,6 +10026,7 @@ class AllenamentiTableCompanion extends UpdateCompanion<AllenamentiTableData> {
     Expression<int>? livello,
     Expression<String>? livelli,
     Expression<int>? durataStimataMinuti,
+    Expression<String>? camminata,
     Expression<String>? stato,
     Expression<String>? origine,
     Expression<bool>? attivo,
@@ -10001,6 +10043,7 @@ class AllenamentiTableCompanion extends UpdateCompanion<AllenamentiTableData> {
       if (livelli != null) 'livelli': livelli,
       if (durataStimataMinuti != null)
         'durata_stimata_minuti': durataStimataMinuti,
+      if (camminata != null) 'camminata': camminata,
       if (stato != null) 'stato': stato,
       if (origine != null) 'origine': origine,
       if (attivo != null) 'attivo': attivo,
@@ -10018,6 +10061,7 @@ class AllenamentiTableCompanion extends UpdateCompanion<AllenamentiTableData> {
     Value<int>? livello,
     Value<String?>? livelli,
     Value<int?>? durataStimataMinuti,
+    Value<String?>? camminata,
     Value<String>? stato,
     Value<String>? origine,
     Value<bool>? attivo,
@@ -10033,6 +10077,7 @@ class AllenamentiTableCompanion extends UpdateCompanion<AllenamentiTableData> {
       livello: livello ?? this.livello,
       livelli: livelli ?? this.livelli,
       durataStimataMinuti: durataStimataMinuti ?? this.durataStimataMinuti,
+      camminata: camminata ?? this.camminata,
       stato: stato ?? this.stato,
       origine: origine ?? this.origine,
       attivo: attivo ?? this.attivo,
@@ -10068,6 +10113,9 @@ class AllenamentiTableCompanion extends UpdateCompanion<AllenamentiTableData> {
     if (durataStimataMinuti.present) {
       map['durata_stimata_minuti'] = Variable<int>(durataStimataMinuti.value);
     }
+    if (camminata.present) {
+      map['camminata'] = Variable<String>(camminata.value);
+    }
     if (stato.present) {
       map['stato'] = Variable<String>(stato.value);
     }
@@ -10097,6 +10145,7 @@ class AllenamentiTableCompanion extends UpdateCompanion<AllenamentiTableData> {
           ..write('livello: $livello, ')
           ..write('livelli: $livelli, ')
           ..write('durataStimataMinuti: $durataStimataMinuti, ')
+          ..write('camminata: $camminata, ')
           ..write('stato: $stato, ')
           ..write('origine: $origine, ')
           ..write('attivo: $attivo, ')
@@ -18750,6 +18799,7 @@ typedef $$AllenamentiTableTableCreateCompanionBuilder =
       Value<int> livello,
       Value<String?> livelli,
       Value<int?> durataStimataMinuti,
+      Value<String?> camminata,
       required String stato,
       required String origine,
       Value<bool> attivo,
@@ -18766,6 +18816,7 @@ typedef $$AllenamentiTableTableUpdateCompanionBuilder =
       Value<int> livello,
       Value<String?> livelli,
       Value<int?> durataStimataMinuti,
+      Value<String?> camminata,
       Value<String> stato,
       Value<String> origine,
       Value<bool> attivo,
@@ -18871,6 +18922,11 @@ class $$AllenamentiTableTableFilterComposer
 
   ColumnFilters<int> get durataStimataMinuti => $composableBuilder(
     column: $table.durataStimataMinuti,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get camminata => $composableBuilder(
+    column: $table.camminata,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -18994,6 +19050,11 @@ class $$AllenamentiTableTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<String> get camminata => $composableBuilder(
+    column: $table.camminata,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<String> get stato => $composableBuilder(
     column: $table.stato,
     builder: (column) => ColumnOrderings(column),
@@ -19078,6 +19139,9 @@ class $$AllenamentiTableTableAnnotationComposer
     column: $table.durataStimataMinuti,
     builder: (column) => column,
   );
+
+  GeneratedColumn<String> get camminata =>
+      $composableBuilder(column: $table.camminata, builder: (column) => column);
 
   GeneratedColumn<String> get stato =>
       $composableBuilder(column: $table.stato, builder: (column) => column);
@@ -19191,6 +19255,7 @@ class $$AllenamentiTableTableTableManager
                 Value<int> livello = const Value.absent(),
                 Value<String?> livelli = const Value.absent(),
                 Value<int?> durataStimataMinuti = const Value.absent(),
+                Value<String?> camminata = const Value.absent(),
                 Value<String> stato = const Value.absent(),
                 Value<String> origine = const Value.absent(),
                 Value<bool> attivo = const Value.absent(),
@@ -19205,6 +19270,7 @@ class $$AllenamentiTableTableTableManager
                 livello: livello,
                 livelli: livelli,
                 durataStimataMinuti: durataStimataMinuti,
+                camminata: camminata,
                 stato: stato,
                 origine: origine,
                 attivo: attivo,
@@ -19221,6 +19287,7 @@ class $$AllenamentiTableTableTableManager
                 Value<int> livello = const Value.absent(),
                 Value<String?> livelli = const Value.absent(),
                 Value<int?> durataStimataMinuti = const Value.absent(),
+                Value<String?> camminata = const Value.absent(),
                 required String stato,
                 required String origine,
                 Value<bool> attivo = const Value.absent(),
@@ -19235,6 +19302,7 @@ class $$AllenamentiTableTableTableManager
                 livello: livello,
                 livelli: livelli,
                 durataStimataMinuti: durataStimataMinuti,
+                camminata: camminata,
                 stato: stato,
                 origine: origine,
                 attivo: attivo,

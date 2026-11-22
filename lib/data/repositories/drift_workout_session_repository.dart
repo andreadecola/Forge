@@ -1,3 +1,8 @@
+import 'package:drift/drift.dart';
+import '../../domain/entities/walking_session.dart';
+import '../../domain/entities/walking_session_status.dart';
+import '../../domain/entities/workout_walking_block.dart';
+import 'drift_walking_session_repository.dart';
 import '../../domain/entities/persisted_session_exercise.dart';
 import '../../domain/entities/persisted_session_timer.dart';
 import '../../domain/entities/persisted_workout_session.dart';
@@ -13,6 +18,61 @@ class DriftWorkoutSessionRepository implements WorkoutSessionRepository {
   DriftWorkoutSessionRepository(this.db);
 
   final AppDatabase db;
+
+  @override
+  Future<WalkingSession?> getWalkingBlockSession(int sessionId) async {
+    final session = await getSessionById(sessionId);
+    final id = session?.walkingSessionId;
+    return id == null
+        ? null
+        : DriftWalkingSessionRepository(db).getWalkingSession(id);
+  }
+
+  @override
+  Future<WalkingSession> startWalkingBlock({
+    required int sessionId,
+    required DateTime startedAt,
+  }) => db.transaction(() async {
+    final session = await getSessionById(sessionId);
+    final block = session?.walkingBlock;
+    if (session == null ||
+        block == null ||
+        !['IN_PROGRESS', 'PAUSED'].contains(session.status.code)) {
+      throw StateError('Nessuna camminata prevista nella sessione attiva.');
+    }
+    final walking = DriftWalkingSessionRepository(db);
+    final existing = await getWalkingBlockSession(sessionId);
+    if (existing != null && existing.status != WalkingSessionStatus.aborted) {
+      return existing;
+    }
+    final snapshots = await getSessionExercises(sessionId);
+    if (block.placement == WalkingPlacement.afterExercises &&
+        snapshots.any((e) => !e.isCompleted && !e.isSkipped)) {
+      throw StateError('Completa gli esercizi prima della camminata.');
+    }
+    if (await walking.getActiveWalkingSession(profileId: session.profileId) !=
+        null) {
+      throw StateError(
+        'È già in corso un’altra camminata. Termina quella prima di iniziare questa fase.',
+      );
+    }
+    final id = await walking.createWalkingSession(
+      WalkingSession(
+        profileId: session.profileId,
+        startedAt: startedAt,
+        status: WalkingSessionStatus.inProgress,
+      ),
+    );
+    await (db.update(
+      db.sessioniAllenamentoTable,
+    )..where((t) => t.id.equals(sessionId))).write(
+      SessioniAllenamentoTableCompanion(
+        idCamminata: Value(id),
+        dataModifica: Value(startedAt),
+      ),
+    );
+    return (await walking.getWalkingSession(id))!;
+  });
 
   @override
   Future<PersistedWorkoutSession?> getActiveSession({
@@ -71,6 +131,7 @@ class DriftWorkoutSessionRepository implements WorkoutSessionRepository {
           profileId: profileId,
           workoutNameSnapshot: details.workout.name,
           startedAt: startedAt,
+          walkingBlock: details.workout.walkingBlock,
         ),
       );
 
@@ -194,17 +255,31 @@ class DriftWorkoutSessionRepository implements WorkoutSessionRepository {
     required int sessionId,
     required DateTime endedAt,
   }) {
-    return db.sessioniAllenamentoDao.updateState(
-      sessionId,
-      WorkoutSessionMappers.stateChanges(
-        status: WorkoutSessionPersistenceStatus.completed,
-        isCompleted: true,
-        isPaused: false,
-        endedAt: endedAt,
-        clearTimer: true,
-        updatedAt: endedAt,
-      ),
-    );
+    return db.transaction(() async {
+      final session = await getSessionById(sessionId);
+      if (session?.walkingBlock != null &&
+          session?.status == WorkoutSessionPersistenceStatus.completed) {
+        return;
+      }
+      if (session?.walkingBlock != null &&
+          (await getWalkingBlockSession(sessionId))?.status !=
+              WalkingSessionStatus.completed) {
+        throw StateError(
+          'Completa anche la camminata prima di concludere la scheda.',
+        );
+      }
+      await db.sessioniAllenamentoDao.updateState(
+        sessionId,
+        WorkoutSessionMappers.stateChanges(
+          status: WorkoutSessionPersistenceStatus.completed,
+          isCompleted: true,
+          isPaused: false,
+          endedAt: endedAt,
+          clearTimer: true,
+          updatedAt: endedAt,
+        ),
+      );
+    });
   }
 
   @override
@@ -212,15 +287,23 @@ class DriftWorkoutSessionRepository implements WorkoutSessionRepository {
     required int sessionId,
     required DateTime endedAt,
   }) {
-    return db.sessioniAllenamentoDao.updateState(
-      sessionId,
-      WorkoutSessionMappers.stateChanges(
-        status: WorkoutSessionPersistenceStatus.aborted,
-        endedAt: endedAt,
-        clearTimer: true,
-        updatedAt: endedAt,
-      ),
-    );
+    return db.transaction(() async {
+      final walk = await getWalkingBlockSession(sessionId);
+      if (walk?.status == WalkingSessionStatus.inProgress) {
+        await DriftWalkingSessionRepository(
+          db,
+        ).abortWalkingSession(sessionId: walk!.id!, endedAt: endedAt);
+      }
+      await db.sessioniAllenamentoDao.updateState(
+        sessionId,
+        WorkoutSessionMappers.stateChanges(
+          status: WorkoutSessionPersistenceStatus.aborted,
+          endedAt: endedAt,
+          clearTimer: true,
+          updatedAt: endedAt,
+        ),
+      );
+    });
   }
 
   @override

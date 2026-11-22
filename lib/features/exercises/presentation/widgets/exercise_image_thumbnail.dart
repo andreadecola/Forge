@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/theme/forge_colors.dart';
 import '../../../../domain/entities/exercise_catalog_enums.dart';
 import '../../../../domain/entities/exercise_image.dart';
 import '../../application/exercise_catalog_providers.dart';
@@ -50,7 +49,9 @@ class ExerciseImageThumbnail extends ConsumerWidget {
                   ExerciseImagePlaceholder(categoryCode: categoryCode),
             );
           },
-          loading: () => Container(color: ForgeColors.anthraciteSurfaceHigh),
+          loading: () => Container(
+            color: Theme.of(context).colorScheme.surfaceContainerHighest,
+          ),
           error: (error, stackTrace) =>
               ExerciseImagePlaceholder(categoryCode: categoryCode),
         ),

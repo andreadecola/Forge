@@ -29,6 +29,7 @@ Future<void> _pumpAppOnForgeGenerator(
 
   await tester.tap(find.text('Programma'));
   await tester.pumpAndSettle();
+  await tester.ensureVisible(find.text('Genera con Forge'));
   await tester.tap(find.text('Genera con Forge'));
   await tester.pumpAndSettle();
 }
@@ -201,7 +202,8 @@ void main() {
       await _pumpBounded(tester);
       await tester.tap(find.text('Programma'));
       await _pumpBounded(tester);
-      await tester.tap(find.text('Genera con Forge'));
+      await tester.ensureVisible(find.text('Genera con Forge'));
+  await tester.tap(find.text('Genera con Forge'));
       await _pumpBounded(tester);
 
       expect(

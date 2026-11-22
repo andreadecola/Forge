@@ -14,19 +14,36 @@ final bodyMeasurementsProvider =
           .watchMeasurementsByProfile(profileId);
     });
 
-final latestWeightProvider = FutureProvider.family<BodyMeasurement?, int>((
-  ref,
-  profileId,
-) {
-  return ref.watch(bodyMetricsRepositoryProvider).getLatestWeight(profileId);
-});
+/// Derivato dallo stesso stream usato da Progressi: segue inserimenti,
+/// modifiche, cancellazioni e restore senza invalidazioni manuali.
+/// Il repository ordina per measuredAt DESC, poi id DESC; le misure
+/// di solo girovita non sostituiscono l'ultimo peso disponibile.
+final latestWeightProvider = Provider.family<AsyncValue<BodyMeasurement?>, int>(
+  (ref, profileId) {
+    return ref.watch(bodyMeasurementsProvider(profileId)).whenData((
+      measurements,
+    ) {
+      for (final measurement in measurements) {
+        if (measurement.weightKg != null) return measurement;
+      }
+      return null;
+    });
+  },
+);
 
 /// Speculare a [latestWeightProvider] per il girovita (Milestone 7.2).
-final latestWaistProvider = FutureProvider.family<BodyMeasurement?, int>((
+final latestWaistProvider = Provider.family<AsyncValue<BodyMeasurement?>, int>((
   ref,
   profileId,
 ) {
-  return ref.watch(bodyMetricsRepositoryProvider).getLatestWaist(profileId);
+  return ref.watch(bodyMeasurementsProvider(profileId)).whenData((
+    measurements,
+  ) {
+    for (final measurement in measurements) {
+      if (measurement.waistCm != null) return measurement;
+    }
+    return null;
+  });
 });
 
 /// Singola misurazione per id (Milestone 7.1, sezione 24), `null` se non

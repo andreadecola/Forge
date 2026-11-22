@@ -1,3 +1,4 @@
+import '../../../../core/theme/forge_typography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -256,10 +257,13 @@ class _NoPlanState extends StatelessWidget {
           children: [
             const Icon(Icons.error_outline, size: 48),
             const SizedBox(height: 16),
-            const Text(
+            Text(
               'Nessun allenamento generato da mostrare.',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              style: TextStyle(
+                fontSize: ForgeTypography.bodySize,
+                fontWeight: FontWeight.w600,
+              ),
             ),
             const SizedBox(height: 16),
             FilledButton(

@@ -8,6 +8,7 @@ mixin _$SessioniAllenamentoDaoMixin on DatabaseAccessor<AppDatabase> {
       attachedDatabase.userProfilesTable;
   $AllenamentiTableTable get allenamentiTable =>
       attachedDatabase.allenamentiTable;
+  $CamminateTableTable get camminateTable => attachedDatabase.camminateTable;
   $SessioniAllenamentoTableTable get sessioniAllenamentoTable =>
       attachedDatabase.sessioniAllenamentoTable;
   SessioniAllenamentoDaoManager get managers =>
@@ -26,6 +27,11 @@ class SessioniAllenamentoDaoManager {
       $$AllenamentiTableTableTableManager(
         _db.attachedDatabase,
         _db.allenamentiTable,
+      );
+  $$CamminateTableTableTableManager get camminateTable =>
+      $$CamminateTableTableTableManager(
+        _db.attachedDatabase,
+        _db.camminateTable,
       );
   $$SessioniAllenamentoTableTableTableManager get sessioniAllenamentoTable =>
       $$SessioniAllenamentoTableTableTableManager(

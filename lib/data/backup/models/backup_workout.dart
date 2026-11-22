@@ -1,6 +1,7 @@
 import '../backup_date_codec.dart';
 import '../backup_json_helpers.dart';
 import '../backup_format_exception.dart';
+import '../../../domain/entities/workout_walking_block.dart';
 
 /// Riga di `allenamenti` (Backup.1, sezione 1). [origin] preserva la
 /// stringa `.code` reale (`"USER"`/`"FORGE_ENGINE"`/`"SYSTEM"`, mai
@@ -17,6 +18,7 @@ class BackupWorkout {
     required this.type,
     required this.level,
     this.selectedLevels,
+    this.walkingBlock,
     required this.estimatedDurationMinutes,
     required this.status,
     required this.origin,
@@ -32,6 +34,7 @@ class BackupWorkout {
   final String type;
   final int level;
   final List<int>? selectedLevels;
+  final WorkoutWalkingBlock? walkingBlock;
 
   List<int> get effectiveSelectedLevels => selectedLevels ?? [level];
   final int? estimatedDurationMinutes;
@@ -50,6 +53,7 @@ class BackupWorkout {
     'level': level,
     if (selectedLevels != null) 'selectedLevels': selectedLevels,
     'estimatedDurationMinutes': estimatedDurationMinutes,
+    if (walkingBlock != null) 'walkingBlock': walkingBlock!.toJson(),
     'status': status,
     'origin': origin,
     'isActive': isActive,
@@ -66,6 +70,7 @@ class BackupWorkout {
       type: requireString(json, 'type', path),
       level: requireInt(json, 'level', path),
       selectedLevels: _parseSelectedLevels(json['selectedLevels'], path),
+      walkingBlock: optionalWalkingBlock(json, path),
       estimatedDurationMinutes: optionalInt(
         json,
         'estimatedDurationMinutes',

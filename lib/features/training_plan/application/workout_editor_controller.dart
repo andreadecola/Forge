@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../data/repositories/workout_providers.dart';
 import '../../../domain/entities/exercise.dart';
 import '../../../domain/entities/workout_details.dart';
+import '../../../domain/entities/workout_walking_block.dart';
 import '../../../domain/entities/workout_enums.dart';
 import '../../../domain/entities/workout_exercise.dart';
 import '../../../domain/entities/workout_validation_result.dart';
@@ -68,6 +69,7 @@ class WorkoutEditorController
     required int level,
     required Set<int> selectedLevels,
     required int? estimatedDurationMinutes,
+    WorkoutWalkingBlock? Function()? walkingBlock,
   }) async {
     final current = state.valueOrNull;
     if (current == null) return;
@@ -80,6 +82,7 @@ class WorkoutEditorController
             type: type,
             level: level,
             selectedLevels: selectedLevels,
+            walkingBlock: walkingBlock,
             estimatedDurationMinutes: () => estimatedDurationMinutes,
           ),
         );

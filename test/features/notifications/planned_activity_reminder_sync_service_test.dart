@@ -287,6 +287,94 @@ void main() {
     );
   });
 
+  test(
+    'EVO-003 master sufficiente con flag legacy spento e orario predefinito',
+    () async {
+      final repository = _FakePlannedActivityRepository()
+        ..activities[1] = activity();
+      final gateway = _FakeGateway();
+      final service = createService(
+        repository: repository,
+        settings: _FakeSettingsRepository(
+          const NotificationSettings(
+            notificationsEnabled: true,
+            plannedActivityRemindersEnabled: false,
+            plannedActivityReminderTimeMinutes: null,
+          ),
+        ),
+        permission: _FakePermissionGateway(
+          NotificationPermissionStatus.granted,
+        ),
+        gateway: gateway,
+        sessionStates: _FakeSessionStateResolver(),
+      );
+      await service.syncActivity(1);
+      expect(gateway.scheduled.single.scheduledAt, DateTime(2026, 9, 2, 9));
+    },
+  );
+
+  test(
+    'EVO-003 rinvio persistente, stesso ID, riconciliazione e riapertura',
+    () async {
+      final repository = _FakePlannedActivityRepository()
+        ..activities[1] = activity();
+      final gateway = _FakeGateway();
+      final states = _FakeSessionStateResolver();
+      PlannedActivityReminderSyncService build() => createService(
+        repository: repository,
+        settings: enabledSettings(),
+        permission: _FakePermissionGateway(
+          NotificationPermissionStatus.granted,
+        ),
+        gateway: gateway,
+        sessionStates: states,
+      );
+      final until = DateTime(2026, 9, 2, 16, 35);
+      await build().syncActivity(1);
+      final id = gateway.scheduled.last.id;
+      await build().snooze(1, until);
+      expect(repository.activities[1]!.reminderAt, until);
+      await build().syncAllPlannedActivityReminders(profileId: 1);
+      expect(gateway.scheduled.last.id, id);
+      expect(gateway.scheduled.last.scheduledAt, until);
+      expect(gateway.pendingRequests.length, 1);
+    },
+  );
+
+  test(
+    'EVO-003 rinvii passati, fuori giorno o di attività conclusa rifiutati',
+    () async {
+      final repository = _FakePlannedActivityRepository()
+        ..activities[1] = activity();
+      final states = _FakeSessionStateResolver();
+      final service = createService(
+        repository: repository,
+        settings: enabledSettings(),
+        permission: _FakePermissionGateway(
+          NotificationPermissionStatus.granted,
+        ),
+        gateway: _FakeGateway(),
+        sessionStates: states,
+      );
+      await expectLater(
+        service.snooze(1, DateTime(2026, 9, 1, 11)),
+        throwsArgumentError,
+      );
+      await expectLater(
+        service.snooze(1, DateTime(2026, 9, 3, 12)),
+        throwsArgumentError,
+      );
+      repository.activities[1] = activity(
+        status: PlannedActivityStatus.skipped,
+      );
+      await expectLater(
+        service.snooze(1, DateTime(2026, 9, 2, 12)),
+        throwsStateError,
+      );
+      expect(repository.activities[1]!.reminderAt, isNull);
+    },
+  );
+
   test('RECOVERY non schedula e cancella l id deterministico', () async {
     final repository = _FakePlannedActivityRepository()
       ..activities[1] = activity(type: PlannedActivityType.recovery);

@@ -64,7 +64,7 @@ void main() {
     expect(find.text('I tuoi allenamenti'), findsOneWidget);
     expect(find.text('Non hai ancora creato allenamenti.'), findsOneWidget);
     expect(
-      find.widgetWithText(FilledButton, 'Crea il primo allenamento'),
+      find.widgetWithText(OutlinedButton, 'Crea il primo allenamento'),
       findsOneWidget,
     );
 
@@ -77,7 +77,7 @@ void main() {
       await _pumpAppOnProgram(tester, database);
 
       await tester.tap(
-        find.widgetWithText(FilledButton, 'Crea il primo allenamento'),
+        find.widgetWithText(OutlinedButton, 'Crea il primo allenamento'),
       );
       await tester.pumpAndSettle();
       expect(find.text('Nuovo allenamento'), findsOneWidget);

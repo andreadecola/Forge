@@ -16,8 +16,7 @@ import 'package:forge/data/database/tables/gruppi_muscolari_table.dart';
 import 'package:forge/data/database/tables/immagini_esercizi_table.dart';
 import 'package:forge/data/database/tables/pressure_measurements_table.dart';
 import 'package:forge/data/database/tables/progressioni_esercizi_table.dart';
-import 'package:forge/data/database/tables/sessioni_allenamento_table.dart';
-import 'package:forge/data/database/tables/sessioni_esercizi_table.dart';
+import 'legacy_workout_session_tables.dart';
 import 'package:forge/data/database/tables/user_equipment_table.dart';
 import 'package:forge/data/database/tables/user_profiles_table.dart';
 import 'package:forge/data/database/tables/versioni_catalogo_table.dart';
@@ -76,8 +75,8 @@ class CamminateTableV5 extends Table {
     VersioniCatalogoTable,
     AllenamentiTable,
     AllenamentiEserciziTable,
-    SessioniAllenamentoTable,
-    SessioniEserciziTable,
+    LegacyWorkoutSessions,
+    LegacySessionExercises,
   ],
 )
 class _SchemaV5Database extends _$_SchemaV5Database {
@@ -127,7 +126,7 @@ void main() {
     final database = AppDatabase(NativeDatabase.opened(rawDb));
     addTearDown(database.close);
 
-    expect(database.schemaVersion, 12);
+    expect(database.schemaVersion, 14);
     final legacy = await database.camminateDao.getById(1);
     expect(legacy, isNotNull);
     expect(legacy!.distanzaMetri, 3500);

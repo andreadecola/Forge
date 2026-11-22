@@ -1,3 +1,5 @@
+import 'set_performance.dart';
+
 /// Riga persistita di `sessioni_esercizi` (Milestone 4.4.3): snapshot dei
 /// parametri di una riga scheda al momento dell'avvio della sessione, più
 /// il progresso serie raggiunto. Vedi `sessioni_esercizi_table.dart` per il
@@ -18,6 +20,7 @@ class PersistedSessionExercise {
     this.isCompleted = false,
     this.createdAt,
     this.updatedAt,
+    this.performedSets = const [],
   });
 
   final int? id;
@@ -34,6 +37,7 @@ class PersistedSessionExercise {
   final bool isCompleted;
   final DateTime? createdAt;
   final DateTime? updatedAt;
+  final List<SetPerformance> performedSets;
 }
 
 /// Aggiornamento di progresso per una riga (Milestone 4.4.3): usato da

@@ -1,5 +1,44 @@
 # FORGE — Milestone 7.4: Progress Dashboard
 
+Restyling UX/UI (22/11/2026): «Attività e risultati» apre ora Progressi,
+con riepilogo narrativo derivato dai valori reali di EVO-010. Metriche corporee,
+storici e grafici rimangono disponibili. Temi Ambra/Blu e verifiche in
+`Docs/UX_UI_Restyling.md`.
+
+## Aggiornamento corrente — BUG-001 (22/11/2026)
+
+La Home e Progressi condividono ora lo stream delle misurazioni corporee del
+profilo corrente. `latestWeightProvider` e `latestWaistProvider` derivano i dati
+da `bodyMeasurementsProvider`: non conservano più il risultato di una lettura
+singola. Inserimento, modifica, eliminazione e ripristino del backup aggiornano
+quindi anche la Home già aperta, senza invalidazioni manuali o query aggiuntive.
+
+La selezione conserva l'ordinamento del repository `measuredAt DESC, id DESC`.
+Peso e girovita restano indipendenti: una misura di solo girovita non sostituisce
+l'ultimo peso. Variazione, BMI, BMR e TDEE della Home usano il peso aggiornato con
+le formule esistenti. In assenza di pesi la Home mostra `Non disponibile` per
+questi indicatori; il peso iniziale non diventa una misurazione corrente.
+
+Nessuna modifica a formule, database, catalogo o formato backup:
+Il fix BUG-001 era su schema 12; le successive evolutive portano lo schema a
+**14**, con catalogo **2** (vedi `Docs/EVOLUTIVE_001_010.md`). Le camminate interne
+alle schede sono conteggiate tramite il collegamento alla sessione reale.
+I valori nelle sezioni
+successive descrivono la baseline storica della milestone M7.4.
+
+Verifica automatica: **94 test mirati superati, 0 falliti**. Le quattro nuove
+regressioni in `test/features/dashboard_weight_sync_test.dart` coprono il
+percorso Progressi → salvataggio/modifica/eliminazione → Home, date e parità di
+timestamp, righe di solo girovita, assenza di pesi, ricreazione dell'interfaccia
+sullo stesso database e importazione JSON reale con Home già montata. Nel test
+backup sono isolati file picker e riconciliazione delle notifiche native.
+`flutter analyze`: nessun problema. `git diff --check`: superato.
+
+**Stato: In collaudo.** Restano da verificare su Android aggiornamenti UI,
+riavvio effettivo del processo e ripristino tramite file picker. Non è stata
+rieseguita la suite completa e non è stato effettuato alcun commit o push.
+Il registro ufficiale è `Docs/EVOLUTIVE_FUTURE.md`, voce BUG-001.
+
 ## Stato iniziale
 
 La ricognizione del repository ha confermato l’architettura già introdotta

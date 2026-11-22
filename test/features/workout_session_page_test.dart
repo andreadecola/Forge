@@ -319,7 +319,7 @@ void main() {
 
       expect(find.text('Vuoi uscire dall\'allenamento?'), findsOneWidget);
       expect(
-        find.text('I progressi della sessione corrente non verranno salvati.'),
+        find.text('La sessione verrà interrotta e resterà nello storico. Potrai iniziare un nuovo allenamento quando vorrai.'),
         findsOneWidget,
       );
 

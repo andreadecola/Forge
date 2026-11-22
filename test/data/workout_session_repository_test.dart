@@ -336,7 +336,7 @@ void main() {
     },
   );
 
-  test('eliminare la scheda mentre una sessione esiste: la sessione sopravvive '
+  test('eliminare la scheda dopo la sessione: la sessione sopravvive '
       'orfana (id_allenamento null), lo snapshot resta leggibile', () async {
     final sessionId = await sessionRepository.createSession(
       profileId: profileId,
@@ -344,6 +344,14 @@ void main() {
       startedAt: DateTime(2026, 1, 1),
     );
 
+    await expectLater(
+      workoutRepository.deleteWorkout(workoutId),
+      throwsStateError,
+    );
+    await sessionRepository.completeSession(
+      sessionId: sessionId,
+      endedAt: DateTime(2026, 1, 1, 1),
+    );
     await workoutRepository.deleteWorkout(workoutId);
 
     final session = await sessionRepository.getSessionById(sessionId);

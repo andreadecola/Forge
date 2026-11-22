@@ -2,6 +2,12 @@
 
 ## Stato della fase
 
+Aggiornamento EVO-003 del 22/11/2026: le preferenze effettive usano soltanto
+l'interruttore generale e il permesso Android. Il flag di categoria resta
+legacy nel backup. Tap sull'attività e rinvio a orario personalizzato persistente
+sono descritti in `Docs/EVOLUTIVE_001_010.md`; richiedono nuovo collaudo Android.
+Le verifiche riportate sotto restano riferite alla baseline Notifiche.6.
+
 La fase applica il freeze funzionale delle notifiche locali. Sono state
 verificate e, dove necessario, irrobustite soltanto le integrazioni gia
 presenti nelle fasi Notifiche.4 e Notifiche.5.

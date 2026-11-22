@@ -158,15 +158,20 @@ void main() {
 
   /// Ogni test che la usa ha esattamente un'attività con pulsante "Avvia"
   /// visibile: nessuna ambiguità nel trovarlo senza ulteriore scoping.
+  Finder startButton() => find.descendant(
+    of: todayCardFinder(),
+    matching: find.ancestor(
+      of: find.textContaining(RegExp(r'^Inizia (allenamento|camminata)$')),
+      matching: find.byType(FilledButton),
+    ),
+  );
   Future<void> tapAvvia(WidgetTester tester) async {
     await tester.scrollUntilVisible(
-      find.widgetWithText(OutlinedButton, 'Avvia'),
+      startButton(),
       160,
       scrollable: find.byType(Scrollable).first,
     );
-    tester
-        .widget<OutlinedButton>(find.widgetWithText(OutlinedButton, 'Avvia'))
-        .onPressed!();
+    tester.widget<FilledButton>(startButton()).onPressed!();
     await tester.pumpAndSettle();
   }
 
@@ -176,7 +181,10 @@ void main() {
     await pumpDashboard(tester);
 
     expect(find.textContaining('Oggi — 26 agosto 2026'), findsOneWidget);
-    expect(find.text('Nessuna attività pianificata per oggi.'), findsOneWidget);
+    expect(
+      find.textContaining('Oggi non hai attività in programma.'),
+      findsOneWidget,
+    );
 
     await disposeCleanly(tester);
   });
@@ -207,10 +215,7 @@ void main() {
       findsOneWidget,
     );
     expect(
-      find.descendant(
-        of: todayCardFinder(),
-        matching: find.widgetWithText(OutlinedButton, 'Avvia'),
-      ),
+      find.descendant(of: todayCardFinder(), matching: startButton()),
       findsOneWidget,
     );
 
@@ -281,10 +286,7 @@ void main() {
         findsOneWidget,
       );
       expect(
-        find.descendant(
-          of: todayCardFinder(),
-          matching: find.widgetWithText(OutlinedButton, 'Avvia'),
-        ),
+        find.descendant(of: todayCardFinder(), matching: startButton()),
         findsNothing,
       );
 
@@ -366,10 +368,7 @@ void main() {
         findsOneWidget,
       );
       expect(
-        find.descendant(
-          of: todayCardFinder(),
-          matching: find.widgetWithText(OutlinedButton, 'Avvia'),
-        ),
+        find.descendant(of: todayCardFinder(), matching: startButton()),
         findsNothing,
       );
 
@@ -506,7 +505,7 @@ void main() {
       await pumpDashboard(tester);
 
       expect(
-        find.text('Nessuna attività pianificata per oggi.'),
+        find.textContaining('Oggi non hai attività in programma.'),
         findsOneWidget,
       );
 
@@ -524,7 +523,10 @@ void main() {
 
     await pumpDashboard(tester);
 
-    expect(find.text('Nessuna attività pianificata per oggi.'), findsOneWidget);
+    expect(
+      find.textContaining('Oggi non hai attività in programma.'),
+      findsOneWidget,
+    );
 
     await disposeCleanly(tester);
   });
@@ -559,7 +561,10 @@ void main() {
     await pumpDashboard(tester, now: DateTime(2027, 1, 1, 8));
 
     expect(find.textContaining('Oggi — 1 gennaio 2027'), findsOneWidget);
-    expect(find.text('Nessuna attività pianificata per oggi.'), findsOneWidget);
+    expect(
+      find.textContaining('Oggi non hai attività in programma.'),
+      findsOneWidget,
+    );
 
     await disposeCleanly(tester);
   });
@@ -658,14 +663,14 @@ void main() {
         expect(
           find.descendant(
             of: todayCardFinder(),
-            matching: find.widgetWithText(OutlinedButton, 'Riprendi'),
+            matching: find.widgetWithText(FilledButton, 'Riprendi attività'),
           ),
           findsOneWidget,
         );
 
         tester
-            .widget<OutlinedButton>(
-              find.widgetWithText(OutlinedButton, 'Riprendi'),
+            .widget<FilledButton>(
+              find.widgetWithText(FilledButton, 'Riprendi attività'),
             )
             .onPressed!();
         await tester.pumpAndSettle();
@@ -709,7 +714,7 @@ void main() {
       expect(
         find.descendant(
           of: todayCardFinder(),
-          matching: find.byType(OutlinedButton),
+          matching: find.byType(FilledButton),
         ),
         findsNothing,
       );
@@ -747,8 +752,8 @@ void main() {
         );
 
         tester
-            .widget<OutlinedButton>(
-              find.widgetWithText(OutlinedButton, 'Riprendi'),
+            .widget<FilledButton>(
+              find.widgetWithText(FilledButton, 'Riprendi attività'),
             )
             .onPressed!();
         await tester.pumpAndSettle();
@@ -792,7 +797,7 @@ void main() {
         expect(
           find.descendant(
             of: todayCardFinder(),
-            matching: find.byType(OutlinedButton),
+            matching: find.byType(FilledButton),
           ),
           findsNothing,
         );
@@ -840,10 +845,7 @@ void main() {
         );
 
         expect(
-          find.descendant(
-            of: todayCardFinder(),
-            matching: find.widgetWithText(OutlinedButton, 'Avvia'),
-          ),
+          find.descendant(of: todayCardFinder(), matching: startButton()),
           findsOneWidget,
         );
         expect(
@@ -887,7 +889,7 @@ void main() {
       expect(
         find.descendant(
           of: todayCardFinder(),
-          matching: find.byType(OutlinedButton),
+          matching: find.byType(FilledButton),
         ),
         findsNothing,
       );
@@ -921,7 +923,7 @@ void main() {
         expect(
           find.descendant(
             of: todayCardFinder(),
-            matching: find.byType(OutlinedButton),
+            matching: find.byType(FilledButton),
           ),
           findsNothing,
         );
@@ -956,7 +958,7 @@ void main() {
       expect(
         find.descendant(
           of: todayCardFinder(),
-          matching: find.byType(OutlinedButton),
+          matching: find.byType(FilledButton),
         ),
         findsNothing,
       );
@@ -989,7 +991,7 @@ void main() {
       expect(
         find.descendant(
           of: todayCardFinder(),
-          matching: find.byType(OutlinedButton),
+          matching: find.byType(FilledButton),
         ),
         findsNothing,
       );
@@ -1092,10 +1094,7 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(
-          find.descendant(
-            of: todayCardFinder(),
-            matching: find.widgetWithText(OutlinedButton, 'Avvia'),
-          ),
+          find.descendant(of: todayCardFinder(), matching: startButton()),
           findsOneWidget,
         );
 

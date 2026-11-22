@@ -17,10 +17,12 @@ class NotificationSettings {
   bool get hasValidReminderTime =>
       isValidReminderTimeMinutes(plannedActivityReminderTimeMinutes);
 
-  bool get hasDesiredPlannedActivityReminders =>
-      notificationsEnabled &&
-      plannedActivityRemindersEnabled &&
-      hasValidReminderTime;
+  bool get hasDesiredPlannedActivityReminders => notificationsEnabled;
+
+  /// Il vecchio flag di categoria resta leggibile nei backup, ma non blocca
+  /// più i promemoria automatici. Senza preferenza precedente si usa 09:00.
+  int get effectiveReminderTimeMinutes =>
+      plannedActivityReminderTimeMinutes ?? 9 * 60;
 
   static bool isValidReminderTimeMinutes(int? value) =>
       value != null && value >= 0 && value <= 1439;

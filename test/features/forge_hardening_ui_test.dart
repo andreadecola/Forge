@@ -39,6 +39,7 @@ Future<AppDatabase> _seedRealCatalogApp() async {
 Future<void> _openForgeGenerator(WidgetTester tester) async {
   await tester.tap(find.text('Programma'));
   await tester.pumpAndSettle();
+  await tester.ensureVisible(find.text('Genera con Forge'));
   await tester.tap(find.text('Genera con Forge'));
   await tester.pumpAndSettle();
 }

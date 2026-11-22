@@ -61,6 +61,7 @@ void main() {
     expect(find.text('Configura Forge'), findsOneWidget);
     expect(find.text('Ripristina da backup'), findsOneWidget);
     expect(find.byType(NavigationBar), findsNothing);
+    await _disposeCleanly(tester);
   });
 
   testWidgets('Completed onboarding shows dashboard with bottom navigation', (
@@ -112,7 +113,7 @@ void main() {
     await _disposeCleanly(tester);
   });
 
-  testWidgets('Notification tap apre il Piano dentro la shell principale', (
+  testWidgets('Notification tap apre l’attività dentro la shell principale', (
     tester,
   ) async {
     final database = _memoryDatabase();
@@ -158,7 +159,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('Piano settimanale'), findsOneWidget);
+    expect(find.text('Attività pianificata'), findsOneWidget);
     expect(find.byType(NavigationBar), findsOneWidget);
     expect(find.text('Home'), findsOneWidget);
     expect(find.text('Programma'), findsOneWidget);

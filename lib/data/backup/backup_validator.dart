@@ -233,6 +233,13 @@ class BackupValidator {
       final e = data.workoutSessions[i];
       checkRef(
         r'$.data.workoutSessions['
+            '$i].walkingSessionLocalId',
+        e.walkingSessionLocalId,
+        walkingSessionIds,
+        'data.walkingSessions',
+      );
+      checkRef(
+        r'$.data.workoutSessions['
             '$i].profileLocalId',
         e.profileLocalId,
         profileIds,
@@ -355,6 +362,14 @@ class BackupValidator {
 
     for (var i = 0; i < data.workoutSessions.length; i++) {
       final s = data.workoutSessions[i];
+      checkSameProfile(
+        r'$.data.workoutSessions['
+            '$i].walkingSessionLocalId',
+        s.profileLocalId,
+        s.walkingSessionLocalId,
+        profileOfWalk,
+        'WalkingSession',
+      );
       checkSameProfile(
         r'$.data.workoutSessions['
             '$i].workoutLocalId',

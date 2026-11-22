@@ -80,7 +80,7 @@ class _NotificationSettingsSectionState
   ) {
     final permissionGranted =
         permission == NotificationPermissionStatus.granted;
-    final reminderMinutes = settings.plannedActivityReminderTimeMinutes;
+    final reminderMinutes = settings.effectiveReminderTimeMinutes;
     final effective =
         settings.hasDesiredPlannedActivityReminders && permissionGranted;
 
@@ -102,27 +102,14 @@ class _NotificationSettingsSectionState
           value: settings.notificationsEnabled,
           onChanged: _isBusy ? null : _onMasterChanged,
         ),
-        SwitchListTile(
-          key: const ValueKey('planned-activity-reminders-switch'),
-          contentPadding: EdgeInsets.zero,
-          title: const Text('Promemoria attività pianificate'),
-          subtitle: const Text(
-            'Promemoria per gli allenamenti e le camminate pianificate.',
-          ),
-          value: settings.plannedActivityRemindersEnabled,
-          onChanged: _isBusy
-              ? null
-              : (value) => _onCategoryChanged(value, settings),
+        const Text(
+          'I promemoria seguono automaticamente allenamenti e camminate del piano. Nessuna notifica nei giorni senza attività.',
         ),
         ListTile(
           key: const ValueKey('planned-activity-reminder-time'),
           contentPadding: EdgeInsets.zero,
           title: const Text('Ora promemoria'),
-          subtitle: Text(
-            reminderMinutes == null
-                ? 'Scegli un orario'
-                : _formatMinutes(reminderMinutes),
-          ),
+          subtitle: Text(_formatMinutes(reminderMinutes)),
           trailing: const Icon(Icons.access_time_outlined),
           enabled: !_isBusy,
           onTap: _pickReminderTime,
@@ -164,32 +151,6 @@ class _NotificationSettingsSectionState
           await _requestPermission(controller);
         }
       }
-    });
-  }
-
-  Future<void> _onCategoryChanged(
-    bool value,
-    NotificationSettings settings,
-  ) async {
-    if (value && !settings.notificationsEnabled) {
-      _showMessage('Attiva prima le notifiche.');
-      return;
-    }
-
-    var time = settings.plannedActivityReminderTimeMinutes;
-    if (value && time == null) {
-      final picked = await _showReminderTimePicker();
-      if (picked == null || !mounted) return;
-      time = picked;
-    }
-
-    await _run(() async {
-      final controller = ref.read(notificationSettingsControllerProvider);
-      if (time != settings.plannedActivityReminderTimeMinutes) {
-        await controller.setReminderTimeMinutes(time);
-      }
-      await controller.setPlannedActivityRemindersEnabled(value);
-      if (value) await _requestPermission(controller);
     });
   }
 

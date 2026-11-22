@@ -1,3 +1,4 @@
+import '../../../../core/theme/forge_typography.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/forge_colors.dart';
@@ -11,19 +12,19 @@ class AvailabilityBadge extends StatelessWidget {
 
   final ExerciseAvailabilityStatus status;
 
-  Color get _color {
+  Color _color(BuildContext context) {
     switch (status) {
       case ExerciseAvailabilityStatus.available:
-        return ForgeColors.success;
+        return ForgeColors.successFor(context);
       case ExerciseAvailabilityStatus.lockedLevel:
-        return ForgeColors.steelGrayLight;
+        return Theme.of(context).colorScheme.onSurfaceVariant;
       case ExerciseAvailabilityStatus.lockedEquipment:
-        return ForgeColors.copper;
+        return Theme.of(context).colorScheme.primary;
       case ExerciseAvailabilityStatus.recommended:
-        return ForgeColors.copperLight;
+        return ForgeColors.warningFor(context);
       case ExerciseAvailabilityStatus.temporarilyAvoided:
       case ExerciseAvailabilityStatus.mastered:
-        return ForgeColors.steelGrayLight;
+        return Theme.of(context).colorScheme.onSurfaceVariant;
     }
   }
 
@@ -42,7 +43,7 @@ class AvailabilityBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = _color;
+    final color = _color(context);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
@@ -60,7 +61,7 @@ class AvailabilityBadge extends StatelessWidget {
               ExerciseLabels.availabilityStatus(status),
               style: TextStyle(
                 color: color,
-                fontSize: 11,
+                fontSize: ForgeTypography.badgeSize,
                 fontWeight: FontWeight.w600,
               ),
             ),

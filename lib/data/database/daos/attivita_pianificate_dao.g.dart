@@ -8,9 +8,9 @@ mixin _$AttivitaPianificateDaoMixin on DatabaseAccessor<AppDatabase> {
       attachedDatabase.userProfilesTable;
   $AllenamentiTableTable get allenamentiTable =>
       attachedDatabase.allenamentiTable;
+  $CamminateTableTable get camminateTable => attachedDatabase.camminateTable;
   $SessioniAllenamentoTableTable get sessioniAllenamentoTable =>
       attachedDatabase.sessioniAllenamentoTable;
-  $CamminateTableTable get camminateTable => attachedDatabase.camminateTable;
   $AttivitaPianificateTableTable get attivitaPianificateTable =>
       attachedDatabase.attivitaPianificateTable;
   AttivitaPianificateDaoManager get managers =>
@@ -30,15 +30,15 @@ class AttivitaPianificateDaoManager {
         _db.attachedDatabase,
         _db.allenamentiTable,
       );
-  $$SessioniAllenamentoTableTableTableManager get sessioniAllenamentoTable =>
-      $$SessioniAllenamentoTableTableTableManager(
-        _db.attachedDatabase,
-        _db.sessioniAllenamentoTable,
-      );
   $$CamminateTableTableTableManager get camminateTable =>
       $$CamminateTableTableTableManager(
         _db.attachedDatabase,
         _db.camminateTable,
+      );
+  $$SessioniAllenamentoTableTableTableManager get sessioniAllenamentoTable =>
+      $$SessioniAllenamentoTableTableTableManager(
+        _db.attachedDatabase,
+        _db.sessioniAllenamentoTable,
       );
   $$AttivitaPianificateTableTableTableManager get attivitaPianificateTable =>
       $$AttivitaPianificateTableTableTableManager(

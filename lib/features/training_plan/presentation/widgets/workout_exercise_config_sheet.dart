@@ -130,7 +130,7 @@ class _WorkoutExerciseConfigSheetState
         widget.initialDurationSeconds != null &&
         widget.initialRepetitions == null;
     final emphasisStyle = TextStyle(
-      color: Theme.of(context).colorScheme.primary,
+      color: Theme.of(context).colorScheme.secondary,
       fontWeight: FontWeight.w600,
     );
 

@@ -1,13 +1,17 @@
+import '../../../../core/theme/forge_typography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/theme/forge_colors.dart';
 import '../../../../core/utils/italian_date_formatter.dart';
 import '../../../../domain/entities/workout_session_exercise_history_item.dart';
 import '../../../../domain/entities/workout_session_history_details.dart';
 import '../../../exercises/presentation/widgets/exercise_image_thumbnail.dart';
 import '../../application/workout_history_providers.dart';
 import '../workout_session_history_labels.dart';
+import '../widgets/exercise_performance_diary.dart';
+import '../../../../data/repositories/walking_session_providers.dart';
+import '../../../../domain/entities/workout_session_history_item.dart';
+import '../../../../domain/entities/walking_session_status.dart';
 
 /// Dettaglio di una sessione storica (Milestone 4.5.1): nome/data/stato
 /// snapshot, durata totale derivata, esercizi in ordine con i parametri
@@ -101,11 +105,51 @@ class _DetailBody extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 24),
+        if (session.walkingBlock != null)
+          _SessionWalkingSummary(session: session),
         Text('Esercizi', style: Theme.of(context).textTheme.titleLarge),
         const SizedBox(height: 8),
-        for (final exercise in details.exercises)
+        for (final exercise in details.exercises) ...[
           _ExerciseHistoryRow(exercise: exercise),
+          ExercisePerformanceDiary(
+            sessionId: session.sessionId,
+            order: exercise.order,
+            exerciseId: exercise.exerciseId,
+            totalSets: exercise.totalSets,
+            timed: exercise.durationSeconds != null,
+          ),
+        ],
       ],
+    );
+  }
+}
+
+class _SessionWalkingSummary extends ConsumerWidget {
+  const _SessionWalkingSummary({required this.session});
+  final WorkoutSessionHistoryItem session;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final block = session.walkingBlock!;
+    final walking = session.walkingSessionId == null
+        ? null
+        : ref
+              .watch(walkingSessionProvider(session.walkingSessionId!))
+              .valueOrNull;
+    final state = walking == null
+        ? 'Non registrata'
+        : walking.status == WalkingSessionStatus.completed
+        ? 'Completata'
+        : walking.status == WalkingSessionStatus.aborted
+        ? 'Interrotta'
+        : 'In corso';
+    return Card(
+      child: ListTile(
+        leading: const Icon(Icons.directions_walk),
+        title: Text('Camminata · ${block.minutes} min previsti'),
+        subtitle: Text(
+          '${block.positionLabel} · $state${walking?.endedAt == null ? '' : ' · ${walking!.activeDuration(walking.endedAt!).inSeconds ~/ 60} min effettivi'}',
+        ),
+      ),
     );
   }
 }
@@ -172,10 +216,12 @@ class _ExerciseHistoryRow extends StatelessWidget {
                 top: -4,
                 child: CircleAvatar(
                   radius: 11,
-                  backgroundColor: ForgeColors.anthraciteSurfaceHigh,
+                  backgroundColor: Theme.of(
+                    context,
+                  ).colorScheme.surfaceContainerHighest,
                   child: Text(
                     '${exercise.order}',
-                    style: const TextStyle(fontSize: 11),
+                    style: TextStyle(fontSize: ForgeTypography.badgeSize),
                   ),
                 ),
               ),

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:drift/drift.dart';
 
 import '../../domain/entities/planned_activity.dart';
@@ -317,6 +318,7 @@ class BackupRestoreService {
         level: w.level,
         selectedLevels: w.effectiveSelectedLevels.toSet(),
         estimatedDurationMinutes: w.estimatedDurationMinutes,
+        walkingBlock: w.walkingBlock,
         status: WorkoutDefinitionStatus.fromCode(w.status),
         origin: WorkoutOrigin.fromCode(w.origin),
         isActive: w.isActive,
@@ -391,6 +393,12 @@ class BackupRestoreService {
               ),
               idProfilo: mapping.profileIds[s.profileLocalId]!,
               nomeAllenamentoSnapshot: s.workoutNameSnapshot,
+              camminataSnapshot: Value(s.walkingBlock?.encode()),
+              idCamminata: Value(
+                s.walkingSessionLocalId == null
+                    ? null
+                    : mapping.walkingSessionIds[s.walkingSessionLocalId]!,
+              ),
               stato: s.status,
               indiceEsercizioCorrente: Value(s.currentExerciseIndex),
               dataInizio: s.startedAt,
@@ -422,6 +430,9 @@ class BackupRestoreService {
               idEsercizio: exerciseIdByCode[se.exerciseCode]!,
               ordine: se.order,
               serieTotali: se.totalSets,
+              prestazioni: Value(
+                jsonEncode(se.performedSets.map((e) => e.toJson()).toList()),
+              ),
               serieCompletate: Value(se.completedSets),
               ripetizioni: Value(se.repetitions),
               durataSecondi: Value(se.durationSeconds),
@@ -446,6 +457,7 @@ class BackupRestoreService {
         status: PlannedActivityStatus.fromCode(a.status),
         origin: PlannedActivityOrigin.fromCode(a.origin),
         notes: a.notes,
+        reminderAt: a.reminderAt,
         workoutSessionId: a.workoutSessionLocalId == null
             ? null
             : mapping.workoutSessionIds[a.workoutSessionLocalId],

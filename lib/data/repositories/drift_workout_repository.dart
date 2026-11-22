@@ -1,3 +1,5 @@
+import 'package:drift/drift.dart';
+
 import '../../domain/entities/workout.dart';
 import '../../domain/entities/workout_details.dart';
 import '../../domain/entities/workout_enums.dart';
@@ -121,10 +123,41 @@ class DriftWorkoutRepository implements WorkoutRepository {
 
   @override
   Future<void> deleteWorkout(int id) async {
-    // Le righe allenamenti_esercizi vengono eliminate in CASCADE dal DB
-    // (foreign_keys = ON dalla Milestone 4.1); il catalogo esercizi non è
-    // coinvolto in nessun modo da questa cancellazione.
-    await db.allenamentiDao.deleteById(id);
+    await db.transaction(() async {
+      final active =
+          await (db.select(db.sessioniAllenamentoTable)..where(
+                (t) =>
+                    t.idAllenamento.equals(id) &
+                    t.stato.isIn(['IN_PROGRESS', 'PAUSED']),
+              ))
+              .get();
+      if (active.isNotEmpty) {
+        throw StateError(
+          'Termina la sessione attiva prima di eliminare la scheda.',
+        );
+      }
+      // Lo storico conserva nome, esercizi e prescrizioni snapshot.
+      await (db.update(
+        db.sessioniAllenamentoTable,
+      )..where((t) => t.idAllenamento.equals(id))).write(
+        const SessioniAllenamentoTableCompanion(idAllenamento: Value(null)),
+      );
+      await (db.update(
+        db.attivitaPianificateTable,
+      )..where((t) => t.idAllenamento.equals(id))).write(
+        const AttivitaPianificateTableCompanion(idAllenamento: Value(null)),
+      );
+      final entries = await db.allenamentiEserciziDao.getByWorkoutId(id);
+      await (db.update(db.sessioniEserciziTable)..where(
+            (t) => t.idAllenamentoEsercizio.isIn(entries.map((e) => e.id)),
+          ))
+          .write(
+            const SessioniEserciziTableCompanion(
+              idAllenamentoEsercizio: Value(null),
+            ),
+          );
+      await db.allenamentiDao.deleteById(id);
+    });
   }
 
   @override

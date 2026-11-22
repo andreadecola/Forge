@@ -146,7 +146,7 @@ abstract final class PlannedActivityPresentation {
         );
         return workoutAsync.when(
           data: (workout) => Text(
-            '${workout?.name ?? 'Allenamento non più disponibile'}$suffix',
+            '${workout?.name ?? 'Allenamento non più disponibile'}${workout?.walkingBlock == null ? '' : ' · Camminata ${workout!.walkingBlock!.minutes} min (${workout.walkingBlock!.positionLabel.toLowerCase()})'}$suffix',
           ),
           loading: () => const Text('Caricamento...'),
           error: (error, _) => const Text('Allenamento non disponibile'),

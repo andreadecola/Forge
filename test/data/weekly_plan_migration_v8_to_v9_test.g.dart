@@ -10202,6 +10202,17 @@ class $AllenamentiTableTable extends AllenamentiTable
     type: DriftSqlType.int,
     requiredDuringInsert: false,
   );
+  static const VerificationMeta _camminataMeta = const VerificationMeta(
+    'camminata',
+  );
+  @override
+  late final GeneratedColumn<String> camminata = GeneratedColumn<String>(
+    'camminata',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _statoMeta = const VerificationMeta('stato');
   @override
   late final GeneratedColumn<String> stato = GeneratedColumn<String>(
@@ -10268,6 +10279,7 @@ class $AllenamentiTableTable extends AllenamentiTable
     livello,
     livelli,
     durataStimataMinuti,
+    camminata,
     stato,
     origine,
     attivo,
@@ -10344,6 +10356,12 @@ class $AllenamentiTableTable extends AllenamentiTable
           data['durata_stimata_minuti']!,
           _durataStimataMinutiMeta,
         ),
+      );
+    }
+    if (data.containsKey('camminata')) {
+      context.handle(
+        _camminataMeta,
+        camminata.isAcceptableOrUnknown(data['camminata']!, _camminataMeta),
       );
     }
     if (data.containsKey('stato')) {
@@ -10431,6 +10449,10 @@ class $AllenamentiTableTable extends AllenamentiTable
         DriftSqlType.int,
         data['${effectivePrefix}durata_stimata_minuti'],
       ),
+      camminata: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}camminata'],
+      ),
       stato: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}stato'],
@@ -10476,6 +10498,7 @@ class AllenamentiTableData extends DataClass
   /// fallback per quelle righe.
   final String? livelli;
   final int? durataStimataMinuti;
+  final String? camminata;
 
   /// Codice stabile di `WorkoutDefinitionStatus`.
   final String stato;
@@ -10494,6 +10517,7 @@ class AllenamentiTableData extends DataClass
     required this.livello,
     this.livelli,
     this.durataStimataMinuti,
+    this.camminata,
     required this.stato,
     required this.origine,
     required this.attivo,
@@ -10516,6 +10540,9 @@ class AllenamentiTableData extends DataClass
     }
     if (!nullToAbsent || durataStimataMinuti != null) {
       map['durata_stimata_minuti'] = Variable<int>(durataStimataMinuti);
+    }
+    if (!nullToAbsent || camminata != null) {
+      map['camminata'] = Variable<String>(camminata);
     }
     map['stato'] = Variable<String>(stato);
     map['origine'] = Variable<String>(origine);
@@ -10541,6 +10568,9 @@ class AllenamentiTableData extends DataClass
       durataStimataMinuti: durataStimataMinuti == null && nullToAbsent
           ? const Value.absent()
           : Value(durataStimataMinuti),
+      camminata: camminata == null && nullToAbsent
+          ? const Value.absent()
+          : Value(camminata),
       stato: Value(stato),
       origine: Value(origine),
       attivo: Value(attivo),
@@ -10565,6 +10595,7 @@ class AllenamentiTableData extends DataClass
       durataStimataMinuti: serializer.fromJson<int?>(
         json['durataStimataMinuti'],
       ),
+      camminata: serializer.fromJson<String?>(json['camminata']),
       stato: serializer.fromJson<String>(json['stato']),
       origine: serializer.fromJson<String>(json['origine']),
       attivo: serializer.fromJson<bool>(json['attivo']),
@@ -10584,6 +10615,7 @@ class AllenamentiTableData extends DataClass
       'livello': serializer.toJson<int>(livello),
       'livelli': serializer.toJson<String?>(livelli),
       'durataStimataMinuti': serializer.toJson<int?>(durataStimataMinuti),
+      'camminata': serializer.toJson<String?>(camminata),
       'stato': serializer.toJson<String>(stato),
       'origine': serializer.toJson<String>(origine),
       'attivo': serializer.toJson<bool>(attivo),
@@ -10601,6 +10633,7 @@ class AllenamentiTableData extends DataClass
     int? livello,
     Value<String?> livelli = const Value.absent(),
     Value<int?> durataStimataMinuti = const Value.absent(),
+    Value<String?> camminata = const Value.absent(),
     String? stato,
     String? origine,
     bool? attivo,
@@ -10617,6 +10650,7 @@ class AllenamentiTableData extends DataClass
     durataStimataMinuti: durataStimataMinuti.present
         ? durataStimataMinuti.value
         : this.durataStimataMinuti,
+    camminata: camminata.present ? camminata.value : this.camminata,
     stato: stato ?? this.stato,
     origine: origine ?? this.origine,
     attivo: attivo ?? this.attivo,
@@ -10639,6 +10673,7 @@ class AllenamentiTableData extends DataClass
       durataStimataMinuti: data.durataStimataMinuti.present
           ? data.durataStimataMinuti.value
           : this.durataStimataMinuti,
+      camminata: data.camminata.present ? data.camminata.value : this.camminata,
       stato: data.stato.present ? data.stato.value : this.stato,
       origine: data.origine.present ? data.origine.value : this.origine,
       attivo: data.attivo.present ? data.attivo.value : this.attivo,
@@ -10662,6 +10697,7 @@ class AllenamentiTableData extends DataClass
           ..write('livello: $livello, ')
           ..write('livelli: $livelli, ')
           ..write('durataStimataMinuti: $durataStimataMinuti, ')
+          ..write('camminata: $camminata, ')
           ..write('stato: $stato, ')
           ..write('origine: $origine, ')
           ..write('attivo: $attivo, ')
@@ -10681,6 +10717,7 @@ class AllenamentiTableData extends DataClass
     livello,
     livelli,
     durataStimataMinuti,
+    camminata,
     stato,
     origine,
     attivo,
@@ -10699,6 +10736,7 @@ class AllenamentiTableData extends DataClass
           other.livello == this.livello &&
           other.livelli == this.livelli &&
           other.durataStimataMinuti == this.durataStimataMinuti &&
+          other.camminata == this.camminata &&
           other.stato == this.stato &&
           other.origine == this.origine &&
           other.attivo == this.attivo &&
@@ -10715,6 +10753,7 @@ class AllenamentiTableCompanion extends UpdateCompanion<AllenamentiTableData> {
   final Value<int> livello;
   final Value<String?> livelli;
   final Value<int?> durataStimataMinuti;
+  final Value<String?> camminata;
   final Value<String> stato;
   final Value<String> origine;
   final Value<bool> attivo;
@@ -10729,6 +10768,7 @@ class AllenamentiTableCompanion extends UpdateCompanion<AllenamentiTableData> {
     this.livello = const Value.absent(),
     this.livelli = const Value.absent(),
     this.durataStimataMinuti = const Value.absent(),
+    this.camminata = const Value.absent(),
     this.stato = const Value.absent(),
     this.origine = const Value.absent(),
     this.attivo = const Value.absent(),
@@ -10744,6 +10784,7 @@ class AllenamentiTableCompanion extends UpdateCompanion<AllenamentiTableData> {
     this.livello = const Value.absent(),
     this.livelli = const Value.absent(),
     this.durataStimataMinuti = const Value.absent(),
+    this.camminata = const Value.absent(),
     required String stato,
     required String origine,
     this.attivo = const Value.absent(),
@@ -10765,6 +10806,7 @@ class AllenamentiTableCompanion extends UpdateCompanion<AllenamentiTableData> {
     Expression<int>? livello,
     Expression<String>? livelli,
     Expression<int>? durataStimataMinuti,
+    Expression<String>? camminata,
     Expression<String>? stato,
     Expression<String>? origine,
     Expression<bool>? attivo,
@@ -10781,6 +10823,7 @@ class AllenamentiTableCompanion extends UpdateCompanion<AllenamentiTableData> {
       if (livelli != null) 'livelli': livelli,
       if (durataStimataMinuti != null)
         'durata_stimata_minuti': durataStimataMinuti,
+      if (camminata != null) 'camminata': camminata,
       if (stato != null) 'stato': stato,
       if (origine != null) 'origine': origine,
       if (attivo != null) 'attivo': attivo,
@@ -10798,6 +10841,7 @@ class AllenamentiTableCompanion extends UpdateCompanion<AllenamentiTableData> {
     Value<int>? livello,
     Value<String?>? livelli,
     Value<int?>? durataStimataMinuti,
+    Value<String?>? camminata,
     Value<String>? stato,
     Value<String>? origine,
     Value<bool>? attivo,
@@ -10813,6 +10857,7 @@ class AllenamentiTableCompanion extends UpdateCompanion<AllenamentiTableData> {
       livello: livello ?? this.livello,
       livelli: livelli ?? this.livelli,
       durataStimataMinuti: durataStimataMinuti ?? this.durataStimataMinuti,
+      camminata: camminata ?? this.camminata,
       stato: stato ?? this.stato,
       origine: origine ?? this.origine,
       attivo: attivo ?? this.attivo,
@@ -10848,6 +10893,9 @@ class AllenamentiTableCompanion extends UpdateCompanion<AllenamentiTableData> {
     if (durataStimataMinuti.present) {
       map['durata_stimata_minuti'] = Variable<int>(durataStimataMinuti.value);
     }
+    if (camminata.present) {
+      map['camminata'] = Variable<String>(camminata.value);
+    }
     if (stato.present) {
       map['stato'] = Variable<String>(stato.value);
     }
@@ -10877,6 +10925,7 @@ class AllenamentiTableCompanion extends UpdateCompanion<AllenamentiTableData> {
           ..write('livello: $livello, ')
           ..write('livelli: $livelli, ')
           ..write('durataStimataMinuti: $durataStimataMinuti, ')
+          ..write('camminata: $camminata, ')
           ..write('stato: $stato, ')
           ..write('origine: $origine, ')
           ..write('attivo: $attivo, ')
@@ -11708,6 +11757,32 @@ class $SessioniAllenamentoTableTable extends SessioniAllenamentoTable
         type: DriftSqlType.string,
         requiredDuringInsert: true,
       );
+  static const VerificationMeta _camminataSnapshotMeta = const VerificationMeta(
+    'camminataSnapshot',
+  );
+  @override
+  late final GeneratedColumn<String> camminataSnapshot =
+      GeneratedColumn<String>(
+        'camminata_snapshot',
+        aliasedName,
+        true,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+      );
+  static const VerificationMeta _idCamminataMeta = const VerificationMeta(
+    'idCamminata',
+  );
+  @override
+  late final GeneratedColumn<int> idCamminata = GeneratedColumn<int>(
+    'id_camminata',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES camminate (id) ON DELETE SET NULL',
+    ),
+  );
   static const VerificationMeta _statoMeta = const VerificationMeta('stato');
   @override
   late final GeneratedColumn<String> stato = GeneratedColumn<String>(
@@ -11853,6 +11928,8 @@ class $SessioniAllenamentoTableTable extends SessioniAllenamentoTable
     idAllenamento,
     idProfilo,
     nomeAllenamentoSnapshot,
+    camminataSnapshot,
+    idCamminata,
     stato,
     indiceEsercizioCorrente,
     dataInizio,
@@ -11908,6 +11985,24 @@ class $SessioniAllenamentoTableTable extends SessioniAllenamentoTable
       );
     } else if (isInserting) {
       context.missing(_nomeAllenamentoSnapshotMeta);
+    }
+    if (data.containsKey('camminata_snapshot')) {
+      context.handle(
+        _camminataSnapshotMeta,
+        camminataSnapshot.isAcceptableOrUnknown(
+          data['camminata_snapshot']!,
+          _camminataSnapshotMeta,
+        ),
+      );
+    }
+    if (data.containsKey('id_camminata')) {
+      context.handle(
+        _idCamminataMeta,
+        idCamminata.isAcceptableOrUnknown(
+          data['id_camminata']!,
+          _idCamminataMeta,
+        ),
+      );
     }
     if (data.containsKey('stato')) {
       context.handle(
@@ -12035,6 +12130,14 @@ class $SessioniAllenamentoTableTable extends SessioniAllenamentoTable
         DriftSqlType.string,
         data['${effectivePrefix}nome_allenamento_snapshot'],
       )!,
+      camminataSnapshot: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}camminata_snapshot'],
+      ),
+      idCamminata: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id_camminata'],
+      ),
       stato: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}stato'],
@@ -12102,6 +12205,8 @@ class SessioniAllenamentoTableData extends DataClass
   /// rinominata (o eliminata) dopo, ma lo storico deve restare leggibile
   /// con il nome usato quando la sessione è iniziata (sezione 7).
   final String nomeAllenamentoSnapshot;
+  final String? camminataSnapshot;
+  final int? idCamminata;
 
   /// Codice stabile di `WorkoutSessionPersistenceStatus`
   /// (IN_PROGRESS/PAUSED/COMPLETED/ABORTED).
@@ -12133,6 +12238,8 @@ class SessioniAllenamentoTableData extends DataClass
     this.idAllenamento,
     required this.idProfilo,
     required this.nomeAllenamentoSnapshot,
+    this.camminataSnapshot,
+    this.idCamminata,
     required this.stato,
     required this.indiceEsercizioCorrente,
     required this.dataInizio,
@@ -12157,6 +12264,12 @@ class SessioniAllenamentoTableData extends DataClass
     map['nome_allenamento_snapshot'] = Variable<String>(
       nomeAllenamentoSnapshot,
     );
+    if (!nullToAbsent || camminataSnapshot != null) {
+      map['camminata_snapshot'] = Variable<String>(camminataSnapshot);
+    }
+    if (!nullToAbsent || idCamminata != null) {
+      map['id_camminata'] = Variable<int>(idCamminata);
+    }
     map['stato'] = Variable<String>(stato);
     map['indice_esercizio_corrente'] = Variable<int>(indiceEsercizioCorrente);
     map['data_inizio'] = Variable<DateTime>(dataInizio);
@@ -12190,6 +12303,12 @@ class SessioniAllenamentoTableData extends DataClass
           : Value(idAllenamento),
       idProfilo: Value(idProfilo),
       nomeAllenamentoSnapshot: Value(nomeAllenamentoSnapshot),
+      camminataSnapshot: camminataSnapshot == null && nullToAbsent
+          ? const Value.absent()
+          : Value(camminataSnapshot),
+      idCamminata: idCamminata == null && nullToAbsent
+          ? const Value.absent()
+          : Value(idCamminata),
       stato: Value(stato),
       indiceEsercizioCorrente: Value(indiceEsercizioCorrente),
       dataInizio: Value(dataInizio),
@@ -12227,6 +12346,10 @@ class SessioniAllenamentoTableData extends DataClass
       nomeAllenamentoSnapshot: serializer.fromJson<String>(
         json['nomeAllenamentoSnapshot'],
       ),
+      camminataSnapshot: serializer.fromJson<String?>(
+        json['camminataSnapshot'],
+      ),
+      idCamminata: serializer.fromJson<int?>(json['idCamminata']),
       stato: serializer.fromJson<String>(json['stato']),
       indiceEsercizioCorrente: serializer.fromJson<int>(
         json['indiceEsercizioCorrente'],
@@ -12255,6 +12378,8 @@ class SessioniAllenamentoTableData extends DataClass
       'nomeAllenamentoSnapshot': serializer.toJson<String>(
         nomeAllenamentoSnapshot,
       ),
+      'camminataSnapshot': serializer.toJson<String?>(camminataSnapshot),
+      'idCamminata': serializer.toJson<int?>(idCamminata),
       'stato': serializer.toJson<String>(stato),
       'indiceEsercizioCorrente': serializer.toJson<int>(
         indiceEsercizioCorrente,
@@ -12277,6 +12402,8 @@ class SessioniAllenamentoTableData extends DataClass
     Value<int?> idAllenamento = const Value.absent(),
     int? idProfilo,
     String? nomeAllenamentoSnapshot,
+    Value<String?> camminataSnapshot = const Value.absent(),
+    Value<int?> idCamminata = const Value.absent(),
     String? stato,
     int? indiceEsercizioCorrente,
     DateTime? dataInizio,
@@ -12297,6 +12424,10 @@ class SessioniAllenamentoTableData extends DataClass
     idProfilo: idProfilo ?? this.idProfilo,
     nomeAllenamentoSnapshot:
         nomeAllenamentoSnapshot ?? this.nomeAllenamentoSnapshot,
+    camminataSnapshot: camminataSnapshot.present
+        ? camminataSnapshot.value
+        : this.camminataSnapshot,
+    idCamminata: idCamminata.present ? idCamminata.value : this.idCamminata,
     stato: stato ?? this.stato,
     indiceEsercizioCorrente:
         indiceEsercizioCorrente ?? this.indiceEsercizioCorrente,
@@ -12329,6 +12460,12 @@ class SessioniAllenamentoTableData extends DataClass
       nomeAllenamentoSnapshot: data.nomeAllenamentoSnapshot.present
           ? data.nomeAllenamentoSnapshot.value
           : this.nomeAllenamentoSnapshot,
+      camminataSnapshot: data.camminataSnapshot.present
+          ? data.camminataSnapshot.value
+          : this.camminataSnapshot,
+      idCamminata: data.idCamminata.present
+          ? data.idCamminata.value
+          : this.idCamminata,
       stato: data.stato.present ? data.stato.value : this.stato,
       indiceEsercizioCorrente: data.indiceEsercizioCorrente.present
           ? data.indiceEsercizioCorrente.value
@@ -12367,6 +12504,8 @@ class SessioniAllenamentoTableData extends DataClass
           ..write('idAllenamento: $idAllenamento, ')
           ..write('idProfilo: $idProfilo, ')
           ..write('nomeAllenamentoSnapshot: $nomeAllenamentoSnapshot, ')
+          ..write('camminataSnapshot: $camminataSnapshot, ')
+          ..write('idCamminata: $idCamminata, ')
           ..write('stato: $stato, ')
           ..write('indiceEsercizioCorrente: $indiceEsercizioCorrente, ')
           ..write('dataInizio: $dataInizio, ')
@@ -12389,6 +12528,8 @@ class SessioniAllenamentoTableData extends DataClass
     idAllenamento,
     idProfilo,
     nomeAllenamentoSnapshot,
+    camminataSnapshot,
+    idCamminata,
     stato,
     indiceEsercizioCorrente,
     dataInizio,
@@ -12410,6 +12551,8 @@ class SessioniAllenamentoTableData extends DataClass
           other.idAllenamento == this.idAllenamento &&
           other.idProfilo == this.idProfilo &&
           other.nomeAllenamentoSnapshot == this.nomeAllenamentoSnapshot &&
+          other.camminataSnapshot == this.camminataSnapshot &&
+          other.idCamminata == this.idCamminata &&
           other.stato == this.stato &&
           other.indiceEsercizioCorrente == this.indiceEsercizioCorrente &&
           other.dataInizio == this.dataInizio &&
@@ -12430,6 +12573,8 @@ class SessioniAllenamentoTableCompanion
   final Value<int?> idAllenamento;
   final Value<int> idProfilo;
   final Value<String> nomeAllenamentoSnapshot;
+  final Value<String?> camminataSnapshot;
+  final Value<int?> idCamminata;
   final Value<String> stato;
   final Value<int> indiceEsercizioCorrente;
   final Value<DateTime> dataInizio;
@@ -12447,6 +12592,8 @@ class SessioniAllenamentoTableCompanion
     this.idAllenamento = const Value.absent(),
     this.idProfilo = const Value.absent(),
     this.nomeAllenamentoSnapshot = const Value.absent(),
+    this.camminataSnapshot = const Value.absent(),
+    this.idCamminata = const Value.absent(),
     this.stato = const Value.absent(),
     this.indiceEsercizioCorrente = const Value.absent(),
     this.dataInizio = const Value.absent(),
@@ -12465,6 +12612,8 @@ class SessioniAllenamentoTableCompanion
     this.idAllenamento = const Value.absent(),
     required int idProfilo,
     required String nomeAllenamentoSnapshot,
+    this.camminataSnapshot = const Value.absent(),
+    this.idCamminata = const Value.absent(),
     required String stato,
     this.indiceEsercizioCorrente = const Value.absent(),
     required DateTime dataInizio,
@@ -12488,6 +12637,8 @@ class SessioniAllenamentoTableCompanion
     Expression<int>? idAllenamento,
     Expression<int>? idProfilo,
     Expression<String>? nomeAllenamentoSnapshot,
+    Expression<String>? camminataSnapshot,
+    Expression<int>? idCamminata,
     Expression<String>? stato,
     Expression<int>? indiceEsercizioCorrente,
     Expression<DateTime>? dataInizio,
@@ -12507,6 +12658,8 @@ class SessioniAllenamentoTableCompanion
       if (idProfilo != null) 'id_profilo': idProfilo,
       if (nomeAllenamentoSnapshot != null)
         'nome_allenamento_snapshot': nomeAllenamentoSnapshot,
+      if (camminataSnapshot != null) 'camminata_snapshot': camminataSnapshot,
+      if (idCamminata != null) 'id_camminata': idCamminata,
       if (stato != null) 'stato': stato,
       if (indiceEsercizioCorrente != null)
         'indice_esercizio_corrente': indiceEsercizioCorrente,
@@ -12530,6 +12683,8 @@ class SessioniAllenamentoTableCompanion
     Value<int?>? idAllenamento,
     Value<int>? idProfilo,
     Value<String>? nomeAllenamentoSnapshot,
+    Value<String?>? camminataSnapshot,
+    Value<int?>? idCamminata,
     Value<String>? stato,
     Value<int>? indiceEsercizioCorrente,
     Value<DateTime>? dataInizio,
@@ -12549,6 +12704,8 @@ class SessioniAllenamentoTableCompanion
       idProfilo: idProfilo ?? this.idProfilo,
       nomeAllenamentoSnapshot:
           nomeAllenamentoSnapshot ?? this.nomeAllenamentoSnapshot,
+      camminataSnapshot: camminataSnapshot ?? this.camminataSnapshot,
+      idCamminata: idCamminata ?? this.idCamminata,
       stato: stato ?? this.stato,
       indiceEsercizioCorrente:
           indiceEsercizioCorrente ?? this.indiceEsercizioCorrente,
@@ -12581,6 +12738,12 @@ class SessioniAllenamentoTableCompanion
       map['nome_allenamento_snapshot'] = Variable<String>(
         nomeAllenamentoSnapshot.value,
       );
+    }
+    if (camminataSnapshot.present) {
+      map['camminata_snapshot'] = Variable<String>(camminataSnapshot.value);
+    }
+    if (idCamminata.present) {
+      map['id_camminata'] = Variable<int>(idCamminata.value);
     }
     if (stato.present) {
       map['stato'] = Variable<String>(stato.value);
@@ -12630,6 +12793,8 @@ class SessioniAllenamentoTableCompanion
           ..write('idAllenamento: $idAllenamento, ')
           ..write('idProfilo: $idProfilo, ')
           ..write('nomeAllenamentoSnapshot: $nomeAllenamentoSnapshot, ')
+          ..write('camminataSnapshot: $camminataSnapshot, ')
+          ..write('idCamminata: $idCamminata, ')
           ..write('stato: $stato, ')
           ..write('indiceEsercizioCorrente: $indiceEsercizioCorrente, ')
           ..write('dataInizio: $dataInizio, ')
@@ -12739,6 +12904,18 @@ class $SessioniEserciziTableTable extends SessioniEserciziTable
     requiredDuringInsert: false,
     defaultValue: const Constant(0),
   );
+  static const VerificationMeta _prestazioniMeta = const VerificationMeta(
+    'prestazioni',
+  );
+  @override
+  late final GeneratedColumn<String> prestazioni = GeneratedColumn<String>(
+    'prestazioni',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('[]'),
+  );
   static const VerificationMeta _ripetizioniMeta = const VerificationMeta(
     'ripetizioni',
   );
@@ -12834,6 +13011,7 @@ class $SessioniEserciziTableTable extends SessioniEserciziTable
     ordine,
     serieTotali,
     serieCompletate,
+    prestazioni,
     ripetizioni,
     durataSecondi,
     recuperoSecondi,
@@ -12910,6 +13088,15 @@ class $SessioniEserciziTableTable extends SessioniEserciziTable
         serieCompletate.isAcceptableOrUnknown(
           data['serie_completate']!,
           _serieCompletateMeta,
+        ),
+      );
+    }
+    if (data.containsKey('prestazioni')) {
+      context.handle(
+        _prestazioniMeta,
+        prestazioni.isAcceptableOrUnknown(
+          data['prestazioni']!,
+          _prestazioniMeta,
         ),
       );
     }
@@ -13018,6 +13205,10 @@ class $SessioniEserciziTableTable extends SessioniEserciziTable
         DriftSqlType.int,
         data['${effectivePrefix}serie_completate'],
       )!,
+      prestazioni: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}prestazioni'],
+      )!,
       ripetizioni: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}ripetizioni'],
@@ -13071,6 +13262,9 @@ class SessioniEserciziTableData extends DataClass
   /// [serieCompletate]).
   final int serieTotali;
   final int serieCompletate;
+
+  /// JSON delle prestazioni effettive per serie (EVO-009), mai prescrizioni.
+  final String prestazioni;
   final int? ripetizioni;
   final int? durataSecondi;
   final int? recuperoSecondi;
@@ -13086,6 +13280,7 @@ class SessioniEserciziTableData extends DataClass
     required this.ordine,
     required this.serieTotali,
     required this.serieCompletate,
+    required this.prestazioni,
     this.ripetizioni,
     this.durataSecondi,
     this.recuperoSecondi,
@@ -13106,6 +13301,7 @@ class SessioniEserciziTableData extends DataClass
     map['ordine'] = Variable<int>(ordine);
     map['serie_totali'] = Variable<int>(serieTotali);
     map['serie_completate'] = Variable<int>(serieCompletate);
+    map['prestazioni'] = Variable<String>(prestazioni);
     if (!nullToAbsent || ripetizioni != null) {
       map['ripetizioni'] = Variable<int>(ripetizioni);
     }
@@ -13133,6 +13329,7 @@ class SessioniEserciziTableData extends DataClass
       ordine: Value(ordine),
       serieTotali: Value(serieTotali),
       serieCompletate: Value(serieCompletate),
+      prestazioni: Value(prestazioni),
       ripetizioni: ripetizioni == null && nullToAbsent
           ? const Value.absent()
           : Value(ripetizioni),
@@ -13164,6 +13361,7 @@ class SessioniEserciziTableData extends DataClass
       ordine: serializer.fromJson<int>(json['ordine']),
       serieTotali: serializer.fromJson<int>(json['serieTotali']),
       serieCompletate: serializer.fromJson<int>(json['serieCompletate']),
+      prestazioni: serializer.fromJson<String>(json['prestazioni']),
       ripetizioni: serializer.fromJson<int?>(json['ripetizioni']),
       durataSecondi: serializer.fromJson<int?>(json['durataSecondi']),
       recuperoSecondi: serializer.fromJson<int?>(json['recuperoSecondi']),
@@ -13184,6 +13382,7 @@ class SessioniEserciziTableData extends DataClass
       'ordine': serializer.toJson<int>(ordine),
       'serieTotali': serializer.toJson<int>(serieTotali),
       'serieCompletate': serializer.toJson<int>(serieCompletate),
+      'prestazioni': serializer.toJson<String>(prestazioni),
       'ripetizioni': serializer.toJson<int?>(ripetizioni),
       'durataSecondi': serializer.toJson<int?>(durataSecondi),
       'recuperoSecondi': serializer.toJson<int?>(recuperoSecondi),
@@ -13202,6 +13401,7 @@ class SessioniEserciziTableData extends DataClass
     int? ordine,
     int? serieTotali,
     int? serieCompletate,
+    String? prestazioni,
     Value<int?> ripetizioni = const Value.absent(),
     Value<int?> durataSecondi = const Value.absent(),
     Value<int?> recuperoSecondi = const Value.absent(),
@@ -13219,6 +13419,7 @@ class SessioniEserciziTableData extends DataClass
     ordine: ordine ?? this.ordine,
     serieTotali: serieTotali ?? this.serieTotali,
     serieCompletate: serieCompletate ?? this.serieCompletate,
+    prestazioni: prestazioni ?? this.prestazioni,
     ripetizioni: ripetizioni.present ? ripetizioni.value : this.ripetizioni,
     durataSecondi: durataSecondi.present
         ? durataSecondi.value
@@ -13252,6 +13453,9 @@ class SessioniEserciziTableData extends DataClass
       serieCompletate: data.serieCompletate.present
           ? data.serieCompletate.value
           : this.serieCompletate,
+      prestazioni: data.prestazioni.present
+          ? data.prestazioni.value
+          : this.prestazioni,
       ripetizioni: data.ripetizioni.present
           ? data.ripetizioni.value
           : this.ripetizioni,
@@ -13284,6 +13488,7 @@ class SessioniEserciziTableData extends DataClass
           ..write('ordine: $ordine, ')
           ..write('serieTotali: $serieTotali, ')
           ..write('serieCompletate: $serieCompletate, ')
+          ..write('prestazioni: $prestazioni, ')
           ..write('ripetizioni: $ripetizioni, ')
           ..write('durataSecondi: $durataSecondi, ')
           ..write('recuperoSecondi: $recuperoSecondi, ')
@@ -13304,6 +13509,7 @@ class SessioniEserciziTableData extends DataClass
     ordine,
     serieTotali,
     serieCompletate,
+    prestazioni,
     ripetizioni,
     durataSecondi,
     recuperoSecondi,
@@ -13323,6 +13529,7 @@ class SessioniEserciziTableData extends DataClass
           other.ordine == this.ordine &&
           other.serieTotali == this.serieTotali &&
           other.serieCompletate == this.serieCompletate &&
+          other.prestazioni == this.prestazioni &&
           other.ripetizioni == this.ripetizioni &&
           other.durataSecondi == this.durataSecondi &&
           other.recuperoSecondi == this.recuperoSecondi &&
@@ -13341,6 +13548,7 @@ class SessioniEserciziTableCompanion
   final Value<int> ordine;
   final Value<int> serieTotali;
   final Value<int> serieCompletate;
+  final Value<String> prestazioni;
   final Value<int?> ripetizioni;
   final Value<int?> durataSecondi;
   final Value<int?> recuperoSecondi;
@@ -13356,6 +13564,7 @@ class SessioniEserciziTableCompanion
     this.ordine = const Value.absent(),
     this.serieTotali = const Value.absent(),
     this.serieCompletate = const Value.absent(),
+    this.prestazioni = const Value.absent(),
     this.ripetizioni = const Value.absent(),
     this.durataSecondi = const Value.absent(),
     this.recuperoSecondi = const Value.absent(),
@@ -13372,6 +13581,7 @@ class SessioniEserciziTableCompanion
     required int ordine,
     required int serieTotali,
     this.serieCompletate = const Value.absent(),
+    this.prestazioni = const Value.absent(),
     this.ripetizioni = const Value.absent(),
     this.durataSecondi = const Value.absent(),
     this.recuperoSecondi = const Value.absent(),
@@ -13393,6 +13603,7 @@ class SessioniEserciziTableCompanion
     Expression<int>? ordine,
     Expression<int>? serieTotali,
     Expression<int>? serieCompletate,
+    Expression<String>? prestazioni,
     Expression<int>? ripetizioni,
     Expression<int>? durataSecondi,
     Expression<int>? recuperoSecondi,
@@ -13410,6 +13621,7 @@ class SessioniEserciziTableCompanion
       if (ordine != null) 'ordine': ordine,
       if (serieTotali != null) 'serie_totali': serieTotali,
       if (serieCompletate != null) 'serie_completate': serieCompletate,
+      if (prestazioni != null) 'prestazioni': prestazioni,
       if (ripetizioni != null) 'ripetizioni': ripetizioni,
       if (durataSecondi != null) 'durata_secondi': durataSecondi,
       if (recuperoSecondi != null) 'recupero_secondi': recuperoSecondi,
@@ -13428,6 +13640,7 @@ class SessioniEserciziTableCompanion
     Value<int>? ordine,
     Value<int>? serieTotali,
     Value<int>? serieCompletate,
+    Value<String>? prestazioni,
     Value<int?>? ripetizioni,
     Value<int?>? durataSecondi,
     Value<int?>? recuperoSecondi,
@@ -13445,6 +13658,7 @@ class SessioniEserciziTableCompanion
       ordine: ordine ?? this.ordine,
       serieTotali: serieTotali ?? this.serieTotali,
       serieCompletate: serieCompletate ?? this.serieCompletate,
+      prestazioni: prestazioni ?? this.prestazioni,
       ripetizioni: ripetizioni ?? this.ripetizioni,
       durataSecondi: durataSecondi ?? this.durataSecondi,
       recuperoSecondi: recuperoSecondi ?? this.recuperoSecondi,
@@ -13481,6 +13695,9 @@ class SessioniEserciziTableCompanion
     if (serieCompletate.present) {
       map['serie_completate'] = Variable<int>(serieCompletate.value);
     }
+    if (prestazioni.present) {
+      map['prestazioni'] = Variable<String>(prestazioni.value);
+    }
     if (ripetizioni.present) {
       map['ripetizioni'] = Variable<int>(ripetizioni.value);
     }
@@ -13515,6 +13732,7 @@ class SessioniEserciziTableCompanion
           ..write('ordine: $ordine, ')
           ..write('serieTotali: $serieTotali, ')
           ..write('serieCompletate: $serieCompletate, ')
+          ..write('prestazioni: $prestazioni, ')
           ..write('ripetizioni: $ripetizioni, ')
           ..write('durataSecondi: $durataSecondi, ')
           ..write('recuperoSecondi: $recuperoSecondi, ')
@@ -13723,6 +13941,13 @@ abstract class _$_SchemaV8Database extends GeneratedDatabase {
     WritePropagation(
       on: TableUpdateQuery.onTableName(
         'allenamenti',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('sessioni_allenamento', kind: UpdateKind.update)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'camminate',
         limitUpdateKind: UpdateKind.delete,
       ),
       result: [TableUpdate('sessioni_allenamento', kind: UpdateKind.update)],
@@ -15509,6 +15734,31 @@ final class $$CamminateTableTableReferences
       manager.$state.copyWith(prefetchedData: [item]),
     );
   }
+
+  static MultiTypedResultKey<
+    $SessioniAllenamentoTableTable,
+    List<SessioniAllenamentoTableData>
+  >
+  _sessioniAllenamentoTableRefsTable(_$_SchemaV8Database db) =>
+      MultiTypedResultKey.fromTable(
+        db.sessioniAllenamentoTable,
+        aliasName: 'camminate__id__sessioni_allenamento__id_camminata',
+      );
+
+  $$SessioniAllenamentoTableTableProcessedTableManager
+  get sessioniAllenamentoTableRefs {
+    final manager = $$SessioniAllenamentoTableTableTableManager(
+      $_db,
+      $_db.sessioniAllenamentoTable,
+    ).filter((f) => f.idCamminata.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(
+      _sessioniAllenamentoTableRefsTable($_db),
+    );
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
 }
 
 class $$CamminateTableTableFilterComposer
@@ -15601,6 +15851,33 @@ class $$CamminateTableTableFilterComposer
           ),
     );
     return composer;
+  }
+
+  Expression<bool> sessioniAllenamentoTableRefs(
+    Expression<bool> Function($$SessioniAllenamentoTableTableFilterComposer f)
+    f,
+  ) {
+    final $$SessioniAllenamentoTableTableFilterComposer composer =
+        $composerBuilder(
+          composer: this,
+          getCurrentColumn: (t) => t.id,
+          referencedTable: $db.sessioniAllenamentoTable,
+          getReferencedColumn: (t) => t.idCamminata,
+          builder:
+              (
+                joinBuilder, {
+                $addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer,
+              }) => $$SessioniAllenamentoTableTableFilterComposer(
+                $db: $db,
+                $table: $db.sessioniAllenamentoTable,
+                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                joinBuilder: joinBuilder,
+                $removeJoinBuilderFromRootComposer:
+                    $removeJoinBuilderFromRootComposer,
+              ),
+        );
+    return f(composer);
   }
 }
 
@@ -15779,6 +16056,33 @@ class $$CamminateTableTableAnnotationComposer
         );
     return composer;
   }
+
+  Expression<T> sessioniAllenamentoTableRefs<T extends Object>(
+    Expression<T> Function($$SessioniAllenamentoTableTableAnnotationComposer a)
+    f,
+  ) {
+    final $$SessioniAllenamentoTableTableAnnotationComposer composer =
+        $composerBuilder(
+          composer: this,
+          getCurrentColumn: (t) => t.id,
+          referencedTable: $db.sessioniAllenamentoTable,
+          getReferencedColumn: (t) => t.idCamminata,
+          builder:
+              (
+                joinBuilder, {
+                $addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer,
+              }) => $$SessioniAllenamentoTableTableAnnotationComposer(
+                $db: $db,
+                $table: $db.sessioniAllenamentoTable,
+                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                joinBuilder: joinBuilder,
+                $removeJoinBuilderFromRootComposer:
+                    $removeJoinBuilderFromRootComposer,
+              ),
+        );
+    return f(composer);
+  }
 }
 
 class $$CamminateTableTableTableManager
@@ -15794,7 +16098,10 @@ class $$CamminateTableTableTableManager
           $$CamminateTableTableUpdateCompanionBuilder,
           (CamminateTableData, $$CamminateTableTableReferences),
           CamminateTableData,
-          PrefetchHooks Function({bool idProfilo})
+          PrefetchHooks Function({
+            bool idProfilo,
+            bool sessioniAllenamentoTableRefs,
+          })
         > {
   $$CamminateTableTableTableManager(
     _$_SchemaV8Database db,
@@ -15877,48 +16184,75 @@ class $$CamminateTableTableTableManager
                 ),
               )
               .toList(),
-          prefetchHooksCallback: ({idProfilo = false}) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [],
-              addJoins:
-                  <
-                    T extends TableManagerState<
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic
-                    >
-                  >(state) {
-                    if (idProfilo) {
-                      state =
-                          state.withJoin(
-                                currentTable: table,
-                                currentColumn: table.idProfilo,
-                                referencedTable: $$CamminateTableTableReferences
-                                    ._idProfiloTable(db),
-                                referencedColumn:
-                                    $$CamminateTableTableReferences
-                                        ._idProfiloTable(db)
-                                        .id,
-                              )
-                              as T;
-                    }
+          prefetchHooksCallback:
+              ({idProfilo = false, sessioniAllenamentoTableRefs = false}) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [
+                    if (sessioniAllenamentoTableRefs)
+                      db.sessioniAllenamentoTable,
+                  ],
+                  addJoins:
+                      <
+                        T extends TableManagerState<
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic
+                        >
+                      >(state) {
+                        if (idProfilo) {
+                          state =
+                              state.withJoin(
+                                    currentTable: table,
+                                    currentColumn: table.idProfilo,
+                                    referencedTable:
+                                        $$CamminateTableTableReferences
+                                            ._idProfiloTable(db),
+                                    referencedColumn:
+                                        $$CamminateTableTableReferences
+                                            ._idProfiloTable(db)
+                                            .id,
+                                  )
+                                  as T;
+                        }
 
-                    return state;
+                        return state;
+                      },
+                  getPrefetchedDataCallback: (items) async {
+                    return [
+                      if (sessioniAllenamentoTableRefs)
+                        await $_getPrefetchedData<
+                          CamminateTableData,
+                          $CamminateTableTable,
+                          SessioniAllenamentoTableData
+                        >(
+                          currentTable: table,
+                          referencedTable: $$CamminateTableTableReferences
+                              ._sessioniAllenamentoTableRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$CamminateTableTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).sessioniAllenamentoTableRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.idCamminata == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                    ];
                   },
-              getPrefetchedDataCallback: (items) async {
-                return [];
+                );
               },
-            );
-          },
         ),
       );
 }
@@ -15935,7 +16269,10 @@ typedef $$CamminateTableTableProcessedTableManager =
       $$CamminateTableTableUpdateCompanionBuilder,
       (CamminateTableData, $$CamminateTableTableReferences),
       CamminateTableData,
-      PrefetchHooks Function({bool idProfilo})
+      PrefetchHooks Function({
+        bool idProfilo,
+        bool sessioniAllenamentoTableRefs,
+      })
     >;
 typedef $$PressureMeasurementsTableTableCreateCompanionBuilder =
     PressureMeasurementsTableCompanion Function({
@@ -22267,6 +22604,7 @@ typedef $$AllenamentiTableTableCreateCompanionBuilder =
       Value<int> livello,
       Value<String?> livelli,
       Value<int?> durataStimataMinuti,
+      Value<String?> camminata,
       required String stato,
       required String origine,
       Value<bool> attivo,
@@ -22283,6 +22621,7 @@ typedef $$AllenamentiTableTableUpdateCompanionBuilder =
       Value<int> livello,
       Value<String?> livelli,
       Value<int?> durataStimataMinuti,
+      Value<String?> camminata,
       Value<String> stato,
       Value<String> origine,
       Value<bool> attivo,
@@ -22413,6 +22752,11 @@ class $$AllenamentiTableTableFilterComposer
 
   ColumnFilters<int> get durataStimataMinuti => $composableBuilder(
     column: $table.durataStimataMinuti,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get camminata => $composableBuilder(
+    column: $table.camminata,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -22563,6 +22907,11 @@ class $$AllenamentiTableTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<String> get camminata => $composableBuilder(
+    column: $table.camminata,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<String> get stato => $composableBuilder(
     column: $table.stato,
     builder: (column) => ColumnOrderings(column),
@@ -22647,6 +22996,9 @@ class $$AllenamentiTableTableAnnotationComposer
     column: $table.durataStimataMinuti,
     builder: (column) => column,
   );
+
+  GeneratedColumn<String> get camminata =>
+      $composableBuilder(column: $table.camminata, builder: (column) => column);
 
   GeneratedColumn<String> get stato =>
       $composableBuilder(column: $table.stato, builder: (column) => column);
@@ -22788,6 +23140,7 @@ class $$AllenamentiTableTableTableManager
                 Value<int> livello = const Value.absent(),
                 Value<String?> livelli = const Value.absent(),
                 Value<int?> durataStimataMinuti = const Value.absent(),
+                Value<String?> camminata = const Value.absent(),
                 Value<String> stato = const Value.absent(),
                 Value<String> origine = const Value.absent(),
                 Value<bool> attivo = const Value.absent(),
@@ -22802,6 +23155,7 @@ class $$AllenamentiTableTableTableManager
                 livello: livello,
                 livelli: livelli,
                 durataStimataMinuti: durataStimataMinuti,
+                camminata: camminata,
                 stato: stato,
                 origine: origine,
                 attivo: attivo,
@@ -22818,6 +23172,7 @@ class $$AllenamentiTableTableTableManager
                 Value<int> livello = const Value.absent(),
                 Value<String?> livelli = const Value.absent(),
                 Value<int?> durataStimataMinuti = const Value.absent(),
+                Value<String?> camminata = const Value.absent(),
                 required String stato,
                 required String origine,
                 Value<bool> attivo = const Value.absent(),
@@ -22832,6 +23187,7 @@ class $$AllenamentiTableTableTableManager
                 livello: livello,
                 livelli: livelli,
                 durataStimataMinuti: durataStimataMinuti,
+                camminata: camminata,
                 stato: stato,
                 origine: origine,
                 attivo: attivo,
@@ -23661,6 +24017,8 @@ typedef $$SessioniAllenamentoTableTableCreateCompanionBuilder =
       Value<int?> idAllenamento,
       required int idProfilo,
       required String nomeAllenamentoSnapshot,
+      Value<String?> camminataSnapshot,
+      Value<int?> idCamminata,
       required String stato,
       Value<int> indiceEsercizioCorrente,
       required DateTime dataInizio,
@@ -23680,6 +24038,8 @@ typedef $$SessioniAllenamentoTableTableUpdateCompanionBuilder =
       Value<int?> idAllenamento,
       Value<int> idProfilo,
       Value<String> nomeAllenamentoSnapshot,
+      Value<String?> camminataSnapshot,
+      Value<int?> idCamminata,
       Value<String> stato,
       Value<int> indiceEsercizioCorrente,
       Value<DateTime> dataInizio,
@@ -23744,6 +24104,24 @@ final class $$SessioniAllenamentoTableTableReferences
     );
   }
 
+  static $CamminateTableTable _idCamminataTable(_$_SchemaV8Database db) => db
+      .camminateTable
+      .createAlias('sessioni_allenamento__id_camminata__camminate__id');
+
+  $$CamminateTableTableProcessedTableManager? get idCamminata {
+    final $_column = $_itemColumn<int>('id_camminata');
+    if ($_column == null) return null;
+    final manager = $$CamminateTableTableTableManager(
+      $_db,
+      $_db.camminateTable,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_idCamminataTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+
   static MultiTypedResultKey<
     $SessioniEserciziTableTable,
     List<SessioniEserciziTableData>
@@ -23786,6 +24164,11 @@ class $$SessioniAllenamentoTableTableFilterComposer
 
   ColumnFilters<String> get nomeAllenamentoSnapshot => $composableBuilder(
     column: $table.nomeAllenamentoSnapshot,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get camminataSnapshot => $composableBuilder(
+    column: $table.camminataSnapshot,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -23895,6 +24278,29 @@ class $$SessioniAllenamentoTableTableFilterComposer
     return composer;
   }
 
+  $$CamminateTableTableFilterComposer get idCamminata {
+    final $$CamminateTableTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.idCamminata,
+      referencedTable: $db.camminateTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$CamminateTableTableFilterComposer(
+            $db: $db,
+            $table: $db.camminateTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
   Expression<bool> sessioniEserciziTableRefs(
     Expression<bool> Function($$SessioniEserciziTableTableFilterComposer f) f,
   ) {
@@ -23938,6 +24344,11 @@ class $$SessioniAllenamentoTableTableOrderingComposer
 
   ColumnOrderings<String> get nomeAllenamentoSnapshot => $composableBuilder(
     column: $table.nomeAllenamentoSnapshot,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get camminataSnapshot => $composableBuilder(
+    column: $table.camminataSnapshot,
     builder: (column) => ColumnOrderings(column),
   );
 
@@ -24046,6 +24457,29 @@ class $$SessioniAllenamentoTableTableOrderingComposer
     );
     return composer;
   }
+
+  $$CamminateTableTableOrderingComposer get idCamminata {
+    final $$CamminateTableTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.idCamminata,
+      referencedTable: $db.camminateTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$CamminateTableTableOrderingComposer(
+            $db: $db,
+            $table: $db.camminateTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
 }
 
 class $$SessioniAllenamentoTableTableAnnotationComposer
@@ -24062,6 +24496,11 @@ class $$SessioniAllenamentoTableTableAnnotationComposer
 
   GeneratedColumn<String> get nomeAllenamentoSnapshot => $composableBuilder(
     column: $table.nomeAllenamentoSnapshot,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get camminataSnapshot => $composableBuilder(
+    column: $table.camminataSnapshot,
     builder: (column) => column,
   );
 
@@ -24164,6 +24603,29 @@ class $$SessioniAllenamentoTableTableAnnotationComposer
     return composer;
   }
 
+  $$CamminateTableTableAnnotationComposer get idCamminata {
+    final $$CamminateTableTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.idCamminata,
+      referencedTable: $db.camminateTable,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$CamminateTableTableAnnotationComposer(
+            $db: $db,
+            $table: $db.camminateTable,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
   Expression<T> sessioniEserciziTableRefs<T extends Object>(
     Expression<T> Function($$SessioniEserciziTableTableAnnotationComposer a) f,
   ) {
@@ -24210,6 +24672,7 @@ class $$SessioniAllenamentoTableTableTableManager
           PrefetchHooks Function({
             bool idAllenamento,
             bool idProfilo,
+            bool idCamminata,
             bool sessioniEserciziTableRefs,
           })
         > {
@@ -24241,6 +24704,8 @@ class $$SessioniAllenamentoTableTableTableManager
                 Value<int?> idAllenamento = const Value.absent(),
                 Value<int> idProfilo = const Value.absent(),
                 Value<String> nomeAllenamentoSnapshot = const Value.absent(),
+                Value<String?> camminataSnapshot = const Value.absent(),
+                Value<int?> idCamminata = const Value.absent(),
                 Value<String> stato = const Value.absent(),
                 Value<int> indiceEsercizioCorrente = const Value.absent(),
                 Value<DateTime> dataInizio = const Value.absent(),
@@ -24258,6 +24723,8 @@ class $$SessioniAllenamentoTableTableTableManager
                 idAllenamento: idAllenamento,
                 idProfilo: idProfilo,
                 nomeAllenamentoSnapshot: nomeAllenamentoSnapshot,
+                camminataSnapshot: camminataSnapshot,
+                idCamminata: idCamminata,
                 stato: stato,
                 indiceEsercizioCorrente: indiceEsercizioCorrente,
                 dataInizio: dataInizio,
@@ -24277,6 +24744,8 @@ class $$SessioniAllenamentoTableTableTableManager
                 Value<int?> idAllenamento = const Value.absent(),
                 required int idProfilo,
                 required String nomeAllenamentoSnapshot,
+                Value<String?> camminataSnapshot = const Value.absent(),
+                Value<int?> idCamminata = const Value.absent(),
                 required String stato,
                 Value<int> indiceEsercizioCorrente = const Value.absent(),
                 required DateTime dataInizio,
@@ -24294,6 +24763,8 @@ class $$SessioniAllenamentoTableTableTableManager
                 idAllenamento: idAllenamento,
                 idProfilo: idProfilo,
                 nomeAllenamentoSnapshot: nomeAllenamentoSnapshot,
+                camminataSnapshot: camminataSnapshot,
+                idCamminata: idCamminata,
                 stato: stato,
                 indiceEsercizioCorrente: indiceEsercizioCorrente,
                 dataInizio: dataInizio,
@@ -24319,6 +24790,7 @@ class $$SessioniAllenamentoTableTableTableManager
               ({
                 idAllenamento = false,
                 idProfilo = false,
+                idCamminata = false,
                 sessioniEserciziTableRefs = false,
               }) {
                 return PrefetchHooks(
@@ -24368,6 +24840,21 @@ class $$SessioniAllenamentoTableTableTableManager
                                     referencedColumn:
                                         $$SessioniAllenamentoTableTableReferences
                                             ._idProfiloTable(db)
+                                            .id,
+                                  )
+                                  as T;
+                        }
+                        if (idCamminata) {
+                          state =
+                              state.withJoin(
+                                    currentTable: table,
+                                    currentColumn: table.idCamminata,
+                                    referencedTable:
+                                        $$SessioniAllenamentoTableTableReferences
+                                            ._idCamminataTable(db),
+                                    referencedColumn:
+                                        $$SessioniAllenamentoTableTableReferences
+                                            ._idCamminataTable(db)
                                             .id,
                                   )
                                   as T;
@@ -24422,6 +24909,7 @@ typedef $$SessioniAllenamentoTableTableProcessedTableManager =
       PrefetchHooks Function({
         bool idAllenamento,
         bool idProfilo,
+        bool idCamminata,
         bool sessioniEserciziTableRefs,
       })
     >;
@@ -24434,6 +24922,7 @@ typedef $$SessioniEserciziTableTableCreateCompanionBuilder =
       required int ordine,
       required int serieTotali,
       Value<int> serieCompletate,
+      Value<String> prestazioni,
       Value<int?> ripetizioni,
       Value<int?> durataSecondi,
       Value<int?> recuperoSecondi,
@@ -24451,6 +24940,7 @@ typedef $$SessioniEserciziTableTableUpdateCompanionBuilder =
       Value<int> ordine,
       Value<int> serieTotali,
       Value<int> serieCompletate,
+      Value<String> prestazioni,
       Value<int?> ripetizioni,
       Value<int?> durataSecondi,
       Value<int?> recuperoSecondi,
@@ -24561,6 +25051,11 @@ class $$SessioniEserciziTableTableFilterComposer
 
   ColumnFilters<int> get serieCompletate => $composableBuilder(
     column: $table.serieCompletate,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get prestazioni => $composableBuilder(
+    column: $table.prestazioni,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -24700,6 +25195,11 @@ class $$SessioniEserciziTableTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<String> get prestazioni => $composableBuilder(
+    column: $table.prestazioni,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<int> get ripetizioni => $composableBuilder(
     column: $table.ripetizioni,
     builder: (column) => ColumnOrderings(column),
@@ -24829,6 +25329,11 @@ class $$SessioniEserciziTableTableAnnotationComposer
 
   GeneratedColumn<int> get serieCompletate => $composableBuilder(
     column: $table.serieCompletate,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get prestazioni => $composableBuilder(
+    column: $table.prestazioni,
     builder: (column) => column,
   );
 
@@ -24987,6 +25492,7 @@ class $$SessioniEserciziTableTableTableManager
                 Value<int> ordine = const Value.absent(),
                 Value<int> serieTotali = const Value.absent(),
                 Value<int> serieCompletate = const Value.absent(),
+                Value<String> prestazioni = const Value.absent(),
                 Value<int?> ripetizioni = const Value.absent(),
                 Value<int?> durataSecondi = const Value.absent(),
                 Value<int?> recuperoSecondi = const Value.absent(),
@@ -25002,6 +25508,7 @@ class $$SessioniEserciziTableTableTableManager
                 ordine: ordine,
                 serieTotali: serieTotali,
                 serieCompletate: serieCompletate,
+                prestazioni: prestazioni,
                 ripetizioni: ripetizioni,
                 durataSecondi: durataSecondi,
                 recuperoSecondi: recuperoSecondi,
@@ -25019,6 +25526,7 @@ class $$SessioniEserciziTableTableTableManager
                 required int ordine,
                 required int serieTotali,
                 Value<int> serieCompletate = const Value.absent(),
+                Value<String> prestazioni = const Value.absent(),
                 Value<int?> ripetizioni = const Value.absent(),
                 Value<int?> durataSecondi = const Value.absent(),
                 Value<int?> recuperoSecondi = const Value.absent(),
@@ -25034,6 +25542,7 @@ class $$SessioniEserciziTableTableTableManager
                 ordine: ordine,
                 serieTotali: serieTotali,
                 serieCompletate: serieCompletate,
+                prestazioni: prestazioni,
                 ripetizioni: ripetizioni,
                 durataSecondi: durataSecondi,
                 recuperoSecondi: recuperoSecondi,

@@ -1,4 +1,5 @@
 import 'workout_session_persistence_status.dart';
+import 'workout_walking_block.dart';
 
 /// Riga di storico (Milestone 4.5.1): riepilogo di una sessione conclusa
 /// (COMPLETED o ABORTED — le sessioni IN_PROGRESS/PAUSED non compaiono
@@ -19,6 +20,8 @@ class WorkoutSessionHistoryItem {
     required this.skippedExercises,
     required this.totalSetsCompleted,
     required this.totalPlannedSets,
+    this.walkingBlock,
+    this.walkingSessionId,
   });
 
   final int sessionId;
@@ -43,4 +46,6 @@ class WorkoutSessionHistoryItem {
   /// totale per sessione, mai delle singole righe.
   final int totalSetsCompleted;
   final int totalPlannedSets;
+  final WorkoutWalkingBlock? walkingBlock;
+  final int? walkingSessionId;
 }

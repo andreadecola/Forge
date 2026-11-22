@@ -57,7 +57,8 @@ abstract class WorkoutRepository {
   Future<void> archiveWorkout(int id);
 
   /// Hard delete: elimina la scheda e le sue righe scheda (CASCADE a
-  /// livello DB). Non elimina mai l'esercizio master dal catalogo.
+  /// livello DB). Conserva lo storico snapshot e rifiuta sessioni attive
+  /// o in pausa. Non elimina mai l'esercizio master dal catalogo.
   Future<void> deleteWorkout(int id);
 
   /// Aggiunge un esercizio alla scheda. Se [exercise] ha `order <= 0`

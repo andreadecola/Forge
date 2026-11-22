@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/theme/forge_colors.dart';
 import '../../../../core/utils/italian_date_formatter.dart';
@@ -8,6 +9,8 @@ import '../../../../domain/entities/walking_session_status.dart';
 import '../../application/walking_history_providers.dart';
 import '../walking_metrics.dart';
 import '../walking_session_formatter.dart';
+import '../widgets/delete_walking_button.dart';
+import '../../../../core/routing/app_routes.dart';
 
 class WalkingHistoryDetailPage extends ConsumerWidget {
   const WalkingHistoryDetailPage({super.key, required this.sessionId});
@@ -18,7 +21,20 @@ class WalkingHistoryDetailPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final sessionAsync = ref.watch(walkingHistoryDetailsProvider(sessionId));
     return Scaffold(
-      appBar: AppBar(title: const Text('Dettaglio camminata')),
+      appBar: AppBar(
+        title: const Text('Dettaglio camminata'),
+        actions: [
+          if (sessionAsync.valueOrNull case final session?)
+            if (session.status != WalkingSessionStatus.inProgress)
+              DeleteWalkingButton(
+                sessionId: sessionId,
+                profileId: session.profileId,
+                onDeleted: () {
+                  if (context.mounted) context.go(AppRoutes.walkingHistory);
+                },
+              ),
+        ],
+      ),
       body: sessionAsync.when(
         data: (session) {
           if (session == null ||
@@ -76,8 +92,8 @@ class _WalkingHistoryDetailBody extends StatelessWidget {
                   : Icons.pause_circle_outline,
               size: 18,
               color: session.status == WalkingSessionStatus.completed
-                  ? ForgeColors.success
-                  : ForgeColors.copper,
+                  ? ForgeColors.successFor(context)
+                  : Theme.of(context).colorScheme.primary,
             ),
             label: Text(
               session.status == WalkingSessionStatus.completed

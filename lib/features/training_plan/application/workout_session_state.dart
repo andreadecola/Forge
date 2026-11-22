@@ -1,5 +1,6 @@
 import '../../../domain/entities/workout_exercise.dart';
 import '../../../domain/entities/workout_exercise_details.dart';
+import '../../../domain/entities/workout_walking_block.dart';
 import 'session_timer.dart';
 import 'workout_session_clock.dart';
 import 'workout_session_phase.dart';
@@ -49,6 +50,9 @@ class WorkoutSessionState {
     this.completedSetsByWorkoutExerciseId = const {},
     this.exerciseTimer,
     this.restTimer,
+    this.walkingBlock,
+    this.walkingSessionId,
+    this.walkingCompleted = false,
   });
 
   /// Id di `sessioni_allenamento` (Milestone 4.4.3): permette al
@@ -79,6 +83,23 @@ class WorkoutSessionState {
   /// Countdown del recupero tra due serie dell'esercizio corrente, se in
   /// corso.
   final SessionTimer? restTimer;
+  final WorkoutWalkingBlock? walkingBlock;
+  final int? walkingSessionId;
+  final bool walkingCompleted;
+
+  bool get exercisesResolved =>
+      exercises.isNotEmpty &&
+      exercises.every(
+        (e) =>
+            completedWorkoutExerciseIds.contains(e.workoutExercise.id) ||
+            skippedWorkoutExerciseIds.contains(e.workoutExercise.id),
+      );
+  bool get isWalkingPhase =>
+      walkingBlock != null &&
+      !walkingCompleted &&
+      (walkingBlock!.placement == WalkingPlacement.beforeExercises ||
+          exercisesResolved);
+  bool get canCompleteSession => walkingBlock == null || walkingCompleted;
 
   int get totalExercises => exercises.length;
 
@@ -110,6 +131,7 @@ class WorkoutSessionState {
   WorkoutSessionPhase get phase {
     if (isCompleted) return WorkoutSessionPhase.completed;
     if (isPaused) return WorkoutSessionPhase.paused;
+    if (isWalkingPhase) return WorkoutSessionPhase.walking;
     if (restTimer != null) return WorkoutSessionPhase.resting;
     if (exerciseTimer != null) return WorkoutSessionPhase.timedSetRunning;
     return WorkoutSessionPhase.readySet;
@@ -124,6 +146,8 @@ class WorkoutSessionState {
     Map<int, int>? completedSetsByWorkoutExerciseId,
     SessionTimer? Function()? exerciseTimer,
     SessionTimer? Function()? restTimer,
+    int? Function()? walkingSessionId,
+    bool? walkingCompleted,
   }) {
     return WorkoutSessionState(
       sessionId: sessionId,
@@ -131,6 +155,11 @@ class WorkoutSessionState {
       workoutName: workoutName,
       exercises: exercises,
       startedAt: startedAt,
+      walkingBlock: walkingBlock,
+      walkingSessionId: walkingSessionId != null
+          ? walkingSessionId()
+          : this.walkingSessionId,
+      walkingCompleted: walkingCompleted ?? this.walkingCompleted,
       currentExerciseIndex: currentExerciseIndex ?? this.currentExerciseIndex,
       isPaused: isPaused ?? this.isPaused,
       isCompleted: isCompleted ?? this.isCompleted,

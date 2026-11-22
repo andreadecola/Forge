@@ -9,6 +9,8 @@ import 'core/constants/app_constants.dart';
 import 'core/routing/app_router.dart';
 import 'core/routing/app_routes.dart';
 import 'core/theme/forge_theme.dart';
+import 'core/theme/forge_typography.dart';
+import 'core/theme/theme_mode_provider.dart';
 import 'data/repositories/repository_providers.dart';
 import 'features/notifications/application/notification_constants.dart';
 import 'features/notifications/application/notification_lifecycle_coordinator.dart';
@@ -60,8 +62,14 @@ class _ForgeAppState extends ConsumerState<ForgeApp>
     return MaterialApp.router(
       title: AppConstants.appName,
       debugShowCheckedModeBanner: false,
-      theme: ForgeTheme.dark,
-      themeMode: ThemeMode.dark,
+      theme: ForgeTypography.preview
+          ? ForgeTheme.preview(false, ForgeTypography.previewFamily)
+          : ForgeTheme.light,
+      darkTheme: ForgeTypography.preview
+          ? ForgeTheme.preview(true, ForgeTypography.previewFamily)
+          : ForgeTheme.dark,
+      themeMode:
+          ref.watch(forgeThemeModeProvider).valueOrNull ?? ThemeMode.dark,
       locale: const Locale('it'),
       supportedLocales: const [Locale('it')],
       localizationsDelegates: const [
@@ -89,8 +97,10 @@ class _ForgeAppState extends ConsumerState<ForgeApp>
     final activity = await ref
         .read(plannedActivityRepositoryProvider)
         .getById(payload!.entityId);
-    if (profile?.id == activity?.profileId) {
-      router.go(AppRoutes.weeklyPlan);
+    if (activity != null && profile?.id == activity.profileId) {
+      router.go(
+        '${AppRoutes.plannedActivityPath(activity.id!)}${event.actionId == 'snooze' ? '?reminder=snooze' : ''}',
+      );
     } else {
       router.go(AppRoutes.dashboard);
     }

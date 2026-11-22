@@ -136,7 +136,7 @@ void main() {
     final database = AppDatabase(NativeDatabase.opened(rawDb));
     addTearDown(database.close);
 
-    expect(database.schemaVersion, 12);
+    expect(database.schemaVersion, 14);
 
     // Riga legacy preservata integralmente.
     final legacy = await database.bodyMeasurementsDao.getById(1);

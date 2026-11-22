@@ -62,16 +62,29 @@ class TodayPlannedActivitiesCard extends ConsumerWidget {
             const SizedBox(height: 4),
             activitiesAsync.when(
               data: (activities) => activities.isEmpty
-                  ? const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8),
-                      child: Text('Nessuna attività pianificata per oggi.'),
+                  ? Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Oggi non hai attività in programma. Puoi organizzare i prossimi giorni o scegliere una scheda qui sotto.',
+                          ),
+                          TextButton.icon(
+                            onPressed: () => context.push(AppRoutes.weeklyPlan),
+                            icon: const Icon(Icons.calendar_month),
+                            label: const Text('Organizza la settimana'),
+                          ),
+                        ],
+                      ),
                     )
                   : Column(
                       children: [
                         for (final activity in activities)
-                          _TodayActivityTile(
+                          PlannedActivityActionTile(
                             profileId: profileId,
                             activity: activity,
+                            prominent: true,
                           ),
                       ],
                     ),
@@ -91,17 +104,24 @@ class TodayPlannedActivitiesCard extends ConsumerWidget {
   }
 }
 
-class _TodayActivityTile extends ConsumerStatefulWidget {
-  const _TodayActivityTile({required this.profileId, required this.activity});
+class PlannedActivityActionTile extends ConsumerStatefulWidget {
+  const PlannedActivityActionTile({
+    super.key,
+    required this.profileId,
+    required this.activity,
+    this.prominent = false,
+  });
 
   final int profileId;
   final PlannedActivity activity;
+  final bool prominent;
 
   @override
-  ConsumerState<_TodayActivityTile> createState() => _TodayActivityTileState();
+  ConsumerState<PlannedActivityActionTile> createState() =>
+      _TodayActivityTileState();
 }
 
-class _TodayActivityTileState extends ConsumerState<_TodayActivityTile> {
+class _TodayActivityTileState extends ConsumerState<PlannedActivityActionTile> {
   bool _busy = false;
 
   void _showMessage(String message) {
@@ -302,6 +322,26 @@ class _TodayActivityTileState extends ConsumerState<_TodayActivityTile> {
         // Sezione 15/21/37: nessuna sessione, nessun pulsante.
         return null;
     }
+    if (widget.prominent) {
+      return SizedBox(
+        width: double.infinity,
+        child: FilledButton.icon(
+          onPressed: onPressed,
+          icon: Icon(
+            label == 'Riprendi' ? Icons.play_circle_outline : Icons.play_arrow,
+          ),
+          label: Text(
+            _busy
+                ? 'Avvio in corso…'
+                : label == 'Riprendi'
+                ? 'Riprendi attività'
+                : activity.type == PlannedActivityType.walk
+                ? 'Inizia camminata'
+                : 'Inizia allenamento',
+          ),
+        ),
+      );
+    }
     return OutlinedButton(
       onPressed: onPressed,
       child: _busy
@@ -322,6 +362,35 @@ class _TodayActivityTileState extends ConsumerState<_TodayActivityTile> {
       activity,
     );
     final actionButton = _buildActionButton(displayState);
+    if (widget.prominent) {
+      final details =
+          activity.type == PlannedActivityType.workout &&
+              activity.workoutId != null
+          ? ref.watch(workoutDetailsProvider(activity.workoutId!)).valueOrNull
+          : null;
+      final exerciseMinutes = details?.workout.estimatedDurationMinutes;
+      final walkingMinutes = details?.workout.walkingBlock?.minutes ?? 0;
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              PlannedActivityPresentation.title(activity.type),
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            const SizedBox(height: 6),
+            PlannedActivityPresentation.subtitle(ref, activity),
+            if (details != null)
+              Text(
+                '${details.exercises.length} esercizi${exerciseMinutes == null ? '' : ' · ${exerciseMinutes + walkingMinutes} min previsti'}',
+              ),
+            const SizedBox(height: 12),
+            ?actionButton,
+          ],
+        ),
+      );
+    }
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(

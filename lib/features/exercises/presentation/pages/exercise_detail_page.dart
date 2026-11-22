@@ -1,9 +1,9 @@
+import '../../../../core/theme/forge_typography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/routing/app_routes.dart';
-import '../../../../core/theme/forge_colors.dart';
 import '../../../../data/repositories/catalog_providers.dart';
 import '../../../../domain/entities/equipment.dart';
 import '../../../../domain/entities/exercise_availability_status.dart';
@@ -283,7 +283,11 @@ class _SectionCard extends StatelessWidget {
             Row(
               children: [
                 if (leadingIcon != null) ...[
-                  Icon(leadingIcon, size: 18, color: ForgeColors.copper),
+                  Icon(
+                    leadingIcon,
+                    size: 18,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
                   const SizedBox(width: 8),
                 ],
                 Text(title, style: Theme.of(context).textTheme.titleLarge),
@@ -329,7 +333,9 @@ class _MusclesSection extends StatelessWidget {
                   .map(
                     (m) => Chip(
                       label: Text(m.name),
-                      backgroundColor: ForgeColors.anthraciteSurfaceHigh,
+                      backgroundColor: Theme.of(
+                        context,
+                      ).colorScheme.surfaceContainerHighest,
                     ),
                   )
                   .toList(),
@@ -376,12 +382,12 @@ class _InstructionsList extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 12,
-                  backgroundColor: ForgeColors.copper,
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                   child: Text(
                     '${i + 1}',
-                    style: const TextStyle(
-                      color: ForgeColors.anthracite,
-                      fontSize: 12,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      fontSize: ForgeTypography.captionSize,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -409,9 +415,9 @@ class _ParameterTile extends StatelessWidget {
       children: [
         Text(
           label,
-          style: Theme.of(
-            context,
-          ).textTheme.bodyMedium?.copyWith(color: ForgeColors.textSecondary),
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
         ),
         Text(value, style: Theme.of(context).textTheme.titleLarge),
       ],
@@ -436,7 +442,7 @@ class _RelatedExerciseSection extends StatelessWidget {
             .map(
               (entry) => Card(
                 margin: const EdgeInsets.only(bottom: 8),
-                color: ForgeColors.anthraciteSurfaceHigh,
+                color: Theme.of(context).colorScheme.surfaceContainerHighest,
                 child: ListTile(
                   title: Text(entry.$2),
                   subtitle: entry.$3 == null ? null : Text(entry.$3!),
@@ -461,12 +467,12 @@ class _InfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: ForgeColors.anthraciteSurfaceHigh,
+      color: Theme.of(context).colorScheme.surfaceContainerHighest,
       child: Padding(
         padding: const EdgeInsets.all(12),
         child: Row(
           children: [
-            Icon(icon, color: ForgeColors.copper),
+            Icon(icon, color: Theme.of(context).colorScheme.primary),
             const SizedBox(width: 10),
             Expanded(child: Text(text)),
           ],

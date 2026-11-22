@@ -16,8 +16,8 @@ class ExerciseStatusChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final isCompleted = status == SessionExerciseStatus.completed;
     final color = isCompleted
-        ? ForgeColors.success
-        : ForgeColors.steelGrayLight;
+        ? ForgeColors.successFor(context)
+        : Theme.of(context).colorScheme.onSurfaceVariant;
     final label = isCompleted ? 'Completato' : 'Saltato';
     final icon = isCompleted ? Icons.check_circle : Icons.skip_next;
 

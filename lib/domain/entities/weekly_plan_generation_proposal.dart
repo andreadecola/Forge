@@ -1,5 +1,7 @@
 import 'adapted_generated_workout_plan.dart';
 import 'forge_adapted_generation_result.dart';
+import 'planned_activity.dart';
+import 'workout_walking_block.dart';
 
 /// Un allenamento Forge proposto per un giorno specifico della settimana
 /// (Milestone 8.4): ancora nulla di persistito, [generationResult] è lo
@@ -28,6 +30,9 @@ class WeeklyPlanGenerationProposal {
     required this.weekStart,
     required this.weekEnd,
     required this.entries,
+    this.additionalActivities = const [],
+    this.walkingBlock,
+    this.updateWorkoutWalkingBlock = false,
   });
 
   final DateTime weekStart;
@@ -35,4 +40,9 @@ class WeeklyPlanGenerationProposal {
 
   /// Ordinati per data crescente.
   final List<ProposedForgeWorkout> entries;
+
+  /// Camminate o schede esistenti scelte nel percorso manuale.
+  final List<PlannedActivity> additionalActivities;
+  final WorkoutWalkingBlock? walkingBlock;
+  final bool updateWorkoutWalkingBlock;
 }

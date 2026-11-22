@@ -61,6 +61,9 @@ class SessioniEserciziTable extends Table {
 
   IntColumn get serieCompletate => integer().withDefault(const Constant(0))();
 
+  /// JSON delle prestazioni effettive per serie (EVO-009), mai prescrizioni.
+  TextColumn get prestazioni => text().withDefault(const Constant('[]'))();
+
   IntColumn get ripetizioni => integer().nullable()();
   IntColumn get durataSecondi => integer().nullable()();
   IntColumn get recuperoSecondi => integer().nullable()();

@@ -133,10 +133,21 @@ class PlannedActivityController {
   }
 
   Future<void> updatePlannedActivity(PlannedActivity activity) async {
+    final existing = activity.id == null
+        ? null
+        : await _ref
+              .read(plannedActivityRepositoryProvider)
+              .getById(activity.id!);
+    if (existing?.scheduledDate != activity.scheduledDate) {
+      activity = activity.copyWith(reminderAt: () => null);
+    }
     await UpdatePlannedActivity(_ref.read(plannedActivityRepositoryProvider))(
       activity,
     );
     if (activity.id != null) await _syncActivity(activity.id!);
+    if (activity.id != null) {
+      _ref.invalidate(plannedActivityByIdProvider(activity.id!));
+    }
   }
 
   /// Sezione 28 (Milestone 8.5): rifiuta l'eliminazione se la sessione

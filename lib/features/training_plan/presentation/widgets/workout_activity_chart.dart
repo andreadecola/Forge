@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/theme/forge_colors.dart';
 import '../../../../domain/entities/workout_activity_point.dart';
 
 /// Grafico ad barre semplice (Milestone 4.5.2, sezione 26): widget Flutter
@@ -46,8 +45,9 @@ class WorkoutActivityChart extends StatelessWidget {
                                 .clamp(4, _maxBarHeight),
                       decoration: BoxDecoration(
                         color: point.sessionCount == 0
-                            ? ForgeColors.steelGrayLight.withValues(alpha: 0.3)
-                            : ForgeColors.copper,
+                            ? Theme.of(context).colorScheme.onSurfaceVariant
+                                  .withValues(alpha: 0.3)
+                            : Theme.of(context).colorScheme.primary,
                         borderRadius: BorderRadius.circular(4),
                       ),
                     ),
@@ -55,7 +55,7 @@ class WorkoutActivityChart extends StatelessWidget {
                     Text(
                       '${point.periodStart.day}/${point.periodStart.month}',
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        color: ForgeColors.textSecondary,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ],

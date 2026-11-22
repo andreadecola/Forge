@@ -202,7 +202,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
               Icon(
                 Icons.fitness_center,
                 size: 56,
-                color: Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).colorScheme.secondary,
               ),
               const SizedBox(height: 24),
               Text(
@@ -350,6 +350,18 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(title, style: Theme.of(context).textTheme.headlineMedium),
+          const SizedBox(height: 12),
+          Text(
+            const [
+              'Come vuoi essere chiamato? La data di nascita serve alle stime del profilo.',
+              'Altezza e peso aiutano a descrivere il punto di partenza. Il peso obiettivo è facoltativo.',
+              'Questo dato è usato soltanto per la stima metabolica. Puoi scegliere di non indicarlo.',
+              'Scegli una durata comoda per le camminate: potrai modificarla anche in seguito.',
+              'Indica quello che hai già. Forge userà questa selezione per gli esercizi compatibili.',
+              'Il budget è una preferenza per l’attrezzatura. Non comporta alcun acquisto.',
+              'Controlla i dati. Puoi tornare indietro per correggerli prima di iniziare.',
+            ][_step],
+          ),
           const SizedBox(height: 24),
           ...children,
         ],
@@ -359,6 +371,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
 
   Widget _identityStep() {
     return Form(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       key: _formKeys[0],
       child: _stepBody(
         title: 'La tua identità',
@@ -402,6 +415,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
 
   Widget _bodyDataStep() {
     return Form(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       key: _formKeys[1],
       child: _stepBody(
         title: 'Dati corporei',
@@ -481,6 +495,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
 
   Widget _walkStep() {
     return Form(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       key: _formKeys[3],
       child: _stepBody(
         title: 'Camminata',
@@ -548,6 +563,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
 
   Widget _budgetStep() {
     return Form(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       key: _formKeys[5],
       child: _stepBody(
         title: 'Budget attrezzatura',

@@ -171,7 +171,7 @@ class _WalkingSessionPageState extends ConsumerState<WalkingSessionPage> {
         appBar: AppBar(title: const Text('Camminata')),
         body: terminal
             ? _SummaryView(runtime: runtime)
-            : _ActiveWalkingView(
+            : ActiveWalkingView(
                 runtime: runtime,
                 onPause: () =>
                     ref.read(walkingSessionControllerProvider.notifier).pause(),
@@ -187,14 +187,16 @@ class _WalkingSessionPageState extends ConsumerState<WalkingSessionPage> {
   }
 }
 
-class _ActiveWalkingView extends ConsumerWidget {
-  const _ActiveWalkingView({
+class ActiveWalkingView extends ConsumerWidget {
+  const ActiveWalkingView({
+    super.key,
     required this.runtime,
     required this.onPause,
     required this.onResume,
     required this.onComplete,
     required this.onAbort,
     required this.onEditMetrics,
+    this.targetMinutes,
   });
 
   final WalkingSessionRuntimeState runtime;
@@ -203,6 +205,7 @@ class _ActiveWalkingView extends ConsumerWidget {
   final VoidCallback onComplete;
   final VoidCallback onAbort;
   final VoidCallback onEditMetrics;
+  final int? targetMinutes;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -225,8 +228,8 @@ class _ActiveWalkingView extends ConsumerWidget {
                     paused ? 'In pausa' : 'In corso',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       color: paused
-                          ? ForgeColors.copperLight
-                          : ForgeColors.success,
+                          ? ForgeColors.warningFor(context)
+                          : ForgeColors.successFor(context),
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -241,6 +244,12 @@ class _ActiveWalkingView extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
+                  if (targetMinutes != null) ...[
+                    Text('Durata prevista: $targetMinutes min'),
+                    Text(
+                      'Tempo rimanente ${formatWalkingDuration((targetMinutes! * 60 - activeSeconds).clamp(0, 1 << 31))}',
+                    ),
+                  ],
                   Text(
                     'Tempo attivo',
                     textAlign: TextAlign.center,
@@ -312,7 +321,9 @@ class _SummaryView extends ConsumerWidget {
             Icon(
               completed ? Icons.check_circle_outline : Icons.info_outline,
               size: 60,
-              color: completed ? ForgeColors.success : ForgeColors.copper,
+              color: completed
+                  ? ForgeColors.successFor(context)
+                  : Theme.of(context).colorScheme.primary,
             ),
             const SizedBox(height: 16),
             Text(
@@ -478,6 +489,12 @@ Future<void> _editWalkingMetrics(
     }
   }
 }
+
+Future<void> showWalkingMetricsEditor(
+  BuildContext context,
+  WidgetRef ref,
+  WalkingSessionRuntimeState runtime,
+) => _editWalkingMetrics(context, ref, runtime);
 
 class _SummaryRow extends StatelessWidget {
   const _SummaryRow({required this.label, required this.value});

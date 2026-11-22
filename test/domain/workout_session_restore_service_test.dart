@@ -312,9 +312,18 @@ void main() {
   );
 
   test(
-    'scheda originale eliminata: il ripristino non è possibile (null)',
+    'scheda attiva protetta; dopo abort ed eliminazione non si ripristina',
     () async {
       final sessionId = await createSession();
+      await expectLater(
+        workoutRepository.deleteWorkout(workoutId),
+        throwsStateError,
+      );
+      expect(await restoreService.restore(sessionId), isNotNull);
+      await sessionRepository.abortSession(
+        sessionId: sessionId,
+        endedAt: clock.now(),
+      );
       await workoutRepository.deleteWorkout(workoutId);
 
       expect(await restoreService.restore(sessionId), isNull);

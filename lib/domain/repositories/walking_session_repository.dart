@@ -1,6 +1,9 @@
 import '../entities/walking_session.dart';
 
 abstract class WalkingSessionRepository {
+  /// Elimina soltanto una camminata conclusa; le attività pianificate restano.
+  Future<void> deleteWalkingSession(int id);
+
   Future<int> createWalkingSession(WalkingSession session);
 
   Future<WalkingSession?> getWalkingSession(int id);

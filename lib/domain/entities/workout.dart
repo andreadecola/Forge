@@ -1,4 +1,5 @@
 import 'workout_enums.dart';
+import 'workout_walking_block.dart';
 
 /// Definizione di una scheda allenamento (dati scalari). La lista di
 /// esercizi risolta è aggregata in [WorkoutDetails]: `Workout` resta
@@ -13,6 +14,7 @@ class Workout {
     this.level = 1,
     this.selectedLevels,
     this.estimatedDurationMinutes,
+    this.walkingBlock,
     required this.status,
     required this.origin,
     this.isActive = true,
@@ -34,6 +36,7 @@ class Workout {
   /// Compatibilità per le schede create prima del campo multilivello.
   Set<int> get effectiveSelectedLevels => selectedLevels ?? {level};
   final int? estimatedDurationMinutes;
+  final WorkoutWalkingBlock? walkingBlock;
   final WorkoutDefinitionStatus status;
   final WorkoutOrigin origin;
   final bool isActive;
@@ -49,6 +52,7 @@ class Workout {
     int? level,
     Set<int>? selectedLevels,
     int? Function()? estimatedDurationMinutes,
+    WorkoutWalkingBlock? Function()? walkingBlock,
     WorkoutDefinitionStatus? status,
     WorkoutOrigin? origin,
     bool? isActive,
@@ -61,6 +65,7 @@ class Workout {
       name: name ?? this.name,
       description: description != null ? description() : this.description,
       type: type ?? this.type,
+      walkingBlock: walkingBlock != null ? walkingBlock() : this.walkingBlock,
       level: level ?? this.level,
       selectedLevels: selectedLevels ?? this.selectedLevels,
       estimatedDurationMinutes: estimatedDurationMinutes != null

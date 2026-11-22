@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../core/widgets/forge_message_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -89,7 +90,7 @@ class _HistoryBody extends ConsumerWidget {
                           ? '1 allenamento'
                           : '${items.length} allenamenti',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: ForgeColors.textSecondary,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ),
@@ -154,7 +155,9 @@ class _HistoryCard extends StatelessWidget {
                       ? Icons.check_circle_outline
                       : Icons.pause_circle_outline,
                   size: 16,
-                  color: isCompleted ? ForgeColors.success : ForgeColors.copper,
+                  color: isCompleted
+                      ? ForgeColors.successFor(context)
+                      : Theme.of(context).colorScheme.primary,
                 ),
                 const SizedBox(width: 4),
                 Text(WorkoutSessionHistoryLabels.status(item.status)),
@@ -166,7 +169,7 @@ class _HistoryCard extends StatelessWidget {
               '${item.completedExercises == 1 ? 'esercizio completato' : 'esercizi completati'}'
               '${skippedLine == null ? '' : ' · $skippedLine'}',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: ForgeColors.textSecondary,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
           ],
@@ -179,32 +182,16 @@ class _HistoryCard extends StatelessWidget {
 
 class _EmptyState extends StatelessWidget {
   const _EmptyState();
-
   @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Icon(Icons.history, size: 48),
-            const SizedBox(height: 16),
-            const Text(
-              'Nessun allenamento registrato.',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              'Quando completerai un allenamento, lo troverai qui.',
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => ForgeMessageState(
+    title: 'Nessun allenamento registrato.',
+    message: 'Quando completerai un allenamento, lo troverai qui.',
+    icon: Icons.history,
+    action: FilledButton(
+      onPressed: () => context.push(AppRoutes.workouts),
+      child: const Text('Scegli un allenamento'),
+    ),
+  );
 }
 
 class _ErrorState extends StatelessWidget {

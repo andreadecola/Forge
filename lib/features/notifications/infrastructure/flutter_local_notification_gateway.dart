@@ -22,6 +22,9 @@ class FlutterLocalNotificationGateway
       channelDescription: NotificationChannelConfig.description,
       importance: Importance.defaultImportance,
       priority: Priority.defaultPriority,
+      actions: [
+        AndroidNotificationAction('snooze', 'Rinvia', showsUserInterface: true),
+      ],
     ),
   );
 
@@ -57,7 +60,9 @@ class FlutterLocalNotificationGateway
         android: AndroidInitializationSettings('@mipmap/ic_launcher'),
       ),
       onDidReceiveNotificationResponse: (response) async {
-        await onNotificationTap(_eventFromRawPayload(response.payload));
+        await onNotificationTap(
+          _eventFromRawPayload(response.payload, response.actionId),
+        );
       },
     );
 
@@ -77,7 +82,12 @@ class FlutterLocalNotificationGateway
     final launchDetails = await plugin.getNotificationAppLaunchDetails();
     if (launchDetails?.didNotificationLaunchApp ?? false) {
       final payload = launchDetails?.notificationResponse?.payload;
-      await onNotificationTap(_eventFromRawPayload(payload));
+      await onNotificationTap(
+        _eventFromRawPayload(
+          payload,
+          launchDetails?.notificationResponse?.actionId,
+        ),
+      );
     }
 
     _initialized = true;
@@ -122,9 +132,13 @@ class FlutterLocalNotificationGateway
   @override
   Future<void> cancelAll() => plugin.cancelAll();
 
-  NotificationTapEvent _eventFromRawPayload(String? rawPayload) {
+  NotificationTapEvent _eventFromRawPayload(
+    String? rawPayload, [
+    String? actionId,
+  ]) {
     return NotificationTapEvent(
       rawPayload: rawPayload,
+      actionId: actionId,
       payload: NotificationPayloadCodec.tryDecode(rawPayload),
     );
   }

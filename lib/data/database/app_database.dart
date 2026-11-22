@@ -134,11 +134,13 @@ part 'app_database.g.dart';
 )
 /// Schema 12 aggiunge `allenamenti.livelli` per conservare il set dei livelli
 /// manuali/Forge; NULL nelle righe precedenti equivale a `{livello}`.
+/// Schema 13 aggiunge prestazioni per serie e rinvio del solo promemoria;
+/// i dati precedenti mantengono rispettivamente `[]` e NULL.
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor]) : super(executor ?? _openConnection());
 
   @override
-  int get schemaVersion => 12;
+  int get schemaVersion => 14;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -323,12 +325,77 @@ class AppDatabase extends _$AppDatabase {
         // classe Dart corrente), quindi non deve rieseguire questa
         // ricreazione. `from < 11` copre sia chi arriva da schema 9 (dopo
         // l'addColumn appena sopra) sia da schema 10.
-        await m.alterTable(TableMigration(attivitaPianificateTable));
+        final columns = await customSelect(
+          'PRAGMA table_info(attivita_pianificate)',
+        ).get();
+        await m.alterTable(
+          TableMigration(
+            attivitaPianificateTable,
+            newColumns:
+                columns.any(
+                  (row) => row.read<String>('name') == 'promemoria_rinviato_al',
+                )
+                ? []
+                : [attivitaPianificateTable.promemoriaRinviatoAl],
+          ),
+        );
       }
       if (from >= 3 && from < 12) {
         // Le schede esistenti conservano il loro livello numerico; il nuovo
         // campo resta NULL e il mapper lo interpreta come {livello}.
         await m.addColumn(allenamentiTable, allenamentiTable.livelli);
+      }
+      if (from >= 4 && from < 13) {
+        final columns = await customSelect(
+          'PRAGMA table_info(sessioni_esercizi)',
+        ).get();
+        if (!columns.any((row) => row.read<String>('name') == 'prestazioni')) {
+          await m.addColumn(
+            sessioniEserciziTable,
+            sessioniEserciziTable.prestazioni,
+          );
+        }
+      }
+      if (from >= 11 && from < 13) {
+        // from < 11 riceve già la colonna dalla creazione/alterTable corrente.
+        final columns = await customSelect(
+          'PRAGMA table_info(attivita_pianificate)',
+        ).get();
+        if (!columns.any(
+          (row) => row.read<String>('name') == 'promemoria_rinviato_al',
+        )) {
+          await m.addColumn(
+            attivitaPianificateTable,
+            attivitaPianificateTable.promemoriaRinviatoAl,
+          );
+        }
+      }
+      if (from >= 3 && from < 14) {
+        final columns = await customSelect(
+          'PRAGMA table_info(allenamenti)',
+        ).get();
+        if (!columns.any((r) => r.read<String>('name') == 'camminata')) {
+          await m.addColumn(allenamentiTable, allenamentiTable.camminata);
+        }
+      }
+      if (from >= 4 && from < 14) {
+        final columns = await customSelect(
+          'PRAGMA table_info(sessioni_allenamento)',
+        ).get();
+        if (!columns.any(
+          (r) => r.read<String>('name') == 'camminata_snapshot',
+        )) {
+          await m.addColumn(
+            sessioniAllenamentoTable,
+            sessioniAllenamentoTable.camminataSnapshot,
+          );
+        }
+        if (!columns.any((r) => r.read<String>('name') == 'id_camminata')) {
+          await m.addColumn(
+            sessioniAllenamentoTable,
+            sessioniAllenamentoTable.idCamminata,
+          );
+        }
       }
     },
     beforeOpen: (details) async {

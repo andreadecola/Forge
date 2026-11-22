@@ -25,6 +25,12 @@ Future<void> _pumpApp(WidgetTester tester, AppDatabase database) async {
     ),
   );
   await tester.pumpAndSettle();
+  await tester.scrollUntilVisible(
+    find.byKey(const ValueKey('ready-workout-launcher')),
+    140,
+    scrollable: find.byType(Scrollable).first,
+  );
+  await tester.pumpAndSettle();
 }
 
 Future<int> _seedWorkout(
@@ -59,6 +65,19 @@ Future<int> _seedWorkout(
     ),
   );
   return workoutId;
+}
+
+Future<void> tapVisible(WidgetTester tester, Finder target) async {
+  if (target.evaluate().isEmpty) {
+    await tester.scrollUntilVisible(
+      target,
+      140,
+      scrollable: find.byType(Scrollable).first,
+    );
+  }
+  await Scrollable.ensureVisible(tester.element(target), alignment: 0.1);
+  await tester.pumpAndSettle();
+  await tester.tap(target);
 }
 
 void main() {
@@ -106,26 +125,30 @@ void main() {
         await _seedWorkout(database, name: 'Scheda nuova');
         await _pumpApp(tester, database);
         if (entry != 'Home') {
-          await tester.tap(find.text('Programma'));
+          await tapVisible(tester, find.text('Programma'));
           await tester.pumpAndSettle();
-          await tester.tap(find.text('Scheda nuova'));
+          await tapVisible(tester, find.text('Scheda nuova'));
           await tester.pumpAndSettle();
           if (entry == 'Salvataggio') {
-            await tester.tap(find.widgetWithText(FilledButton, 'Modifica'));
+            await tapVisible(
+              tester,
+              find.widgetWithText(FilledButton, 'Modifica'),
+            );
             await tester.pumpAndSettle();
-            await tester.tap(find.text('Segna come pronta'));
+            await tapVisible(tester, find.text('Segna come pronta'));
             await tester.pumpAndSettle();
           }
         }
         final context = tester.element(find.byType(Scaffold).first);
         final container = ProviderScope.containerOf(context);
         expect(container.read(workoutSessionControllerProvider), isNull);
-        await tester.tap(
+        await tapVisible(
+          tester,
           find.widgetWithText(FilledButton, 'Inizia allenamento'),
         );
         await tester.pumpAndSettle();
         expect(find.text('Allenamento già in corso'), findsOneWidget);
-        await tester.tap(find.text('Vai alla sessione attiva'));
+        await tapVisible(tester, find.text('Vai alla sessione attiva'));
         await tester.pumpAndSettle();
         final restored = container.read(workoutSessionControllerProvider)!;
         expect(restored.sessionId, sessionId);
@@ -168,7 +191,10 @@ void main() {
       expect(find.text('Scheda bozza'), findsNothing);
       expect(find.text('Scheda archiviata'), findsNothing);
 
-      await tester.tap(find.widgetWithText(OutlinedButton, 'Crea una scheda'));
+      await tapVisible(
+        tester,
+        find.widgetWithText(OutlinedButton, 'Crea una scheda'),
+      );
       await tester.pumpAndSettle();
       expect(find.text('Nuovo allenamento'), findsOneWidget);
 
@@ -193,7 +219,10 @@ void main() {
 
     expect(find.text('Scheda pronta'), findsOneWidget);
     expect(find.textContaining('Livelli 1, 3'), findsOneWidget);
-    await tester.tap(find.widgetWithText(FilledButton, 'Inizia allenamento'));
+    await tapVisible(
+      tester,
+      find.widgetWithText(FilledButton, 'Inizia allenamento'),
+    );
     await tester.pumpAndSettle();
 
     expect(find.text('Esercizio 1 di 1'), findsOneWidget);
@@ -219,13 +248,16 @@ void main() {
     );
 
     await _pumpApp(tester, database);
-    await tester.tap(find.byType(DropdownButtonFormField<int>));
+    await tapVisible(tester, find.byType(DropdownButtonFormField<int>));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Scheda B').last);
+    await tapVisible(tester, find.text('Scheda B').last);
     await tester.pumpAndSettle();
 
     expect(find.textContaining('Livelli 2, 5'), findsOneWidget);
-    await tester.tap(find.widgetWithText(FilledButton, 'Inizia allenamento'));
+    await tapVisible(
+      tester,
+      find.widgetWithText(FilledButton, 'Inizia allenamento'),
+    );
     await tester.pumpAndSettle();
 
     expect(find.text('Esercizio 1 di 1'), findsOneWidget);

@@ -16,6 +16,10 @@ import 'package:forge/data/repositories/settings_repository_impl.dart';
 import 'package:forge/data/seed/exercise_catalog_seeder.dart';
 import 'package:forge/domain/entities/planned_activity.dart';
 import 'package:forge/domain/entities/planned_activity_enums.dart';
+import 'package:forge/domain/entities/workout.dart';
+import 'package:forge/domain/entities/workout_exercise.dart';
+import 'package:forge/domain/entities/workout_enums.dart';
+import 'package:forge/domain/entities/workout_walking_block.dart';
 import 'package:forge/domain/services/clock.dart';
 import 'package:forge/domain/use_cases/add_planned_activity.dart';
 
@@ -191,7 +195,9 @@ void main() {
       await tester.pumpAndSettle();
 
       tester
-          .widget<ChoiceChip>(find.widgetWithText(ChoiceChip, '2').last)
+          .widget<ChoiceChip>(
+            find.byKey(const ValueKey('weekly-workout-count-2')),
+          )
           .onSelected!(true);
       await tester.pumpAndSettle();
       tapGeneratePreview(tester);
@@ -276,7 +282,9 @@ void main() {
     openSheet(tester);
     await tester.pumpAndSettle();
     tester
-        .widget<ChoiceChip>(find.widgetWithText(ChoiceChip, '1').last)
+        .widget<ChoiceChip>(
+          find.byKey(const ValueKey('weekly-workout-count-1')),
+        )
         .onSelected!(true);
     await tester.pumpAndSettle();
     tapGeneratePreview(tester);
@@ -322,7 +330,9 @@ void main() {
     openSheet(tester);
     await tester.pumpAndSettle();
     tester
-        .widget<ChoiceChip>(find.widgetWithText(ChoiceChip, '1').last)
+        .widget<ChoiceChip>(
+          find.byKey(const ValueKey('weekly-workout-count-1')),
+        )
         .onSelected!(true);
     await tester.pumpAndSettle();
     tapGeneratePreview(tester);
@@ -410,6 +420,151 @@ void main() {
         findsOneWidget,
       );
 
+      await disposeCleanly(tester);
+    },
+  );
+
+  for (final manual in [false, true]) {
+    testWidgets(
+      'EVO-004/006 piano misto ${manual ? 'manuale' : 'Forge'}: anteprima, conferma, riapertura',
+      (tester) async {
+        int? selectedWorkoutId;
+        if (manual) {
+          final exerciseId =
+              (await database.select(database.eserciziTable).get()).first.id;
+          selectedWorkoutId = await DriftWorkoutRepository(database)
+              .createWorkoutWithExercises(
+                workout: Workout(
+                  profileId: profileId,
+                  name: 'Scheda manuale multilivello',
+                  type: WorkoutType.fullBody,
+                  level: 3,
+                  selectedLevels: {1, 3},
+                  status: WorkoutDefinitionStatus.ready,
+                  origin: WorkoutOrigin.user,
+                ),
+                exercises: [
+                  WorkoutExercise(
+                    workoutId: 0,
+                    exerciseId: exerciseId,
+                    order: 1,
+                    sets: 2,
+                    repetitions: 10,
+                    restSeconds: 30,
+                  ),
+                ],
+              );
+        }
+        await pumpWeeklyPlan(tester);
+        if (manual) {
+          final open = find.widgetWithText(
+            OutlinedButton,
+            'Pianifica manualmente',
+          );
+          await tester.ensureVisible(open);
+          await tester.tap(open);
+        } else {
+          openSheet(tester);
+        }
+        await tester.pumpAndSettle();
+        if (manual) {
+          tester
+              .widget<DropdownButtonFormField<int>>(
+                find.byType(DropdownButtonFormField<int>).first,
+              )
+              .onChanged!(selectedWorkoutId);
+        }
+        tester
+            .widget<ChoiceChip>(
+              find.byKey(const ValueKey('weekly-workout-count-1')),
+            )
+            .onSelected!(true);
+        tester
+            .widget<ChoiceChip>(
+              find.byKey(
+                ValueKey(
+                  'walking-placement-${manual ? 'beforeExercises' : 'afterExercises'}',
+                ),
+              ),
+            )
+            .onSelected!(true);
+        await tester.pumpAndSettle();
+        expect(find.text('Giorni delle camminate'), findsNothing);
+        expect(find.text('Quante camminate questa settimana?'), findsNothing);
+        expect(find.text('Giorni della scheda'), findsOneWidget);
+        tapGeneratePreview(tester);
+        await tester.pumpAndSettle();
+        expect(find.textContaining('Camminata 30 min'), findsOneWidget);
+        final repository = DriftPlannedActivityRepository(
+          database.attivitaPianificateDao,
+        );
+        expect(
+          await repository.getAllForProfile(profileId: profileId),
+          isEmpty,
+        );
+        tapConfirm(tester);
+        await tester.pumpAndSettle();
+        final values = await repository.getAllForProfile(profileId: profileId);
+        expect(values, hasLength(1));
+        expect(values.single.type, PlannedActivityType.workout);
+        final saved = (await DriftWorkoutRepository(
+          database,
+        ).getWorkoutById(values.single.workoutId!))!;
+        expect(saved.walkingBlock!.minutes, 30);
+        expect(
+          saved.walkingBlock!.placement,
+          manual
+              ? WalkingPlacement.beforeExercises
+              : WalkingPlacement.afterExercises,
+        );
+        expect(await database.select(database.camminateTable).get(), isEmpty);
+        if (manual) {
+          expect(
+            values
+                .singleWhere((a) => a.type == PlannedActivityType.workout)
+                .workoutId,
+            selectedWorkoutId,
+          );
+        }
+        expect(
+          await database.select(database.sessioniAllenamentoTable).get(),
+          isEmpty,
+        );
+        await disposeCleanly(tester);
+        await pumpWeeklyPlan(tester);
+        expect(find.text('Piano settimanale'), findsOneWidget);
+        expect(
+          await repository.getAllForProfile(profileId: profileId),
+          hasLength(1),
+        );
+        await disposeCleanly(tester);
+      },
+    );
+  }
+
+  testWidgets(
+    'EVO-005 configurazione irrealizzabile non crea attività né schede',
+    (tester) async {
+      await pumpWeeklyPlan(tester);
+      openSheet(tester);
+      await tester.pumpAndSettle();
+      tester
+          .widget<ChoiceChip>(
+            find.byKey(const ValueKey('weekly-workout-count-7')),
+          )
+          .onSelected!(true);
+      await tester.pumpAndSettle();
+      tapGeneratePreview(tester);
+      await tester.pumpAndSettle();
+      expect(
+        find.textContaining('Configurazione non realizzabile'),
+        findsOneWidget,
+      );
+      expect(await database.select(database.allenamentiTable).get(), isEmpty);
+      expect(
+        await database.select(database.attivitaPianificateTable).get(),
+        isEmpty,
+      );
       await disposeCleanly(tester);
     },
   );

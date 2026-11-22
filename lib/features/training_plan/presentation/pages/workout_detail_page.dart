@@ -1,23 +1,24 @@
+import '../../../../core/theme/forge_typography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/routing/app_routes.dart';
-import '../../../../core/theme/forge_colors.dart';
 import '../../../../data/repositories/workout_providers.dart';
 import '../../../../domain/entities/workout_details.dart';
 import '../../../../domain/entities/workout_enums.dart';
+import '../../../../domain/entities/workout_walking_block.dart';
 import '../../../../domain/entities/workout_exercise_details.dart';
 import '../../../exercises/presentation/widgets/exercise_image_thumbnail.dart';
 import '../../application/workout_session_launcher.dart';
 import '../workout_labels.dart';
 import '../widgets/active_workout_dialog.dart';
 import '../widgets/workout_status_badge.dart';
+import '../widgets/delete_workout_button.dart';
 
-/// Vista di sola lettura di una scheda (Milestone 4.3, sezione 29): nessuna
-/// azione di modifica/rimozione/riordino qui, solo le CTA "Inizia
-/// allenamento" (solo per schede PRONTE, Milestone 4.4.1) e "Modifica"
-/// verso `WorkoutEditPage`.
+/// Dettaglio scheda: avvio per schede pronte, modifica nel relativo editor
+/// ed eliminazione esplicita con conferma (EVO-002). Le singole righe restano
+/// di sola lettura; lo storico delle sessioni sopravvive alla scheda.
 class WorkoutDetailPage extends ConsumerWidget {
   const WorkoutDetailPage({super.key, required this.workoutId});
 
@@ -56,7 +57,18 @@ class WorkoutDetailPage extends ConsumerWidget {
     final detailsAsync = ref.watch(workoutDetailsProvider(workoutId));
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Dettaglio scheda')),
+      appBar: AppBar(
+        title: const Text('Dettaglio scheda'),
+        actions: [
+          if (detailsAsync.valueOrNull != null)
+            DeleteWorkoutButton(
+              workout: detailsAsync.valueOrNull!.workout,
+              onDeleted: () {
+                if (context.mounted) context.go(AppRoutes.workouts);
+              },
+            ),
+        ],
+      ),
       body: detailsAsync.when(
         data: (details) {
           if (details == null) {
@@ -105,6 +117,9 @@ class WorkoutDetailPage extends ConsumerWidget {
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     const SizedBox(height: 8),
+                    if (workout.walkingBlock?.placement ==
+                        WalkingPlacement.beforeExercises)
+                      _walkingCard(workout.walkingBlock!),
                     if (details.exercises.isEmpty)
                       const Text('Nessun esercizio in questa scheda.')
                     else
@@ -113,6 +128,9 @@ class WorkoutDetailPage extends ConsumerWidget {
                           index: i + 1,
                           entry: details.exercises[i],
                         ),
+                    if (workout.walkingBlock?.placement ==
+                        WalkingPlacement.afterExercises)
+                      _walkingCard(workout.walkingBlock!),
                   ],
                 ),
               ),
@@ -158,6 +176,14 @@ class WorkoutDetailPage extends ConsumerWidget {
   }
 }
 
+Widget _walkingCard(WorkoutWalkingBlock block) => Card(
+  child: ListTile(
+    leading: const Icon(Icons.directions_walk),
+    title: Text('Camminata · ${block.minutes} min'),
+    subtitle: Text('${block.positionLabel} · inclusa nella scheda'),
+  ),
+);
+
 class _ReadOnlyExerciseRow extends StatelessWidget {
   const _ReadOnlyExerciseRow({required this.index, required this.entry});
 
@@ -194,8 +220,13 @@ class _ReadOnlyExerciseRow extends StatelessWidget {
                 top: -4,
                 child: CircleAvatar(
                   radius: 11,
-                  backgroundColor: ForgeColors.anthraciteSurfaceHigh,
-                  child: Text('$index', style: const TextStyle(fontSize: 11)),
+                  backgroundColor: Theme.of(
+                    context,
+                  ).colorScheme.surfaceContainerHighest,
+                  child: Text(
+                    '$index',
+                    style: TextStyle(fontSize: ForgeTypography.badgeSize),
+                  ),
                 ),
               ),
             ],
