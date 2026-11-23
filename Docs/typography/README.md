@@ -1,7 +1,7 @@
 # Forge — Confronto tipografico preliminare
 
-Stato: **scelta del font in attesa dell'utente**. Nessun font definitivo applicato.
-La build normale mantiene la tipografia precedente. Nessun dato, algoritmo,
+Stato: **Inter unico font approvato e applicato il 23 novembre 2026**.
+La build normale usa Inter e la scala centralizzata. Nessun dato, algoritmo,
 database, backup o preferenza del font viene modificato dalle anteprime.
 
 ## Audit
@@ -31,8 +31,7 @@ card catalogo e dell'esercizio corrente sono già a capo senza troncamento.
 | Timer | 40 / 48 / 56 sp | 700 | 1,15 | cifre tabulari |
 
 Definizione centralizzata in `lib/core/theme/forge_typography.dart`.
-I valori hardcoded sono collegati ai token: nella build normale conservano
-le misure precedenti, nell'anteprima si attivano quelle proposte.
+I valori locali sono collegati ai token approvati: badge 13 sp, didascalie 13 sp e secondari 14 sp.
 Non sono stati introdotti clamp o sostituzioni del text scaling Android.
 La toolbar dell'anteprima è più alta per ospitare titoli grandi; la stessa
 altezza è usata con tutti i font.
@@ -78,7 +77,24 @@ Prima verifica normale: 17 test verdi (scala, font caricabili, contrasto e
 Home/Profilo). Anteprima Inter: 23 test verdi, comprese sessioni combinate
 prima/dopo, ripresa e backup. Un finder è stato corretto per portare la CTA
 completamente sopra la barra di navigazione prima del tap. Nessun test disabilitato.
-Gli esiti conclusivi e l'indice immagini vengono aggiunti dopo l'acquisizione.
+Anteprima Manrope: 12 test verdi. Regressione normale su catalogo, dettaglio
+esercizio, sessione, generazione settimanale e progressi: 60 test verdi.
+`flutter analyze --no-pub`: nessun problema. `git diff --check`: superato.
+La suite completa non è stata rieseguita per questa anteprima.
+
+## Confronto visivo
+
+Aprire [confronto.html](confronto.html) nel browser: 18 screenshot reali,
+sei viste per ciascuna famiglia. Home nei due temi, catalogo chiaro,
+pianificazione, progressi e Profilo scuri. Le immagini sono a scala Android
+100%; i controlli 320 px / 200% sono test widget, non collaudo completo
+di ogni schermata sull'emulatore. La baseline separata conserva le dimensioni
+precedenti. Le catture delle tre varianti risalgono al 22 novembre 2026.
+
+Proposta: Inter come unica famiglia, per una gerarchia chiara e uniforme.
+Manrope offre un aspetto più arrotondato; l'abbinamento ai soli titoli
+resta un'opzione da confermare. L'applicazione definitiva a tutte le schermate,
+compresa la sessione, attende la scelta dell'utente dopo il confronto.
 
 ## Dopo la scelta
 
@@ -87,3 +103,20 @@ dei testi secondari ai rispettivi ruoli e rifinire i casi di nomi lunghi,
 toolbar e timer su telefono. Eliminare le famiglie non scelte dal bundle.
 La selezione del tema e le palette Ambra/Blu rimangono quelle già approvate.
 Commit e push non effettuati.
+
+## Scelta definitiva — 23 novembre 2026
+
+L'utente ha scelto Inter come unica famiglia e richiesto di fermare il lavoro
+al termine di questa applicazione. Inter e la scala proposta sono ora attivi
+in entrambe le palette, per avvio normale e release. I define di anteprima
+non sono più necessari e non controllano il tema dell'app.
+Manrope è escluso dal bundle; i confronti precedenti restano come storico.
+Le sezioni sul metodo di anteprima sopra descrivono il confronto precedente,
+non le istruzioni correnti di avvio. Usare semplicemente `flutter run`.
+Nessuna modifica a logica applicativa, database, backup o algoritmi.
+I nomi lunghi nei menu e il FittedBox del timer camminata rimangono punti
+di rifinitura documentati; nessun collaudo completo di tutte le schermate
+al 200% sull'emulatore viene dichiarato.
+Verifica della configurazione definitiva: 82 test mirati/regressione superati, 0 falliti. Include temi, tipografia, accessibilità, sessioni combinate, catalogo, dettaglio esercizio, sessione, pianificazione e progressi. Suite completa non rieseguita in questa attività. Commit e push: NO.
+
+Analisi finale Inter: flutter analyze --no-pub, nessun problema (177,2 s). git diff --check: superato. Home definitiva verificata visivamente sull'emulatore e conservata in screenshots/home_Inter_final_dark.png. Lavoro fermato su richiesta dell'utente.

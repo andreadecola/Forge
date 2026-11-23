@@ -86,18 +86,10 @@ flutter:
           weight: 600
         - asset: assets/fonts/preview/Inter.ttf
           weight: 700
-    - family: Manrope
-      fonts:
-        - asset: assets/fonts/preview/Manrope.ttf
-          weight: 400
-        - asset: assets/fonts/preview/Manrope.ttf
-          weight: 600
-        - asset: assets/fonts/preview/Manrope.ttf
-          weight: 700
 
   assets:
     - assets/fonts/preview/Inter-OFL.txt
-    - assets/fonts/preview/Manrope-OFL.txt
+
     - assets/data/
     - assets/images/exercises/
     - assets/images/img_allenamenti/arm_002/

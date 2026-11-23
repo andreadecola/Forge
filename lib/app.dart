@@ -9,7 +9,7 @@ import 'core/constants/app_constants.dart';
 import 'core/routing/app_router.dart';
 import 'core/routing/app_routes.dart';
 import 'core/theme/forge_theme.dart';
-import 'core/theme/forge_typography.dart';
+
 import 'core/theme/theme_mode_provider.dart';
 import 'data/repositories/repository_providers.dart';
 import 'features/notifications/application/notification_constants.dart';
@@ -62,12 +62,8 @@ class _ForgeAppState extends ConsumerState<ForgeApp>
     return MaterialApp.router(
       title: AppConstants.appName,
       debugShowCheckedModeBanner: false,
-      theme: ForgeTypography.preview
-          ? ForgeTheme.preview(false, ForgeTypography.previewFamily)
-          : ForgeTheme.light,
-      darkTheme: ForgeTypography.preview
-          ? ForgeTheme.preview(true, ForgeTypography.previewFamily)
-          : ForgeTheme.dark,
+      theme: ForgeTheme.light,
+      darkTheme: ForgeTheme.dark,
       themeMode:
           ref.watch(forgeThemeModeProvider).valueOrNull ?? ThemeMode.dark,
       locale: const Locale('it'),

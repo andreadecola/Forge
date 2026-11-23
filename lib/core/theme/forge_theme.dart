@@ -7,7 +7,10 @@ abstract final class ForgeTheme {
   static ThemeData get dark => _build(true);
   static ThemeData preview(bool dark, String family) =>
       _build(dark, family: family);
-  static ThemeData _build(bool dark, {String? family}) {
+  static ThemeData _build(
+    bool dark, {
+    String? family = ForgeTypography.family,
+  }) {
     final scheme =
         ColorScheme.fromSeed(
           seedColor: dark ? const Color(0xFF3B82F6) : const Color(0xFFB45309),
@@ -28,7 +31,11 @@ abstract final class ForgeTheme {
               ? const Color(0xFFDCEAFF)
               : const Color(0xFF603000),
         );
-    var base = ThemeData(useMaterial3: true, colorScheme: scheme);
+    var base = ThemeData(
+      useMaterial3: true,
+      colorScheme: scheme,
+      fontFamily: family,
+    );
     if (family != null) {
       base = base.copyWith(
         textTheme: ForgeTypography.proposed(base.textTheme, family),

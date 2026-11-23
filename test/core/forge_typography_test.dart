@@ -7,27 +7,23 @@ import 'package:forge/core/theme/forge_typography.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   setUpAll(() async {
-    for (final family in ['Inter', 'Manrope']) {
+    for (final family in ['Inter']) {
       final loader = FontLoader(family)
         ..addFont(rootBundle.load('assets/fonts/preview/$family.ttf'));
       await loader.load();
     }
   });
-  test('la build normale conserva la tipografia precedente', () {
-    expect(
-      ForgeTheme.dark.textTheme.bodyMedium!.fontSize,
-      ThemeData(
-        useMaterial3: true,
-        colorScheme: ForgeTheme.dark.colorScheme,
-      ).textTheme.bodyMedium!.fontSize,
-    );
+  test('la build normale usa Inter e la scala approvata', () {
+    expect(ForgeTheme.dark.textTheme.bodyMedium!.fontSize, 16);
     expect(
       ForgeTheme.dark.filledButtonTheme.style!.textStyle!.resolve({})!.fontSize,
       16,
     );
     expect(ForgeTypography.bodySize, 16);
+    expect(ForgeTheme.dark.textTheme.bodyMedium!.fontFamily, 'Inter');
+    expect(ForgeTheme.light.textTheme.bodyMedium!.fontFamily, 'Inter');
   });
-  for (final family in ['Roboto', 'Inter', 'Manrope']) {
+  for (final family in ['Inter']) {
     test('scala proposta centralizzata: $family', () {
       final t = ForgeTheme.preview(true, family).textTheme;
       expect(t.headlineMedium!.fontFamily, family);

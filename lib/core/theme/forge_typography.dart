@@ -1,18 +1,12 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-/// Solo anteprima debug: il font definitivo richiede la scelta dell'utente.
+/// Scala tipografica condivisa: Inter in tutti i temi e tutte le build.
 abstract final class ForgeTypography {
-  static const preview =
-      kDebugMode && bool.fromEnvironment('FORGE_TYPOGRAPHY_PREVIEW');
   static const bodySize = 16.0;
-  static const previewFamily = String.fromEnvironment(
-    'FORGE_TYPOGRAPHY_FAMILY',
-    defaultValue: 'Roboto',
-  );
-  static double get badgeSize => preview ? 13 : 11;
-  static double get captionSize => preview ? 13 : 12;
-  static double get secondarySize => preview ? 14 : 11;
+  static const family = 'Inter';
+  static const badgeSize = 13.0;
+  static const captionSize = 13.0;
+  static const secondarySize = 14.0;
 
   static TextTheme proposed(TextTheme base, String family) {
     TextStyle style(
